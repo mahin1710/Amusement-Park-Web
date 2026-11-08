@@ -54,21 +54,6 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/45 to-white/70"></div>
       </div>
 
-      {/* Floating Amusement Park Badges (Positioned cleanly on large screens) */}
-      <div className="absolute top-32 left-6 lg:left-12 z-10 hidden xl:flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 border-2 border-[#FFD93D] shadow-lg animate-float-slow pointer-events-none">
-        <span className="text-xl">🌊</span>
-        <span className="text-xs font-heading font-bold text-[#172554]">
-          {isBangla ? "দেশের বৃহত্তম ওয়েভ পুল" : "Largest Wave Pool in BD"}
-        </span>
-      </div>
-
-      <div className="absolute top-32 right-6 lg:right-12 z-10 hidden xl:flex items-center gap-2 px-4 py-2 rounded-full bg-white/95 border-2 border-[#8B5CF6] shadow-lg animate-float-reverse pointer-events-none">
-        <span className="text-xl">🦖</span>
-        <span className="text-xs font-heading font-bold text-[#172554]">
-          {isBangla ? "৫০+ গর্জনরত ডাইনোসর" : "50+ Roaring Dinosaurs"}
-        </span>
-      </div>
-
       {/* 1. NON-STICKY INTEGRATED HERO NAVIGATION */}
       <header className="relative z-30 w-full pt-4 sm:pt-6 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
