@@ -122,7 +122,7 @@ export function FeaturedWaterParkSection() {
           </div>
 
           {/* Hotspot Callout 3: Tropical Lazy River */}
-          <div className="absolute bottom-[50%] left-[63%] z-10">
+          <div className="absolute bottom-[50%] left-[64%] z-10">
             <div
               className="relative group/pin cursor-pointer"
               onClick={() => setActivePin(activePin === 3 ? null : 3)}
