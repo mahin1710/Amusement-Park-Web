@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   MapPin,
   Clock,
@@ -10,39 +10,26 @@ import {
   ShieldCheck,
   Phone,
   Mail,
-  CheckCircle2,
   ExternalLink,
   MessageCircle,
+  PhoneCall,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
 import { businessConfig, buildWhatsAppLink } from "@/config/business";
-import { api } from "@/services/api";
 
 export default function LocationPage() {
   const { t, isBangla } = useTranslation();
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [contactName, setContactName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactMessage, setContactMessage] = useState("");
 
   const waLink = buildWhatsAppLink({
     packageTitle: isBangla ? "লোকেশন ও ভিজিট তথ্য" : "Location & Visit Info",
     locale: isBangla ? "bn" : "en",
   });
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await api.submitContactMessage({
-        full_name: contactName,
-        email: contactEmail,
-        message: contactMessage,
-      });
-    } catch (e) {
-      // Graceful fallback
-    }
-    setFormSubmitted(true);
-  };
+  const whatsappHref = `https://wa.me/${businessConfig.hotlines.whatsapp.replace(/[^0-9]/g, "")}`;
+  const hotlineHref = `tel:${businessConfig.contact.hotline.callable}`;
+  const facebookHref = "https://www.facebook.com/ac.magicisland/";
 
   return (
     <div className="min-h-screen bg-[#FFF9ED] text-[#172554] py-14">
@@ -100,7 +87,7 @@ export default function LocationPage() {
                   {isBangla ? businessConfig.location.areaName.bn : businessConfig.location.areaName.en}
                 </h4>
                 <a
-                  href="https://www.facebook.com/ac.magicisland/"
+                  href={facebookHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-[#1877F2] hover:underline font-bold flex items-center gap-1"
@@ -168,9 +155,12 @@ export default function LocationPage() {
                     <span className="font-black text-[#172554] block">
                       {isBangla ? "অফিশিয়াল হেল্পলাইন:" : "Official Hotline:"}
                     </span>
-                    <span className="text-[#172554]/80 font-bold">
+                    <a
+                      href={hotlineHref}
+                      className="text-[#172554] font-black hover:text-[#FF6B35] transition-colors"
+                    >
                       {businessConfig.contact.hotline.display}
-                    </span>
+                    </a>
                   </div>
                 </div>
 
@@ -180,9 +170,12 @@ export default function LocationPage() {
                     <span className="font-black text-[#172554] block">
                       {isBangla ? "ইমেইল যোগাযোগ:" : "General Inquiry Email:"}
                     </span>
-                    <span className="text-[#172554]/80 font-bold">
+                    <a
+                      href={`mailto:${businessConfig.contact.email.general}`}
+                      className="text-[#172554] font-black hover:text-[#0284C7] transition-colors"
+                    >
                       {businessConfig.contact.email.general}
-                    </span>
+                    </a>
                   </div>
                 </div>
 
@@ -240,77 +233,90 @@ export default function LocationPage() {
           </div>
         </div>
 
-        {/* Contact Message Form */}
-        <div className="max-w-2xl mx-auto park-card rounded-3xl p-6 sm:p-10 shadow-xl">
-          <h3 className="font-heading font-black text-2xl sm:text-3xl text-[#172554] text-center mb-1">
-            {isBangla ? "আমাদের বার্তা পাঠান" : "Send Us a Message"}
-          </h3>
-          <p className="text-xs text-[#172554]/75 text-center mb-6 font-medium">
-            {isBangla ? "যেকোনো পরামর্শ, তথ্য বা প্রশ্নের জন্য সরাসরি বার্তা লিখুন" : "Have questions before visiting? Send your inquiry directly"}
-          </p>
-
-          {formSubmitted ? (
-            <div className="p-8 text-center space-y-2 bg-[#DCFCE7] rounded-2xl border border-[#55C98B]">
-              <CheckCircle2 className="w-10 h-10 text-[#059669] mx-auto" />
-              <p className="text-base font-black text-[#059669] font-heading">
-                {isBangla ? "ধন্যবাদ! আপনার বার্তাটি গৃহীত হয়েছে।" : "Thank you! Your message has been received."}
-              </p>
-              <p className="text-xs text-[#059669]/80 font-medium">
-                {isBangla ? "আমাদের প্রতিনিধি দ্রুত আপনার সাথে যোগাযোগ করবে।" : "Our support team will get in touch with you shortly."}
-              </p>
+        {/* Official Social & Contact Hub (Replacing Form with Modern Social Hub Cards) */}
+        <div className="park-card rounded-3xl p-8 sm:p-10 shadow-xl">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FED7AA] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-2.5 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#FF6B35]" />
+              <span>{isBangla ? "অফিসিয়াল যোগাযোগ ও সোশ্যাল হাব" : "Official Social & Contact Hub"}</span>
             </div>
-          ) : (
-            <form onSubmit={handleContactSubmit} className="space-y-4 text-xs font-medium">
-              <div>
-                <label className="text-[#172554] font-black block mb-1">
-                  {t("booking.fullName")} *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={contactName}
-                  onChange={(e) => setContactName(e.target.value)}
-                  placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-2xl bg-white border-2 border-amber-200 text-[#172554] focus:outline-none focus:border-[#FF6B35]"
-                />
-              </div>
+            <h3 className="font-heading font-black text-2xl sm:text-4xl text-[#172554]">
+              {isBangla ? "সরাসরি আমাদের সাথে যুক্ত হোন" : "Connect Directly With Us"}
+            </h3>
+            <p className="mt-2 text-xs sm:text-sm text-[#172554]/75 font-medium">
+              {isBangla
+                ? "টিকিট, ইভেন্ট বা যেকোনো তথ্যের জন্য আমাদের অফিসিয়াল চ্যানেলে সরাসরি যোগাযোগ করুন।"
+                : "Reach our team directly on WhatsApp, phone hotline, or our official Facebook page."}
+            </p>
+          </div>
 
-              <div>
-                <label className="text-[#172554] font-black block mb-1">
-                  {t("booking.email")} *
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={contactEmail}
-                  onChange={(e) => setContactEmail(e.target.value)}
-                  placeholder="name@example.com"
-                  className="w-full px-4 py-3 rounded-2xl bg-white border-2 border-amber-200 text-[#172554] focus:outline-none focus:border-[#FF6B35]"
-                />
+          <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {/* WhatsApp Card */}
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group p-6 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA] hover:border-[#25D366] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-[#25D366]/15 text-[#15803D] flex items-center justify-center text-2xl mb-3 group-hover:scale-110 group-hover:bg-[#25D366] group-hover:text-white transition-all shadow-xs">
+                <i className="fa-brands fa-whatsapp"></i>
               </div>
-
-              <div>
-                <label className="text-[#172554] font-black block mb-1">
-                  {isBangla ? "বার্তা বা মন্তব্য:" : "Your Message:"} *
-                </label>
-                <textarea
-                  required
-                  rows={4}
-                  value={contactMessage}
-                  onChange={(e) => setContactMessage(e.target.value)}
-                  placeholder="Your inquiry details..."
-                  className="w-full px-4 py-3 rounded-2xl bg-white border-2 border-amber-200 text-[#172554] focus:outline-none focus:border-[#FF6B35]"
-                ></textarea>
+              <div className="text-xs font-heading font-black uppercase tracking-wider text-[#15803D] mb-1">
+                {isBangla ? "হোয়াটসঅ্যাপ" : "WhatsApp"}
               </div>
+              <div className="text-base font-black font-heading text-[#172554] mb-4">
+                {businessConfig.hotlines.whatsapp}
+              </div>
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-50 text-[#15803D] border border-emerald-200 text-xs font-heading font-bold group-hover:bg-[#25D366] group-hover:text-white group-hover:border-[#25D366] transition-colors mt-auto">
+                <span className="w-2 h-2 rounded-full bg-[#25D366] group-hover:bg-white animate-ping"></span>
+                <span>{isBangla ? "চ্যাট করুন" : "Chat on WhatsApp"}</span>
+                <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+              </span>
+            </a>
 
-              <button
-                type="submit"
-                className="btn-park-primary w-full py-3.5 rounded-full text-xs font-black uppercase tracking-wider shadow-lg hover:scale-102 transition-transform"
-              >
-                {t("common.submit")}
-              </button>
-            </form>
-          )}
+            {/* Hotline Card */}
+            <a
+              href={hotlineHref}
+              className="group p-6 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA] hover:border-[#FF6B35] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-[#FF6B35]/15 text-[#FF6B35] flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-[#FF6B35] group-hover:text-white transition-all shadow-xs">
+                <i className="fa-solid fa-phone"></i>
+              </div>
+              <div className="text-xs font-heading font-black uppercase tracking-wider text-[#FF6B35] mb-1">
+                {isBangla ? "হটলাইন" : "Hotline"}
+              </div>
+              <div className="text-base font-black font-heading text-[#172554] mb-4">
+                {businessConfig.contact.hotline.display}
+              </div>
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-orange-50 text-[#C2410C] border border-orange-200 text-xs font-heading font-bold group-hover:bg-[#FF6B35] group-hover:text-white group-hover:border-[#FF6B35] transition-colors mt-auto">
+                <PhoneCall className="w-3.5 h-3.5 text-[#FF6B35] group-hover:text-white" />
+                <span>{isBangla ? "কল দিন" : "Call Hotline"}</span>
+                <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
+              </span>
+            </a>
+
+            {/* Facebook Card */}
+            <a
+              href={facebookHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group p-6 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA] hover:border-[#1877F2] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-[#1877F2]/15 text-[#1877F2] flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-[#1877F2] group-hover:text-white transition-all shadow-xs">
+                <i className="fa-brands fa-facebook-f"></i>
+              </div>
+              <div className="text-xs font-heading font-black uppercase tracking-wider text-[#1877F2] mb-1">
+                {isBangla ? "ফেসবুক" : "Facebook"}
+              </div>
+              <div className="text-base font-black font-heading text-[#172554] mb-4">
+                @ac.magicisland
+              </div>
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-blue-50 text-[#1877F2] border border-blue-200 text-xs font-heading font-bold group-hover:bg-[#1877F2] group-hover:text-white group-hover:border-[#1877F2] transition-colors mt-auto">
+                <span>{isBangla ? "পেজ দেখুন" : "Visit Page"}</span>
+                <ExternalLink className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
