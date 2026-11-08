@@ -99,7 +99,7 @@ export function ChooseAdventureSection() {
               <img
                 alt="Magic Island Dino Zone featuring prehistoric animatronic dinosaurs and elevated wooden jungle boardwalks"
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
-                src="/images/magic-island-dino.jpg"
+                src="/images/Dino%20World/Dino%20Cover%20PIC.webp"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/75 via-transparent to-black/10"></div>
               <div className="absolute top-4 left-4 bg-[#8B5CF6] text-white text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
