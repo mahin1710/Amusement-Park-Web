@@ -118,6 +118,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link className="hover:text-[#FFD93D] transition-colors" href="/about">
+                  {isBangla ? "আমাদের সম্পর্কে" : "About Us"}
+                </Link>
+              </li>
+              <li>
                 <Link className="hover:text-[#FFD93D] transition-colors" href="/gallery">
                   {isBangla ? "ছবি ও ভিডিও গ্যালারি" : "Photo & Video Gallery"}
                 </Link>

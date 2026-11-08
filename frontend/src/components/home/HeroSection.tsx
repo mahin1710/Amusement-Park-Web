@@ -31,7 +31,7 @@ export function HeroSection() {
     { href: "/", labelEn: "Home", labelBn: "হোম" },
     { href: "/attractions", labelEn: "Explore Attractions", labelBn: "সকল আকর্ষণ" },
     { href: "/gallery", labelEn: "Gallery", labelBn: "গ্যালারি" },
-    { href: "/location", labelEn: "Contact", labelBn: "যোগাযোগ" },
+    { href: "/about", labelEn: "About Us", labelBn: "আমাদের সম্পর্কে" },
   ];
 
   const whatsappHref = `https://wa.me/${businessConfig.hotlines.whatsapp.replace(/[^0-9]/g, "")}`;
