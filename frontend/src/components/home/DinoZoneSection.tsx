@@ -23,7 +23,7 @@ export function DinoZoneSection() {
                 <img
                   alt="Jurassic Dino Zone at Anowar City Magic Island with animatronic T-Rex and Brachiosaurus on elevated boardwalk"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  src="/images/magic-island-dino.jpg"
+                  src="/images/Dino%20World/Dino%20Cover%20PIC.webp"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/75 via-transparent to-black/10"></div>
                 <div className="absolute top-4 left-4 bg-[#8B5CF6] text-white font-heading font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
@@ -134,6 +134,32 @@ export function DinoZoneSection() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Real Dino World Snapshot Strip */}
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {[
+            { src: "/images/Dino%20World/Dino_1.webp", titleEn: "Colossal T-Rex Animatronic", titleBn: "পূর্ণাকৃতির টি-রেক্স" },
+            { src: "/images/Dino%20World/Dino_2.webp", titleEn: "Velociraptor Pack", titleBn: "ভেলোসিরাপটর আস্তানা" },
+            { src: "/images/Dino%20World/Dino_4.webp", titleEn: "Brachiosaurus Canopy", titleBn: "ব্র্যাকিওসরাস ক্যানোপি" },
+            { src: "/images/Dino%20World/Dino_6.webp", titleEn: "Triceratops Sanctuary", titleBn: "ট্রাইসেরাটপস জোন" },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-md transition-all duration-300 h-36 sm:h-44 bg-white"
+            >
+              <img
+                src={item.src}
+                alt={item.titleEn}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
+                  {isBangla ? item.titleBn : item.titleEn}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

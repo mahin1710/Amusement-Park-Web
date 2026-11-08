@@ -21,7 +21,7 @@ export default function DinoZonePage() {
       {/* Hero Banner with Authentic Dino Zone Photography */}
       <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden">
         <img
-          src="/images/magic-island-dino.jpg"
+          src="/images/Dino%20World/Dino%20Cover%20PIC.webp"
           alt="Dino Zone Jurassic Jungle"
           className="absolute inset-0 w-full h-full object-cover object-center filter brightness-105 contrast-100"
         />
@@ -142,6 +142,55 @@ export default function DinoZonePage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Real Dino World Photo Showcase Gallery */}
+      <section className="py-16 bg-[#FFF9ED] border-t border-[#FED7AA]/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#059669] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-emerald-200 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#FF6B35]" />
+              <span>{isBangla ? "আসল ডাইনো পার্ক গ্যালারি" : "Authentic Dino World Gallery"}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#172554] font-heading tracking-tight">
+              {isBangla ? "ডাইনো ওয়ার্ল্ডের আসল মুহূর্ত" : "REAL MOMENTS AT DINO WORLD"}
+            </h2>
+            <p className="mt-2 text-[#172554]/75 text-xs sm:text-sm font-sans">
+              {isBangla
+                ? "আমাদের ম্যাজিক আইল্যান্ড জুরাসিক ডাইনো পার্কের জীবন্ত অ্যানিমেট্রনিক ডাইনোসর ও সাফারি ট্রেইলের আসল ছবি।"
+                : "Real snapshot highlights capturing our roaring animatronics, tropical boardwalks, and Jurassic adventures."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[
+              { src: "/images/Dino%20World/Dino%20Cover%20PIC.webp", labelEn: "Dino World Portal & Habitat", labelBn: "ডাইনো ওয়ার্ল্ড প্রধান ফটক ও ট্রেইল" },
+              { src: "/images/Dino%20World/Dino_1.webp", labelEn: "Apex T-Rex Animatronic", labelBn: "টি-রেক্স জীবন্ত রোবোটিক্স" },
+              { src: "/images/Dino%20World/Dino_2.webp", labelEn: "Velociraptor Pack Habitat", labelBn: "ভেলোসিরাপটর আস্তানা" },
+              { src: "/images/Dino%20World/Dino_3.webp", labelEn: "Jurassic Safari Path", labelBn: "জুরাসিক সাফারি ওয়াকওয়ে" },
+              { src: "/images/Dino%20World/Dino_4.webp", labelEn: "Brachiosaurus Canopy Lookout", labelBn: "ব্র্যাকিওসরাস ক্যানোপি ভিউ" },
+              { src: "/images/Dino%20World/Dino_5.webp", labelEn: "Spinosaurus Riverbank", labelBn: "স্পিনোসরাস জলপ্রপাত" },
+              { src: "/images/Dino%20World/Dino_6.webp", labelEn: "Triceratops Family Trail", labelBn: "ট্রাইসেরাটপস ফ্যামিলি ট্রেইল" },
+              { src: "/images/Dino%20World/Dino_7.webp", labelEn: "Pterodactyl Aviary Lookout", labelBn: "উড়ন্ত টেরোডাক্টাইল ভিউপয়েন্ট" },
+            ].map((pic, idx) => (
+              <div
+                key={idx}
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-4/3 bg-white"
+              >
+                <img
+                  src={pic.src}
+                  alt={pic.labelEn}
+                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
+                    {isBangla ? pic.labelBn : pic.labelEn}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
