@@ -49,9 +49,9 @@ export function FeaturedWaterParkSection() {
         {/* Centerpiece Interactive Real Aerial Photo Showcase */}
         <div className="relative rounded-3xl overflow-hidden border-2 border-[#FED7AA] shadow-2xl mb-12 group bg-white">
           <img
-            alt="Real aerial photo of Magic Island wave pool, lazy river, rainbow bridges, and water slides"
+            alt="Real photo of Magic Island wave pool, lazy river, rainbow bridges, and water slides"
             className="w-full h-[450px] sm:h-[540px] md:h-[620px] object-cover object-center"
-            src="/images/magic-island-waterpark-aerial.jpg"
+            src="/images/Water%20World/Water%20Cover%20Pic.png"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-black/10 pointer-events-none"></div>
 
@@ -179,6 +179,32 @@ export function FeaturedWaterParkSection() {
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
+        </div>
+
+        {/* Real Water World Photo Snapshot Strip */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+          {[
+            { src: "/images/Water%20World/Water-2.png", titleEn: "Lazy River Canal & Wave Basin", titleBn: "লেজি রিভার ও ওয়াটার বেসিন" },
+            { src: "/images/Water%20World/Water-4.png", titleEn: "Mega Speed Slide Tower", titleBn: "স্পিড স্লাইডার টাওয়ার" },
+            { src: "/images/Water%20World/Water-7.png", titleEn: "Kids Splash Fortress", titleBn: "কিডস স্প্ল্যাশ ফোর্ট্রেস" },
+            { src: "/images/Water%20World/Water-5.webp", titleEn: "Multi-Lane Racing Flumes", titleBn: "মাল্টি-লেন রেসিং স্লাইড" },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-md transition-all duration-300 h-36 sm:h-44 bg-white"
+            >
+              <img
+                src={item.src}
+                alt={item.titleEn}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
+                  {isBangla ? item.titleBn : item.titleEn}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* 4 Feature Highlights Cards */}
