@@ -14,7 +14,7 @@ export function FeaturedWaterParkSection() {
 
   return (
     <section
-      className="py-20 sm:py-24 bg-[#FFF9ED] relative overflow-hidden border-y-2 border-[#FED7AA]/70"
+      className="py-20 sm:py-24 bg-[#FFF9ED] relative overflow-hidden"
       data-purpose="featured-water-park-showcase"
       id="water-park"
     >

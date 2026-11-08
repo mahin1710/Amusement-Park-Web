@@ -69,7 +69,7 @@ export function AmusementParkSection() {
 
   return (
     <section
-      className="py-20 sm:py-24 bg-[#FFF9ED] relative border-y-2 border-[#FED7AA]/70"
+      className="py-20 sm:py-24 bg-[#FFF9ED] relative"
       data-purpose="amusement-park-showcase"
       id="amusement-park"
     >
