@@ -18,10 +18,10 @@ export default function WaterParkPage() {
 
   return (
     <div className="min-h-screen bg-[#FFF9ED] text-[#172554]">
-      {/* Hero Banner with Authentic Aerial Photograph */}
+      {/* Hero Banner with Authentic Water World Photograph */}
       <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden">
         <img
-          src="/images/magic-island-waterpark-aerial.jpg"
+          src="/images/Water%20World/Water%20Cover%20Pic.png"
           alt="Magic Island Aerial Wave Pool and Mega Water Slides"
           className="absolute inset-0 w-full h-full object-cover object-center filter brightness-105 contrast-100"
         />

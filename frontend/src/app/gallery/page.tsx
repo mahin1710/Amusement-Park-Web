@@ -22,7 +22,7 @@ const GALLERY_DATA: GalleryItem[] = [
     titleBn: "সুনামি বে ঢেউয়ের উচ্ছ্বাস",
     captionEn: "Guests riding rolling ocean waves at the computerized wave pool at Magic Island.",
     captionBn: "ম্যাজিক আইল্যান্ডের সুবিশাল ওয়েভ পুলে দর্শনার্থীদের অনাবিল আনন্দের মুহূর্ত।",
-    imageUrl: "/images/magic-island-waterpark-aerial.jpg",
+    imageUrl: "/images/Water%20World/Water%20Cover%20Pic.png",
   },
   {
     id: "g2",
@@ -49,7 +49,7 @@ const GALLERY_DATA: GalleryItem[] = [
     titleBn: "মেগা ভর্টেক্স ফানেল স্প্ল্যাশ",
     captionEn: "Four-person family rafts dropping from the 6-story enclosed tower.",
     captionBn: "৬ তলা উচ্চতার অন্ধকার পাইপ থেকে ফানেলে দ্রুতগতির ওয়াটার ড্রপ।",
-    imageUrl: "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "/images/Water%20World/Water-4.png",
   },
   {
     id: "g5",
@@ -85,7 +85,7 @@ const GALLERY_DATA: GalleryItem[] = [
     titleBn: "ট্রপিক্যাল লেজি রিভার ক্রুজ",
     captionEn: "Float through misty waterfall caverns on plush dual-rider tubes.",
     captionBn: "ঝর্ণা ও গুহার মধ্য দিয়ে শান্ত জলের স্রোতে টিউব নিয়ে ভেসে চলা।",
-    imageUrl: "https://images.unsplash.com/photo-1583344682029-7c87515ecce0?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "/images/Water%20World/Water-2.png",
   },
   {
     id: "g9",
@@ -108,11 +108,29 @@ const GALLERY_DATA: GalleryItem[] = [
   {
     id: "g11",
     category: "water",
-    titleEn: "Kids Mushroom Splash & Rain Dance",
-    titleBn: "শিশুদের মাশরুম ঝরনা ও বৃষ্টি নাচ",
-    captionEn: "Joyful shallow splash zones with giant dumping buckets and mushroom fountains.",
+    titleEn: "Kids Water Fortress & Splash Lagoon",
+    titleBn: "শিশুদের ওয়াটার ফোর্ট্রেস ও স্প্ল্যাশ লেগুন",
+    captionEn: "Joyful shallow splash zones with giant dumping buckets and water fun.",
     captionBn: "শিশুদের জন্য অগভীর নিরাপদ মাশরুম ঝরনা ও ওয়াটার বাকেট স্প্ল্যাশ।",
-    imageUrl: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?q=80&w=1200&auto=format&fit=crop",
+    imageUrl: "/images/Water%20World/Water-7.png",
+  },
+  {
+    id: "g12",
+    category: "water",
+    titleEn: "Multi-Lane High Speed Water Flumes",
+    titleBn: "মাল্টি-লেন হাই স্পিড ওয়াটার স্লাইডার",
+    captionEn: "Thrilling high velocity speed slides plunging into sparkling splash pools.",
+    captionBn: "তীব্র গতিতে স্লাইড করে পানির ফোয়ারায় ঝাঁপিয়ে পড়ার অবিস্মরণীয় মুহূর্ত।",
+    imageUrl: "/images/Water%20World/Water-5.webp",
+  },
+  {
+    id: "g13",
+    category: "water",
+    titleEn: "Rain Dance & DJ Mist Party",
+    titleBn: "রেইন ড্যান্স ও ডিজে মিস্ট পার্টি",
+    captionEn: "Dancing under artificial rain showers to pumping music in the water park.",
+    captionBn: "মিউজিকের তালে তালে কৃত্রিম বৃষ্টির পানির নিচে নাচ ও পরিবারের আনন্দ।",
+    imageUrl: "/images/Water%20World/Water-3.webp",
   },
 ];
 

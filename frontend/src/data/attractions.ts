@@ -54,7 +54,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["6 distinct ocean wave modes", "Gradual beach-style shallow entry", "White sand lounger deck", "Certified lifeguard surveillance"],
       bn: ["৬ ধরনের ভিন্ন ঢেউয়ের প্যাটার্ন", "সৈকতের মতো ধীরে ধীরে ঢালু অগভীর অংশ", "হোয়াইট স্যান্ড লাউঞ্জার ডেক", "সার্বক্ষণিক লাইফগার্ড নিরাপত্তা"],
     },
-    imageUrl: "/images/magic-island-waterpark-aerial.jpg",
+    imageUrl: "/images/Water%20World/Water%20Cover%20Pic.png",
     isSignature: true,
   },
   {
@@ -81,7 +81,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["4-person cloverleaf tube", "Zero-gravity oscillation", "High speed 45 km/h entry", "Water curtain splashdown"],
       bn: ["৪ জনের ফ্যামিলি টিউব", "শূন্য-মাধ্যাকর্ষণ দোলনা অনুভূতি", "ঘন্টায় ৪৫ কিমি গতি", "ওয়াটার কার্টেন স্প্ল্যাশডাউন"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Water%20World/Water-4.png",
     isSignature: true,
   },
   {
@@ -108,7 +108,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["450m crystal clear stream", "Single and double plush tubes", "Mist cooling stations", "Gentle 3 km/h current"],
       bn: ["৪৫০ মিটার স্বচ্ছ জলধারা", "সিঙ্গেল ও ডাবল আরামদায়ক টিউব", "কুলিং মিস্ট স্টেশন", "ধীর ও নিরাপদ স্রোত"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1583344682029-7c87515ecce0?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Water%20World/Water-2.png",
   },
   {
     id: "pirate-fortress-splash",
@@ -134,7 +134,59 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["1,000L tipping bucket", "Padded slip-resistant surfacing", "Junior body slides", "Interactive wheels & valves"],
       bn: ["১,০০০ লিটার ডাম্পিং বাকেট", "পিচ্ছিলরোধী নিরাপদ মেঝ", "শিশুদের জন্য বিশেষ স্লাইড", "ইন্টারঅ্যাক্টিভ স্প্রে কন্ট্রোল"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Water%20World/Water-7.png",
+  },
+  {
+    id: "aqua-speed-racing-flumes",
+    name: {
+      en: "Multi-Lane Speed Racing Slides",
+      bn: "মাল্টি-লেন স্পিড রেসিং স্লাইডার",
+    },
+    zone: "water-park",
+    category: "thrill",
+    thrillLevel: "Extreme",
+    thrillLevelBn: "চরম রোমাঞ্চকর",
+    heightRequirement: "Minimum 42 inches (107 cm)",
+    heightRequirementBn: "ন্যূনতম ৪২ ইঞ্চি (১০৭ সেমি)",
+    tagline: {
+      en: "Side-by-side high velocity plunge with steep drops",
+      bn: "বন্ধুদের সাথে পাল্লা দিয়ে খাড়া ঢাল বেয়ে তীব্র গতির ওয়াটার রেসিং",
+    },
+    description: {
+      en: "Race your friends on multi-lane racing slides with sudden elevation dips, rushing water curtains, and exciting splash-down runouts.",
+      bn: "পাশাপাশি বহু লেনের স্পিড স্লাইডারে দ্রুত গতিতে নামার প্রতিযোগিতা আর শীতল পানির স্রোতে চোখ ধাঁধানো স্প্ল্যাশ ফিনিশ।",
+    },
+    features: {
+      en: ["Parallel racing lanes", "High velocity splashout", "Lifeguard monitored arrival", "Timer display"],
+      bn: ["প্যারালাল রেসিং লেন", "উচ্চগতির স্প্ল্যাশ সমাপ্তি", "সার্বক্ষণিক লাইফগার্ড তদারকি", "নিরাপদ ল্যান্ডিং বেসিন"],
+    },
+    imageUrl: "/images/Water%20World/Water-5.webp",
+  },
+  {
+    id: "rain-dance-tropical-lagoon",
+    name: {
+      en: "Rain Dance & Splash Lagoon",
+      bn: "রেইন ড্যান্স ও স্প্ল্যাশ লেগুন",
+    },
+    zone: "water-park",
+    category: "water",
+    thrillLevel: "Mild",
+    thrillLevelBn: "সহজ ও মনোরম",
+    heightRequirement: "All ages welcome",
+    heightRequirementBn: "সকল বয়সী দর্শনার্থীদের জন্য উন্মুক্ত",
+    tagline: {
+      en: "Rhythmic showers with dance music and refreshing mist",
+      bn: "ছন্দময় মিউজিকের সাথে কৃত্রিম বৃষ্টির পানির নিচে নাচ ও আনন্দ",
+    },
+    description: {
+      en: "Feel the beats with top DJ sound, computerized rain showers, cooling mist arrays, and energetic dance floor in the water park.",
+      bn: "অত্যাধুনিক সাউন্ড সিস্টেমের সাথে কৃত্রিম ঝরনার বৃষ্টিতে ভিজে পুরো পরিবার ও বন্ধুদের সাথে অনাবিল আনন্দ উপভোগ করুন।",
+    },
+    features: {
+      en: ["Surround DJ sound", "High-volume rain nozzles", "Cooling mist fans", "Non-slip aquatic flooring"],
+      bn: ["সারাউন্ড ডিজে মিউজিক", "উচ্চগতির রেইন নজল", "কুলিং মিস্ট ফ্যান", "পিচ্ছিলহীন ওয়াটার ডেক"],
+    },
+    imageUrl: "/images/Water%20World/Water-3.webp",
   },
 
   // DINO ZONE
