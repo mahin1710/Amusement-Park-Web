@@ -214,7 +214,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["45ft life-size scale", "Computerized audio-animatronics", "Subwoofer acoustic roaring", "Authentic Jurassic jungle habitat"],
       bn: ["৪৫ ফুট পূর্ণাকৃতি বিশালাকার ডাইনোসর", "কম্পিউটারাইজড নিখুঁত অঙ্গভঙ্গি", "বুক কাঁপানো হাই-ফাই গর্জন", "বাস্তবধর্মী ট্রপিক্যাল বন"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1525877442103-5ddb2089e2bb?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Dino%20World/Dino_1.webp",
     isSignature: true,
   },
   {
@@ -241,7 +241,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["0-75 km/h in 2.8s launch", "850m dynamic track", "Zero-G corkscrew inversion", "Onboard synchronized soundtrack"],
       bn: ["২.৮ সেকেন্ডে ৭৫ কিমি গতি", "৮৫০ মিটার রোমাঞ্চকর ট্র্যাক", "জিরো-জি কর্কস্ক্রু লুপ", "অনবোর্ড সিনেমাটিক সাউন্ডট্র্যাক"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Dino%20World/Dino_2.webp",
     isSignature: true,
   },
   {
@@ -268,7 +268,111 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["Life-size buried Triceratops cast", "Authentic excavation tools", "Junior Paleontologist badge", "Air-shaded comfortable arena"],
       bn: ["পূর্ণাকৃতির ট্রাইসেরাটপস ফসিল", "খনন সরঞ্জাম কিট", "জুনিয়র প্যালিয়ন্টোলজিস্ট ব্যাজ", "ছায়াযুক্ত আরামদায়ক স্থান"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Dino%20World/Dino_3.webp",
+  },
+  {
+    id: "brachiosaurus-canopy-trail",
+    name: {
+      en: "Colossal Herbivore Boardwalk Trail",
+      bn: "বিশাল তৃণভোজী ডাইনোসর ক্যানোপি ট্রেইল",
+    },
+    zone: "dino-zone",
+    category: "spectacle",
+    thrillLevel: "Mild",
+    thrillLevelBn: "সহজ ও মনোরম",
+    heightRequirement: "All ages welcome",
+    heightRequirementBn: "সকল বয়সী দর্শনার্থীদের জন্য উন্মুক্ত",
+    tagline: {
+      en: "Towering 60ft gentle giants towering above the rainforest treetops",
+      bn: "৬০ ফুট উঁচু বিশালাকার নিরীহ ব্র্যাকিওসরাসের সাথে ট্রপিক্যাল বনের ক্যানোপি দর্শন",
+    },
+    description: {
+      en: "Walk along an elevated wooden canopy trail that brings you eye-to-eye with colossal long-neck animatronic giants munching on prehistoric fronds.",
+      bn: "গাছের ডালপালার ওপর দিয়ে নির্মিত কাঠের তৈরি ঝুলন্ত ফুটব্রিজে হেঁটে বিশাল লম্বা গলার ব্র্যাকিওসরাসের কাছাকাছি যাওয়ার অনুপম অভিজ্ঞতা।",
+    },
+    features: {
+      en: ["60ft animatronic neck movements", "Elevated wooden boardwalk", "Misty cooling stations", "Panoramic jungle overview"],
+      bn: ["৬০ ফুটের জীবন্ত অ্যানিমেট্রনিক ডাইনোসর", "উঁচু কাঠের ফুটব্রিজ", "শীতল কুয়াশা স্টেশন", "বনাঞ্চলের মনোরম দৃশ্য"],
+    },
+    imageUrl: "/images/Dino%20World/Dino_4.webp",
+  },
+  {
+    id: "spinosaurus-swamp-bluff",
+    name: {
+      en: "Spinosaurus Riverbank Safari",
+      bn: "স্পিনোসরাস রিভারব্যাংক সাফারি",
+    },
+    zone: "dino-zone",
+    category: "spectacle",
+    thrillLevel: "Moderate",
+    thrillLevelBn: "মাঝারি",
+    heightRequirement: "All ages welcome",
+    heightRequirementBn: "সকল বয়সী দর্শনার্থীদের জন্য উন্মুক্ত",
+    tagline: {
+      en: "Encounter the formidable sail-backed predator guarding ancient streams",
+      bn: "পিঠে বিশাল ডানাযুক্ত হিংস্র স্পিনোসরাসের প্রাগৈতিহাসিক জলাভূমি অভিযান",
+    },
+    description: {
+      en: "Watch as the legendary semi-aquatic predator rises from the jungle waterways with snapping jaws, motion-activated roars, and hyper-realistic skin textures.",
+      bn: "পানির কিনারা থেকে বিশালাকার ধারালো দাঁতওয়ালা স্পিনোসরাসের গর্জন ও শিকার ধরার জীবন্ত শারীরিক নড়াচড়ার রোমাঞ্চকর দৃশ্য।",
+    },
+    features: {
+      en: ["Water-edge motion robotics", "Fierce jaw-snapping motions", "Jurassic water sounds", "Interactive photo deck"],
+      bn: ["জলাভূমির কিনারে রোবোটিক মুভমেন্ট", "ভীতিকর মুখ হাঁ করা ভঙ্গি", "জুরাসিক সাউন্ড এফেক্টস", "ছবি তোলার নিরাপদ ডেক"],
+    },
+    imageUrl: "/images/Dino%20World/Dino_5.webp",
+  },
+  {
+    id: "triceratops-family-habitat",
+    name: {
+      en: "Triceratops Nesting Family Sanctuary",
+      bn: "ট্রাইসেরাটপস ফ্যামিলি সাফারি জোন",
+    },
+    zone: "dino-zone",
+    category: "family",
+    thrillLevel: "Mild",
+    thrillLevelBn: "সহজ ও মনোরম",
+    heightRequirement: "All ages welcome",
+    heightRequirementBn: "সকল বয়সী দর্শনার্থীদের জন্য উন্মুক্ত",
+    tagline: {
+      en: "Three-horned protective mothers and playful hatchling dinosaurs",
+      bn: "তিন শিংওয়ালা মা ডাইনোসর ও ডিম ফুটে বের হওয়া ফুটফুটে ছানাদের সাফারি",
+    },
+    description: {
+      en: "A family-favorite interactive zone showcasing horned Triceratops families guarding giant cracked eggs where children can touch and take memorable photos.",
+      bn: "পরিবার ও শিশুদের জন্য বিশেষ আনন্দদায়ক অংশ, যেখানে বিশাল ডিমের ভেতর ঢুকে ট্রাইসেরাটপস ছানাদের সাথে ছবি তোলা যায়।",
+    },
+    features: {
+      en: ["Interactive cracked egg photo props", "Life-size horned mother", "Gentle breathing soundscapes", "Shaded rest pavilions"],
+      bn: ["ডিম্বাকৃতি ইন্টারঅ্যাক্টিভ ফটো প্রপস", "পূর্ণাকৃতির মা ট্রাইসেরাটপস", "প্রাকৃতিক শ্বাসপ্রশ্বাসের শব্দ", "ছায়াযুক্ত বিশ্রাম প্যাভিলিয়ন"],
+    },
+    imageUrl: "/images/Dino%20World/Dino_6.webp",
+  },
+  {
+    id: "pterodactyl-sky-aviary",
+    name: {
+      en: "Pterodactyl Sky Aviary Lookout",
+      bn: "উড়ন্ত টেরোডাক্টাইল স্কাই এভিয়ারি ভিউপয়েন্ট",
+    },
+    zone: "dino-zone",
+    category: "spectacle",
+    thrillLevel: "Moderate",
+    thrillLevelBn: "মাঝারি",
+    heightRequirement: "All ages welcome",
+    heightRequirementBn: "সকল বয়সী দর্শনার্থীদের জন্য উন্মুক্ত",
+    tagline: {
+      en: "Soaring winged reptiles perched along elevated cliff overlooks",
+      bn: "পাহাড়ি পাথুরে খাঁড়া ঢালে ডানা মেলা উড়ন্ত প্রাগৈতিহাসিক পাখিদের জগৎ",
+    },
+    description: {
+      en: "Gaze upward as wide-winged Pterodactyls flap their wings with realistic screeching cries perched high above the jungle canopy.",
+      bn: "গাছের চূড়ায় ও কৃত্রিম পাথুরে পাহাড়ে ডানা ঝাপটানো বিশাল টেরোডাক্টাইলের ডাক এবং প্রাচীন আকাশের রোমাঞ্চ উপভোগ করুন।",
+    },
+    features: {
+      en: ["Wing-flapping animatronics", "Cliff-side high lookouts", "High-fidelity screech acoustics", "Binocular viewing stations"],
+      bn: ["ডানা ঝাপটানোর জীবন্ত রোবোটিক্স", "পাহাড়ি ভিউপয়েন্ট ডেক", "উচ্চমাত্রার অ্যাকোস্টিক সাউন্ড", "দূরবীক্ষণ ভিউয়ার স্ট্যান্ড"],
+    },
+    imageUrl: "/images/Dino%20World/Dino_7.webp",
   },
 
   // AMUSEMENT PARK
