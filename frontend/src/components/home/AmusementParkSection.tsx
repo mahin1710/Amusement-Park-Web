@@ -69,20 +69,20 @@ export function AmusementParkSection() {
 
   return (
     <section
-      className="py-24 bg-white relative border-y-2 border-[#FED7AA]/60"
+      className="py-20 sm:py-24 bg-[#FFF9ED] relative border-y-2 border-[#FED7AA]/70"
       data-purpose="amusement-park-showcase"
       id="amusement-park"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFF7ED] text-[#C2410C] text-xs font-heading font-bold uppercase tracking-wider mb-3 border-2 border-[#FED7AA]">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#C2410C] text-xs font-heading font-bold uppercase tracking-wider mb-3 border-2 border-[#FED7AA] shadow-xs">
               <FerrisWheel className="w-4 h-4 text-[#FF6B35]" />
               <span>{isBangla ? "আন্তর্জাতিক মানের রোমাঞ্চকর রাইডস" : "World-Class Amusement Rides"}</span>
             </div>
             <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
               {isBangla ? "অ্যামিউজমেন্ট পার্ক:" : "AMUSEMENT PARK:"}{" "}
-              <span className="text-gradient-park">
+              <span className="text-[#FF6B35]">
                 {isBangla ? "থ্রিল ও ফ্যামিলি রাইডস" : "THRILL & FAMILY RIDES"}
               </span>
             </h2>
@@ -95,7 +95,7 @@ export function AmusementParkSection() {
           <div className="shrink-0">
             <Link
               href="/attractions"
-              className="btn-park-primary text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-lg"
+              className="btn-park-primary text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
             >
               <span>{isBangla ? "সকল রাইডস দেখুন (২৫+)" : "View All 25+ Rides"}</span>
               <ArrowRight className="w-4 h-4" />
@@ -109,7 +109,7 @@ export function AmusementParkSection() {
             <Link
               key={idx}
               href={`/attractions/${ride.id}`}
-              className="park-card p-6 flex flex-col justify-between group cursor-pointer"
+              className="park-card p-6 flex flex-col justify-between group cursor-pointer h-full"
             >
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA] flex items-center justify-center text-3xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-xs">
@@ -126,9 +126,9 @@ export function AmusementParkSection() {
                 </p>
               </div>
 
-              <div className="pt-4 mt-6 border-t border-[#FED7AA]/40 flex items-center justify-between text-xs font-heading font-bold text-[#FF6B35]">
-                <span>{isBangla ? "রাইডের বিস্তারিত" : "View Dedicated Page"}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <div className="pt-4 mt-6 border-t border-[#FED7AA]/50 flex items-center justify-between text-xs font-heading font-bold text-[#FF6B35]">
+                <span>{isBangla ? "রাইডের বিস্তারিত দেখুন" : "View Dedicated Page"}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </Link>
           ))}

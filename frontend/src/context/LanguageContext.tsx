@@ -21,26 +21,25 @@ const dictionaries: Record<Locale, any> = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  // Always default strictly to English ("en")
   const [locale, setLocaleState] = useState<Locale>("en");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check localStorage or cookie on mount
+    // Only check active tab's sessionStorage if visitor explicitly toggled in this session.
+    // Fresh website session always starts in English ("en").
     try {
-      const savedLocale = localStorage.getItem("magic_island_locale") as Locale | null;
-      if (savedLocale === "en" || savedLocale === "bn") {
-        setLocaleState(savedLocale);
-        document.documentElement.lang = savedLocale;
+      const sessionLocale = sessionStorage.getItem("magic_island_locale");
+      if (sessionLocale === "bn") {
+        setLocaleState("bn");
+        document.documentElement.lang = "bn";
       } else {
-        // Check cookie
-        const match = document.cookie.match(/NEXT_LOCALE=([^;]+)/);
-        if (match && (match[1] === "en" || match[1] === "bn")) {
-          setLocaleState(match[1] as Locale);
-          document.documentElement.lang = match[1];
-        }
+        setLocaleState("en");
+        document.documentElement.lang = "en";
       }
-    } catch (e) {
-      // Storage access safety
+    } catch {
+      setLocaleState("en");
+      document.documentElement.lang = "en";
     }
     setMounted(true);
   }, []);
@@ -48,10 +47,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
     try {
-      localStorage.setItem("magic_island_locale", newLocale);
-      document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
+      sessionStorage.setItem("magic_island_locale", newLocale);
       document.documentElement.lang = newLocale;
-    } catch (e) {
+    } catch {
       // Storage safety
     }
   };
@@ -112,4 +110,3 @@ export function useTranslation() {
   }
   return context;
 }
-

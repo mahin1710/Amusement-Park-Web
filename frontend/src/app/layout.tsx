@@ -76,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${poppins.variable} ${hindSiliguri.variable} scroll-smooth`}>
+    <html lang="en" className={`${fredoka.variable} ${poppins.variable} ${hindSiliguri.variable}`}>
       <head>
         <link
           rel="stylesheet"

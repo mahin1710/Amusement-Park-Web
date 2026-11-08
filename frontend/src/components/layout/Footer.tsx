@@ -143,7 +143,11 @@ export function Footer() {
             <ul className="space-y-3 text-xs font-sans">
               <li className="flex items-start gap-2.5">
                 <i className="fa-solid fa-location-dot text-[#38BDF8] mt-1"></i>
-                <span>কোনাখোলা, কেরানীগঞ্জ হাইওয়ে, ঢাকা-১৩১০, বাংলাদেশ</span>
+                <span>
+                  {isBangla
+                    ? "কোনাখোলা, কেরানীগঞ্জ হাইওয়ে, ঢাকা-১৩১০, বাংলাদেশ"
+                    : "Konakhola, Keraniganj Highway, Dhaka-1310, Bangladesh"}
+                </span>
               </li>
               <li className="flex items-center gap-2.5">
                 <i className="fa-solid fa-phone text-[#38BDF8]"></i>
@@ -159,7 +163,11 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <i className="fa-solid fa-clock text-[#FFD93D]"></i>
-                <span>প্রতিদিন সকাল ১০:০০ – সন্ধ্যা ০৭:০০</span>
+                <span>
+                  {isBangla
+                    ? "প্রতিদিন সকাল ১০:০০ – সন্ধ্যা ০৭:০০"
+                    : "Daily 10:00 AM – 07:00 PM"}
+                </span>
               </li>
             </ul>
           </div>
