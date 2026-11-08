@@ -12,17 +12,21 @@ export function FinalCtaSection() {
 
   return (
     <section
-      className="relative py-28 overflow-hidden bg-[#172554] text-white"
+      className="relative pt-28 pb-24 sm:pt-36 sm:pb-28 overflow-hidden bg-[#FFF9ED] text-white"
       data-purpose="final-visit-invitation"
     >
-      {/* Background Aerial Drone Image with Ambient Theme Park Overlay */}
+      {/* Background Aerial Drone Image with Smooth Shading (Light Warm Cream -> Deep Theme Park Navy) */}
       <div className="absolute inset-0 z-0">
         <img
           alt="Anowar City Magic Island Aerial Overview"
-          className="w-full h-full object-cover object-center filter brightness-60 contrast-105"
+          className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
           src="/images/magic-island-waterpark-aerial.jpg"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#172554] via-[#172554]/85 to-[#0284C7]/75"></div>
+        {/* Layer 1: Smooth Vertical Shading from preceding #FFF9ED light background into rich deep navy */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF9ED] via-[#172554]/80 via-30% to-[#172554] to-85%"></div>
+
+        {/* Layer 2: Ambient Dark Overlay at bottom for seamless connection to Footer */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#172554] via-transparent to-transparent opacity-90"></div>
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
@@ -32,7 +36,7 @@ export function FinalCtaSection() {
         </div>
 
         {/* Playful Headline per Master Prompt */}
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black font-heading tracking-tight mb-6 max-w-4xl leading-tight">
+        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black font-heading tracking-tight mb-6 max-w-4xl leading-tight text-white drop-shadow-md">
           {isBangla ? (
             <>
               আপনার পরবর্তী অবিস্মরণীয় অ্যাডভেঞ্চার <br />
@@ -47,7 +51,7 @@ export function FinalCtaSection() {
         </h2>
 
         {/* Subtext */}
-        <p className="text-base sm:text-xl text-yellow-50 font-sans max-w-2xl mb-10 leading-relaxed font-normal">
+        <p className="text-base sm:text-xl text-yellow-50 font-sans max-w-2xl mb-10 leading-relaxed font-normal drop-shadow-sm">
           {isBangla
             ? "পরিবার, প্রিয়জন ও বন্ধুদের সাথে নিয়ে আসুন আনোয়ার সিটি ম্যাজিক আইল্যান্ডে। দেশের সর্ববৃহৎ ওয়েভ পুল, ডাইনোসর সাফারি ও রোমাঞ্চকর রাইডসের আনন্দ উপভোগ করুন সরাসরি।"
             : "Bring your family, friends, and loved ones to Anowar City Magic Island for a world of colossal ocean waves, prehistoric dinosaur safaris, and high-velocity thrill rides."}
