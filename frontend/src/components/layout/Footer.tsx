@@ -11,7 +11,7 @@ export function Footer() {
 
   return (
     <footer
-      className="bg-[#172554] border-t-2 border-[#FED7AA]/40 pt-16 pb-12 text-slate-300"
+      className="bg-[#172554] pt-16 pb-12 text-slate-300"
       data-purpose="site-footer"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
