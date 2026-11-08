@@ -40,7 +40,7 @@ export function RealPhotoFeed() {
       titleBn: "জুরাসিক ফরেস্টে ৪৫ ফুটের সেন্সর নিয়ন্ত্রিত গর্জনরত জীবন্ত রোবোটিক টি-রেক্স ডাইনোসর।",
       rideNameEn: "Animatronic T-Rex (রোবোটিক ডাইনো)",
       rideNameBn: "গর্জনরত টি-রেক্স ডাইনোসর",
-      imageUrl: "https://images.unsplash.com/photo-1525877442103-5ddb2089e2bb?q=80&w=1200&auto=format&fit=crop",
+      imageUrl: "/images/Dino%20World/Dino%20Cover%20PIC.webp",
       likes: 2180,
       comments: 195,
     },

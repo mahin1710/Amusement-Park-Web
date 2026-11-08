@@ -49,7 +49,7 @@ export function ZoneShowcase() {
       btnClass: "btn-fantasy-gold",
       icon: Footprints,
       tag: isBangla ? "🦖 জীবন্ত ডাইনোসর" : "🦖 Roaring Dinosaurs",
-      imageUrl: "https://images.unsplash.com/photo-1525877442103-5ddb2089e2bb?q=80&w=1200&auto=format&fit=crop",
+      imageUrl: "/images/Dino%20World/Dino%20Cover%20PIC.webp",
       stats: isBangla ? "২৫+ সেন্সর রোবোটিক ডাইনো" : "25+ Sensor Animatronics",
       highlights: isBangla
         ? ["৪৫ ফুট গর্জনরত রোবোটিক টি-রেক্স", "জুরাসিক ফরেস্ট ওয়াকওয়ে", "সেলফি ফটো স্পট ও ডাইনো এগ", "খুদে প্রত্নতাত্ত্বিক ফসিল ল্যাব"]
