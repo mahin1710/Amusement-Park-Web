@@ -68,11 +68,10 @@ export function FeaturedWaterParkSection() {
                 </span>
               </span>
               <div
-                className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 p-4 rounded-2xl bg-white/95 border-2 border-[#BAE6FD] shadow-xl text-left transition-opacity duration-200 ${
-                  activePin === 1
-                    ? "opacity-100 pointer-events-auto"
-                    : "opacity-0 group-hover/pin:opacity-100 pointer-events-none"
-                }`}
+                className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-56 p-4 rounded-2xl bg-white/95 border-2 border-[#BAE6FD] shadow-xl text-left transition-opacity duration-200 ${activePin === 1
+                  ? "opacity-100 pointer-events-auto"
+                  : "opacity-0 group-hover/pin:opacity-100 pointer-events-none"
+                  }`}
               >
                 <div className="text-[11px] font-heading font-bold text-[#0284C7] uppercase">
                   {isBangla ? "জোন ০১: মেগাওয়েভ বে" : "Zone 01: Megawave Bay"}
@@ -102,11 +101,10 @@ export function FeaturedWaterParkSection() {
                 </span>
               </span>
               <div
-                className={`absolute bottom-full right-0 mb-3 w-56 p-4 rounded-2xl bg-white/95 border-2 border-[#FED7AA] shadow-xl text-left transition-opacity duration-200 ${
-                  activePin === 2
-                    ? "opacity-100 pointer-events-auto"
-                    : "opacity-0 group-hover/pin:opacity-100 pointer-events-none"
-                }`}
+                className={`absolute bottom-full right-0 mb-3 w-56 p-4 rounded-2xl bg-white/95 border-2 border-[#FED7AA] shadow-xl text-left transition-opacity duration-200 ${activePin === 2
+                  ? "opacity-100 pointer-events-auto"
+                  : "opacity-0 group-hover/pin:opacity-100 pointer-events-none"
+                  }`}
               >
                 <div className="text-[11px] font-heading font-bold text-[#FF6B35] uppercase">
                   {isBangla ? "জোন ০২: স্পিড স্লাইডার টাওয়ার" : "Zone 02: High-Speed Flumes"}
@@ -124,7 +122,7 @@ export function FeaturedWaterParkSection() {
           </div>
 
           {/* Hotspot Callout 3: Tropical Lazy River */}
-          <div className="absolute bottom-[24%] left-[28%] z-10">
+          <div className="absolute bottom-[50%] left-[63%] z-10">
             <div
               className="relative group/pin cursor-pointer"
               onClick={() => setActivePin(activePin === 3 ? null : 3)}
@@ -136,11 +134,10 @@ export function FeaturedWaterParkSection() {
                 </span>
               </span>
               <div
-                className={`absolute bottom-full left-0 mb-3 w-56 p-4 rounded-2xl bg-white/95 border-2 border-emerald-200 shadow-xl text-left transition-opacity duration-200 ${
-                  activePin === 3
-                    ? "opacity-100 pointer-events-auto"
-                    : "opacity-0 group-hover/pin:opacity-100 pointer-events-none"
-                }`}
+                className={`absolute bottom-full left-0 mb-3 w-56 p-4 rounded-2xl bg-white/95 border-2 border-emerald-200 shadow-xl text-left transition-opacity duration-200 ${activePin === 3
+                  ? "opacity-100 pointer-events-auto"
+                  : "opacity-0 group-hover/pin:opacity-100 pointer-events-none"
+                  }`}
               >
                 <div className="text-[11px] font-heading font-bold text-[#059669] uppercase">
                   {isBangla ? "জোন ০৩: লেজি রিভার ক্যানাল" : "Zone 03: Lazy River Canal"}
