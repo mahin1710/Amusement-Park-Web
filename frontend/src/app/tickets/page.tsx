@@ -11,35 +11,8 @@ import { PlaceholderBadge } from "@/components/ui/PlaceholderBadge";
 export default function TicketsPage() {
   const { t, isBangla } = useTranslation();
 
-  const ticketFaqs = [
-    {
-      qEn: "How are child tickets calculated?",
-      qBn: "শিশুদের টিকেটের মাপকাঠি কীভাবে নির্ধারিত হয়?",
-      aEn: "Children under 3 feet in height (or below 3 years of age) enjoy free entry when accompanied by a ticketed adult guardian. Children above 3 feet enter under the discounted child tariff.",
-      aBn: "৩ ফুটের নিচে উচ্চতার (অথবা ৩ বছরের কম বয়সী) শিশুরা টিকেটধারী অভিভাবকের সাথে বিনামূল্যে প্রবেশ করতে পারবে। ৩ ফুটের বেশি উচ্চতার শিশুদের জন্য নির্ধারিত শিশু টিকেট প্রয়োজন।",
-    },
-    {
-      qEn: "Can I upgrade my pass inside the park?",
-      qBn: "পার্কে প্রবেশের পর কি পাস আপগ্রেড করা সম্ভব?",
-      aEn: "Yes! Single-zone ticket holders can easily upgrade to the Super All-Access Pass at any of our Guest Services kiosks inside the park.",
-      aBn: "হ্যাঁ! একক জোনের টিকেটধারীরা পার্কের ভেতরের যেকোনো গেস্ট সার্ভিস কিয়স্কে গিয়ে সামান্য পার্থক্য পরিশোধ করে সুপার অল-অ্যাক্সেস পাসে আপগ্রেড করতে পারবেন।",
-    },
-    {
-      qEn: "What is the policy for inclement weather or heavy rain?",
-      qBn: "প্রচণ্ড বৃষ্টি বা বিরূপ আবহাওয়ায় পার্কের নিয়ম কী?",
-      aEn: "The Water Park remains delightfully open during warm light showers! In the event of severe lightning storms, high-speed outdoor coasters pause temporarily for guest safety and resume immediately once cleared.",
-      aBn: "হালকা বৃষ্টিতে ওয়াটার পার্ক সবসময় খোলা থাকে এবং চমৎকার অনুভূতি দেয়! বজ্রঝড়ের ক্ষেত্রে কেবল উন্মুক্ত মেগা রোলারকোস্টার সাময়িকভাবে বন্ধ রাখা হয় এবং আবহাওয়া স্বাভাবিক হলে পুনরায় চালু হয়।",
-    },
-    {
-      qEn: "Is outside food permitted inside the park?",
-      qBn: "বাইরে থেকে খাবার বা পানীয় আনা যাবে কি?",
-      aEn: "To maintain hygiene and safety, outside commercial food and beverages are not permitted. Baby food and medically required nutrition are fully exempted.",
-      aBn: "পার্কের স্বাস্থ্যবিধি ও পরিচ্ছন্নতা বজায় রাখতে বাইরের বাণিজ্যিক খাবার আনা নিষেধ। তবে শিশুদের ফর্মুলা দুধ ও প্রেসক্রাইবড ওষুধ সম্পূর্ণ অনুমোদিত।",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-[#faf8ff] text-slate-800 py-16">
+    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
@@ -217,35 +190,6 @@ export default function TicketsPage() {
                 </div>
               );
             })}
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-100 text-sky-800 text-xs font-bold uppercase tracking-wider mb-2 border border-sky-200">
-              <HelpCircle className="w-3.5 h-3.5 text-sky-600" />
-              <span>{t("tickets.faqTitle")}</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-heading">
-              {t("tickets.faqSubtitle")}
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {ticketFaqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl bg-white border border-slate-200 p-6 space-y-2 shadow-sm"
-              >
-                <h3 className="text-base font-bold text-slate-900 font-heading">
-                  {isBangla ? faq.qBn : faq.qEn}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                  {isBangla ? faq.aBn : faq.aEn}
-                </p>
-              </div>
-            ))}
           </div>
         </section>
       </div>
