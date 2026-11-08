@@ -1,0 +1,11 @@
+# Netlify Configuration for Anowar City Magic Island (Frontend Folder)
+
+[build]
+  publish = ".next"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
