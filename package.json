@@ -1,0 +1,13 @@
+{
+  "name": "magic-island-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Magic Island Theme & Water Park Decoupled Architecture",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend run start"
+  }
+}
+

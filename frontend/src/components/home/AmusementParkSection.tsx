@@ -1,0 +1,139 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { FerrisWheel, Zap, ArrowRight, Sparkles } from "lucide-react";
+import { useTranslation } from "@/context/LanguageContext";
+
+export function AmusementParkSection() {
+  const { isBangla } = useTranslation();
+
+  const rides = [
+    {
+      id: "galaxy-cyclone-rollercoaster",
+      nameEn: "Cyclone Mega Coaster",
+      nameBn: "সাইক্লোন মেগা কোস্টার",
+      thrillEn: "Extreme Thrill • 90 km/h",
+      thrillBn: "চরম রোমাঞ্চ • ৯০ কিমি/ঘণ্টা",
+      descEn:
+        "High-altitude loops and stomach-dropping freefalls designed for maximum adrenaline seekers.",
+      descBn:
+        "আকাশচুম্বী ড্রপ এবং লুপের মধ্য দিয়ে তীব্রগতির রোমাঞ্চকর রোলারকোস্টার অভিজ্ঞতা।",
+      emoji: "🎢",
+      accent: "border-[#FF6B35]",
+      badgeBg: "bg-[#FFF7ED] text-[#C2410C]",
+    },
+    {
+      id: "grand-skylight-ferris-wheel",
+      nameEn: "150ft Panoramic Sky Wheel",
+      nameBn: "১৫০ ফুট প্যানোরামিক স্কাই হুইল",
+      thrillEn: "Family Panoramic • VIP AC",
+      thrillBn: "পারিবারিক আনন্দ • ভিআইপি এসি গন্ডোলা",
+      descEn:
+        "36 enclosed air-conditioned luxury glass capsules soaring 150ft for 360-degree vistas.",
+      descBn:
+        "১৫০ ফুট উঁচুতে ৩৬টি শীতাতপ নিয়ন্ত্রিত গ্লাস ক্যাপসুল থেকে উপভোগ করুন পুরো পার্কের অপূর্ব দৃশ্য।",
+      emoji: "🎡",
+      accent: "border-[#38BDF8]",
+      badgeBg: "bg-[#F0F9FF] text-[#0369A1]",
+    },
+    {
+      id: "turbo-bumper-grand-prix",
+      nameEn: "Turbo Bumper Grand Prix",
+      nameBn: "টার্বো বাম্পার গ্র্যান্ড প্রিক্স",
+      thrillEn: "Interactive • Neon Floors",
+      thrillBn: "ইন্টারেক্টিভ • নিওন ডজিং কার",
+      descEn:
+        "High-energy electric floor track bumper cars featuring glowing neon LED underglow.",
+      descBn:
+        "রঙিন নিয়ন লাইটে সজ্জিত ফ্লোরে বন্ধুদের সাথে ধাক্কাধাক্কির অনাবিল মজার বাম্পার কার।",
+      emoji: "🚗",
+      accent: "border-[#55C98B]",
+      badgeBg: "bg-[#F0FDF4] text-[#15803D]",
+    },
+    {
+      id: "pirate-fortress-splash",
+      nameEn: "Pirate Swing Ship",
+      nameBn: "পাইরেট সুইং শিপ",
+      thrillEn: "High Thrill • Weightless Swing",
+      thrillBn: "রোমাঞ্চকর দোলনা • ওয়েটলেস সুইং",
+      descEn:
+        "Swinging 75 degrees in the air creating thrilling zero-gravity stomach butterflies.",
+      descBn:
+        "শূন্যে ৭৫ ডিগ্রি কোণে তীব্র গতিতে দোলা পাইরেট জাহাজে চড়ে উপভোগ করুন রোমাঞ্চ।",
+      emoji: "⚓",
+      accent: "border-[#8B5CF6]",
+      badgeBg: "bg-[#FAF5FF] text-[#6D28D9]",
+    },
+  ];
+
+  return (
+    <section
+      className="py-24 bg-white relative border-y-2 border-[#FED7AA]/60"
+      data-purpose="amusement-park-showcase"
+      id="amusement-park"
+    >
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FFF7ED] text-[#C2410C] text-xs font-heading font-bold uppercase tracking-wider mb-3 border-2 border-[#FED7AA]">
+              <FerrisWheel className="w-4 h-4 text-[#FF6B35]" />
+              <span>{isBangla ? "আন্তর্জাতিক মানের রোমাঞ্চকর রাইডস" : "World-Class Amusement Rides"}</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
+              {isBangla ? "অ্যামিউজমেন্ট পার্ক:" : "AMUSEMENT PARK:"}{" "}
+              <span className="text-gradient-park">
+                {isBangla ? "থ্রিল ও ফ্যামিলি রাইডস" : "THRILL & FAMILY RIDES"}
+              </span>
+            </h2>
+            <p className="text-[#3B4B75] text-sm sm:text-base mt-2 max-w-2xl font-sans leading-relaxed">
+              {isBangla
+                ? "হৃৎস্পন্দন বাড়িয়ে দেওয়া উচ্চগতির রোলারকোস্টার থেকে শুরু করে পুরো পরিবারের একসাথে আনন্দ উপভোগের ২৫টিরও বেশি আন্তর্জাতিক মানের রাইডস।"
+                : "From gravity-defying steel coasters and giant observation wheels to electric bumper karts, discover non-stop entertainment crafted for every age."}
+            </p>
+          </div>
+          <div className="shrink-0">
+            <Link
+              href="/attractions"
+              className="btn-park-primary text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-lg"
+            >
+              <span>{isBangla ? "সকল রাইডস দেখুন (২৫+)" : "View All 25+ Rides"}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
+        {/* 4 Featured Ride Cards with dedicated attraction links */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {rides.map((ride, idx) => (
+            <Link
+              key={idx}
+              href={`/attractions/${ride.id}`}
+              className="park-card p-6 flex flex-col justify-between group cursor-pointer"
+            >
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA] flex items-center justify-center text-3xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-xs">
+                  {ride.emoji}
+                </div>
+                <div className={`inline-block text-[11px] font-heading font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2 ${ride.badgeBg}`}>
+                  {isBangla ? ride.thrillBn : ride.thrillEn}
+                </div>
+                <h3 className="text-xl font-bold font-heading text-[#172554] group-hover:text-[#FF6B35] transition-colors mb-2 leading-tight">
+                  {isBangla ? ride.nameBn : ride.nameEn}
+                </h3>
+                <p className="text-xs text-[#3B4B75] leading-relaxed font-sans">
+                  {isBangla ? ride.descBn : ride.descEn}
+                </p>
+              </div>
+
+              <div className="pt-4 mt-6 border-t border-[#FED7AA]/40 flex items-center justify-between text-xs font-heading font-bold text-[#FF6B35]">
+                <span>{isBangla ? "রাইডের বিস্তারিত" : "View Dedicated Page"}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

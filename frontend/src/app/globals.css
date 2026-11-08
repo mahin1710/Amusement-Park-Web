@@ -1,0 +1,272 @@
+@import "tailwindcss";
+
+@theme {
+  --color-park-orange: #FF6B35;
+  --color-park-orange-hover: #E85924;
+  --color-park-yellow: #FFD93D;
+  --color-park-yellow-light: #FFF2B2;
+  --color-park-sky: #38BDF8;
+  --color-park-sky-dark: #0284C7;
+  --color-park-purple: #8B5CF6;
+  --color-park-purple-light: #DDD6FE;
+  --color-park-green: #55C98B;
+  --color-park-green-light: #D1FAE5;
+  --color-park-cream: #FFF9ED;
+  --color-park-cream-card: #FFFFFF;
+  --color-park-navy: #172554;
+  --color-park-navy-muted: #3B4B75;
+
+  --font-heading: var(--font-heading), "Fredoka", "Poppins", sans-serif;
+  --font-sans: var(--font-sans), "Poppins", system-ui, sans-serif;
+  --font-body: var(--font-sans), "Poppins", system-ui, sans-serif;
+  --font-bangla: var(--font-bangla), "Hind Siliguri", sans-serif;
+}
+
+:root {
+  --background: #FFF9ED;
+  --surface: #FFFFFF;
+  --primary: #FF6B35;
+  --secondary: #FFD93D;
+  --accent-sky: #38BDF8;
+  --accent-purple: #8B5CF6;
+  --accent-green: #55C98B;
+  --text-main: #172554;
+}
+
+@layer base {
+  body {
+    background-color: #FFF9ED;
+    color: #172554;
+    font-family: var(--font-sans), "Poppins", sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), "Fredoka", sans-serif;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
+}
+
+.font-heading {
+  font-family: var(--font-heading), "Fredoka", "Poppins", sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-heading), "Fredoka", "Poppins", sans-serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans), "Poppins", sans-serif;
+}
+
+.font-bangla {
+  font-family: var(--font-bangla), "Hind Siliguri", sans-serif;
+}
+
+/* Amusement Park Glass Navigation */
+.glass-nav {
+  background: rgba(255, 249, 237, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 2px solid rgba(254, 215, 170, 0.6);
+  box-shadow: 0 4px 20px -2px rgba(255, 107, 53, 0.08);
+}
+
+/* Amusement Park Card: soft rounded corners, warm borders, playful hover */
+.park-card {
+  background: #FFFFFF;
+  border-radius: 28px;
+  border: 2px solid rgba(254, 215, 170, 0.7);
+  box-shadow: 0 10px 30px -5px rgba(23, 37, 84, 0.06);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.park-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -10px rgba(255, 107, 53, 0.16);
+  border-color: #FF6B35;
+}
+
+/* Colorful Playful Pills */
+.park-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  border: 2px solid #FFD93D;
+  color: #172554;
+  font-family: var(--font-heading), "Fredoka", sans-serif;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(255, 217, 61, 0.25);
+}
+
+.park-pill-orange {
+  background: #FFF7ED;
+  border-color: #FED7AA;
+  color: #C2410C;
+}
+
+.park-pill-sky {
+  background: #F0F9FF;
+  border-color: #BAE6FD;
+  color: #0369A1;
+}
+
+.park-pill-purple {
+  background: #FAF5FF;
+  border-color: #DDD6FE;
+  color: #6D28D9;
+}
+
+.park-pill-green {
+  background: #F0FDF4;
+  border-color: #BBF7D0;
+  color: #15803D;
+}
+
+/* Buttons */
+.btn-park-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF5100 100%);
+  color: #FFFFFF !important;
+  font-family: var(--font-heading), "Fredoka", sans-serif;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+}
+.btn-park-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(255, 107, 53, 0.45);
+}
+
+.btn-park-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #FFD93D;
+  color: #172554 !important;
+  font-family: var(--font-heading), "Fredoka", sans-serif;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  box-shadow: 0 6px 20px rgba(255, 217, 61, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+.btn-park-secondary:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: #FEE05E;
+}
+
+.btn-park-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #FFFFFF;
+  border: 2px solid #FF6B35;
+  color: #FF6B35 !important;
+  font-family: var(--font-heading), "Fredoka", sans-serif;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+.btn-park-outline:hover {
+  background: #FFF7ED;
+  transform: translateY(-2px);
+}
+
+/* Gradient text */
+.text-gradient-park {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF9F1C 50%, #FFD93D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-water {
+  background: linear-gradient(135deg, #0284C7 0%, #38BDF8 60%, #55C98B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hero Vignette with Warm Park Atmosphere */
+.hero-park-vignette {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 249, 237, 0.85) 75%, #FFF9ED 100%),
+              linear-gradient(to bottom, rgba(255, 249, 237, 0.3) 0%, transparent 40%, rgba(255, 249, 237, 0.95) 85%, #FFF9ED 100%);
+}
+
+/* Playful Floating Animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-2deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 7s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF9ED;
+}
+::-webkit-scrollbar-thumb {
+  background: #FED7AA;
+  border-radius: 9999px;
+  border: 2px solid #FFF9ED;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF6B35;
+}
