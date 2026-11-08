@@ -465,7 +465,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
     zone: "amusement-park",
     category: "thrill",
     thrillLevel: "Moderate",
-    thrillLevelBn: "মাঝারি রোমাঞ্চকর",
+    thrillLevelBn: "মাঝারি",
     heightRequirement: "Minimum 40 inches (102 cm)",
     heightRequirementBn: "ন্যূনতম ৪০ ইঞ্চি (১০২ সেমি)",
     tagline: {
