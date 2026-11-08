@@ -171,7 +171,7 @@ export function Footer() {
         {/* Bottom Copyright & Terms */}
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-yellow-100/70 font-sans">
           <div>
-            © {new Date().getFullYear()} Anowar City Magic Island. All rights reserved.
+            © {new Date().getFullYear()} Anowar City Magic Island. All rights reserved. MMH_MAHIN
           </div>
           <div className="flex items-center gap-4">
             <Link className="hover:text-white transition-colors" href="/about">
