@@ -37,11 +37,11 @@ export default function HomePage() {
       {/* 8. Visitor Information & Park Essentials */}
       <VisitorInfoSection />
 
-      {/* 9. Social Media & Official Facebook Community */}
-      <SocialMediaSection />
-
-      {/* 10. One Destination. Endless Adventures. (Moved to bottom as requested) */}
+      {/* 9. One Destination, Endless Adventure (IntroSection) */}
       <IntroSection />
+
+      {/* 10. Connect with Magic Island (SocialMediaSection - Official Contact & Social Hub) */}
+      <SocialMediaSection />
 
       {/* 11. Final Call to Action */}
       <FinalCtaSection />

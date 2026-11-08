@@ -17,7 +17,7 @@ export function IntroSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header Badge & Title */}
         <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FED7AA] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <Sparkles className="w-4 h-4 text-[#FF6B35]" />
             <span>
               {isBangla
@@ -27,7 +27,7 @@ export function IntroSection() {
           </div>
 
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
-            {isBangla ? "একটি গন্তব্য।" : "ONE DESTINATION."}{" "}
+            {isBangla ? "একটি গন্তব্য," : "ONE DESTINATION,"}{" "}
             <span className="text-[#FF6B35]">
               {isBangla ? "অফুরন্ত অ্যাডভেঞ্চার।" : "ENDLESS ADVENTURE."}
             </span>

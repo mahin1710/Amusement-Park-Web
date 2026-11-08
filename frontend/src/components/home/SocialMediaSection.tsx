@@ -21,7 +21,7 @@ export function SocialMediaSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FED7AA] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <Sparkles className="w-4 h-4 text-[#FF6B35]" />
             <span>
               {isBangla ? "অফিসিয়াল সোশ্যাল ও যোগাযোগ হাব" : "Official Social & Contact Hub"}
