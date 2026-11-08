@@ -73,7 +73,7 @@ export function RealPhotoFeed() {
       titleBn: "মাল্টি-লেন স্পিড ওয়াটার স্লাইডার দিয়ে তীব্র গতিতে পানিতে ঝাঁপিয়ে পড়ার অনাবিল সুখ।",
       rideNameEn: "Multi-Lane Speed Slides (স্পিড স্লাইডার)",
       rideNameBn: "মাল্টি-লেন ওয়াটার স্লাইডার",
-      imageUrl: "https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1200&auto=format&fit=crop",
+      imageUrl: "/images/Water%20World/Water-4.png",
       likes: 1640,
       comments: 130,
     },
