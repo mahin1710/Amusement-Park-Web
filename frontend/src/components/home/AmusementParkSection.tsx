@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { FerrisWheel, Zap, ArrowRight, Sparkles } from "lucide-react";
+import { FerrisWheel, Zap, ArrowRight, Sparkles, Camera } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
 
 export function AmusementParkSection() {
@@ -132,6 +132,75 @@ export function AmusementParkSection() {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Real Photo Snapshot Strip */}
+        <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-sm">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+            <div className="flex items-center gap-3">
+              <span className="w-10 h-10 rounded-2xl bg-[#FFEDD5] text-[#FF6B35] flex items-center justify-center font-bold shadow-xs">
+                <Camera className="w-5 h-5" />
+              </span>
+              <div>
+                <h4 className="font-heading font-black text-lg text-[#172554]">
+                  {isBangla ? "থ্রিল ওয়ার্ল্ডের আসল দৃশ্যপট" : "Authentic Thrill World Snapshots"}
+                </h4>
+                <p className="text-xs text-[#3B4B75]">
+                  {isBangla
+                    ? "আনোয়ার সিটি ম্যাজিক আইল্যান্ডের আকর্ষণীয় মেকানিক্যাল রাইডস ও দর্শনার্থীদের মুহূর্ত"
+                    : "Real rides & carnival atmosphere at Anowar City Magic Island"}
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/amusement-park"
+              className="px-5 py-2.5 rounded-full bg-[#FFF9ED] hover:bg-[#FFEDD5] text-[#172554] font-heading font-bold text-xs flex items-center gap-2 transition-colors border border-[#FED7AA]"
+            >
+              <span>{isBangla ? "থ্রিল পার্ক পেজে যান" : "Explore Thrill Park"}</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#FF6B35]" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              {
+                src: "/images/Thrill%20World/Thrill%20Cover%20Pic.png",
+                titleEn: "Thrill World Panorama",
+                titleBn: "থ্রিল ওয়ার্ল্ড প্যানোরামা",
+              },
+              {
+                src: "/images/Thrill%20World/Thrill-1.webp",
+                titleEn: "Sky High Coaster",
+                titleBn: "আকাশছোঁয়া রোলারকোস্টার",
+              },
+              {
+                src: "/images/Thrill%20World/Thrill-4.webp",
+                titleEn: "Flying Chair Swings",
+                titleBn: "ফ্লাইং চেয়ার সুইং",
+              },
+              {
+                src: "/images/Thrill%20World/Thrill-5.png",
+                titleEn: "Pirate Ocean Voyager",
+                titleBn: "পাইরেট ওশান ভয়েজার",
+              },
+            ].map((pic, idx) => (
+              <div
+                key={idx}
+                className="group relative rounded-2xl overflow-hidden border border-[#FED7AA] aspect-4/3 bg-slate-100"
+              >
+                <img
+                  src={pic.src}
+                  alt={pic.titleEn}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  <span className="text-white text-xs font-heading font-bold">
+                    {isBangla ? pic.titleBn : pic.titleEn}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

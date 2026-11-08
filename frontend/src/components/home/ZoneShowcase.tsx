@@ -26,7 +26,7 @@ export function ZoneShowcase() {
       btnClass: "btn-fantasy-cyan",
       icon: Waves,
       tag: isBangla ? "🌊 ওয়েভ পুল ও স্লাইডস" : "🌊 Waves & Flumes",
-      imageUrl: "https://images.unsplash.com/photo-1582650625119-3a31f8418b7d?q=80&w=1200&auto=format&fit=crop",
+      imageUrl: "/images/Water%20World/Water%20Cover%20Pic.png",
       stats: isBangla ? "বিশাল ওয়েভ পুল ও ১২+ স্লাইডার" : "Mega Wave Pool & 12+ Slides",
       highlights: isBangla
         ? ["৬ ফুট সামুদ্রিক ঢেউয়ের ওয়েভ পুল", "মাল্টি-লেন স্পিড স্লাইডার", "বৃষ্টি নাচ ও ফ্যামিলি স্প্ল্যাশ", "১০০% ফিল্টার্ড নিরাপদ পানি"]
@@ -72,7 +72,7 @@ export function ZoneShowcase() {
       btnClass: "btn-fantasy-coral",
       icon: FerrisWheel,
       tag: isBangla ? "🎡 রোলারকোস্টার ও রাইডস" : "🎡 Coasters & Rides",
-      imageUrl: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop",
+      imageUrl: "/images/Thrill%20World/Thrill%20Cover%20Pic.png",
       stats: isBangla ? "১৫+ ফ্যামিলি ও থ্রিল রাইডস" : "15+ Family & Thrill Rides",
       highlights: isBangla
         ? ["হাই-স্পিড স্টিল রোলার কোস্টার", "রঙিন ইলেকট্রিক বাম্পার কার", "বিশাল নাগরদোলা (স্কাই হুইল)", "উড়ন্ত দোলনা (ফ্লাই দোলনা) ও চড়কি"]
