@@ -141,6 +141,55 @@ export default function WaterParkPage() {
         </div>
       </section>
 
+      {/* Real Water World Photo Showcase Gallery */}
+      <section className="py-16 bg-[#FFF9ED] border-t border-[#FED7AA]/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#0284C7] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#BAE6FD] shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#FF6B35]" />
+              <span>{isBangla ? "আসল ওয়াটার পার্ক গ্যালারি" : "Authentic Water Park Gallery"}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#172554] font-heading tracking-tight">
+              {isBangla ? "ওয়াটার ওয়ার্ল্ডের আসল মুহূর্ত" : "REAL MOMENTS AT WATER WORLD"}
+            </h2>
+            <p className="mt-2 text-[#172554]/75 text-xs sm:text-sm font-sans">
+              {isBangla
+                ? "আমাদের ম্যাজিক আইল্যান্ড ওয়াটার পার্কের আসল দৃশ্যপট ও দর্শনার্থীদের রোমাঞ্চকর সব স্মৃতি।"
+                : "Real snapshot highlights capturing the thrills, family fun, and ocean waves at Magic Island."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[
+              { src: "/images/Water%20World/Water%20Cover%20Pic.png", labelEn: "Aerial Wave Pool Panorama", labelBn: "ওয়েভ পুল এরিয়াল ভিউ" },
+              { src: "/images/Water%20World/Water-2.png", labelEn: "Lazy River Canal & Wave Basin", labelBn: "লেজি রিভার ও ওয়াটার বেসিন" },
+              { src: "/images/Water%20World/Water-4.png", labelEn: "Mega Speed Slide Tower", labelBn: "স্পিড স্লাইডার টাওয়ার" },
+              { src: "/images/Water%20World/Water-7.png", labelEn: "Kids Splash & Water Fortress", labelBn: "কিডস স্প্ল্যাশ ফোর্ট্রেস" },
+              { src: "/images/Water%20World/Water-3.webp", labelEn: "Rain Dance & Mist Zone", labelBn: "রেইন ড্যান্স ও মিস্ট জোন" },
+              { src: "/images/Water%20World/Water-5.webp", labelEn: "Multi-Lane Racing Flumes", labelBn: "মাল্টি-লেন রেসিং স্লাইড" },
+              { src: "/images/Water%20World/Water-6.webp", labelEn: "Sun Deck & Poolside Lounge", labelBn: "পুলসাইড সান ডেক লাউঞ্জ" },
+              { src: "/images/Water%20World/Water-1.jpg", labelEn: "Splash Lagoon Entrance", labelBn: "স্প্ল্যাশ লেগুন এন্ট্রান্স" },
+            ].map((pic, idx) => (
+              <div
+                key={idx}
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-4/3 bg-white"
+              >
+                <img
+                  src={pic.src}
+                  alt={pic.labelEn}
+                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
+                    {isBangla ? pic.labelBn : pic.labelEn}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Safety & Amenities Strip */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

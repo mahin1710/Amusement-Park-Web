@@ -44,7 +44,7 @@ export function ChooseAdventureSection() {
               <img
                 alt="Magic Island Water World featuring the largest wave pool and winding lazy river in Bangladesh"
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
-                src="/images/magic-island-waterpark-aerial.jpg"
+                src="/images/Water%20World/Water%20Cover%20Pic.png"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/75 via-transparent to-black/10"></div>
               <div className="absolute top-4 left-4 bg-[#38BDF8] text-[#172554] text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
