@@ -11,8 +11,8 @@ export function IntroSection() {
   return (
     <section
       className="py-20 sm:py-24 bg-[#FFF9ED] relative"
-      data-purpose="about-intro-section"
-      id="about"
+      data-purpose="park-intro-section"
+      id="overview"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header Badge & Title */}
@@ -144,10 +144,10 @@ export function IntroSection() {
                     </h4>
                   </div>
                   <Link
-                    href="/about"
+                    href="/attractions"
                     className="btn-park-secondary text-xs px-4 py-2 hover:scale-105 transition-transform"
                   >
-                    <span>{isBangla ? "বিস্তারিত জানুন" : "Explore More"}</span>
+                    <span>{isBangla ? "আকর্ষণসমূহ দেখুন" : "Explore Attractions"}</span>
                     <ArrowRight className="w-3.5 h-3.5 ml-1" />
                   </Link>
                 </div>

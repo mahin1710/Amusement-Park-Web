@@ -113,8 +113,8 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-xs font-heading">
               <li>
-                <Link className="hover:text-[#FFD93D] transition-colors" href="/about">
-                  {isBangla ? "পার্ক সম্পর্কে" : "About Magic Island"}
+                <Link className="hover:text-[#FFD93D] transition-colors" href="/attractions">
+                  {isBangla ? "আকর্ষণসমূহ এক্সপ্লোর করুন" : "Explore Attractions"}
                 </Link>
               </li>
               <li>
@@ -174,11 +174,11 @@ export function Footer() {
             © {new Date().getFullYear()} Anowar City Magic Island. All rights reserved. MMH_MAHIN
           </div>
           <div className="flex items-center gap-4">
-            <Link className="hover:text-white transition-colors" href="/about">
+            <Link className="hover:text-white transition-colors" href="/location">
               {isBangla ? "গোপনীয়তা নীতি" : "Privacy Policy"}
             </Link>
             <span>•</span>
-            <Link className="hover:text-white transition-colors" href="/about">
+            <Link className="hover:text-white transition-colors" href="/location">
               {isBangla ? "ব্যবহারের শর্তাবলী" : "Terms & Conditions"}
             </Link>
           </div>
