@@ -21,7 +21,7 @@ export default function AmusementParkPage() {
       {/* Hero Banner with Authentic Amusement Park Photography */}
       <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden">
         <img
-          src="/images/magic-island-thrill.jpg"
+          src="/images/Thrill%20World/Thrill%20Cover%20Pic.png"
           alt="Amusement Park Rollercoaster"
           className="absolute inset-0 w-full h-full object-cover object-center filter brightness-105 contrast-100"
         />
@@ -142,6 +142,55 @@ export default function AmusementParkPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Real Thrill World Photo Showcase Gallery */}
+      <section className="py-16 bg-[#FFF9ED] border-t border-[#FED7AA]/60">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#C2410C] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-orange-200 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#FF6B35]" />
+              <span>{isBangla ? "আসল থ্রিল পার্ক গ্যালারি" : "Authentic Thrill World Gallery"}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#172554] font-heading tracking-tight">
+              {isBangla ? "থ্রিল ওয়ার্ল্ডের আসল মুহূর্ত" : "REAL MOMENTS AT THRILL WORLD"}
+            </h2>
+            <p className="mt-2 text-[#172554]/75 text-xs sm:text-sm font-sans">
+              {isBangla
+                ? "আমাদের ম্যাজিক আইল্যান্ড অ্যামিউজমেন্ট পার্কের রাইডস ও কার্নিভাল আমেজের আসল ছবি।"
+                : "Real snapshot highlights capturing our high-altitude rides, family swings, and carnival atmosphere."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[
+              { src: "/images/Thrill%20World/Thrill%20Cover%20Pic.png", labelEn: "Thrill World Panorama & Rides", labelBn: "থ্রিল ওয়ার্ল্ড প্যানোরামা ও রাইডস" },
+              { src: "/images/Thrill%20World/Thrill-1.webp", labelEn: "Sky High Thrill Coaster", labelBn: "আকাশছোঁয়া থ্রিল রাইড" },
+              { src: "/images/Thrill%20World/Thrill-2.webp", labelEn: "Panoramic Sky Wheel", labelBn: "প্যানোরামিক স্কাই হুইল" },
+              { src: "/images/Thrill%20World/Thrill-3.webp", labelEn: "Turbo Bumper Arena", labelBn: "টার্বো বাম্পার এরিনা" },
+              { src: "/images/Thrill%20World/Thrill-4.webp", labelEn: "Sky High Flying Swings", labelBn: "উড়ন্ত চেয়ার দোলনা" },
+              { src: "/images/Thrill%20World/Thrill-5.png", labelEn: "Pirate Ocean Voyager", labelBn: "পাইরেট ওশান ভয়েজার" },
+              { src: "/images/Thrill%20World/Thrill-6.webp", labelEn: "Grand Carnival Carousel", labelBn: "গ্র্যান্ড কার্নিভাল ক্যারোসেল" },
+              { src: "/images/Thrill%20World/Thrill-7.webp", labelEn: "Midway Speed Twister", labelBn: "মিডওয়ে স্পিড টুইস্টার" },
+            ].map((pic, idx) => (
+              <div
+                key={idx}
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-4/3 bg-white"
+              >
+                <img
+                  src={pic.src}
+                  alt={pic.labelEn}
+                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                  <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
+                    {isBangla ? pic.labelBn : pic.labelEn}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -151,7 +151,7 @@ export function ChooseAdventureSection() {
               <img
                 alt="Magic Island Amusement Park thrill rides including roller coasters, spinning pendulum, and family attractions"
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
-                src="/images/magic-island-thrill.jpg"
+                src="/images/Thrill%20World/Thrill%20Cover%20Pic.png"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/75 via-transparent to-black/10"></div>
               <div className="absolute top-4 left-4 bg-[#FF6B35] text-white text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">

@@ -400,7 +400,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["140ft apex summit", "85-degree sheer first drop", "4 breathtaking inversions", "Magnetic regenerative braking"],
       bn: ["১৪০ ফুট আকাশছোঁয়া উচ্চতা", "৮৫ ডিগ্রি খাঁড়া ড্রপ", "৪টি পূর্ণাকার ইনভার্সন", "সর্বাধুনিক ম্যাগনেটিক ব্রেকিং"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Thrill%20World/Thrill-1.webp",
     isSignature: true,
   },
   {
@@ -427,7 +427,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["150ft panoramic height", "Fully air-conditioned luxury capsules", "15-minute scenic rotation", "Spectacular LED light choreography"],
       bn: ["১৫০ ফুট উচ্চতার প্যানোরামা", "এসি গ্লাস কেবিন", "১৫ মিনিটের রিল্যাক্সিং রাইড", "রাতের চোখ ধাঁধানো এলইডি লাইটিং"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Thrill%20World/Thrill-2.webp",
     isSignature: true,
   },
   {
@@ -454,7 +454,111 @@ export const ATTRACTIONS_DATA: Attraction[] = [
       en: ["24 simultaneous electric karts", "Shock-absorbent rubber bumpers", "Interactive neon track lighting", "Great for teens and families"],
       bn: ["২৪টি আধুনিক ইলেকট্রিক কার", "উন্নত শক-অ্যাবজরবেন্ট বাম্পার", "ইন্টারেক্টিভ নিওন ট্র্যাক", "পরিবার ও বন্ধুদের জন্য উপযোগী"],
     },
-    imageUrl: "https://images.unsplash.com/photo-1542317854-f95842883f3e?q=80&w=1000&auto=format&fit=crop",
+    imageUrl: "/images/Thrill%20World/Thrill-3.webp",
+  },
+  {
+    id: "flying-chair-swings",
+    name: {
+      en: "Sky High Flying Swings (Fly Dolna)",
+      bn: "উড়ন্ত চেয়ার দোলনা (ফ্লাই দোলনা)",
+    },
+    zone: "amusement-park",
+    category: "thrill",
+    thrillLevel: "Moderate",
+    thrillLevelBn: "মাঝারি রোমাঞ্চকর",
+    heightRequirement: "Minimum 40 inches (102 cm)",
+    heightRequirementBn: "ন্যূনতম ৪০ ইঞ্চি (১০২ সেমি)",
+    tagline: {
+      en: "Soar high into the sky on rotating breeze swings overlooking the entire park",
+      bn: "আকাশের মুক্ত বাতাসে ঘূর্ণায়মান ফ্লাইং চেয়ারে বসে রোমাঞ্চকর দোলার অনুভূতি",
+    },
+    description: {
+      en: "Feel the wind whip past as suspended double-seats lift high into the open sky, tilting at dynamic angles with panoramic horizons across Magic Island.",
+      bn: "বাতাসে ডানা মেলার মতো অনুভূতির এই ফ্লাইং সুইং রাইড আপনাকে নিয়ে যাবে শূন্যের উচ্চতায়, যেখান থেকে পাখির চোখে উপভোগ করা যায় পুরো পার্কের সৌন্দর্য।",
+    },
+    features: {
+      en: ["High-altitude tilting rotation", "Comfortable dual harness seating", "Panoramic park canopy views", "Smooth hydraulic ascent"],
+      bn: ["উঁচুতে কৌণিক ঘূর্ণন", "নিরাপদ ডাবল হারনেস সিট", "পার্কের ওপর প্যানোরামিক ভিউ", "মসৃণ হাইড্রোলিক লিফট"],
+    },
+    imageUrl: "/images/Thrill%20World/Thrill-4.webp",
+  },
+  {
+    id: "pirate-fortress-splash",
+    name: {
+      en: "Pirate Ocean Voyager Pendulum",
+      bn: "পাইরেট ওশান ভয়েজার পেন্ডুলাম",
+    },
+    zone: "amusement-park",
+    category: "thrill",
+    thrillLevel: "Extreme",
+    thrillLevelBn: "চরম রোমাঞ্চকর",
+    heightRequirement: "Minimum 48 inches (122 cm)",
+    heightRequirementBn: "ন্যূনতম ৪৮ ইঞ্চি (১২২ সেমি)",
+    tagline: {
+      en: "Giant swinging pirate galleon rocking 75 degrees into weightless freefall",
+      bn: "শূন্যে ৭৫ ডিগ্রি কোণে তীব্র গতিতে দোলা পাইরেট জাহাজের চরম রোমাঞ্চ",
+    },
+    description: {
+      en: "Climb aboard the massive wooden-styled pirate vessel as it swings higher and higher in massive arcs, creating zero-G stomach drop sensations at each apex.",
+      bn: "বিশাল আকৃতির পাইরেট জাহাজে চড়ে যখন বাতাসে দুলবেন, প্রতিটি শীর্ষে পৌঁছালে মাধ্যাকর্ষণহীন শূন্যতার চমকপ্রদ অনুভূতি তৈরি হয়।",
+    },
+    features: {
+      en: ["75-degree high amplitude swing", "True zero-gravity sensation", "Heavy-duty magnetic braking", "Capacity for 40 brave voyagers"],
+      bn: ["৭৫ ডিগ্রি উচ্চমাত্রার সুইং", "জিরো-জি ওয়েটলেস ফিলিং", "ম্যাগনেটিক ফেইল-সেফ ব্রেক", "৪০ জন আরোহীর ধারণক্ষমতা"],
+    },
+    imageUrl: "/images/Thrill%20World/Thrill-5.png",
+  },
+  {
+    id: "carnival-carousel-twister",
+    name: {
+      en: "Grand Carnival Carousel",
+      bn: "গ্র্যান্ড কার্নিভাল ক্যারোসেল",
+    },
+    zone: "amusement-park",
+    category: "family",
+    thrillLevel: "Mild",
+    thrillLevelBn: "সহজ ও মনোরম",
+    heightRequirement: "All ages welcome",
+    heightRequirementBn: "সকল বয়সী দর্শনার্থীদের জন্য উন্মুক্ত",
+    tagline: {
+      en: "Handcrafted magical steeds spinning under thousands of twinkling warm bulbs",
+      bn: "হাজারো রঙিন আলোর নিচে পরিবারের সাথে ঘোড়ার পিঠে চড়ে মিষ্টি ঘূর্ণন",
+    },
+    description: {
+      en: "A fairytale carousel featuring ornate sculpted horses, royal chariots, and classic calliope organ music that charms children and parents alike.",
+      bn: "ছোট-বড় সবার প্রিয় ক্লাসিক্যাল ক্যারোসেল রাইড। সুন্দর কারুকার্যময় ঘোড়া ও রাজকীয় রথে চড়ে পরিবারের সাথে স্মৃতিময় আনন্দ উপভোগ করুন।",
+    },
+    features: {
+      en: ["Ornate hand-painted animals", "Romantic night illumination", "Gentle soothing motion", "Perfect for children and families"],
+      bn: ["সুন্দর নকশাদার ঘোড়া ও রথ", "মনোরম রাতের আলো", "শান্ত ও আনন্দময় ঘূর্ণন", "ছোট শিশু ও পরিবারের জন্য আদর্শ"],
+    },
+    imageUrl: "/images/Thrill%20World/Thrill-6.webp",
+  },
+  {
+    id: "speed-spin-gravity-wave",
+    name: {
+      en: "Midway Speed Twister",
+      bn: "মিডওয়ে স্পিড টুইস্টার",
+    },
+    zone: "amusement-park",
+    category: "thrill",
+    thrillLevel: "Moderate",
+    thrillLevelBn: "মাঝারি",
+    heightRequirement: "Minimum 42 inches (107 cm)",
+    heightRequirementBn: "ন্যূনতম ৪২ ইঞ্চি (১০৭ সেমি)",
+    tagline: {
+      en: "High-RPM spinning pods weaving through banked track dips and speed bursts",
+      bn: "দ্রুতগতির ঘূর্ণন ও রোমাঞ্চকর স্পিড কার্ভসহ মজার টুইস্টার রাইড",
+    },
+    description: {
+      en: "Hold on tight as your cockpit spins independently while revolving around the giant central axis on a undulating roller track.",
+      bn: "কেন্দ্রীয় অক্ষের চারপাশে তীব্র গতিতে ঘুরতে ঘুরতে নিজের পডও স্বাধীনভাবে চক্কর দেয়—একসাথে দ্বৈত ঘূর্ণনের দারুণ চমক।",
+    },
+    features: {
+      en: ["Dual-axis centrifugal rotation", "Dynamic speed acceleration", "Interactive pilot steering", "High thrill soundtrack"],
+      bn: ["দ্বৈত অক্ষের সেন্ট্রিফিউগাল স্পিন", "গতিশীল ত্বরণ", "ইন্টারেক্টিভ পাইলট কন্ট্রোল", "উত্তেজনাপূর্ণ মিউজিক"],
+    },
+    imageUrl: "/images/Thrill%20World/Thrill-7.webp",
   },
 ];
 
