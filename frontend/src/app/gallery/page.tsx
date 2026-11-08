@@ -221,23 +221,6 @@ export default function GalleryPage() {
               ? "দর্শনার্থীদের উচ্ছ্বাস, রোমাঞ্চকর রাইড এবং অনাবিল পারিবারিক আনন্দের আসল চিত্র।"
               : "Discover real smiles, exhilarating splashes, roaring prehistoric encounters, and magical island moments."}
           </p>
-
-          <div className="mt-6 inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white border-2 border-amber-200 text-xs text-[#172554] shadow-sm">
-            <span className="w-6 h-6 rounded-full bg-[#1877F2] text-white font-bold text-xs flex items-center justify-center">
-              f
-            </span>
-            <span className="font-semibold">
-              {isBangla ? "অফিশিয়াল ফেসবুক পেজ:" : "Official Facebook Community:"}
-            </span>
-            <a
-              href="https://www.facebook.com/ac.magicisland/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-black text-[#FF6B35] hover:underline"
-            >
-              fb.com/ac.magicisland
-            </a>
-          </div>
         </div>
 
         {/* Filter Tabs */}
