@@ -16,7 +16,7 @@ export function ChooseAdventureSection() {
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="flex flex-col items-center text-center mb-12 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <Sparkles className="w-4 h-4 text-[#FF6B35]" />
             <span>{isBangla ? "একটি গন্তব্যে ৩টি রোমাঞ্চকর অ্যাডভেঞ্চার জগৎ" : "Three Wonder Realms In One Destination"}</span>
@@ -28,12 +28,6 @@ export function ChooseAdventureSection() {
               {isBangla ? "রোমাঞ্চকর জগত" : "ADVENTURE REALM"}
             </span>
           </h2>
-
-          <p className="text-[#3B4B75] text-sm sm:text-base max-w-2xl mt-3 font-sans leading-relaxed">
-            {isBangla
-              ? "বিশাল ওয়েভ পুলের পানিতে শীতল হওয়া, প্রাচীন ডাইনোসরদের মুখোমুখি হওয়া কিংবা রোমহর্ষক রোলারকোস্টারের রোমাঞ্চ উপভোগ করা—ম্যাজিক আইল্যান্ডে সব সম্ভব!"
-              : "Whether cooling off in massive computerized ocean waves, facing roaring prehistoric giants, or defying gravity on coasters, Magic Island delivers nonstop family joy."}
-          </p>
         </div>
 
         {/* 3 Signature Experience Realms */}
@@ -196,6 +190,15 @@ export function ChooseAdventureSection() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Supporting description positioned below the 3 realm options */}
+        <div className="text-center max-w-3xl mx-auto mt-12">
+          <p className="text-[#3B4B75] text-sm sm:text-base leading-relaxed font-sans">
+            {isBangla
+              ? "বিশাল ওয়েভ পুলের পানিতে শীতল হওয়া, প্রাচীন ডাইনোসরদের মুখোমুখি হওয়া কিংবা রোমহর্ষক রোলারকোস্টারের রোমাঞ্চ উপভোগ করা—ম্যাজিক আইল্যান্ডে সব সম্ভব!"
+              : "Whether cooling off in massive computerized ocean waves, facing roaring prehistoric giants, or defying gravity on coasters, Magic Island delivers nonstop family joy."}
+          </p>
         </div>
       </div>
     </section>
