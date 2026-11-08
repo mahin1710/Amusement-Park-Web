@@ -34,7 +34,7 @@ export default function HomePage() {
       {/* 7. Experience Magic Island Gallery (with filter tabs & lightbox) */}
       <HomeGallerySection />
 
-      {/* 8. Visitor Information, Timetable & FAQs */}
+      {/* 8. Visitor Information & Park Essentials */}
       <VisitorInfoSection />
 
       {/* 9. Social Media & Official Facebook Community */}

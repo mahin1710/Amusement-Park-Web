@@ -127,11 +127,6 @@ export function Footer() {
                   {isBangla ? "পার্কের অবস্থান ও সময়সূচি" : "Directions & Hours"}
                 </Link>
               </li>
-              <li>
-                <Link className="hover:text-[#FFD93D] transition-colors" href="/faq">
-                  {isBangla ? "সাধারণ জিজ্ঞাসা (FAQs)" : "Park Rules & FAQs"}
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -179,11 +174,11 @@ export function Footer() {
             © {new Date().getFullYear()} Anowar City Magic Island. All rights reserved.
           </div>
           <div className="flex items-center gap-4">
-            <Link className="hover:text-white transition-colors" href="/faq">
+            <Link className="hover:text-white transition-colors" href="/about">
               {isBangla ? "গোপনীয়তা নীতি" : "Privacy Policy"}
             </Link>
             <span>•</span>
-            <Link className="hover:text-white transition-colors" href="/faq">
+            <Link className="hover:text-white transition-colors" href="/about">
               {isBangla ? "ব্যবহারের শর্তাবলী" : "Terms & Conditions"}
             </Link>
           </div>
