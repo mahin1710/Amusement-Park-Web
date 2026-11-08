@@ -302,7 +302,7 @@ export default function AttractionDetailPage() {
       </section>
 
       {/* 3. EXPLORE MORE ATTRACTIONS */}
-      <section className="py-16 bg-white border-t-2 border-[#FED7AA]/60">
+      <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>

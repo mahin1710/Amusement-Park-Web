@@ -142,7 +142,7 @@ export default function WaterParkPage() {
       </section>
 
       {/* Safety & Amenities Strip */}
-      <section className="py-16 bg-white border-t border-amber-100">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 rounded-3xl bg-[#FFF9ED] border-2 border-amber-200/80 flex items-start gap-4 shadow-sm">
