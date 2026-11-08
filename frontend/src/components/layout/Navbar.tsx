@@ -24,7 +24,6 @@ export function Navbar() {
   const navLinks = [
     { href: "/", labelEn: "Home", labelBn: "হোম" },
     { href: "/attractions", labelEn: "Explore Attractions", labelBn: "সকল আকর্ষণ" },
-    { href: "/about", labelEn: "About Us", labelBn: "আমাদের সম্পর্কে" },
     { href: "/gallery", labelEn: "Gallery", labelBn: "গ্যালারি" },
     { href: "/location", labelEn: "Contact", labelBn: "যোগাযোগ" },
   ];
