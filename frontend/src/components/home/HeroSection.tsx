@@ -239,7 +239,7 @@ export function HeroSection() {
         </p>
 
         {/* Primary Interactive CTAs */}
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5 mb-10 sm:mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
           <a
             href="#virtual-journey"
             className="btn-park-primary text-base sm:text-lg px-8 py-3.5 sm:py-4 shadow-xl flex items-center gap-3 hover:scale-105 transition-transform"
@@ -255,60 +255,6 @@ export function HeroSection() {
           >
             <FerrisWheel className="w-5 h-5 text-[#FF6B35]" />
             <span>{isBangla ? "সকল আকর্ষণ ও রাইডস" : "Discover All Attractions"}</span>
-          </Link>
-        </div>
-
-        {/* 3 Real Kingdom Highlights (Playful Rounded Cards) */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 w-full max-w-4xl">
-          <Link
-            href="/water-park"
-            className="p-4 rounded-2xl bg-white/95 border-2 border-[#BAE6FD] shadow-md flex items-center gap-3.5 text-left group hover:scale-103 hover:border-[#38BDF8] transition-all cursor-pointer"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center text-2xl shrink-0 group-hover:rotate-6 transition-transform shadow-xs">
-              🌊
-            </div>
-            <div>
-              <h4 className="text-sm font-heading font-bold text-[#172554] group-hover:text-[#0284C7] transition-colors">
-                {isBangla ? "মেগা ওয়াটার পার্ক" : "Mega Water Park"}
-              </h4>
-              <p className="text-xs text-[#3B4B75] line-clamp-1">
-                {isBangla ? "দেশের সর্ববৃহৎ ওয়েভ পুল" : "Bangladesh's Largest Wave Pool"}
-              </p>
-            </div>
-          </Link>
-
-          <Link
-            href="/dino-zone"
-            className="p-4 rounded-2xl bg-white/95 border-2 border-[#DDD6FE] shadow-md flex items-center gap-3.5 text-left group hover:scale-103 hover:border-[#8B5CF6] transition-all cursor-pointer"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-[#F3E8FF] text-[#7C3AED] flex items-center justify-center text-2xl shrink-0 group-hover:rotate-6 transition-transform shadow-xs">
-              🦖
-            </div>
-            <div>
-              <h4 className="text-sm font-heading font-bold text-[#172554] group-hover:text-[#7C3AED] transition-colors">
-                {isBangla ? "জুরাসিক ডাইনো জোন" : "Jurassic Dino Zone"}
-              </h4>
-              <p className="text-xs text-[#3B4B75] line-clamp-1">
-                {isBangla ? "৫০+ গর্জনরত রোবোটিক ডাইনোসর" : "50+ Life-Sized Animatronics"}
-              </p>
-            </div>
-          </Link>
-
-          <Link
-            href="/amusement-park"
-            className="p-4 rounded-2xl bg-white/95 border-2 border-[#FED7AA] shadow-md flex items-center gap-3.5 text-left group hover:scale-103 hover:border-[#FF6B35] transition-all cursor-pointer"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-[#FFEDD5] text-[#C2410C] flex items-center justify-center text-2xl shrink-0 group-hover:rotate-6 transition-transform shadow-xs">
-              🎡
-            </div>
-            <div>
-              <h4 className="text-sm font-heading font-bold text-[#172554] group-hover:text-[#FF6B35] transition-colors">
-                {isBangla ? "অ্যামিউজমেন্ট পার্ক" : "Thrill Amusement Park"}
-              </h4>
-              <p className="text-xs text-[#3B4B75] line-clamp-1">
-                {isBangla ? "মেগা কোস্টার ও স্কাই হুইল" : "Skyline Coasters & Giant Wheel"}
-              </p>
-            </div>
           </Link>
         </div>
       </div>
