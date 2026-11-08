@@ -483,7 +483,7 @@ export const ATTRACTIONS_DATA: Attraction[] = [
     imageUrl: "/images/Thrill%20World/Thrill-4.webp",
   },
   {
-    id: "pirate-fortress-splash",
+    id: "pirate-ship-voyager",
     name: {
       en: "Pirate Ocean Voyager Pendulum",
       bn: "পাইরেট ওশান ভয়েজার পেন্ডুলাম",

@@ -52,7 +52,7 @@ export function AmusementParkSection() {
       badgeBg: "bg-[#F0FDF4] text-[#15803D]",
     },
     {
-      id: "pirate-fortress-splash",
+      id: "pirate-ship-voyager",
       nameEn: "Pirate Swing Ship",
       nameBn: "পাইরেট সুইং শিপ",
       thrillEn: "High Thrill • Weightless Swing",
