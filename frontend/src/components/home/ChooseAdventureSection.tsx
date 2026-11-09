@@ -91,61 +91,6 @@ export function ChooseAdventureSection() {
           <div className="park-card overflow-hidden flex flex-col justify-between group">
             <div className="relative h-68 overflow-hidden bg-slate-100">
               <img
-                alt="Magic Island Water World featuring the largest wave pool and winding lazy river in Bangladesh"
-                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
-                src="/images/Water%20World/Water%20Cover%20Pic.png"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/75 via-transparent to-black/10"></div>
-              <div className="absolute top-4 left-4 bg-[#38BDF8] text-[#172554] text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
-                {isBangla ? "বাংলাদেশের সর্ববৃহৎ ওয়েভ পুল" : "Largest Wave Pool in BD"}
-              </div>
-              <div className="absolute bottom-3 right-4 text-xs text-white font-heading font-semibold flex items-center gap-1.5 backdrop-blur-md bg-black/50 px-3 py-1 rounded-full border border-white/20">
-                <i className="fa-solid fa-camera text-[#38BDF8]"></i> {isBangla ? "আসল ড্রোন ভিউ" : "Authentic Aerial Photo"}
-              </div>
-            </div>
-
-            <div className="p-7 flex-1 flex flex-col justify-between">
-              <div>
-                <div className="text-xs font-heading font-bold text-[#0284C7] uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <Waves className="w-4 h-4" />
-                  <span>{isBangla ? "জলরাজ্যের রোমাঞ্চ" : "Aquatic Paradise"}</span>
-                </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#172554] font-heading uppercase mb-2">
-                  {isBangla ? "ওয়াটার ওয়ার্ল্ড" : "Water World"}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#3B4B75] leading-relaxed mb-6 font-sans">
-                  {isBangla
-                    ? "সাগরের মতো বিশাল ঢেউ, রোমাঞ্চকর মাল্টি-লেন স্পিড স্লাইড এবং রেইনবো ব্রিজের নিচে ট্রপিক্যাল লেজি রিভারের শীতল পানিতে গা ভাসিয়ে দিন।"
-                    : "Plunge into colossal computerized rolling ocean surf, conquer towering multi-lane flumes, and float through tropical lazy river canals under rainbow bridges."}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="bg-[#E0F2FE] text-[#0369A1] text-xs px-3 py-1 rounded-full font-heading font-semibold">
-                    {isBangla ? "ওয়েভ লেগুন" : "Megawave Bay"}
-                  </span>
-                  <span className="bg-[#E0F2FE] text-[#0369A1] text-xs px-3 py-1 rounded-full font-heading font-semibold">
-                    {isBangla ? "লেজি রিভার" : "Lazy River"}
-                  </span>
-                  <span className="bg-[#E0F2FE] text-[#0369A1] text-xs px-3 py-1 rounded-full font-heading font-semibold">
-                    {isBangla ? "স্পিড ফ্লামস" : "Speed Flumes"}
-                  </span>
-                </div>
-              </div>
-
-              <Link
-                className="btn-park-primary w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2"
-                href="/water-park"
-              >
-                <span>{isBangla ? "ওয়াটার পার্ক ঘুরে দেখুন" : "Explore Water World"}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Realm 2: DINO KINGDOM */}
-          <div className="park-card overflow-hidden flex flex-col justify-between group">
-            <div className="relative h-68 overflow-hidden bg-slate-100">
-              <img
                 alt="Magic Island Dino Zone featuring prehistoric animatronic dinosaurs and elevated wooden jungle boardwalks"
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
                 src="/images/Dino%20World/Dino%20Cover%20PIC.webp"
