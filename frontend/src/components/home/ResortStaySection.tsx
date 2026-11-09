@@ -104,13 +104,13 @@ export function ResortStaySection() {
 
   return (
     <section
-      className="py-24 bg-[#FFF9ED] relative"
+      className="py-12 sm:py-16 bg-[#FFF9ED] relative"
       data-purpose="resort-stay-rooms"
       id="resort-stay"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <span className="text-base">🏨</span>
             <span>{isBangla ? "রিসোর্ট স্টে ও থাকার সুব্যবস্থা" : "Overnight & Day-Stay Resort Accommodation"}</span>
@@ -202,8 +202,8 @@ export function ResortStaySection() {
         </div>
 
         {/* Resort Stay Guest Amenities Banner */}
-        <div className="mt-16 p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-md">
-          <div className="text-center max-w-xl mx-auto mb-8">
+        <div className="mt-8 sm:mt-10 p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-md">
+          <div className="text-center max-w-xl mx-auto mb-6">
             <h4 className="text-xl font-bold font-heading text-[#172554]">
               {isBangla ? "রিসোর্টে অবস্থানকারী অতিথিদের বিশেষ সুবিধাসমূহ" : "Complimentary Resort Guest Privileges"}
             </h4>

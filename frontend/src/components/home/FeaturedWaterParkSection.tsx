@@ -14,13 +14,13 @@ export function FeaturedWaterParkSection() {
 
   return (
     <section
-      className="py-20 sm:py-24 bg-[#FFF9ED] relative overflow-hidden"
+      className="py-12 sm:py-16 bg-[#FFF9ED] relative overflow-hidden"
       data-purpose="featured-water-park-showcase"
       id="water-park"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#0284C7] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#BAE6FD] shadow-xs">
               <Waves className="w-4 h-4 text-[#0284C7]" />
@@ -47,7 +47,7 @@ export function FeaturedWaterParkSection() {
         </div>
 
         {/* Centerpiece Interactive Real Aerial Photo Showcase */}
-        <div className="relative rounded-3xl overflow-hidden border-2 border-[#FED7AA] shadow-2xl mb-12 group bg-white">
+        <div className="relative rounded-3xl overflow-hidden border-2 border-[#FED7AA] shadow-2xl mb-8 group bg-white">
           <img
             alt="Real photo of Magic Island wave pool, lazy river, rainbow bridges, and water slides"
             className="w-full h-[450px] sm:h-[540px] md:h-[620px] object-cover object-center"
@@ -182,7 +182,7 @@ export function FeaturedWaterParkSection() {
         </div>
 
         {/* Real Water World Photo Snapshot Strip */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {[
             { src: "/images/Water%20World/Water-2.png", titleEn: "Lazy River Canal & Wave Basin", titleBn: "লেজি রিভার ও ওয়াটার বেসিন" },
             { src: "/images/Water%20World/Water-4.png", titleEn: "Mega Speed Slide Tower", titleBn: "স্পিড স্লাইডার টাওয়ার" },
@@ -208,7 +208,7 @@ export function FeaturedWaterParkSection() {
         </div>
 
         {/* 4 Feature Highlights Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="p-6 rounded-3xl bg-white border-2 border-[#FED7AA] space-y-2.5 shadow-sm hover:scale-102 transition-transform">
             <div className="w-12 h-12 rounded-2xl bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center text-2xl shadow-xs">
               🌊

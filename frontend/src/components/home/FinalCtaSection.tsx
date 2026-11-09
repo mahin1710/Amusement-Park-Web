@@ -12,7 +12,7 @@ export function FinalCtaSection() {
 
   return (
     <section
-      className="relative pt-28 pb-24 sm:pt-36 sm:pb-28 overflow-hidden bg-[#FFF9ED] text-white"
+      className="relative pt-16 pb-16 sm:pt-20 sm:pb-20 overflow-hidden bg-[#FFF9ED] text-white"
       data-purpose="final-visit-invitation"
     >
       {/* Background Aerial Drone Image with Smooth Shading (Light Warm Cream -> Deep Theme Park Navy) */}
@@ -51,7 +51,7 @@ export function FinalCtaSection() {
         </h2>
 
         {/* Subtext */}
-        <p className="text-base sm:text-xl text-yellow-50 font-sans max-w-2xl mb-10 leading-relaxed font-normal drop-shadow-sm">
+        <p className="text-base sm:text-lg text-yellow-50 font-sans max-w-2xl mb-8 leading-relaxed font-normal drop-shadow-sm">
           {isBangla
             ? "পরিবার, প্রিয়জন ও বন্ধুদের সাথে নিয়ে আসুন আনোয়ার সিটি ম্যাজিক আইল্যান্ডে। দেশের সর্ববৃহৎ ওয়েভ পুল, ডাইনোসর সাফারি ও রোমাঞ্চকর রাইডসের আনন্দ উপভোগ করুন সরাসরি।"
             : "Bring your family, friends, and loved ones to Anowar City Magic Island for a world of colossal ocean waves, prehistoric dinosaur safaris, and high-velocity thrill rides."}

@@ -14,13 +14,13 @@ export function SocialMediaSection() {
 
   return (
     <section
-      className="py-14 sm:py-18 bg-[#FFF9ED] relative"
+      className="py-10 sm:py-14 bg-[#FFF9ED] relative"
       data-purpose="official-social-hub"
       id="social-hub"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-10 sm:mb-12">
+        <div className="flex flex-col items-center text-center mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#FED7AA] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-2.5 shadow-xs">
             <Sparkles className="w-4 h-4 text-[#FF6B35]" />
             <span>

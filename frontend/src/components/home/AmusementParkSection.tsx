@@ -69,12 +69,12 @@ export function AmusementParkSection() {
 
   return (
     <section
-      className="py-20 sm:py-24 bg-[#FFF9ED] relative"
+      className="py-12 sm:py-16 bg-[#FFF9ED] relative"
       data-purpose="amusement-park-showcase"
       id="amusement-park"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#C2410C] text-xs font-heading font-bold uppercase tracking-wider mb-3 border-2 border-[#FED7AA] shadow-xs">
               <FerrisWheel className="w-4 h-4 text-[#FF6B35]" />
@@ -135,7 +135,7 @@ export function AmusementParkSection() {
         </div>
 
         {/* Real Photo Snapshot Strip */}
-        <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-sm">
+        <div className="mt-8 sm:mt-10 p-5 sm:p-6 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
               <span className="w-10 h-10 rounded-2xl bg-[#FFEDD5] text-[#FF6B35] flex items-center justify-center font-bold shadow-xs">

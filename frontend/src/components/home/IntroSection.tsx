@@ -10,13 +10,13 @@ export function IntroSection() {
 
   return (
     <section
-      className="py-20 sm:py-24 bg-[#FFF9ED] relative"
+      className="py-12 sm:py-16 bg-[#FFF9ED] relative"
       data-purpose="park-intro-section"
       id="overview"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header Badge & Title */}
-        <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FED7AA] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <Sparkles className="w-4 h-4 text-[#FF6B35]" />
             <span>
@@ -34,7 +34,7 @@ export function IntroSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column: Official Brand Statement & Stats */}
           <div className="lg:col-span-6 space-y-6">
             <div className="p-8 sm:p-10 rounded-3xl bg-white border-2 border-[#FED7AA] relative overflow-hidden shadow-md">
@@ -87,7 +87,7 @@ export function IntroSection() {
                 </div>
                 <div className="w-12 h-12 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA] p-1 flex items-center justify-center">
                   <img
-                    src="/images/magic-island-logo.jpg"
+                    src="/images/Magic%20Island%20Logo.jpg"
                     alt="Logo"
                     className="h-full w-auto object-contain"
                   />

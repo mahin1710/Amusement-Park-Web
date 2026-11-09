@@ -10,12 +10,12 @@ export function VisitorInfoSection() {
 
   return (
     <section
-      className="py-20 sm:py-24 bg-[#FFF9ED] relative"
+      className="py-12 sm:py-16 bg-[#FFF9ED] relative"
       data-purpose="visitor-information"
       id="info"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center mb-14 sm:mb-16">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <Sparkles className="w-4 h-4 text-[#FF6B35]" />
             <span>{isBangla ? "আপনার সফরের প্রস্তুতি নিন" : "Plan Your Park Visit"}</span>

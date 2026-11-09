@@ -10,12 +10,12 @@ export function DinoZoneSection() {
 
   return (
     <section
-      className="py-24 bg-[#FFF9ED] relative"
+      className="py-12 sm:py-16 bg-[#FFF9ED] relative"
       data-purpose="dino-zone-safari"
       id="dino-zone"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Image Column */}
           <div className="lg:col-span-6 relative">
             <div className="park-card overflow-hidden p-3 bg-white shadow-xl group">
@@ -137,7 +137,7 @@ export function DinoZoneSection() {
         </div>
 
         {/* Real Dino World Snapshot Strip */}
-        <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="mt-8 sm:mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
             { src: "/images/Dino%20World/Dino_1.webp", titleEn: "Colossal T-Rex Animatronic", titleBn: "পূর্ণাকৃতির টি-রেক্স" },
             { src: "/images/Dino%20World/Dino_2.webp", titleEn: "Velociraptor Pack", titleBn: "ভেলোসিরাপটর আস্তানা" },

@@ -116,12 +116,12 @@ export function HomeGallerySection() {
 
   return (
     <section
-      className="py-24 bg-[#FFF9ED] relative"
+      className="py-12 sm:py-16 bg-[#FFF9ED] relative"
       data-purpose="experience-gallery"
       id="gallery"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center mb-14">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <Camera className="w-4 h-4 text-[#FF6B35]" />
             <span>{isBangla ? "আসল মুহূর্ত ও ভিজ্যুয়ালস" : "Memorable Park Moments"}</span>
@@ -134,7 +134,7 @@ export function HomeGallerySection() {
             </span>
           </h2>
 
-          <p className="text-[#3B4B75] text-sm sm:text-base max-w-xl mt-3 font-sans leading-relaxed">
+          <p className="text-[#3B4B75] text-sm sm:text-base max-w-xl mt-2 font-sans leading-relaxed">
             {isBangla
               ? "আমাদের ফটকের ভেতরে প্রবেশ করার আগেই দেখে নিন বিশাল ওয়েভ লেগুন, ডাইনোসর সাফারি এবং অ্যামিউজমেন্ট পার্কের জীবন্ত দৃশ্য।"
               : "Glimpse the joy awaiting you inside our gates across our aquatic wave lagoon, prehistoric dinosaur jungle, and thrill attractions."}
@@ -142,7 +142,7 @@ export function HomeGallerySection() {
 
           {/* Gallery Filter Tabs */}
           <div
-            className="flex flex-wrap gap-2 mt-8 p-1.5 rounded-full bg-white border-2 border-[#FED7AA] shadow-sm"
+            className="flex flex-wrap gap-2 mt-6 p-1.5 rounded-full bg-white border-2 border-[#FED7AA] shadow-sm"
             data-purpose="gallery-filters"
           >
             {filters.map((f) => (
