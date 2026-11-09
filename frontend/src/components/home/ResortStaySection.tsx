@@ -17,6 +17,8 @@ export function ResortStaySection() {
       id: "deluxe-pool",
       titleEn: "Deluxe Pool-View Room",
       titleBn: "ডিলাক্স পুল-ভিউ রুম",
+      image: "/images/Hotel%20Rooms/Deluxe%20room.jpg",
+      alt: "Deluxe Pool-View Room with King Bed and Poolside Balcony at Magic Island Resort",
       badgeEn: "King Bed • Poolside Balcony",
       badgeBn: "কিং বেড • পুলসাইড ব্যালকনি",
       categoryEn: "Couples & Small Families",
@@ -46,6 +48,8 @@ export function ResortStaySection() {
       id: "executive-suite",
       titleEn: "Executive Family Suite",
       titleBn: "এক্সিকিউটিভ ফ্যামিলি স্যুট",
+      image: "/images/Hotel%20Rooms/Family%20room.webp",
+      alt: "Executive Family Suite with 2 Queen Beds and Living Lounge at Magic Island Resort",
       badgeEn: "★ MOST POPULAR • 2 Queen Beds",
       badgeBn: "★ সর্বাধিক জনপ্রিয় • ২টি কুইন বেড",
       categoryEn: "Large Family & Friends Group",
@@ -75,6 +79,8 @@ export function ResortStaySection() {
       id: "presidential-villa",
       titleEn: "VIP Presidential Resort Villa",
       titleBn: "ভিআইপি প্রেসিডেন্সিয়াল রিসোর্ট ভিলা",
+      image: "/images/Hotel%20Rooms/Villa%20room.jpg",
+      alt: "VIP Presidential Resort Villa with Private Sunset Terrace and Jacuzzi at Magic Island Resort",
       badgeEn: "Ultra Luxury • Private Terrace",
       badgeBn: "আল্ট্রা লাক্সারি • নিজস্ব রুফটপ টেরেস",
       categoryEn: "VIP Getaways & Special Occasions",
@@ -135,21 +141,22 @@ export function ResortStaySection() {
               key={room.id}
               className="park-card overflow-hidden flex flex-col justify-between group"
             >
-              {/* Picture Placeholder Box - Specifically Designed with Clear Notice & Upload Space */}
-              <div className="relative h-64 bg-[#FFFDF7] border-b-2 border-dashed border-[#FED7AA] flex flex-col items-center justify-center p-6 text-center group-hover:bg-[#FFF7ED] transition-colors">
-                {/* Decorative Camera / Image Frame */}
-                <div className="w-16 h-16 rounded-2xl bg-white border-2 border-dashed border-[#FFD93D] text-[#FF6B35] flex items-center justify-center text-2xl mb-3 shadow-xs group-hover:scale-105 transition-transform">
-                  <i className="fa-solid fa-camera"></i>
-                </div>
-                <div className="text-xs font-heading font-bold text-[#172554] uppercase tracking-wider">
-                  {isBangla ? "রুমের ছবি যুক্ত করার স্থান" : "Room Photo Placement Area"}
-                </div>
-                <div className="text-[11px] text-[#3B4B75] font-sans mt-1">
-                  {isBangla ? "(ছবি যুক্ত করতে প্রস্তুত • ১২০০ x ৮০০ px)" : "(Ready for Official Photography • 1200x800px)"}
-                </div>
-                <span className="mt-2 text-[10px] font-heading font-bold text-[#C2410C] bg-[#FFF7ED] px-3 py-1 rounded-full border border-[#FED7AA]">
+              {/* Actual Room Photograph */}
+              <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-100">
+                <img
+                  src={room.image}
+                  alt={room.alt}
+                  className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-700"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/75 via-transparent to-black/10"></div>
+                <div className="absolute top-4 left-4 bg-[#FF6B35] text-white text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
                   {isBangla ? room.badgeBn : room.badgeEn}
-                </span>
+                </div>
+                <div className="absolute bottom-3 right-4 text-xs text-white font-heading font-semibold flex items-center gap-1.5 backdrop-blur-md bg-black/50 px-3 py-1 rounded-full border border-white/20">
+                  <i className="fa-solid fa-hotel text-[#FFD93D]"></i>{" "}
+                  {isBangla ? "আসল রুমের ছবি" : "Authentic Room Photo"}
+                </div>
               </div>
 
               {/* Card Body */}
