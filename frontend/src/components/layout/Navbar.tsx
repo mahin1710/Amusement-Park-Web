@@ -36,15 +36,15 @@ export function Navbar() {
       data-purpose="internal-page-navigation"
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
-        {/* Brand Logo & Identity */}
+        {/* Brand Logo & Identity with New Website Logo */}
         <Link
           href="/"
           aria-label="Anowar City Magic Island Home"
           className="flex items-center gap-3 group shrink-0"
         >
-          <div className="h-12 sm:h-14 w-auto shrink-0 flex items-center justify-center p-1.5 rounded-2xl bg-white border-2 border-[#FFD93D] shadow-sm overflow-hidden group-hover:scale-105 transition-transform duration-300">
+          <div className="h-12 sm:h-14 w-auto shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white border-2 border-[#FFD93D] shadow-sm overflow-hidden group-hover:scale-105 transition-transform duration-200">
             <img
-              src="/images/magic-island-logo.jpg"
+              src="/images/Magic%20Island%20Logo.jpg"
               alt="Anowar City Magic Island Official Logo"
               className="h-full w-auto object-contain"
             />
@@ -59,10 +59,10 @@ export function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Rounded Navigation Pill Buttons */}
+        {/* Desktop Navigation Links */}
         <nav
           aria-label="Site Navigation"
-          className="hidden lg:flex items-center gap-2 xl:gap-2.5 flex-wrap justify-center"
+          className="hidden lg:flex items-center gap-1.5 xl:gap-2 flex-wrap justify-center"
         >
           {navLinks.map((item) => {
             const isActive =
@@ -71,7 +71,11 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`nav-pill-btn ${isActive ? "active" : ""}`}
+                className={`px-4 py-2 rounded-full font-heading text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 ${
+                  isActive
+                    ? "bg-[#FF6B35] text-white shadow-md shadow-orange-500/20"
+                    : "text-[#172554] hover:bg-[#FFF2B2] hover:text-[#172554]"
+                }`}
               >
                 <span>{isBangla ? item.labelBn : item.labelEn}</span>
               </Link>
@@ -99,7 +103,7 @@ export function Navbar() {
             onClick={toggleLanguage}
             type="button"
             title="Switch Language"
-            className="nav-pill-btn h-10 !px-3.5 !text-xs"
+            className="h-10 px-3.5 text-xs font-heading font-semibold rounded-full border-2 border-[#FED7AA] bg-white text-[#172554] hover:border-[#FF6B35] transition-colors flex items-center gap-1.5 shadow-xs whitespace-nowrap cursor-pointer"
           >
             <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
             <span>

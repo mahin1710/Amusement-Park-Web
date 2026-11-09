@@ -21,7 +21,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <div className="h-14 sm:h-16 w-auto shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white border-2 border-[#FFD93D] shadow-md overflow-hidden">
                 <img
-                  src="/images/magic-island-logo.jpg"
+                  src="/images/Magic%20Island%20Logo.jpg"
                   alt="Anowar City Magic Island Official Logo"
                   className="h-full w-auto object-contain"
                 />

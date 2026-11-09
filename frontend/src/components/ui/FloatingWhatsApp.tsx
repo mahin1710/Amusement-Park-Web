@@ -22,7 +22,7 @@ export function FloatingWhatsApp() {
             <div className="flex items-center gap-2.5">
               <div className="h-10 w-10 rounded-xl bg-white border border-slate-200 p-0.5 shrink-0 flex items-center justify-center overflow-hidden shadow-xs">
                 <img
-                  src="/images/magic-island-logo.jpg"
+                  src="/images/Magic%20Island%20Logo.jpg"
                   alt="Anowar City Magic Island"
                   className="h-full w-auto object-contain"
                 />
