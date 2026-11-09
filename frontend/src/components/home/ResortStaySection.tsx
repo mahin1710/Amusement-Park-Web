@@ -115,7 +115,7 @@ export function ResortStaySection() {
             <span className="text-base">🏨</span>
             <span>{isBangla ? "রিসোর্ট স্টে ও থাকার সুব্যবস্থা" : "Overnight & Day-Stay Resort Accommodation"}</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
+          <h2 className="section-heading-main text-[#172554] tracking-tight">
             {isBangla ? "লাক্সারি রিসোর্ট রুম ও" : "LUXURY ROOMS & RESORT"}{" "}
             <span className="text-gradient-park">
               {isBangla ? "থাকার ব্যবস্থা" : "STAY AVAILABLE"}

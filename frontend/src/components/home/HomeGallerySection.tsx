@@ -127,7 +127,7 @@ export function HomeGallerySection() {
             <span>{isBangla ? "আসল মুহূর্ত ও ভিজ্যুয়ালস" : "Memorable Park Moments"}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
+          <h2 className="section-heading-main text-[#172554] tracking-tight">
             {isBangla ? "স্মরণীয় মুহূর্ত ও" : "EXPERIENCE"}{" "}
             <span className="text-gradient-park">
               {isBangla ? "গ্যালারি ঝলক" : "MAGIC ISLAND MOMENTS"}

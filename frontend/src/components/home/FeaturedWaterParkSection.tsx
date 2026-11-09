@@ -26,7 +26,7 @@ export function FeaturedWaterParkSection() {
               <Waves className="w-4 h-4 text-[#0284C7]" />
               <span>{isBangla ? "স্বাক্ষরিত প্রধান আকর্ষণ" : "Signature Attraction"}</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="section-heading-main text-[#172554] tracking-tight">
               {isBangla ? "বাংলাদেশের সর্ববৃহৎ" : "BANGLADESH'S LARGEST"}{" "}
               <span className="text-[#0284C7]">
                 {isBangla ? "ওয়েভ পুল" : "WAVE POOL"}

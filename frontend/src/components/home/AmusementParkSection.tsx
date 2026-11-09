@@ -80,7 +80,7 @@ export function AmusementParkSection() {
               <FerrisWheel className="w-4 h-4 text-[#FF6B35]" />
               <span>{isBangla ? "আন্তর্জাতিক মানের রোমাঞ্চকর রাইডস" : "World-Class Amusement Rides"}</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="section-heading-main text-[#172554] tracking-tight">
               {isBangla ? "অ্যামিউজমেন্ট পার্ক:" : "AMUSEMENT PARK:"}{" "}
               <span className="text-[#FF6B35]">
                 {isBangla ? "থ্রিল ও ফ্যামিলি রাইডস" : "THRILL & FAMILY RIDES"}

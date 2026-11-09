@@ -26,7 +26,7 @@ export function IntroSection() {
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
+          <h2 className="section-heading-main text-[#172554] tracking-tight">
             {isBangla ? "একটি গন্তব্য," : "ONE DESTINATION,"}{" "}
             <span className="text-[#FF6B35]">
               {isBangla ? "অফুরন্ত অ্যাডভেঞ্চার।" : "ENDLESS ADVENTURE."}

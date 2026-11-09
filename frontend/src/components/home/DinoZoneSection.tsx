@@ -53,7 +53,7 @@ export function DinoZoneSection() {
               <span>{isBangla ? "প্রাগৈতিহাসিক রোমাঞ্চকর অভিযান" : "Prehistoric Dino Kingdom"}</span>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="section-heading-main text-[#172554] tracking-tight">
               {isBangla ? "ডাইনো জোন:" : "DINO ZONE:"} <br />
               <span className="text-gradient-purple">
                 {isBangla ? "প্রাগৈতিহাসিক সাফারি" : "PREHISTORIC SAFARI"}

@@ -1,117 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { Compass, Waves, Footprints, FerrisWheel, ArrowRight, Sparkles } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
 
 export function ChooseAdventureSection() {
   const { isBangla } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState<"water" | "dino" | "thrill">("water");
-
-  const categories = [
-    {
-      id: "water" as const,
-      labelEn: "Water World",
-      labelBn: "ওয়াটার ওয়ার্ল্ড",
-      icon: Waves,
-      activeStyle: "bg-[#0284C7] text-white border-2 border-[#0284C7] shadow-md shadow-sky-500/25 ring-2 ring-[#38BDF8]/40 scale-105",
-      inactiveStyle: "bg-white text-[#0284C7] border-2 border-[#38BDF8]/60 hover:bg-[#E0F2FE] hover:border-[#0284C7] hover:scale-105 hover:shadow-md",
-      iconActive: "text-white",
-      iconInactive: "text-[#0284C7]",
-    },
-    {
-      id: "dino" as const,
-      labelEn: "Dino World",
-      labelBn: "ডাইনো ওয়ার্ল্ড",
-      icon: Footprints,
-      activeStyle: "bg-[#7C3AED] text-white border-2 border-[#7C3AED] shadow-md shadow-purple-500/25 ring-2 ring-[#A855F7]/40 scale-105",
-      inactiveStyle: "bg-white text-[#7C3AED] border-2 border-[#A855F7]/60 hover:bg-[#F3E8FF] hover:border-[#7C3AED] hover:scale-105 hover:shadow-md",
-      iconActive: "text-white",
-      iconInactive: "text-[#7C3AED]",
-    },
-    {
-      id: "thrill" as const,
-      labelEn: "Thrill World",
-      labelBn: "থ্রিল ওয়ার্ল্ড",
-      icon: FerrisWheel,
-      activeStyle: "bg-[#EA580C] text-white border-2 border-[#EA580C] shadow-md shadow-orange-500/25 ring-2 ring-[#FB923C]/40 scale-105",
-      inactiveStyle: "bg-white text-[#EA580C] border-2 border-[#FB923C]/60 hover:bg-[#FFEDD5] hover:border-[#EA580C] hover:scale-105 hover:shadow-md",
-      iconActive: "text-white",
-      iconInactive: "text-[#EA580C]",
-    },
-  ];
-
-  const handleCategoryClick = (id: "water" | "dino" | "thrill") => {
-    setActiveCategory(id);
-    const element = document.getElementById(`realm-${id}`);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  };
 
   return (
     <section
-      className="pt-4 sm:pt-6 pb-12 sm:pb-16 bg-[#FFF9ED] relative"
+      className="pt-6 sm:pt-8 pb-12 sm:pb-16 bg-[#FFF9ED] relative"
       data-purpose="virtual-island-journey-realms"
       id="virtual-journey"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-5 sm:mb-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider mb-2 shadow-xs">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#FF6B35]" />
             <span>{isBangla ? "একটি গন্তব্যে ৩টি রোমাঞ্চকর অ্যাডভেঞ্চার জগৎ" : "Three Wonder Realms In One Destination"}</span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-[#172554] font-heading tracking-tight leading-tight">
+          <h2 className="section-heading-main text-[#172554] tracking-tight leading-tight">
             {isBangla ? "বেছে নিন আপনার" : "CHOOSE YOUR"}{" "}
             <span className="text-gradient-park">
               {isBangla ? "রোমাঞ্চকর জগত" : "ADVENTURE REALM"}
             </span>
           </h2>
-
-          {/* Three Compact, Rounded Attraction Category Buttons */}
-          <div
-            className="flex items-center justify-center gap-2.5 sm:gap-4 mt-3 sm:mt-4 flex-wrap"
-            role="tablist"
-            aria-label="Attraction Categories"
-          >
-            {categories.map((cat) => {
-              const isActive = activeCategory === cat.id;
-              const Icon = cat.icon;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => handleCategoryClick(cat.id)}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  className={`group relative px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-heading font-bold text-xs sm:text-sm tracking-wide transition-all duration-300 ease-out flex items-center gap-2 cursor-pointer shadow-xs active:scale-95 select-none min-w-[130px] sm:min-w-[145px] justify-center ${
-                    isActive ? cat.activeStyle : cat.inactiveStyle
-                  }`}
-                >
-                  <Icon
-                    className={`w-4 h-4 transition-transform duration-300 group-hover:rotate-12 ${
-                      isActive ? cat.iconActive : cat.iconInactive
-                    }`}
-                  />
-                  <span>{isBangla ? cat.labelBn : cat.labelEn}</span>
-                </button>
-              );
-            })}
-          </div>
         </div>
 
         {/* 3 Signature Experience Realms */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Realm 1: WATER OASIS (Using Real Park Aerial Photo) */}
-          <div
-            id="realm-water"
-            className={`park-card overflow-hidden flex flex-col justify-between group transition-all duration-300 ${
-              activeCategory === "water" ? "ring-2 ring-[#0284C7] shadow-xl" : ""
-            }`}
-          >
+          <div className="park-card overflow-hidden flex flex-col justify-between group">
             <div className="relative h-68 overflow-hidden bg-slate-100">
               <img
                 alt="Magic Island Water World featuring the largest wave pool and winding lazy river in Bangladesh"
@@ -166,12 +88,62 @@ export function ChooseAdventureSection() {
           </div>
 
           {/* Realm 2: DINO KINGDOM */}
-          <div
-            id="realm-dino"
-            className={`park-card overflow-hidden flex flex-col justify-between group transition-all duration-300 ${
-              activeCategory === "dino" ? "ring-2 ring-[#7C3AED] shadow-xl" : ""
-            }`}
-          >
+          <div className="park-card overflow-hidden flex flex-col justify-between group">
+            <div className="relative h-68 overflow-hidden bg-slate-100">
+              <img
+                alt="Magic Island Water World featuring the largest wave pool and winding lazy river in Bangladesh"
+                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                src="/images/Water%20World/Water%20Cover%20Pic.png"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/75 via-transparent to-black/10"></div>
+              <div className="absolute top-4 left-4 bg-[#38BDF8] text-[#172554] text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
+                {isBangla ? "বাংলাদেশের সর্ববৃহৎ ওয়েভ পুল" : "Largest Wave Pool in BD"}
+              </div>
+              <div className="absolute bottom-3 right-4 text-xs text-white font-heading font-semibold flex items-center gap-1.5 backdrop-blur-md bg-black/50 px-3 py-1 rounded-full border border-white/20">
+                <i className="fa-solid fa-camera text-[#38BDF8]"></i> {isBangla ? "আসল ড্রোন ভিউ" : "Authentic Aerial Photo"}
+              </div>
+            </div>
+
+            <div className="p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <div className="text-xs font-heading font-bold text-[#0284C7] uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <Waves className="w-4 h-4" />
+                  <span>{isBangla ? "জলরাজ্যের রোমাঞ্চ" : "Aquatic Paradise"}</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-black text-[#172554] font-heading uppercase mb-2">
+                  {isBangla ? "ওয়াটার ওয়ার্ল্ড" : "Water World"}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#3B4B75] leading-relaxed mb-6 font-sans">
+                  {isBangla
+                    ? "সাগরের মতো বিশাল ঢেউ, রোমাঞ্চকর মাল্টি-লেন স্পিড স্লাইড এবং রেইনবো ব্রিজের নিচে ট্রপিক্যাল লেজি রিভারের শীতল পানিতে গা ভাসিয়ে দিন।"
+                    : "Plunge into colossal computerized rolling ocean surf, conquer towering multi-lane flumes, and float through tropical lazy river canals under rainbow bridges."}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="bg-[#E0F2FE] text-[#0369A1] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                    {isBangla ? "ওয়েভ লেগুন" : "Megawave Bay"}
+                  </span>
+                  <span className="bg-[#E0F2FE] text-[#0369A1] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                    {isBangla ? "লেজি রিভার" : "Lazy River"}
+                  </span>
+                  <span className="bg-[#E0F2FE] text-[#0369A1] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                    {isBangla ? "স্পিড ফ্লামস" : "Speed Flumes"}
+                  </span>
+                </div>
+              </div>
+
+              <Link
+                className="btn-park-primary w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2"
+                href="/water-park"
+              >
+                <span>{isBangla ? "ওয়াটার পার্ক ঘুরে দেখুন" : "Explore Water World"}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Realm 2: DINO KINGDOM */}
+          <div className="park-card overflow-hidden flex flex-col justify-between group">
             <div className="relative h-68 overflow-hidden bg-slate-100">
               <img
                 alt="Magic Island Dino Zone featuring prehistoric animatronic dinosaurs and elevated wooden jungle boardwalks"
@@ -223,12 +195,7 @@ export function ChooseAdventureSection() {
           </div>
 
           {/* Realm 3: THRILL GALAXY */}
-          <div
-            id="realm-thrill"
-            className={`park-card overflow-hidden flex flex-col justify-between group transition-all duration-300 ${
-              activeCategory === "thrill" ? "ring-2 ring-[#EA580C] shadow-xl" : ""
-            }`}
-          >
+          <div className="park-card overflow-hidden flex flex-col justify-between group">
             <div className="relative h-68 overflow-hidden bg-slate-100">
               <img
                 alt="Magic Island Amusement Park thrill rides including roller coasters, spinning pendulum, and family attractions"

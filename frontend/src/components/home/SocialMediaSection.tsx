@@ -28,7 +28,7 @@ export function SocialMediaSection() {
             </span>
           </div>
 
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-[#172554] font-heading tracking-tight">
+          <h2 className="section-heading-main text-[#172554] tracking-tight">
             {isBangla ? "ম্যাজিক আইল্যান্ডের সাথে" : "CONNECT WITH"}{" "}
             <span className="text-[#FF6B35]">
               {isBangla ? "যুক্ত থাকুন" : "MAGIC ISLAND"}

@@ -36,7 +36,7 @@ export function FinalCtaSection() {
         </div>
 
         {/* Playful Headline per Master Prompt */}
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-black font-heading tracking-tight mb-6 max-w-4xl leading-tight text-white drop-shadow-md">
+        <h2 className="section-heading-main text-white drop-shadow-md tracking-tight mb-6 max-w-4xl leading-tight">
           {isBangla ? (
             <>
               আপনার পরবর্তী অবিস্মরণীয় অ্যাডভেঞ্চার <br />

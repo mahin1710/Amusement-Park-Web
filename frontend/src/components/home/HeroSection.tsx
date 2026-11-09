@@ -27,7 +27,7 @@ export function HeroSection() {
     { href: "/", labelEn: "Home", labelBn: "হোম" },
     { href: "/attractions", labelEn: "Explore Attractions", labelBn: "সকল আকর্ষণ" },
     { href: "/gallery", labelEn: "Gallery", labelBn: "গ্যালারি" },
-    { href: "/about", labelEn: "About Us", labelBn: "আমাদের সম্পর্কে" },
+    { href: "/location", labelEn: "Contact", labelBn: "যোগাযোগ" },
   ];
 
   const whatsappHref = `https://wa.me/${businessConfig.hotlines.whatsapp.replace(/[^0-9]/g, "")}`;
@@ -62,7 +62,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative h-[66vh] sm:h-[70vh] lg:h-[73vh] min-h-[490px] sm:min-h-[530px] max-h-[670px] flex flex-col justify-between overflow-hidden bg-[#FFF9ED]"
+      className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex flex-col justify-between overflow-hidden bg-[#FFF9ED]"
       data-purpose="amusement-park-entrance-hero"
       id="hero"
     >
@@ -102,7 +102,7 @@ export function HeroSection() {
       </div>
 
       {/* 4. INTEGRATED HERO NAVIGATION (Positioned neatly with small breathing space at top, shifted slightly higher) */}
-      <header className="relative z-30 w-full pt-5 sm:pt-6 pb-2.5 sm:pb-3 px-4 sm:px-6 lg:px-8">
+      <header className="relative z-30 w-full pt-4 sm:pt-5 pb-2 sm:pb-2.5 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-4 sm:gap-6">
           {/* Brand Logo & Identity with New Official Website Logo */}
           <Link
@@ -127,10 +127,10 @@ export function HeroSection() {
             </div>
           </Link>
 
-          {/* Restored Simple, Elegant Navigation Buttons */}
+          {/* Compact Modern Rounded Pill Navigation Buttons with Orange Hover */}
           <nav
             aria-label="Hero Navigation"
-            className="hidden lg:flex items-center gap-1.5 xl:gap-2.5 flex-wrap justify-center"
+            className="hidden lg:flex items-center gap-2 xl:gap-2.5 flex-wrap justify-center"
           >
             {navLinks.map((item) => {
               const isActive = pathname === item.href;
@@ -138,11 +138,7 @@ export function HeroSection() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-4 py-2 rounded-full font-heading text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 ${
-                    isActive
-                      ? "bg-[#FF6B35] text-white shadow-md shadow-orange-500/20"
-                      : "text-[#172554] hover:bg-[#FFF2B2] hover:text-[#172554]"
-                  }`}
+                  className={`nav-pill-btn ${isActive ? "active" : ""}`}
                 >
                   <span>{isBangla ? item.labelBn : item.labelEn}</span>
                 </Link>
@@ -151,14 +147,14 @@ export function HeroSection() {
           </nav>
 
           {/* Quick Actions (Bilingual Toggle & Helpline) */}
-          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {/* WhatsApp Quick Pill */}
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               title="WhatsApp Helpline"
-              className="hidden sm:inline-flex items-center gap-2 h-10 px-4 text-xs font-heading font-semibold rounded-full bg-[#55C98B] hover:bg-[#43B878] text-white shadow-md shadow-emerald-500/20 transition-all hover:scale-105 duration-200 whitespace-nowrap cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-2 h-9 sm:h-10 px-3.5 sm:px-4 text-xs font-heading font-semibold rounded-full bg-[#55C98B] hover:bg-[#43B878] text-white shadow-md shadow-emerald-500/20 transition-all hover:scale-105 duration-200 whitespace-nowrap cursor-pointer"
             >
               <i className="fa-brands fa-whatsapp text-sm"></i>
               <span className="hidden xl:inline">{businessConfig.hotlines.whatsapp}</span>
@@ -170,7 +166,7 @@ export function HeroSection() {
               onClick={toggleLanguage}
               type="button"
               title="Switch Language"
-              className="h-10 px-3.5 text-xs font-heading font-semibold rounded-full border-2 border-[#FED7AA] bg-white text-[#172554] hover:border-[#FF6B35] transition-colors flex items-center gap-1.5 shadow-xs whitespace-nowrap cursor-pointer"
+              className="nav-pill-btn !h-9 sm:!h-10 !px-3 sm:!px-3.5 !text-xs cursor-pointer"
             >
               <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
               <span>
@@ -191,7 +187,7 @@ export function HeroSection() {
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden h-10 w-10 rounded-full border-2 border-[#FED7AA] bg-white text-[#172554] hover:text-[#FF6B35] flex items-center justify-center transition-transform active:scale-95 shadow-sm cursor-pointer"
+              className="lg:hidden h-9 w-9 sm:h-10 sm:w-10 rounded-full border-2 border-[#FED7AA] bg-white text-[#172554] hover:text-[#FF6B35] flex items-center justify-center transition-transform active:scale-95 shadow-sm cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -210,14 +206,14 @@ export function HeroSection() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`px-4 py-3 rounded-2xl font-heading text-sm font-bold flex items-center justify-between transition-all ${
+                    className={`px-4 py-3 rounded-full font-heading text-sm font-bold flex items-center justify-between transition-all duration-200 border-2 ${
                       isActive
-                        ? "bg-[#FF6B35] text-white shadow-md"
-                        : "text-[#172554] hover:bg-[#FFF2B2]"
+                        ? "bg-[#FF6B35] text-white border-[#FF6B35] shadow-md"
+                        : "bg-white text-[#172554] border-[#FED7AA]/60 hover:bg-[#FF6B35] hover:text-white hover:border-[#FF6B35] active:bg-[#FF6B35] active:text-white"
                     }`}
                   >
                     <span>{isBangla ? item.labelBn : item.labelEn}</span>
-                    <ArrowRight className="w-4 h-4 opacity-60" />
+                    <ArrowRight className="w-4 h-4 opacity-70" />
                   </Link>
                 );
               })}

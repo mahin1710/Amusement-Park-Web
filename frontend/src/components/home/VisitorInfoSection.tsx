@@ -20,7 +20,7 @@ export function VisitorInfoSection() {
             <Sparkles className="w-4 h-4 text-[#FF6B35]" />
             <span>{isBangla ? "আপনার সফরের প্রস্তুতি নিন" : "Plan Your Park Visit"}</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] font-heading tracking-tight">
+          <h2 className="section-heading-main text-[#172554] tracking-tight">
             {isBangla ? "দর্শনার্থী তথ্য ও" : "VISITOR GUIDELINES &"}{" "}
             <span className="text-[#FF6B35]">
               {isBangla ? "পার্ক গাইডলাইন" : "PARK ESSENTIALS"}
