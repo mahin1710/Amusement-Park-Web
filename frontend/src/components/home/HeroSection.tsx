@@ -21,11 +21,16 @@ export function HeroSection() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Delayed Logo Shrink & Scroll-Responsive Header (Adventure World Inspired)
-  // Triggers only after visitor scrolls ~250-300px (or ~240px on mobile), preserving large logo during initial scroll
+  // Triggers only after visitor scrolls ~250-300px (or ~200px on mobile), preserving large logo during initial scroll
   useEffect(() => {
     const handleScroll = () => {
-      const threshold = window.innerWidth < 768 ? 240 : 280;
-      setIsScrolled(window.scrollY > threshold);
+      const scrollY =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      const threshold = window.innerWidth < 768 ? 200 : 260;
+      setIsScrolled(scrollY > threshold);
     };
 
     handleScroll();
@@ -79,46 +84,7 @@ export function HeroSection() {
   }, [advanceToNextSlide]);
 
   return (
-    <section
-      className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex flex-col justify-between overflow-hidden bg-[#FFF9ED]"
-      data-purpose="amusement-park-entrance-hero"
-      id="hero"
-    >
-      {/* 1. AUTOMATIC SHUFFLE FULL-WIDTH PHOTOGRAPHY SLIDESHOW (100% Edge-to-Edge) */}
-      <div className="absolute inset-0 z-0 overflow-hidden w-full">
-        {heroSlides.map((slide, idx) => {
-          const isActive = idx === currentIndex;
-          return (
-            <div
-              key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-              }`}
-              aria-hidden={!isActive}
-            >
-              <img
-                src={slide.src}
-                alt={slide.alt}
-                className="w-full h-full object-cover object-center"
-                loading={idx === 0 ? "eager" : "lazy"}
-              />
-            </div>
-          );
-        })}
-
-        {/* 2. SUBTLE TOP BLUR & SEAMLESS GRADIENT BLEND (Soft transparent backdrop-blur behind navigation area) */}
-        <div
-          className="absolute inset-x-0 top-0 h-28 sm:h-32 bg-gradient-to-b from-[#FFF9ED]/85 via-[#FFF9ED]/30 to-transparent backdrop-blur-[3px] pointer-events-none z-10"
-          style={{
-            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0) 100%)",
-            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0) 100%)",
-          }}
-        ></div>
-
-        {/* 3. SUBTLE, MINIMAL BOTTOM-EDGE BLEND (Short ~36px fade into #FFF9ED) */}
-        <div className="absolute inset-x-0 bottom-0 h-8 sm:h-10 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/30 to-transparent pointer-events-none z-20"></div>
-      </div>
-
+    <>
       {/* 4. INTEGRATED HERO NAVIGATION (Fixed Header with Localized Transparent Blur & Delayed Logo Shrink) */}
       <header
         className={`fixed top-0 inset-x-0 z-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out ${
@@ -130,21 +96,11 @@ export function HeroSection() {
       >
         {/* Localized Transparent Backdrop Blur (Preserves subtle glass blur in both expanded & compact states) */}
         <div
-          className={`absolute inset-0 -z-10 pointer-events-none transition-all duration-300 ease-in-out ${
+          className={`absolute inset-0 -z-10 pointer-events-none transition-all duration-300 ease-in-out backdrop-blur-md ${
             isScrolled || mobileMenuOpen
-              ? "bg-[#FFF9ED]/80 backdrop-blur-md border-b-2 border-[#FED7AA]/60 shadow-sm shadow-orange-950/5"
-              : "bg-gradient-to-b from-[#FFF9ED]/80 via-[#FFF9ED]/40 to-transparent backdrop-blur-[4px] border-b border-transparent"
+              ? "bg-[#FFF9ED]/80 border-b-2 border-[#FED7AA]/60 shadow-sm shadow-orange-950/5"
+              : "bg-[#FFF9ED]/40 border-b border-transparent"
           }`}
-          style={
-            !isScrolled && !mobileMenuOpen
-              ? {
-                  WebkitMaskImage:
-                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 100%)",
-                  maskImage:
-                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 100%)",
-                }
-              : undefined
-          }
         />
 
         <div className={`max-w-[1400px] mx-auto flex items-center justify-between transition-all duration-300 ease-in-out ${
@@ -298,36 +254,78 @@ export function HeroSection() {
         )}
       </header>
 
-      {/* Top Breathing Space Spacer (Preserves layout balance when header is fixed) */}
-      <div className="h-20 sm:h-24 lg:h-28 w-full pointer-events-none" aria-hidden="true" />
-
-      {/* 5. SUBTLE MINIMAL SLIDESHOW INDICATOR DOTS */}
-      <div className="relative z-30 pb-2.5 sm:pb-3 flex items-center justify-center mt-auto pointer-events-auto">
-        <div
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 shadow-sm"
-          role="tablist"
-          aria-label="Slideshow Indicators"
-        >
+      {/* 1. HERO SLIDESHOW & AMUSEMENT PARK SECTION */}
+      <section
+        className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex flex-col justify-between overflow-hidden bg-[#FFF9ED]"
+        data-purpose="amusement-park-entrance-hero"
+        id="hero"
+      >
+        {/* AUTOMATIC SHUFFLE FULL-WIDTH PHOTOGRAPHY SLIDESHOW (100% Edge-to-Edge) */}
+        <div className="absolute inset-0 z-0 overflow-hidden w-full">
           {heroSlides.map((slide, idx) => {
             const isActive = idx === currentIndex;
             return (
-              <button
+              <div
                 key={slide.id}
-                onClick={() => setCurrentIndex(idx)}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                aria-label={`Show ${slide.alt}`}
-                className={`transition-all duration-500 rounded-full cursor-pointer ${
-                  isActive
-                    ? "w-6 h-2 bg-[#FFD93D] shadow-sm"
-                    : "w-2 h-2 bg-white/60 hover:bg-white"
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
                 }`}
-              />
+                aria-hidden={!isActive}
+              >
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="w-full h-full object-cover object-center"
+                  loading={idx === 0 ? "eager" : "lazy"}
+                />
+              </div>
             );
           })}
+
+          {/* 2. SUBTLE TOP BLUR & SEAMLESS GRADIENT BLEND (Soft transparent backdrop-blur behind navigation area) */}
+          <div
+            className="absolute inset-x-0 top-0 h-28 sm:h-32 bg-gradient-to-b from-[#FFF9ED]/85 via-[#FFF9ED]/30 to-transparent backdrop-blur-[3px] pointer-events-none z-10"
+            style={{
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0) 100%)",
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0) 100%)",
+            }}
+          ></div>
+
+          {/* 3. SUBTLE, MINIMAL BOTTOM-EDGE BLEND (Short ~36px fade into #FFF9ED) */}
+          <div className="absolute inset-x-0 bottom-0 h-8 sm:h-10 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/30 to-transparent pointer-events-none z-20"></div>
         </div>
-      </div>
-    </section>
+
+        {/* Top Breathing Space Spacer (Preserves layout balance when header is fixed) */}
+        <div className="h-20 sm:h-24 lg:h-28 w-full pointer-events-none" aria-hidden="true" />
+
+        {/* 5. SUBTLE MINIMAL SLIDESHOW INDICATOR DOTS */}
+        <div className="relative z-30 pb-2.5 sm:pb-3 flex items-center justify-center mt-auto pointer-events-auto">
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 shadow-sm"
+            role="tablist"
+            aria-label="Slideshow Indicators"
+          >
+            {heroSlides.map((slide, idx) => {
+              const isActive = idx === currentIndex;
+              return (
+                <button
+                  key={slide.id}
+                  onClick={() => setCurrentIndex(idx)}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-label={`Show ${slide.alt}`}
+                  className={`transition-all duration-500 rounded-full cursor-pointer ${
+                    isActive
+                      ? "w-6 h-2 bg-[#FFD93D] shadow-sm"
+                      : "w-2 h-2 bg-white/60 hover:bg-white"
+                  }`}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
