@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Globe, Menu, X, ArrowRight } from "lucide-react";
@@ -11,6 +11,16 @@ export function Navbar() {
   const { locale, setLocale, isBangla } = useTranslation();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // On Homepage, the navigation pill buttons are integrated directly into the Hero Section (first viewport)
   if (pathname === "/") {
@@ -32,28 +42,48 @@ export function Navbar() {
 
   return (
     <header
-      className="relative z-30 w-full py-3 sm:py-4 px-4 sm:px-6 lg:px-8 bg-[#FFF9ED]/95 backdrop-blur-md border-b-2 border-[#FED7AA]/70 shadow-xs"
+      className={`sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 bg-[#FFF9ED]/95 backdrop-blur-md border-b-2 border-[#FED7AA]/70 transition-all duration-300 ease-in-out ${
+        isScrolled ? "py-2 sm:py-2.5 shadow-md shadow-orange-950/5" : "py-3 sm:py-4 shadow-xs"
+      }`}
       data-purpose="internal-page-navigation"
     >
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
-        {/* Brand Logo & Identity with New Website Logo */}
+      <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
+        {/* Brand Logo & Identity with Smooth Scaling Logo Element */}
         <Link
           href="/"
           aria-label="Anowar City Magic Island Home"
-          className="flex items-center gap-3 group shrink-0"
+          className="flex items-center gap-2.5 sm:gap-3 group shrink-0 transition-transform duration-200"
         >
-          <div className="h-12 sm:h-14 w-auto shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white border-2 border-[#FFD93D] shadow-sm overflow-hidden group-hover:scale-105 transition-transform duration-200">
+          <div
+            className={`shrink-0 flex items-center justify-center bg-white border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105 transition-all duration-300 ease-in-out ${
+              isScrolled
+                ? "h-10 sm:h-11 lg:h-12 w-auto p-1 rounded-xl shadow-xs"
+                : "h-12 sm:h-14 lg:h-16 w-auto p-1.5 rounded-2xl shadow-sm"
+            }`}
+          >
             <img
               src="/images/Magic%20Island%20Logo.jpg"
               alt="Anowar City Magic Island Official Logo"
-              className="h-full w-auto object-contain"
+              className="h-full w-auto object-contain transition-all duration-300 ease-in-out"
             />
           </div>
-          <div className="flex flex-col justify-center">
-            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] text-[#FF6B35] uppercase font-heading leading-none mb-1">
+          <div className="flex flex-col justify-center transition-all duration-300 ease-in-out">
+            <span
+              className={`font-bold uppercase font-heading leading-none text-[#FF6B35] transition-all duration-300 ease-in-out ${
+                isScrolled
+                  ? "text-[9px] sm:text-[10px] tracking-[0.20em] mb-0.5"
+                  : "text-[10px] sm:text-[11px] tracking-[0.22em] mb-1"
+              }`}
+            >
               {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
             </span>
-            <span className="text-xl sm:text-2xl font-black tracking-tight text-[#172554] font-heading leading-none">
+            <span
+              className={`font-black tracking-tight text-[#172554] font-heading leading-none transition-all duration-300 ease-in-out ${
+                isScrolled
+                  ? "text-base sm:text-lg lg:text-xl"
+                  : "text-xl sm:text-2xl"
+              }`}
+            >
               MAGIC ISLAND
             </span>
           </div>

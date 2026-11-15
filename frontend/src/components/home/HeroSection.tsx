@@ -18,6 +18,17 @@ export function HeroSection() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Adventure World inspired scroll listener for smooth top-left logo shrinking & compact sticky header
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleLanguage = () => {
     setLocale(locale === "en" ? "bn" : "en");
@@ -101,27 +112,52 @@ export function HeroSection() {
         <div className="absolute inset-x-0 bottom-0 h-8 sm:h-10 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/30 to-transparent pointer-events-none z-20"></div>
       </div>
 
-      {/* 4. INTEGRATED HERO NAVIGATION (Positioned neatly with small breathing space at top, shifted slightly higher) */}
-      <header className="relative z-30 w-full pt-4 sm:pt-5 pb-2 sm:pb-2.5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-4 sm:gap-6">
-          {/* Brand Logo & Identity with New Official Website Logo */}
+      {/* 4. INTEGRATED HERO NAVIGATION (Adventure World Inspired Scroll-Responsive Sticky Header & Animated Logo) */}
+      <header
+        className={`fixed top-0 inset-x-0 z-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out ${
+          isScrolled || mobileMenuOpen
+            ? "bg-[#FFF9ED]/95 backdrop-blur-md border-b-2 border-[#FED7AA]/70 shadow-md shadow-orange-950/5 py-2 sm:py-2.5"
+            : "bg-transparent pt-4 sm:pt-5 pb-2.5 sm:pb-3 border-b border-transparent"
+        }`}
+        data-purpose="hero-navigation-header"
+      >
+        <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-3 sm:gap-6">
+          {/* Brand Logo & Identity: Single Element Smoothly Shrinking & Repositioning on Scroll */}
           <Link
             href="/"
             aria-label="Anowar City Magic Island Home"
-            className="flex items-center gap-3 group shrink-0"
+            className="flex items-center gap-2.5 sm:gap-3 group shrink-0 transition-transform duration-200"
           >
-            <div className="h-12 sm:h-14 w-auto shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white border-2 border-[#FFD93D] shadow-sm overflow-hidden group-hover:scale-105 transition-transform duration-200">
+            <div
+              className={`shrink-0 flex items-center justify-center bg-white border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105 transition-all duration-300 ease-in-out ${
+                isScrolled
+                  ? "h-10 sm:h-11 lg:h-12 w-auto p-1 rounded-xl shadow-xs"
+                  : "h-14 sm:h-16 lg:h-20 w-auto p-1.5 rounded-2xl shadow-md"
+              }`}
+            >
               <img
                 src="/images/Magic%20Island%20Logo.jpg"
                 alt="Anowar City Magic Island Official Logo"
-                className="h-full w-auto object-contain"
+                className="h-full w-auto object-contain transition-all duration-300 ease-in-out"
               />
             </div>
-            <div className="flex flex-col justify-center">
-              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.24em] text-[#FF6B35] uppercase font-heading leading-none mb-1">
+            <div className="flex flex-col justify-center transition-all duration-300 ease-in-out">
+              <span
+                className={`font-bold uppercase font-heading leading-none text-[#FF6B35] transition-all duration-300 ease-in-out ${
+                  isScrolled
+                    ? "text-[9px] sm:text-[10px] tracking-[0.20em] mb-0.5"
+                    : "text-[10px] sm:text-[11px] lg:text-[12px] tracking-[0.24em] mb-1"
+                }`}
+              >
                 {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
               </span>
-              <span className="text-xl sm:text-2xl font-black tracking-tight text-[#172554] font-heading leading-none">
+              <span
+                className={`font-black tracking-tight text-[#172554] font-heading leading-none transition-all duration-300 ease-in-out ${
+                  isScrolled
+                    ? "text-base sm:text-lg lg:text-xl"
+                    : "text-xl sm:text-2xl lg:text-3xl"
+                }`}
+              >
                 MAGIC ISLAND
               </span>
             </div>
@@ -197,7 +233,7 @@ export function HeroSection() {
 
         {/* Mobile Navigation Drawer Overlay */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-3 p-4 rounded-3xl bg-white/95 backdrop-blur-md border-2 border-[#FED7AA] shadow-2xl animate-in fade-in slide-in-from-top-3">
+          <div className="lg:hidden mt-3 p-4 rounded-3xl bg-white/95 backdrop-blur-md border-2 border-[#FED7AA] shadow-2xl animate-in fade-in slide-in-from-top-3 max-h-[calc(100vh-90px)] overflow-y-auto">
             <nav className="flex flex-col gap-2">
               {navLinks.map((item) => {
                 const isActive = pathname === item.href;
@@ -234,8 +270,11 @@ export function HeroSection() {
         )}
       </header>
 
-      {/* 4. SUBTLE MINIMAL SLIDESHOW INDICATOR DOTS */}
-      <div className="relative z-30 pb-2.5 sm:pb-3 flex items-center justify-center pointer-events-auto">
+      {/* Top Breathing Space Spacer (Preserves layout balance when header is fixed) */}
+      <div className="h-20 sm:h-24 lg:h-28 w-full pointer-events-none" aria-hidden="true" />
+
+      {/* 5. SUBTLE MINIMAL SLIDESHOW INDICATOR DOTS */}
+      <div className="relative z-30 pb-2.5 sm:pb-3 flex items-center justify-center mt-auto pointer-events-auto">
         <div
           className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 shadow-sm"
           role="tablist"
