@@ -20,14 +20,21 @@ export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Adventure World inspired scroll listener for smooth top-left logo shrinking & compact sticky header
+  // Delayed Logo Shrink & Scroll-Responsive Header (Adventure World Inspired)
+  // Triggers only after visitor scrolls ~250-300px (or ~240px on mobile), preserving large logo during initial scroll
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      const threshold = window.innerWidth < 768 ? 240 : 280;
+      setIsScrolled(window.scrollY > threshold);
     };
+
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   const toggleLanguage = () => {
@@ -112,16 +119,37 @@ export function HeroSection() {
         <div className="absolute inset-x-0 bottom-0 h-8 sm:h-10 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/30 to-transparent pointer-events-none z-20"></div>
       </div>
 
-      {/* 4. INTEGRATED HERO NAVIGATION (Adventure World Inspired Scroll-Responsive Sticky Header & Animated Logo) */}
+      {/* 4. INTEGRATED HERO NAVIGATION (Fixed Header with Localized Transparent Blur & Delayed Logo Shrink) */}
       <header
         className={`fixed top-0 inset-x-0 z-50 px-4 sm:px-6 lg:px-8 transition-all duration-300 ease-in-out ${
-          isScrolled || mobileMenuOpen
-            ? "bg-[#FFF9ED]/95 backdrop-blur-md border-b-2 border-[#FED7AA]/70 shadow-md shadow-orange-950/5 py-2 sm:py-2.5"
-            : "bg-transparent pt-4 sm:pt-5 pb-2.5 sm:pb-3 border-b border-transparent"
+          isScrolled
+            ? "py-2 sm:py-2.5"
+            : "pt-4 sm:pt-5 pb-2.5 sm:pb-3"
         }`}
         data-purpose="hero-navigation-header"
       >
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-3 sm:gap-6">
+        {/* Localized Transparent Backdrop Blur (Preserves subtle glass blur in both expanded & compact states) */}
+        <div
+          className={`absolute inset-0 -z-10 pointer-events-none transition-all duration-300 ease-in-out ${
+            isScrolled || mobileMenuOpen
+              ? "bg-[#FFF9ED]/80 backdrop-blur-md border-b-2 border-[#FED7AA]/60 shadow-sm shadow-orange-950/5"
+              : "bg-gradient-to-b from-[#FFF9ED]/80 via-[#FFF9ED]/40 to-transparent backdrop-blur-[4px] border-b border-transparent"
+          }`}
+          style={
+            !isScrolled && !mobileMenuOpen
+              ? {
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 100%)",
+                  maskImage:
+                    "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 75%, rgba(0,0,0,0.4) 100%)",
+                }
+              : undefined
+          }
+        />
+
+        <div className={`max-w-[1400px] mx-auto flex items-center justify-between transition-all duration-300 ease-in-out ${
+          isScrolled ? "gap-2.5 sm:gap-4" : "gap-3 sm:gap-6"
+        }`}>
           {/* Brand Logo & Identity: Single Element Smoothly Shrinking & Repositioning on Scroll */}
           <Link
             href="/"

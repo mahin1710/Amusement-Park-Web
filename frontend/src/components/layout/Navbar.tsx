@@ -15,11 +15,16 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      const threshold = window.innerWidth < 768 ? 160 : 200;
+      setIsScrolled(window.scrollY > threshold);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   // On Homepage, the navigation pill buttons are integrated directly into the Hero Section (first viewport)
@@ -42,8 +47,8 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 bg-[#FFF9ED]/95 backdrop-blur-md border-b-2 border-[#FED7AA]/70 transition-all duration-300 ease-in-out ${
-        isScrolled ? "py-2 sm:py-2.5 shadow-md shadow-orange-950/5" : "py-3 sm:py-4 shadow-xs"
+      className={`sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 bg-[#FFF9ED]/80 backdrop-blur-md border-b-2 border-[#FED7AA]/60 transition-all duration-300 ease-in-out ${
+        isScrolled ? "py-2 sm:py-2.5 shadow-sm shadow-orange-950/5" : "py-3 sm:py-4 shadow-xs"
       }`}
       data-purpose="internal-page-navigation"
     >
