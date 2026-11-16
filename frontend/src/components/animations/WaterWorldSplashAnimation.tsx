@@ -71,13 +71,13 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     const sceneGroup = new THREE.Group();
     const updateGroupPosition = (width: number) => {
       if (width < 768) {
-        sceneGroup.position.set(-10.5, -2.0, -3);
+        sceneGroup.position.set(-12.0, -2.0, -3);
         sceneGroup.scale.set(0.60, 0.60, 0.60);
       } else if (width < 1200) {
-        sceneGroup.position.set(-15.0, -2.2, -1);
+        sceneGroup.position.set(-17.2, -2.2, -1);
         sceneGroup.scale.set(0.72, 0.72, 0.72);
       } else {
-        sceneGroup.position.set(-18.5, -2.4, 0);
+        sceneGroup.position.set(-21.2, -2.4, 0);
         sceneGroup.scale.set(0.80, 0.80, 0.80);
       }
     };
@@ -671,7 +671,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       <div className="absolute inset-0 bg-gradient-to-b from-[#0284C7]/50 via-[#38BDF8]/30 to-[#0369A1]/65 -z-10" />
 
       <motion.div
-        className="absolute z-40 top-16 sm:top-20 left-6 sm:left-12 flex items-center pointer-events-none"
+        className="absolute z-40 top-10 sm:top-12 left-6 sm:left-12 flex items-center pointer-events-none"
         initial={{ scale: 0, rotate: -6, opacity: 0 }}
         animate={{ scale: 1, rotate: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.15, type: "spring", stiffness: 260, damping: 20 }}

@@ -39,7 +39,7 @@ export default function WaterParkPage() {
         {/* Seamless Bottom-Edge Blend into #FFF9ED (Matches Homepage Smooth Scroll Quality) */}
         <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20"></div>
 
-        <div className="relative z-30 max-w-5xl mx-auto px-4 text-center">
+        <div className="relative z-30 max-w-5xl mx-auto px-4 text-center -translate-y-8 sm:-translate-y-12">
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#38BDF8]/40 backdrop-blur-md">
             <Waves className="w-4 h-4 text-[#0284C7]" />
             <span>{isBangla ? "ম্যাজিক আইল্যান্ড ওয়াটার পার্ক • আসল ড্রোন ভিউ" : "Magic Island Water Park • Authentic Drone View"}</span>

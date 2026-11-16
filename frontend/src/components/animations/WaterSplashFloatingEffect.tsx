@@ -81,20 +81,20 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     scene.add(sunGlint);
 
     // FIXED STATIONARY POSITION ON THE LEFT SIDE OF THE SCREEN
-    // (Does NOT travel from left to right; stays permanently anchored on the left side)
+    // (Shifted 1 inch further left for optimal composition)
     const sceneGroup = new THREE.Group();
     const updateGroupPosition = (width: number) => {
       if (width < 768) {
         // Mobile view: compact scale, shifted left & lower
-        sceneGroup.position.set(-10.5, -2.0, -3);
+        sceneGroup.position.set(-12.0, -2.0, -3);
         sceneGroup.scale.set(0.60, 0.60, 0.60);
       } else if (width < 1200) {
         // Tablet / Medium screen
-        sceneGroup.position.set(-15.0, -2.2, -1);
+        sceneGroup.position.set(-17.2, -2.2, -1);
         sceneGroup.scale.set(0.72, 0.72, 0.72);
       } else {
-        // Desktop view: shifted further left, lower down, with compact 0.80 scale
-        sceneGroup.position.set(-18.5, -2.4, 0);
+        // Desktop view: shifted 1 inch further left (-21.2), lower down (-2.4), 0.80 scale
+        sceneGroup.position.set(-21.2, -2.4, 0);
         sceneGroup.scale.set(0.80, 0.80, 0.80);
       }
     };
@@ -848,9 +848,9 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       {/* 3D WebGL Canvas for Stationary Water Slider on Left Side */}
       <div ref={mountRef} className="absolute inset-0 w-full h-full" />
 
-      {/* Floating Announcement Pill (Anchored Left, non-blocking) */}
+      {/* Floating Announcement Pill (Anchored Left, raised 0.5 inch higher) */}
       <motion.div
-        className="absolute top-20 sm:top-24 left-6 sm:left-12 flex items-center pointer-events-none"
+        className="absolute top-12 sm:top-14 left-6 sm:left-12 flex items-center pointer-events-none"
         initial={{ opacity: 0, x: -20, scale: 0.9 }}
         animate={{ opacity: [0, 1, 1, 0], x: [-20, 0, 0, -10], scale: [0.9, 1, 1, 0.95] }}
         transition={{ duration: 4.5, times: [0, 0.15, 0.82, 1], ease: "easeInOut" }}
