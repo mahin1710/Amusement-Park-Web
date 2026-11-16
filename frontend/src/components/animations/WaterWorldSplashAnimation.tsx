@@ -71,14 +71,14 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     const sceneGroup = new THREE.Group();
     const updateGroupPosition = (width: number) => {
       if (width < 768) {
-        sceneGroup.position.set(-8.5, -0.4, -4);
-        sceneGroup.scale.set(0.75, 0.75, 0.75);
+        sceneGroup.position.set(-10.5, -2.0, -3);
+        sceneGroup.scale.set(0.60, 0.60, 0.60);
       } else if (width < 1200) {
-        sceneGroup.position.set(-13.5, -0.6, -1);
-        sceneGroup.scale.set(0.9, 0.9, 0.9);
+        sceneGroup.position.set(-15.0, -2.2, -1);
+        sceneGroup.scale.set(0.72, 0.72, 0.72);
       } else {
-        sceneGroup.position.set(-16.0, -0.6, 0);
-        sceneGroup.scale.set(0.5, 0.5, 0.5);
+        sceneGroup.position.set(-18.5, -2.4, 0);
+        sceneGroup.scale.set(0.80, 0.80, 0.80);
       }
     };
     updateGroupPosition(initW);
