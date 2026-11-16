@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -9,335 +10,393 @@ interface Props {
 }
 
 export function DinoWorldStampedeAnimation({ isReducedMotion = false }: Props) {
-  const [groundShake, setGroundShake] = useState(false);
+  const mountRef = useRef<HTMLDivElement | null>(null);
+  const [screenRumble, setScreenRumble] = useState(false);
 
   useEffect(() => {
-    // Screen rumble triggers as the heavy T-Rex stomps across (between 1.2s and 3.2s)
-    const rumbleInterval = setInterval(() => {
-      setGroundShake(true);
-      setTimeout(() => setGroundShake(false), 140);
-    }, 450);
+    const container = mountRef.current;
+    if (!container) return;
 
-    const stopRumble = setTimeout(() => {
-      clearInterval(rumbleInterval);
-      setGroundShake(false);
-    }, 3800);
+    // --- SCENE, CAMERA, RENDERER ---
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x14532d, 0.012);
+
+    const camera = new THREE.PerspectiveCamera(
+      48,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.set(0, 8, 38);
+    camera.lookAt(0, 4, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    container.appendChild(renderer.domElement);
+
+    // --- LIGHTS ---
+    const ambientLight = new THREE.AmbientLight(0xffedd5, 1.3);
+    scene.add(ambientLight);
+
+    const sunLight = new THREE.DirectionalLight(0xfef08a, 2.2);
+    sunLight.position.set(30, 45, 20);
+    sunLight.castShadow = true;
+    scene.add(sunLight);
+
+    const jungleRim = new THREE.DirectionalLight(0x22c55e, 1.2);
+    jungleRim.position.set(-25, 20, -20);
+    scene.add(jungleRim);
+
+    // --- JURASSIC TERRAIN ---
+    const groundGeo = new THREE.PlaneGeometry(140, 60, 32, 32);
+    const groundMat = new THREE.MeshToonMaterial({ color: 0x166534 });
+    const groundMesh = new THREE.Mesh(groundGeo, groundMat);
+    groundMesh.rotation.x = -Math.PI / 2;
+    groundMesh.position.y = -0.5;
+    groundMesh.receiveShadow = true;
+    scene.add(groundMesh);
+
+    // --- 1. 3D CARTOON T-REX (Green & Yellow) ---
+    const trexGroup = new THREE.Group();
+
+    // Body (chubby capsule/sphere)
+    const trexBodyGeo = new THREE.SphereGeometry(2.8, 20, 20);
+    const trexGreenMat = new THREE.MeshToonMaterial({ color: 0x22c55e });
+    const trexBody = new THREE.Mesh(trexBodyGeo, trexGreenMat);
+    trexBody.scale.set(1.1, 1.3, 1.5);
+    trexBody.position.set(0, 5, 0);
+    trexGroup.add(trexBody);
+
+    // Tummy (yellow)
+    const trexBellyGeo = new THREE.SphereGeometry(2.2, 16, 16);
+    const trexYellowMat = new THREE.MeshToonMaterial({ color: 0xfef08a });
+    const trexBelly = new THREE.Mesh(trexBellyGeo, trexYellowMat);
+    trexBelly.scale.set(0.9, 1.2, 1.2);
+    trexBelly.position.set(0, 4.6, 0.9);
+    trexGroup.add(trexBelly);
+
+    // Head with open roaring mouth
+    const trexHeadGroup = new THREE.Group();
+    trexHeadGroup.position.set(0, 7.8, 2.4);
+
+    const headUpperGeo = new THREE.BoxGeometry(2.4, 2.0, 3.2);
+    const headUpper = new THREE.Mesh(headUpperGeo, trexGreenMat);
+    headUpper.position.set(0, 0.5, 0);
+    trexHeadGroup.add(headUpper);
+
+    // Big friendly cartoon eyes
+    const eyeGeo = new THREE.SphereGeometry(0.55, 16, 16);
+    const eyeWhiteMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const eyePupilMat = new THREE.MeshBasicMaterial({ color: 0x14532d });
+
+    const leftEye = new THREE.Mesh(eyeGeo, eyeWhiteMat);
+    leftEye.position.set(-1.25, 0.9, 0.5);
+    const leftPupil = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 8), eyePupilMat);
+    leftPupil.position.set(-0.25, 0, 0.35);
+    leftEye.add(leftPupil);
+    trexHeadGroup.add(leftEye);
+
+    const rightEye = new THREE.Mesh(eyeGeo, eyeWhiteMat);
+    rightEye.position.set(1.25, 0.9, 0.5);
+    const rightPupil = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 8), eyePupilMat);
+    rightPupil.position.set(0.25, 0, 0.35);
+    rightEye.add(rightPupil);
+    trexHeadGroup.add(rightEye);
+
+    // Teeth & Mouth
+    const jawLowerGeo = new THREE.BoxGeometry(2.0, 0.8, 2.6);
+    const jawLower = new THREE.Mesh(jawLowerGeo, trexGreenMat);
+    jawLower.position.set(0, -0.6, 0.2);
+    jawLower.rotation.x = 0.25;
+    trexHeadGroup.add(jawLower);
+
+    trexGroup.add(trexHeadGroup);
+
+    // Tail (segmented cones)
+    const tailGeo = new THREE.ConeGeometry(1.4, 6.0, 16);
+    const tailMesh = new THREE.Mesh(tailGeo, trexGreenMat);
+    tailMesh.rotation.x = -Math.PI / 2.3;
+    tailMesh.position.set(0, 4.2, -4.2);
+    trexGroup.add(tailMesh);
+
+    // Tiny cartoon waving arms
+    const armGeo = new THREE.CylinderGeometry(0.25, 0.2, 1.4, 12);
+    const leftTrexArm = new THREE.Mesh(armGeo, trexGreenMat);
+    leftTrexArm.position.set(-1.5, 5.2, 1.8);
+    leftTrexArm.rotation.x = -0.7;
+    trexGroup.add(leftTrexArm);
+
+    const rightTrexArm = new THREE.Mesh(armGeo, trexGreenMat);
+    rightTrexArm.position.set(1.5, 5.2, 1.8);
+    rightTrexArm.rotation.x = -0.7;
+    trexGroup.add(rightTrexArm);
+
+    // Stomping Big Legs
+    const legGeo = new THREE.CylinderGeometry(0.7, 0.8, 3.8, 12);
+    const footGeo = new THREE.BoxGeometry(1.6, 0.7, 2.4);
+
+    const leftLegGroup = new THREE.Group();
+    leftLegGroup.position.set(-1.8, 3.2, 0);
+    const leftLegMesh = new THREE.Mesh(legGeo, trexGreenMat);
+    leftLegMesh.position.y = -1.6;
+    leftLegGroup.add(leftLegMesh);
+    const leftFootMesh = new THREE.Mesh(footGeo, trexGreenMat);
+    leftFootMesh.position.set(0, -3.2, 0.5);
+    leftLegGroup.add(leftFootMesh);
+    trexGroup.add(leftLegGroup);
+
+    const rightLegGroup = new THREE.Group();
+    rightLegGroup.position.set(1.8, 3.2, 0);
+    const rightLegMesh = new THREE.Mesh(legGeo, trexGreenMat);
+    rightLegMesh.position.y = -1.6;
+    rightLegGroup.add(rightLegMesh);
+    const rightFootMesh = new THREE.Mesh(footGeo, trexGreenMat);
+    rightFootMesh.position.set(0, -3.2, 0.5);
+    rightLegGroup.add(rightFootMesh);
+    trexGroup.add(rightLegGroup);
+
+    trexGroup.position.set(-35, 0, 4);
+    trexGroup.rotation.y = Math.PI / 2;
+    scene.add(trexGroup);
+
+    // --- 2. 3D CARTOON TRICERATOPS (Coral Pink with 3 Horns) ---
+    const triceratopsGroup = new THREE.Group();
+    const triPinkMat = new THREE.MeshToonMaterial({ color: 0xfb7185 });
+    const hornMat = new THREE.MeshToonMaterial({ color: 0xfffbeb });
+
+    const triBody = new THREE.Mesh(new THREE.SphereGeometry(2.4, 18, 18), triPinkMat);
+    triBody.scale.set(1.1, 1.1, 1.6);
+    triBody.position.set(0, 3.0, 0);
+    triceratopsGroup.add(triBody);
+
+    // Frill Shield
+    const frillGeo = new THREE.CylinderGeometry(2.6, 2.6, 0.4, 16);
+    const frillMesh = new THREE.Mesh(frillGeo, triPinkMat);
+    frillMesh.rotation.x = Math.PI / 3;
+    frillMesh.position.set(0, 4.4, 1.8);
+    triceratopsGroup.add(frillMesh);
+
+    // 3 Horns
+    const hornGeo = new THREE.ConeGeometry(0.3, 1.8, 12);
+    const h1 = new THREE.Mesh(hornGeo, hornMat);
+    h1.position.set(-1.0, 5.0, 2.6);
+    h1.rotation.x = -0.5;
+    triceratopsGroup.add(h1);
+
+    const h2 = new THREE.Mesh(hornGeo, hornMat);
+    h2.position.set(1.0, 5.0, 2.6);
+    h2.rotation.x = -0.5;
+    triceratopsGroup.add(h2);
+
+    const hNose = new THREE.Mesh(new THREE.ConeGeometry(0.35, 1.2, 12), hornMat);
+    hNose.position.set(0, 3.2, 4.0);
+    hNose.rotation.x = 0.7;
+    triceratopsGroup.add(hNose);
+
+    // Legs
+    const triLegGeo = new THREE.CylinderGeometry(0.5, 0.6, 2.2, 12);
+    const triLeg1 = new THREE.Mesh(triLegGeo, triPinkMat);
+    triLeg1.position.set(-1.4, 1.1, 1.5);
+    triceratopsGroup.add(triLeg1);
+
+    const triLeg2 = new THREE.Mesh(triLegGeo, triPinkMat);
+    triLeg2.position.set(1.4, 1.1, 1.5);
+    triceratopsGroup.add(triLeg2);
+
+    const triLeg3 = new THREE.Mesh(triLegGeo, triPinkMat);
+    triLeg3.position.set(-1.4, 1.1, -1.5);
+    triceratopsGroup.add(triLeg3);
+
+    const triLeg4 = new THREE.Mesh(triLegGeo, triPinkMat);
+    triLeg4.position.set(1.4, 1.1, -1.5);
+    triceratopsGroup.add(triLeg4);
+
+    triceratopsGroup.position.set(-45, 0, 8);
+    triceratopsGroup.rotation.y = Math.PI / 2;
+    scene.add(triceratopsGroup);
+
+    // --- 3. 3D CARTOON BRACHIOSAURUS (Sky-Blue Background Giant) ---
+    const brachioGroup = new THREE.Group();
+    const brachioMat = new THREE.MeshToonMaterial({ color: 0x38bdf8 });
+
+    const brachioBody = new THREE.Mesh(new THREE.SphereGeometry(3.5, 18, 18), brachioMat);
+    brachioBody.scale.set(1.2, 1.2, 1.8);
+    brachioBody.position.set(0, 5.5, 0);
+    brachioGroup.add(brachioBody);
+
+    // Long Curved Neck
+    const neckPoints = [
+      new THREE.Vector3(0, 5.5, 2.5),
+      new THREE.Vector3(0, 11, 4.0),
+      new THREE.Vector3(0, 16, 4.5),
+      new THREE.Vector3(0, 18, 5.5),
+    ];
+    const neckCurve = new THREE.CatmullRomCurve3(neckPoints);
+    const neckGeo = new THREE.TubeGeometry(neckCurve, 20, 1.1, 12, false);
+    const neckMesh = new THREE.Mesh(neckGeo, brachioMat);
+    brachioGroup.add(neckMesh);
+
+    const brachioHead = new THREE.Mesh(new THREE.SphereGeometry(1.2, 14, 14), brachioMat);
+    brachioHead.position.set(0, 18.2, 6.2);
+    brachioGroup.add(brachioHead);
+
+    // Long Legs
+    const brachLegGeo = new THREE.CylinderGeometry(0.7, 0.8, 5.0, 12);
+    const bLeg1 = new THREE.Mesh(brachLegGeo, brachioMat);
+    bLeg1.position.set(-1.8, 2.5, 1.8);
+    brachioGroup.add(bLeg1);
+
+    const bLeg2 = new THREE.Mesh(brachLegGeo, brachioMat);
+    bLeg2.position.set(1.8, 2.5, 1.8);
+    brachioGroup.add(bLeg2);
+
+    const bLeg3 = new THREE.Mesh(brachLegGeo, brachioMat);
+    bLeg3.position.set(-1.8, 2.5, -1.8);
+    brachioGroup.add(bLeg3);
+
+    const bLeg4 = new THREE.Mesh(brachLegGeo, brachioMat);
+    bLeg4.position.set(1.8, 2.5, -1.8);
+    brachioGroup.add(bLeg4);
+
+    brachioGroup.position.set(-50, 0, -10);
+    brachioGroup.rotation.y = Math.PI / 2;
+    scene.add(brachioGroup);
+
+    // --- 4. 3D CARTOON VELOCIRAPTOR (Turquoise Speedster in foreground) ---
+    const raptorGroup = new THREE.Group();
+    const raptorMat = new THREE.MeshToonMaterial({ color: 0x06b6d4 });
+
+    const raptorBody = new THREE.Mesh(new THREE.ConeGeometry(1.1, 4.0, 14), raptorMat);
+    raptorBody.rotation.x = Math.PI / 2.3;
+    raptorBody.position.set(0, 2.2, 0);
+    raptorGroup.add(raptorBody);
+
+    const raptorHead = new THREE.Mesh(new THREE.ConeGeometry(0.7, 2.0, 12), raptorMat);
+    raptorHead.rotation.x = -Math.PI / 2.4;
+    raptorHead.position.set(0, 2.8, 2.2);
+    raptorGroup.add(raptorHead);
+
+    raptorGroup.position.set(-30, 0, 14);
+    raptorGroup.rotation.y = Math.PI / 2;
+    scene.add(raptorGroup);
+
+    // --- 3D DUST CLOUD PARTICLES ---
+    const dustParticles: THREE.Mesh[] = [];
+    const dustGeo = new THREE.DodecahedronGeometry(0.45, 1);
+    const dustMat = new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 0.6 });
+
+    for (let i = 0; i < 40; i++) {
+      const p = new THREE.Mesh(dustGeo, dustMat);
+      p.visible = false;
+      scene.add(p);
+      dustParticles.push(p);
+    }
+
+    let dustIdx = 0;
+    const spawnDust = (pos: THREE.Vector3) => {
+      const p = dustParticles[dustIdx % dustParticles.length];
+      p.visible = true;
+      p.position.set(pos.x - 2, 0.4, pos.z + (Math.random() - 0.5) * 1.5);
+      p.scale.setScalar(Math.random() * 0.8 + 0.4);
+      dustIdx++;
+    };
+
+    const startTime = performance.now();
+    let animFrame: number;
+
+    const animate = () => {
+      const now = performance.now();
+      const elapsed = (now - startTime) / 1000;
+
+      // Velociraptor sprints fastest
+      raptorGroup.position.x = -35 + elapsed * 24;
+      raptorGroup.position.y = Math.abs(Math.sin(elapsed * 20)) * 0.4;
+
+      // T-Rex runs majestically with heavy stomps
+      trexGroup.position.x = -40 + elapsed * 14;
+      const tStep = Math.sin(elapsed * 10);
+      trexGroup.position.y = Math.abs(tStep) * 0.6;
+      leftLegGroup.rotation.x = tStep * 0.8;
+      rightLegGroup.rotation.x = -tStep * 0.8;
+      tailMesh.rotation.y = Math.sin(elapsed * 10) * 0.35;
+      trexHeadGroup.rotation.z = Math.sin(elapsed * 10) * 0.15;
+      leftTrexArm.rotation.x = -0.7 + Math.sin(elapsed * 15) * 0.4;
+      rightTrexArm.rotation.x = -0.7 - Math.sin(elapsed * 15) * 0.4;
+
+      // Trigger dust & ground rumble on T-Rex footsteps
+      if (Math.abs(tStep) > 0.85 && trexGroup.position.x > -15 && trexGroup.position.x < 15) {
+        spawnDust(trexGroup.position);
+        setScreenRumble(true);
+      } else {
+        setScreenRumble(false);
+      }
+
+      // Triceratops runs in midground
+      triceratopsGroup.position.x = -48 + elapsed * 12;
+      const triStep = Math.sin(elapsed * 8);
+      triLeg1.rotation.x = triStep * 0.5;
+      triLeg2.rotation.x = -triStep * 0.5;
+      triLeg3.rotation.x = -triStep * 0.5;
+      triLeg4.rotation.x = triStep * 0.5;
+
+      // Brachiosaurus walks steadily in background
+      brachioGroup.position.x = -55 + elapsed * 7.5;
+      bLeg1.rotation.x = Math.sin(elapsed * 4) * 0.3;
+      bLeg2.rotation.x = -Math.sin(elapsed * 4) * 0.3;
+      brachioHead.position.y = 18.2 + Math.sin(elapsed * 4) * 0.6;
+
+      // Dynamic camera tracking
+      camera.position.x = Math.sin(elapsed * 0.5) * 2;
+      camera.lookAt(0, 4, 0);
+
+      renderer.render(scene, camera);
+      animFrame = requestAnimationFrame(animate);
+    };
+
+    animFrame = requestAnimationFrame(animate);
+
+    const handleResize = () => {
+      if (!container) return;
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    };
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      clearInterval(rumbleInterval);
-      clearTimeout(stopRumble);
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animFrame);
+      if (renderer.domElement && container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement);
+      }
+      renderer.dispose();
     };
   }, []);
 
   return (
     <div
       className={`relative w-full h-full overflow-hidden flex items-center justify-center select-none pointer-events-none transition-transform duration-75 ${
-        groundShake && !isReducedMotion ? "translate-y-1.5 -translate-x-0.5 rotate-[0.2deg]" : ""
+        screenRumble && !isReducedMotion ? "translate-y-1 -translate-x-0.5" : ""
       }`}
     >
-      {/* Jurassic Sunset Jungle Atmosphere */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#14532D]/40 via-[#15803D]/25 to-[#78350F]/50 backdrop-blur-xs" />
+      {/* 3D WebGL Canvas Mount */}
+      <div ref={mountRef} className="absolute inset-0 z-10 w-full h-full" />
 
-      {/* Floating Jungle Spores & Fireflies */}
-      <div className="absolute inset-0 z-5 pointer-events-none">
-        {[...Array(24)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-[#FACC15] shadow-xs"
-            style={{
-              width: Math.random() * 6 + 3,
-              height: Math.random() * 6 + 3,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              opacity: Math.random() * 0.6 + 0.3,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, (Math.random() - 0.5) * 40, 0],
-              opacity: [0.3, 0.8, 0.3],
-            }}
-            transition={{
-              duration: Math.random() * 3 + 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Prehistoric Jungle Floor & Giant Fern Silhouettes */}
-      <svg
-        className="absolute bottom-0 inset-x-0 w-full h-44 z-10 overflow-visible"
-        viewBox="0 0 1200 180"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient id="groundGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#15803D" />
-            <stop offset="35%" stopColor="#166534" />
-            <stop offset="100%" stopColor="#14532D" />
-          </linearGradient>
-        </defs>
-        {/* Rolling Jungle Ground */}
-        <path d="M0,80 Q300,50 600,75 T1200,60 L1200,180 L0,180 Z" fill="url(#groundGrad)" />
-        {/* Decorative Prehistoric Palm Ferns */}
-        <path d="M 60,80 Q 80,10 130,20 Q 95,35 60,80 Z" fill="#22C55E" opacity="0.75" />
-        <path d="M 1120,60 Q 1150,-10 1190,10 Q 1155,25 1120,60 Z" fill="#22C55E" opacity="0.75" />
-        <path d="M 450,75 Q 470,25 510,35 Q 480,45 450,75 Z" fill="#16A34A" opacity="0.6" />
-      </svg>
-
-      {/* 1. BRACHIOSAURUS — Majestic background giant crossing gracefully */}
-      <motion.div
-        className="absolute z-12 bottom-[24%] pointer-events-none"
-        initial={{ x: "-40vw", scale: 0.85, opacity: 0 }}
-        animate={{ x: "120vw", scale: 0.85, opacity: 1 }}
-        transition={{ duration: 5.5, ease: "linear" }}
-      >
-        <svg width="280" height="260" viewBox="0 0 280 260" fill="none">
-          {/* Brachiosaurus Body (Sky Blue) */}
-          <path
-            d="M 60,200 C 60,150 100,140 150,150 C 180,140 210,180 200,210 C 170,225 90,225 60,200 Z"
-            fill="#38BDF8"
-            stroke="#0284C7"
-            strokeWidth="3"
-          />
-          {/* Long Elegant Neck with Head */}
-          <motion.path
-            d="M 150,150 C 170,110 190,50 185,25 C 195,15 220,18 215,35 C 205,50 180,110 170,150 Z"
-            fill="#38BDF8"
-            stroke="#0284C7"
-            strokeWidth="3"
-            animate={{ d: [
-              "M 150,150 C 170,110 190,50 185,25 C 195,15 220,18 215,35 C 205,50 180,110 170,150 Z",
-              "M 150,150 C 170,105 185,45 180,20 C 190,10 215,14 210,30 C 200,45 180,105 170,150 Z",
-              "M 150,150 C 170,110 190,50 185,25 C 195,15 220,18 215,35 C 205,50 180,110 170,150 Z"
-            ]}}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          />
-          {/* Friendly Eye & Cheerful Leaf */}
-          <circle cx="202" cy="26" r="3.5" fill="#0C4A6E" />
-          <circle cx="203" cy="25" r="1.2" fill="#FFFFFF" />
-          <path d="M 215,30 Q 230,22 235,32 Q 225,35 215,30 Z" fill="#4ADE80" stroke="#16A34A" strokeWidth="1.5" />
-          {/* Long Tapering Tail */}
-          <path d="M 60,190 C 30,195 5,175 0,165 C 15,185 45,210 60,205 Z" fill="#38BDF8" />
-          {/* Sturdy Walking Legs */}
-          <rect x="75" y="210" width="18" height="42" rx="9" fill="#0284C7" />
-          <rect x="110" y="212" width="18" height="40" rx="9" fill="#38BDF8" />
-          <rect x="155" y="210" width="18" height="42" rx="9" fill="#0284C7" />
-          <rect x="185" y="212" width="18" height="40" rx="9" fill="#38BDF8" />
-        </svg>
-      </motion.div>
-
-      {/* 2. STEGOSAURUS — Rainbow-plated friendly dinosaur trotting midground */}
-      <motion.div
-        className="absolute z-14 bottom-[18%] pointer-events-none"
-        initial={{ x: "-30vw", scale: 0.95 }}
-        animate={{ x: "115vw" }}
-        transition={{ duration: 4.8, delay: 0.6, ease: "linear" }}
-      >
-        <svg width="240" height="180" viewBox="0 0 240 180" fill="none">
-          {/* Vibrant Rainbow Back Plates */}
-          <path d="M 45,75 L 55,45 L 68,75 Z" fill="#F59E0B" stroke="#B45309" strokeWidth="2" />
-          <path d="M 75,65 L 90,30 L 105,65 Z" fill="#EF4444" stroke="#B91C1C" strokeWidth="2" />
-          <path d="M 115,62 L 135,25 L 150,62 Z" fill="#8B5CF6" stroke="#6D28D9" strokeWidth="2" />
-          <path d="M 158,68 L 172,38 L 185,68 Z" fill="#10B981" stroke="#047857" strokeWidth="2" />
-          {/* Stego Body (Amber-Orange) */}
-          <path
-            d="M 40,110 C 50,70 180,65 195,105 C 205,115 230,120 225,130 C 215,138 190,135 180,140 C 130,150 60,145 40,110 Z"
-            fill="#FBBF24"
-            stroke="#D97706"
-            strokeWidth="3"
-          />
-          {/* Friendly Head with Cute Smile */}
-          <circle cx="218" cy="122" r="3.5" fill="#78350F" />
-          <circle cx="219" cy="121" r="1.2" fill="#FFFFFF" />
-          <path d="M 218,128 Q 223,132 227,129" stroke="#78350F" strokeWidth="1.5" strokeLinecap="round" />
-          {/* Spiked Thagomizer Tail */}
-          <path d="M 40,110 Q 15,100 5,90" stroke="#FBBF24" strokeWidth="12" strokeLinecap="round" />
-          <path d="M 12,98 L 2,88 M 18,92 L 10,80" stroke="#EA580C" strokeWidth="3" strokeLinecap="round" />
-          {/* Trotting Feet */}
-          <rect x="65" y="135" width="16" height="30" rx="8" fill="#D97706" />
-          <rect x="95" y="137" width="16" height="28" rx="8" fill="#FBBF24" />
-          <rect x="145" y="135" width="16" height="30" rx="8" fill="#D97706" />
-          <rect x="175" y="137" width="16" height="28" rx="8" fill="#FBBF24" />
-        </svg>
-      </motion.div>
-
-      {/* 3. TRICERATOPS — Chubby, joyful triceratops running */}
-      <motion.div
-        className="absolute z-16 bottom-[14%] pointer-events-none"
-        initial={{ x: "-35vw", scale: 1.05 }}
-        animate={{ x: "115vw" }}
-        transition={{ duration: 4.2, delay: 1.1, ease: "linear" }}
-      >
-        <svg width="260" height="200" viewBox="0 0 260 200" fill="none">
-          {/* Chubby Coral-Magenta Body */}
-          <path
-            d="M 40,120 C 50,70 170,75 190,115 C 180,165 70,165 40,120 Z"
-            fill="#FB7185"
-            stroke="#E11D48"
-            strokeWidth="3.5"
-          />
-          {/* Frill Shield with Polka Dots */}
-          <path
-            d="M 175,70 C 190,45 225,50 220,110 C 205,120 185,115 175,70 Z"
-            fill="#FDA4AF"
-            stroke="#E11D48"
-            strokeWidth="3"
-          />
-          <circle cx="195" cy="65" r="4" fill="#F43F5E" />
-          <circle cx="208" cy="80" r="4.5" fill="#F43F5E" />
-          <circle cx="205" cy="98" r="4" fill="#F43F5E" />
-          {/* 3 Cute Creamy Horns */}
-          <path d="M 195,65 L 218,40 L 205,70 Z" fill="#FFFBEB" stroke="#D97706" strokeWidth="2" />
-          <path d="M 215,85 L 245,75 L 220,95 Z" fill="#FFFBEB" stroke="#D97706" strokeWidth="2" />
-          <path d="M 245,125 L 258,115 L 248,132 Z" fill="#FFFBEB" stroke="#D97706" strokeWidth="2" />
-          {/* Big Cartoon Eye */}
-          <circle cx="210" cy="100" r="5" fill="#881337" />
-          <circle cx="212" cy="98" r="1.8" fill="#FFFFFF" />
-          {/* Stomping Feet */}
-          <rect x="70" y="145" width="20" height="34" rx="9" fill="#E11D48" />
-          <rect x="105" y="148" width="20" height="32" rx="9" fill="#FB7185" />
-          <rect x="145" y="145" width="20" height="34" rx="9" fill="#E11D48" />
-          <rect x="175" y="148" width="20" height="32" rx="9" fill="#FB7185" />
-        </svg>
-      </motion.div>
-
-      {/* 4. T-REX — The Star! Roaring, friendly green T-Rex with tiny swinging arms */}
-      <motion.div
-        className="absolute z-20 bottom-[12%] pointer-events-none"
-        initial={{ x: "-45vw", scale: 1.25 }}
-        animate={{ x: "115vw" }}
-        transition={{ duration: 3.8, delay: 0.4, ease: "linear" }}
-      >
-        <div className="relative">
-          <svg width="320" height="280" viewBox="0 0 320 280" fill="none">
-            {/* Powerful Wiggling Tail */}
-            <motion.path
-              d="M 90,170 C 40,160 10,130 0,110 C 25,150 60,195 90,190 Z"
-              fill="#22C55E"
-              stroke="#15803D"
-              strokeWidth="4"
-              animate={{ d: [
-                "M 90,170 C 40,160 10,130 0,110 C 25,150 60,195 90,190 Z",
-                "M 90,170 C 40,175 10,150 0,135 C 25,160 60,205 90,190 Z",
-                "M 90,170 C 40,160 10,130 0,110 C 25,150 60,195 90,190 Z"
-              ]}}
-              transition={{ duration: 0.5, repeat: Infinity, ease: "easeInOut" }}
-            />
-            {/* T-Rex Chunky Body with Warm Yellow Tummy */}
-            <ellipse cx="140" cy="165" rx="65" ry="55" fill="#22C55E" stroke="#15803D" strokeWidth="4" />
-            <ellipse cx="152" cy="170" rx="42" ry="40" fill="#FEF08A" />
-            {/* Playful T-Rex Head with Big Friendly Smile & Soft Teeth */}
-            <motion.g
-              animate={{ rotate: [-4, 6, -4], y: [-3, 3, -3] }}
-              transition={{ duration: 0.4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <path
-                d="M 160,135 C 165,70 230,65 260,85 C 275,95 280,120 260,135 C 240,140 230,155 190,155 Z"
-                fill="#22C55E"
-                stroke="#15803D"
-                strokeWidth="4"
-              />
-              {/* Friendly Big Eye */}
-              <circle cx="215" cy="95" r="9" fill="#FFFFFF" stroke="#15803D" strokeWidth="2.5" />
-              <circle cx="217" cy="95" r="5" fill="#14532D" />
-              <circle cx="219" cy="93" r="2" fill="#FFFFFF" />
-              {/* Joyful Open Mouth with Cute Teeth */}
-              <path d="M 230,125 Q 265,120 270,135 Q 245,145 220,138 Z" fill="#991B1B" />
-              <polygon points="235,125 240,132 245,125" fill="#FFFFFF" />
-              <polygon points="248,124 253,132 258,124" fill="#FFFFFF" />
-              <polygon points="260,124 265,131 270,125" fill="#FFFFFF" />
-            </motion.g>
-            {/* Tiny Cartoon Arms Waving Excitingly */}
-            <motion.path
-              d="M 185,155 Q 205,150 215,160"
-              stroke="#22C55E"
-              strokeWidth="10"
-              strokeLinecap="round"
-              animate={{ rotate: [-15, 20, -15] }}
-              transition={{ duration: 0.25, repeat: Infinity }}
-            />
-            {/* Stomping Heavy Legs */}
-            <motion.rect
-              x="115"
-              y="200"
-              width="26"
-              height="55"
-              rx="12"
-              fill="#16A34A"
-              stroke="#15803D"
-              strokeWidth="3.5"
-              animate={{ y: [200, 185, 200] }}
-              transition={{ duration: 0.35, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.rect
-              x="160"
-              y="200"
-              width="26"
-              height="55"
-              rx="12"
-              fill="#22C55E"
-              stroke="#15803D"
-              strokeWidth="3.5"
-              animate={{ y: [185, 200, 185] }}
-              transition={{ duration: 0.35, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </svg>
-
-          {/* Cartoon Dust Puffs Under T-Rex Stomp */}
-          <motion.div
-            className="absolute bottom-2 left-16 text-2xl"
-            animate={{ scale: [0.5, 1.4, 0], opacity: [1, 0.8, 0], x: [-10, -40] }}
-            transition={{ duration: 0.4, repeat: Infinity }}
-          >
-            💨
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* 5. VELOCIRAPTOR — Ultra-fast turquoise speedster zipping in front! */}
-      <motion.div
-        className="absolute z-25 bottom-[6%] pointer-events-none"
-        initial={{ x: "-30vw", scale: 0.9 }}
-        animate={{ x: "125vw" }}
-        transition={{ duration: 1.8, delay: 0.2, ease: "easeIn" }}
-      >
-        <div className="relative flex items-center">
-          <svg width="200" height="130" viewBox="0 0 200 130" fill="none">
-            {/* Streamlined Speedster Body */}
-            <path
-              d="M 20,60 C 40,50 140,40 160,55 C 180,65 195,50 190,65 C 175,80 140,80 110,85 C 70,90 40,80 20,60 Z"
-              fill="#06B6D4"
-              stroke="#0891B2"
-              strokeWidth="3"
-            />
-            <circle cx="178" cy="60" r="3.5" fill="#164E63" />
-            <circle cx="179" cy="59" r="1.2" fill="#FFFFFF" />
-            {/* Speed Stripes */}
-            <path d="M 80,55 L 75,75 M 100,52 L 95,74 M 120,50 L 115,72" stroke="#FACC15" strokeWidth="4" strokeLinecap="round" />
-            {/* Blurred Running Legs */}
-            <line x1="90" y1="80" x2="60" y2="120" stroke="#0891B2" strokeWidth="6" strokeLinecap="round" />
-            <line x1="125" y1="80" x2="155" y2="120" stroke="#0891B2" strokeWidth="6" strokeLinecap="round" />
-          </svg>
-          {/* Turbo Speed Trail Particles */}
-          <div className="absolute -left-12 flex flex-col gap-1 text-xl">
-            <span className="animate-ping">💨</span>
-            <span className="animate-pulse">⚡</span>
-          </div>
-        </div>
-      </motion.div>
+      {/* Jurassic Sunset Jungle Atmosphere Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#14532D]/55 via-[#15803D]/35 to-[#78350F]/65 -z-10" />
 
       {/* Comic Action Sticker Banner */}
       <motion.div
         className="absolute z-40 top-16 sm:top-20 flex flex-col items-center pointer-events-none"
-        initial={{ scale: 0, rotate: 12, opacity: 0 }}
-        animate={{ scale: [0, 1.25, 1], rotate: [12, -3, 0], opacity: [0, 1, 1] }}
-        transition={{ duration: 0.6, delay: 0.2, type: "spring", stiffness: 260 }}
+        initial={{ scale: 0, rotate: 10, opacity: 0 }}
+        animate={{ scale: [0, 1.2, 1], rotate: [10, -2, 0], opacity: [0, 1, 1] }}
+        transition={{ duration: 0.5, delay: 0.2, type: "spring", stiffness: 280 }}
       >
         <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#15803D] via-[#22C55E] to-[#16A34A] border-3 border-white text-white font-heading font-black text-lg sm:text-2xl tracking-wider shadow-2xl flex items-center gap-3">
           <span className="text-2xl animate-bounce">🦖</span>
-          <span>DINO WORLD JURASSIC STAMPEDE!</span>
+          <span>DINO WORLD 3D JURASSIC STAMPEDE!</span>
           <span className="text-2xl animate-spin">🌴</span>
         </div>
         <motion.span

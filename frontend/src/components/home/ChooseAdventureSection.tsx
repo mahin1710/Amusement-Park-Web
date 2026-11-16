@@ -36,7 +36,11 @@ export function ChooseAdventureSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Realm 1: WATER OASIS (Using Real Park Aerial Photo) */}
           <div className="park-card overflow-hidden flex flex-col justify-between group">
-            <div className="relative h-68 overflow-hidden bg-slate-100">
+            <div
+              className="relative h-68 overflow-hidden bg-slate-100 cursor-pointer"
+              onClick={() => playAnimation("water-world")}
+              title="Click to play 3D Water World Cartoon Animation"
+            >
               <img
                 alt="Magic Island Water World featuring the largest wave pool and winding lazy river in Bangladesh"
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
@@ -50,7 +54,10 @@ export function ChooseAdventureSection() {
               {/* 3D Cartoon Animation Launcher Button */}
               <button
                 type="button"
-                onClick={() => playAnimation("water-world")}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playAnimation("water-world");
+                }}
                 className="absolute bottom-3 left-4 text-xs text-[#172554] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFD93D]/95 hover:bg-[#FFD93D] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all"
                 title="Play 3D Water Slide & Splash Animation"
               >
