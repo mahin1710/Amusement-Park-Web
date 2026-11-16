@@ -41,48 +41,105 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       alpha: true,
       powerPreference: "high-performance",
     });
-    renderer.setClearColor(0x000000, 0); // 100% transparent background
+    renderer.setClearColor(0x000000, 0);
     renderer.setSize(initW, initH);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // --- RICH JURASSIC LIGHTING (Specular Depth & Rim Lighting) ---
+    // --- PROCEDURAL REPTILIAN SKIN & SCALE TEXTURE GENERATOR ---
+    const createDinoScaleTexture = (baseHex: string, scaleHex: string, wrinkleHex: string) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 256;
+      canvas.height = 256;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return null;
+
+      // Base skin tint
+      ctx.fillStyle = baseHex;
+      ctx.fillRect(0, 0, 256, 256);
+
+      // Cobblestone reptilian scales pattern
+      ctx.fillStyle = scaleHex;
+      ctx.strokeStyle = wrinkleHex;
+      ctx.lineWidth = 1.5;
+
+      const gridSize = 16;
+      for (let y = 0; y < 256; y += gridSize) {
+        for (let x = 0; x < 256; x += gridSize) {
+          const offsetX = (y / gridSize) % 2 === 0 ? 0 : gridSize / 2;
+          const px = (x + offsetX) % 256;
+          const py = y;
+          const r = gridSize * 0.42;
+
+          ctx.beginPath();
+          ctx.ellipse(px + gridSize / 2, py + gridSize / 2, r, r * 0.85, 0.2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        }
+      }
+
+      // Skin folds / horizontal stretch wrinkles
+      ctx.strokeStyle = "rgba(0,0,0,0.15)";
+      ctx.lineWidth = 2;
+      for (let i = 0; i < 8; i++) {
+        const wy = 30 + i * 28;
+        ctx.beginPath();
+        ctx.moveTo(0, wy);
+        ctx.bezierCurveTo(80, wy + 8, 160, wy - 8, 256, wy + 4);
+        ctx.stroke();
+      }
+
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.RepeatWrapping;
+      tex.repeat.set(4, 4);
+      return tex;
+    };
+
+    const trexSkinTex = createDinoScaleTexture("#15803d", "#22c55e", "#14532d");
+    const raptorSkinTex = createDinoScaleTexture("#0891b2", "#06b6d4", "#155e75");
+    const triSkinTex = createDinoScaleTexture("#e11d48", "#fb7185", "#9f1239");
+    const stegoSkinTex = createDinoScaleTexture("#d97706", "#f59e0b", "#92400e");
+
+    // --- LIGHTING WITH RICH SPECULAR GLINTS & RIM HIGHLIGHTS ---
     const ambientLight = new THREE.AmbientLight(0xffedd5, 1.4);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xfef08a, 2.4);
-    sunLight.position.set(20, 35, 25);
+    const sunLight = new THREE.DirectionalLight(0xfef08a, 2.5);
+    sunLight.position.set(22, 38, 26);
     scene.add(sunLight);
 
-    const emeraldRim = new THREE.DirectionalLight(0x22c55e, 1.8);
-    emeraldRim.position.set(-25, 18, -15);
+    const emeraldRim = new THREE.DirectionalLight(0x22c55e, 2.0);
+    emeraldRim.position.set(-26, 20, -16);
     scene.add(emeraldRim);
 
-    const amberBounce = new THREE.PointLight(0xf59e0b, 2.5, 45);
-    amberBounce.position.set(0, 3, 12);
+    const amberBounce = new THREE.PointLight(0xf59e0b, 2.8, 50);
+    amberBounce.position.set(0, 4, 14);
     scene.add(amberBounce);
 
     const skyCyanLight = new THREE.DirectionalLight(0x38bdf8, 1.0);
-    skyCyanLight.position.set(5, 25, 10);
+    skyCyanLight.position.set(6, 26, 12);
     scene.add(skyCyanLight);
 
-    // Master group holding the entire running stampede
+    // Master stampede group
     const stampedeGroup = new THREE.Group();
     scene.add(stampedeGroup);
 
-    // Track all materials for smooth fade-out at end of sequence
+    // All materials tracking for global opacity fade-out
     const allMaterials: THREE.Material[] = [];
     const registerMat = <T extends THREE.Material>(mat: T): T => {
       allMaterials.push(mat);
       return mat;
     };
 
-    // --- PREMIUM SHADED MATERIALS ---
+    // --- MATERIALS WITH HIGH-DETAIL BUMP & SPECULAR REFLECTIONS ---
     const trexGreenMat = registerMat(
       new THREE.MeshStandardMaterial({
         color: 0x16a34a,
-        roughness: 0.32,
+        roughness: 0.35,
         metalness: 0.12,
+        bumpMap: trexSkinTex || undefined,
+        bumpScale: 0.05,
         transparent: true,
         opacity: 0.98,
       })
@@ -90,8 +147,10 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     const trexBellyMat = registerMat(
       new THREE.MeshStandardMaterial({
         color: 0xfef08a,
-        roughness: 0.35,
+        roughness: 0.38,
         metalness: 0.08,
+        bumpMap: trexSkinTex || undefined,
+        bumpScale: 0.03,
         transparent: true,
         opacity: 0.98,
       })
@@ -99,7 +158,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     const mouthPinkMat = registerMat(
       new THREE.MeshStandardMaterial({
         color: 0xf87171,
-        roughness: 0.4,
+        roughness: 0.25,
         transparent: true,
         opacity: 0.98,
       })
@@ -107,25 +166,35 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     const teethMat = registerMat(
       new THREE.MeshStandardMaterial({
         color: 0xffffff,
-        roughness: 0.2,
+        roughness: 0.15,
         metalness: 0.1,
         transparent: true,
         opacity: 0.98,
       })
     );
-    const eyeWhiteMat = registerMat(
+    const clawMat = registerMat(
       new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        roughness: 0.15,
+        color: 0x1e293b,
+        roughness: 0.2,
+        metalness: 0.25,
+        transparent: true,
+        opacity: 0.98,
+      })
+    );
+    const eyeIrisMat = registerMat(
+      new THREE.MeshStandardMaterial({
+        color: 0xfbbf24,
+        roughness: 0.1,
+        metalness: 0.2,
         transparent: true,
         opacity: 0.98,
       })
     );
     const eyePupilMat = registerMat(
       new THREE.MeshStandardMaterial({
-        color: 0x064e3b,
-        roughness: 0.1,
-        metalness: 0.3,
+        color: 0x09090b,
+        roughness: 0.05,
+        metalness: 0.4,
         transparent: true,
         opacity: 0.98,
       })
@@ -140,7 +209,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     const hornBoneMat = registerMat(
       new THREE.MeshStandardMaterial({
         color: 0xfffbeb,
-        roughness: 0.28,
+        roughness: 0.26,
         metalness: 0.1,
         transparent: true,
         opacity: 0.98,
@@ -151,15 +220,16 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
         color: 0x06b6d4,
         roughness: 0.3,
         metalness: 0.15,
+        bumpMap: raptorSkinTex || undefined,
+        bumpScale: 0.04,
         transparent: true,
         opacity: 0.98,
       })
     );
-    const raptorIndigoMat = registerMat(
+    const raptorStripeMat = registerMat(
       new THREE.MeshStandardMaterial({
-        color: 0x0284c7,
+        color: 0x0369a1,
         roughness: 0.32,
-        metalness: 0.15,
         transparent: true,
         opacity: 0.98,
       })
@@ -169,6 +239,8 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
         color: 0xfb7185,
         roughness: 0.38,
         metalness: 0.08,
+        bumpMap: triSkinTex || undefined,
+        bumpScale: 0.04,
         transparent: true,
         opacity: 0.98,
       })
@@ -186,6 +258,8 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
         color: 0xf59e0b,
         roughness: 0.36,
         metalness: 0.1,
+        bumpMap: stegoSkinTex || undefined,
+        bumpScale: 0.05,
         transparent: true,
         opacity: 0.98,
       })
@@ -193,7 +267,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     const plateRedMat = registerMat(
       new THREE.MeshStandardMaterial({
         color: 0xdc2626,
-        roughness: 0.25,
+        roughness: 0.22,
         metalness: 0.15,
         transparent: true,
         opacity: 0.98,
@@ -203,7 +277,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       new THREE.MeshStandardMaterial({
         color: 0x38bdf8,
         roughness: 0.42,
-        metalness: 0.1,
+        metalness: 0.08,
         transparent: true,
         opacity: 0.96,
       })
@@ -211,7 +285,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     const pteroPurpleMat = registerMat(
       new THREE.MeshStandardMaterial({
         color: 0xa855f7,
-        roughness: 0.35,
+        roughness: 0.32,
         metalness: 0.15,
         transparent: true,
         opacity: 0.98,
@@ -243,86 +317,89 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     );
 
     // =============================================================
-    // 1. T-REX — THE STAR (Center Foreground, Detailed Cartoon)
+    // 1. T-REX — REALISTIC CARTOON ANATOMY & KINEMATICS
     // =============================================================
     const trexGroup = new THREE.Group();
     trexGroup.position.set(2.0, -3.2, 5.5);
-    trexGroup.rotation.y = Math.PI / 2; // Facing right (towards traversal)
+    trexGroup.rotation.y = Math.PI / 2;
 
-    // Body Torso
+    // Muscular Thoracic Body
     const trexBody = new THREE.Mesh(new THREE.SphereGeometry(2.7, 24, 24), trexGreenMat);
     trexBody.scale.set(1.15, 1.35, 1.55);
     trexBody.position.set(0, 4.6, 0);
     trexGroup.add(trexBody);
 
-    // Cream Cartoon Belly
+    // Cream Belly with Muscular Contours
     const trexBelly = new THREE.Mesh(new THREE.SphereGeometry(2.2, 18, 18), trexBellyMat);
     trexBelly.scale.set(0.95, 1.25, 1.2);
     trexBelly.position.set(0, 4.2, 1.05);
     trexGroup.add(trexBelly);
 
-    // Curved Neck
-    const tNeck = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.6, 2.4, 16), trexGreenMat);
+    // S-Curved Neck
+    const tNeck = new THREE.Mesh(new THREE.CylinderGeometry(1.15, 1.55, 2.5, 16), trexGreenMat);
     tNeck.position.set(0, 6.4, 1.3);
     tNeck.rotation.x = -0.4;
     trexGroup.add(tNeck);
 
-    // Articulated Head Group (for bobbing & roaring)
+    // Articulated Predatory Skull with Brow Ridges
     const trexHead = new THREE.Group();
     trexHead.position.set(0, 7.6, 2.5);
 
-    // Cranium / Upper Snout
-    const cranium = new THREE.Mesh(new THREE.BoxGeometry(2.4, 2.0, 3.4), trexGreenMat);
+    // Upper Cranium & Snout
+    const cranium = new THREE.Mesh(new THREE.BoxGeometry(2.35, 1.95, 3.4), trexGreenMat);
     cranium.position.set(0, 0.5, 0.4);
     trexHead.add(cranium);
 
-    // Eyebrow Ridges
-    const ridgeGeo = new THREE.BoxGeometry(0.7, 0.35, 1.6);
+    // Brow Horn Ridges
+    const ridgeGeo = new THREE.BoxGeometry(0.65, 0.32, 1.6);
     const lRidge = new THREE.Mesh(ridgeGeo, trexGreenMat);
-    lRidge.position.set(-1.25, 1.3, 0.6);
-    lRidge.rotation.z = -0.2;
+    lRidge.position.set(-1.22, 1.25, 0.6);
+    lRidge.rotation.z = -0.22;
     trexHead.add(lRidge);
 
     const rRidge = new THREE.Mesh(ridgeGeo, trexGreenMat);
-    rRidge.position.set(1.25, 1.3, 0.6);
-    rRidge.rotation.z = 0.2;
+    rRidge.position.set(1.22, 1.25, 0.6);
+    rRidge.rotation.z = 0.22;
     trexHead.add(rRidge);
 
-    // Big Cartoon Eyes with Glossy Highlights
-    const createCartoonEye = (isLeft: boolean) => {
+    // Realistic Theropod Eyes with Slit Pupil & Specular Glint
+    const createReptileEye = (isLeft: boolean) => {
       const eye = new THREE.Group();
-      const sclera = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 16), eyeWhiteMat);
+      const sclera = new THREE.Mesh(new THREE.SphereGeometry(0.52, 16, 16), eyeIrisMat);
       eye.add(sclera);
 
-      const pupil = new THREE.Mesh(new THREE.SphereGeometry(0.26, 12, 12), eyePupilMat);
-      pupil.position.set(isLeft ? -0.22 : 0.22, 0.05, 0.42);
+      // Slit Pupil
+      const pupilGeo = new THREE.BoxGeometry(0.12, 0.48, 0.2);
+      const pupil = new THREE.Mesh(pupilGeo, eyePupilMat);
+      pupil.position.set(isLeft ? -0.2 : 0.2, 0.02, 0.42);
       eye.add(pupil);
 
-      const glint = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), eyeGlintMat);
-      glint.position.set(isLeft ? -0.16 : 0.16, 0.16, 0.52);
+      // Bright Specular Highlight Glint
+      const glint = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), eyeGlintMat);
+      glint.position.set(isLeft ? -0.15 : 0.15, 0.15, 0.48);
       eye.add(glint);
 
       return eye;
     };
 
-    const lEye = createCartoonEye(true);
-    lEye.position.set(-1.25, 0.85, 0.9);
+    const lEye = createReptileEye(true);
+    lEye.position.set(-1.24, 0.82, 0.9);
     trexHead.add(lEye);
 
-    const rEye = createCartoonEye(false);
-    rEye.position.set(1.25, 0.85, 0.9);
+    const rEye = createReptileEye(false);
+    rEye.position.set(1.24, 0.82, 0.9);
     trexHead.add(rEye);
 
-    // Upper Teeth Row
-    const toothGeo = new THREE.ConeGeometry(0.12, 0.35, 6);
+    // Dagger-Sharp Teeth along Maxilla
+    const toothGeo = new THREE.ConeGeometry(0.12, 0.42, 6);
     toothGeo.rotateX(Math.PI);
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       const t1 = new THREE.Mesh(toothGeo, teethMat);
-      t1.position.set(-0.9 + i * 0.36, -0.48, 1.8);
+      t1.position.set(-0.95 + i * 0.31, -0.48, 1.8 - (i % 2) * 0.15);
       trexHead.add(t1);
     }
 
-    // Articulated Lower Jaw with Teeth & Tongue
+    // Articulated Lower Jaw with Tongue & Dentary Teeth
     const trexJaw = new THREE.Group();
     trexJaw.position.set(0, -0.3, 0.6);
 
@@ -331,117 +408,131 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     trexJaw.add(jawBase);
 
     const tongue = new THREE.Mesh(new THREE.SphereGeometry(0.55, 12, 12), mouthPinkMat);
-    tongue.scale.set(1.4, 0.4, 1.6);
-    tongue.position.set(0, 0.4, 1.0);
+    tongue.scale.set(1.3, 0.35, 1.6);
+    tongue.position.set(0, 0.4, 0.95);
     trexJaw.add(tongue);
 
-    const bottomToothGeo = new THREE.ConeGeometry(0.11, 0.32, 6);
-    for (let i = 0; i < 5; i++) {
+    const bottomToothGeo = new THREE.ConeGeometry(0.1, 0.35, 6);
+    for (let i = 0; i < 6; i++) {
       const bt = new THREE.Mesh(bottomToothGeo, teethMat);
-      bt.position.set(-0.75 + i * 0.375, 0.42, 1.8);
+      bt.position.set(-0.8 + i * 0.32, 0.42, 1.8 - (i % 2) * 0.15);
       trexJaw.add(bt);
     }
     trexHead.add(trexJaw);
     trexGroup.add(trexHead);
 
-    // Tiny Waving Cartoon Arms with Claws
-    const createArm = (isLeft: boolean) => {
+    // Tiny 2-Clawed Forelimbs
+    const createTrexArm = (isLeft: boolean) => {
       const arm = new THREE.Group();
-      arm.position.set(isLeft ? -1.5 : 1.5, 5.0, 1.8);
+      arm.position.set(isLeft ? -1.5 : 1.5, 4.9, 1.8);
 
-      const upperArm = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.2, 1.0, 10), trexGreenMat);
+      const upperArm = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.18, 1.0, 10), trexGreenMat);
       upperArm.position.set(0, -0.4, 0);
       arm.add(upperArm);
 
-      const claw1 = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.3, 6), teethMat);
+      const claw1 = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.32, 6), clawMat);
       claw1.rotation.x = Math.PI / 2;
       claw1.position.set(-0.1, -0.9, 0.2);
       arm.add(claw1);
 
-      const claw2 = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.3, 6), teethMat);
+      const claw2 = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.32, 6), clawMat);
       claw2.rotation.x = Math.PI / 2;
       claw2.position.set(0.1, -0.9, 0.2);
       arm.add(claw2);
 
       return arm;
     };
-    const tArmL = createArm(true);
-    const tArmR = createArm(false);
+    const tArmL = createTrexArm(true);
+    const tArmR = createTrexArm(false);
     trexGroup.add(tArmL);
     trexGroup.add(tArmR);
 
-    // Dynamic Multi-Segment Tail
-    const trexTail = new THREE.Group();
-    trexTail.position.set(0, 4.0, -2.2);
+    // 4-Segment Multi-Link Serpentine Whipping Tail
+    const tailSeg1 = new THREE.Group();
+    tailSeg1.position.set(0, 4.0, -2.1);
+    const mTail1 = new THREE.Mesh(new THREE.ConeGeometry(1.4, 2.6, 16), trexGreenMat);
+    mTail1.rotation.x = -Math.PI / 2.3;
+    mTail1.position.set(0, 0.2, -1.2);
+    tailSeg1.add(mTail1);
 
-    const tTailSeg1 = new THREE.Mesh(new THREE.ConeGeometry(1.4, 3.2, 16), trexGreenMat);
-    tTailSeg1.rotation.x = -Math.PI / 2.3;
-    tTailSeg1.position.set(0, 0.3, -1.5);
-    trexTail.add(tTailSeg1);
+    const tailSeg2 = new THREE.Group();
+    tailSeg2.position.set(0, 0.4, -2.4);
+    const mTail2 = new THREE.Mesh(new THREE.ConeGeometry(1.0, 2.4, 14), trexGreenMat);
+    mTail2.rotation.x = -Math.PI / 2.2;
+    mTail2.position.set(0, 0.3, -1.1);
+    tailSeg2.add(mTail2);
+    tailSeg1.add(tailSeg2);
 
-    const tTailSeg2 = new THREE.Mesh(new THREE.ConeGeometry(0.9, 3.0, 14), trexGreenMat);
-    tTailSeg2.rotation.x = -Math.PI / 2.15;
-    tTailSeg2.position.set(0, 1.0, -4.0);
-    trexTail.add(tTailSeg2);
-    trexGroup.add(trexTail);
+    const tailSeg3 = new THREE.Group();
+    tailSeg3.position.set(0, 0.4, -2.2);
+    const mTail3 = new THREE.Mesh(new THREE.ConeGeometry(0.65, 2.2, 12), trexGreenMat);
+    mTail3.rotation.x = -Math.PI / 2.15;
+    mTail3.position.set(0, 0.3, -1.0);
+    tailSeg3.add(mTail3);
+    tailSeg2.add(tailSeg3);
 
-    // Muscular Stomping Legs with Thighs & Claws
-    const createTrexLeg = (isLeft: boolean) => {
+    trexGroup.add(tailSeg1);
+
+    // Anatomical 3-Segment Articulated Legs (Thigh -> Shin -> Hock/Foot with Claws)
+    const createAnatomicalLeg = (isLeft: boolean) => {
       const legRoot = new THREE.Group();
       legRoot.position.set(isLeft ? -1.8 : 1.8, 3.2, 0.2);
 
-      // Chunky Thigh
-      const thigh = new THREE.Mesh(new THREE.SphereGeometry(1.2, 14, 14), trexGreenMat);
-      thigh.scale.set(0.9, 1.3, 1.1);
+      // Muscular Femur / Thigh
+      const thigh = new THREE.Mesh(new THREE.SphereGeometry(1.25, 16, 16), trexGreenMat);
+      thigh.scale.set(0.9, 1.35, 1.15);
       thigh.position.set(0, -0.4, 0);
       legRoot.add(thigh);
 
-      // Lower Shin
-      const shin = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.72, 2.6, 12), trexGreenMat);
+      // Tibia / Shin
+      const shin = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.7, 2.6, 12), trexGreenMat);
       shin.position.set(0, -1.9, 0.1);
       legRoot.add(shin);
 
-      // Foot with 3 Claws
+      // Foot with 3 Splayed Forward Claws + Rear Spur
       const foot = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.65, 2.3), trexGreenMat);
       foot.position.set(0, -3.2, 0.5);
       legRoot.add(foot);
 
       for (let c = 0; c < 3; c++) {
-        const claw = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.5, 6), teethMat);
+        const claw = new THREE.Mesh(new THREE.ConeGeometry(0.14, 0.55, 6), clawMat);
         claw.rotation.x = Math.PI / 2.2;
         claw.position.set(-0.45 + c * 0.45, -3.2, 1.7);
         legRoot.add(claw);
       }
 
+      // Rear dewclaw
+      const dewclaw = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.35, 6), clawMat);
+      dewclaw.rotation.x = -Math.PI / 2.2;
+      dewclaw.position.set(0, -3.0, -0.7);
+      legRoot.add(dewclaw);
+
       return legRoot;
     };
-    const tLegL = createTrexLeg(true);
-    const tLegR = createTrexLeg(false);
+    const tLegL = createAnatomicalLeg(true);
+    const tLegR = createAnatomicalLeg(false);
     trexGroup.add(tLegL);
     trexGroup.add(tLegR);
 
     stampedeGroup.add(trexGroup);
 
     // =============================================================
-    // 2. VELOCIRAPTOR — THE SPRINTER (Far Front Right, Fast & Lean)
+    // 2. VELOCIRAPTOR — AGILE AERO SPRINTER (Turquoise with Stripes)
     // =============================================================
     const raptorGroup = new THREE.Group();
     raptorGroup.position.set(9.5, -3.6, 7.5);
     raptorGroup.rotation.y = Math.PI / 2;
 
-    // Lean Body tilted forward
     const rBody = new THREE.Mesh(new THREE.ConeGeometry(0.85, 3.4, 14), raptorCyanMat);
     rBody.rotation.x = Math.PI / 2.2;
     rBody.position.set(0, 1.9, 0);
     raptorGroup.add(rBody);
 
-    // Indigo Dorsal Stripe
-    const rStripe = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.3, 3.2), raptorIndigoMat);
+    const rStripe = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.28, 3.2), raptorStripeMat);
     rStripe.position.set(0, 2.4, 0);
     rStripe.rotation.x = 0.3;
     raptorGroup.add(rStripe);
 
-    // Sharp Head & Snout
     const rHead = new THREE.Group();
     rHead.position.set(0, 2.6, 2.2);
 
@@ -450,33 +541,34 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     rSkull.position.set(0, 0, 0.6);
     rHead.add(rSkull);
 
-    // Fierce/Playful Raptor Eye
+    // Raptor Eye
     const rEyeGeo = new THREE.SphereGeometry(0.22, 10, 10);
-    const rEyeMat = registerMat(new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 0.98 }));
-    const rPupilMat = registerMat(new THREE.MeshBasicMaterial({ color: 0x0f172a, transparent: true, opacity: 0.98 }));
-
-    const rEyeL = new THREE.Mesh(rEyeGeo, rEyeMat);
+    const rEyeL = new THREE.Mesh(rEyeGeo, eyeIrisMat);
     rEyeL.position.set(-0.45, 0.25, 0.5);
-    const rPupL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), rPupilMat);
+    const rPupL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), eyePupilMat);
     rPupL.position.set(-0.12, 0, 0.14);
     rEyeL.add(rPupL);
     rHead.add(rEyeL);
 
-    const rEyeR = new THREE.Mesh(rEyeGeo, rEyeMat);
+    const rEyeR = new THREE.Mesh(rEyeGeo, eyeIrisMat);
     rEyeR.position.set(0.45, 0.25, 0.5);
-    const rPupR = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), rPupilMat);
+    const rPupR = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), eyePupilMat);
     rPupR.position.set(0.12, 0, 0.14);
     rEyeR.add(rPupR);
     rHead.add(rEyeR);
     raptorGroup.add(rHead);
 
-    // Balancing Stiff Tail
-    const rTail = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.45, 4.2, 10), raptorCyanMat);
+    // Stiff Rod Balancing Tail with Feather Fan
+    const rTail = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.42, 4.4, 10), raptorCyanMat);
     rTail.rotation.x = -Math.PI / 2.1;
     rTail.position.set(0, 2.1, -2.4);
     raptorGroup.add(rTail);
 
-    // High Cadence Running Legs
+    const rFeatherFan = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.08, 1.4), raptorStripeMat);
+    rFeatherFan.position.set(0, 2.1, -4.5);
+    raptorGroup.add(rFeatherFan);
+
+    // Raptor Legs with Raised Sickle Claw
     const createRaptorLeg = (isLeft: boolean) => {
       const leg = new THREE.Group();
       leg.position.set(isLeft ? -0.85 : 0.85, 1.6, 0);
@@ -489,10 +581,10 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       foot.position.set(0, -1.8, 0.3);
       leg.add(foot);
 
-      // Curved Sickle Claw
-      const sickle = new THREE.Mesh(new THREE.ConeGeometry(0.1, 0.4, 6), teethMat);
-      sickle.rotation.x = -Math.PI / 3;
-      sickle.position.set(isLeft ? 0.2 : -0.2, -1.6, 0.7);
+      // Raised Curved Sickle Claw
+      const sickle = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.5, 6), clawMat);
+      sickle.rotation.x = -Math.PI / 2.8;
+      sickle.position.set(isLeft ? 0.2 : -0.2, -1.55, 0.75);
       leg.add(sickle);
 
       return leg;
@@ -505,13 +597,12 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     stampedeGroup.add(raptorGroup);
 
     // =============================================================
-    // 3. TRICERATOPS (Mid-Foreground, Coral Pink with 3 Horns & Frill)
+    // 3. TRICERATOPS (Midground, Coral-Terracotta with Scalloped Frill)
     // =============================================================
     const triGroup = new THREE.Group();
     triGroup.position.set(-4.5, -3.4, 2.5);
     triGroup.rotation.y = Math.PI / 2;
 
-    // Chunky Barrel Body
     const triBody = new THREE.Mesh(new THREE.SphereGeometry(2.3, 20, 20), triPinkMat);
     triBody.scale.set(1.15, 1.15, 1.65);
     triBody.position.set(0, 2.9, 0);
@@ -522,30 +613,30 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     triBelly.position.set(0, 2.3, 0.3);
     triGroup.add(triBelly);
 
-    // Head with Scalloped Frill
+    // Head with Scalloped Parietal Frill
     const triHead = new THREE.Group();
     triHead.position.set(0, 3.4, 2.2);
 
-    const frillGeo = new THREE.CylinderGeometry(2.4, 2.4, 0.38, 18);
-    const frillMesh = new THREE.Mesh(frillGeo, triPinkMat);
+    const frillMesh = new THREE.Mesh(new THREE.CylinderGeometry(2.4, 2.4, 0.38, 18), triPinkMat);
     frillMesh.rotation.x = Math.PI / 3.2;
     frillMesh.position.set(0, 0.7, -0.4);
     triHead.add(frillMesh);
 
-    // Golden dots along frill rim
+    // Scalloped epoccipital horn bumps along frill rim
     for (let f = 0; f < 7; f++) {
-      const dot = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 8), trexBellyMat);
+      const dot = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), hornBoneMat);
       const angle = -Math.PI * 0.45 + (f * Math.PI * 0.9) / 6;
-      dot.position.set(Math.sin(angle) * 2.2, 0.7 + Math.cos(angle) * 1.5, -0.4);
+      dot.position.set(Math.sin(angle) * 2.25, 0.7 + Math.cos(angle) * 1.55, -0.4);
       triHead.add(dot);
     }
 
+    // Beak Snout
     const snout = new THREE.Mesh(new THREE.ConeGeometry(1.0, 1.8, 14), triPinkMat);
     snout.rotation.x = -Math.PI / 2.3;
     snout.position.set(0, -0.2, 1.2);
     triHead.add(snout);
 
-    // 3 Curved Horns
+    // 3 Curved Ivory Horns
     const browHornGeo = new THREE.ConeGeometry(0.28, 1.9, 10);
     const hornL = new THREE.Mesh(browHornGeo, hornBoneMat);
     hornL.position.set(-0.95, 1.3, 0.6);
@@ -587,7 +678,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     stampedeGroup.add(triGroup);
 
     // =============================================================
-    // 4. STEGOSAURUS (Midground, Amber with Ruby Dorsal Plates & Spikes)
+    // 4. STEGOSAURUS (Midground, Amber with Vascular Red Plates)
     // =============================================================
     const stegoGroup = new THREE.Group();
     stegoGroup.position.set(-10.0, -3.3, -2.5);
@@ -603,8 +694,8 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     sHead.position.set(0, 2.2, 3.0);
     stegoGroup.add(sHead);
 
-    // Alternating Dual Rows of Diamond Back Plates (Ruby Red)
-    const plateGeo = new THREE.ConeGeometry(0.7, 1.5, 4);
+    // Alternating Dual Rows of Vascular Dorsal Plates
+    const plateGeo = new THREE.ConeGeometry(0.72, 1.55, 4);
     for (let i = 0; i < 6; i++) {
       const zOff = -2.2 + i * 0.85;
       const p1 = new THREE.Mesh(plateGeo, plateRedMat);
@@ -650,7 +741,6 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     stegoTail.add(spk4);
 
     stegoGroup.add(stegoTail);
-
     stampedeGroup.add(stegoGroup);
 
     // =============================================================
@@ -665,7 +755,6 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     bBody.position.set(0, 5.5, 0);
     brachioGroup.add(bBody);
 
-    // Towering S-Curved Neck
     const neckPoints = [
       new THREE.Vector3(0, 5.5, 2.2),
       new THREE.Vector3(0, 11.0, 3.8),
@@ -673,8 +762,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       new THREE.Vector3(0, 19.5, 5.4),
     ];
     const neckCurve = new THREE.CatmullRomCurve3(neckPoints);
-    const neckGeo = new THREE.TubeGeometry(neckCurve, 20, 1.1, 12, false);
-    const neckMesh = new THREE.Mesh(neckGeo, brachioBlueMat);
+    const neckMesh = new THREE.Mesh(new THREE.TubeGeometry(neckCurve, 20, 1.1, 12, false), brachioBlueMat);
     brachioGroup.add(neckMesh);
 
     const bHead = new THREE.Mesh(new THREE.SphereGeometry(1.2, 14, 14), brachioBlueMat);
@@ -684,10 +772,10 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     stampedeGroup.add(brachioGroup);
 
     // =============================================================
-    // 6. PTERODACTYL (Soaring Sky Plane, Flapping Purple Wings)
+    // 6. PTERODACTYL (Soaring Sky Plane, Flapping Wing Membrane)
     // =============================================================
     const pteroGroup = new THREE.Group();
-    pteroGroup.position.set(4.0, 9.5, 4.0);
+    pteroGroup.position.set(4.0, 9.8, 4.0);
     pteroGroup.rotation.y = Math.PI / 2;
     pteroGroup.rotation.z = -0.15; // Banking angle
 
@@ -695,13 +783,12 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     ptBody.rotation.x = Math.PI / 2.2;
     pteroGroup.add(ptBody);
 
-    // Crest & Beak
     const ptBeak = new THREE.Mesh(new THREE.ConeGeometry(0.3, 1.8, 8), hornBoneMat);
     ptBeak.rotation.x = -Math.PI / 2.3;
     ptBeak.position.set(0, 0.2, 1.8);
     pteroGroup.add(ptBeak);
 
-    // Flapping Cartoon Wings
+    // Articulated Wings with Flapping Motion
     const wingGeo = new THREE.BoxGeometry(3.4, 0.12, 1.4);
     const ptWingL = new THREE.Mesh(wingGeo, pteroPurpleMat);
     ptWingL.position.set(-2.0, 0.2, 0);
@@ -759,9 +846,6 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       dustPoolIdx++;
     };
 
-    // =============================================================
-    // 8. SPEED STREAKS & FLOATING JUNGLE LEAVES
-    // =============================================================
     // Speed lines trailing fast runners
     const speedLines: THREE.Mesh[] = [];
     const lineGeo = new THREE.CylinderGeometry(0.04, 0.04, 3.2, 6);
@@ -797,10 +881,10 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
     }
 
     // =============================================================
-    // 9. ANIMATION LOOP & RUNNING PHYSICS
+    // 8. ANIMATION LOOP & RUNNING KINEMATICS
     // =============================================================
     const startTime = performance.now();
-    const duration = 4.3; // 4.3 seconds smooth traversal
+    const duration = 4.3; // 4.3s traversal across screen
     let animFrame: number;
     let prevTRexStepSign = 1;
 
@@ -813,30 +897,33 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       const currentX = -38 + progress * 76;
       stampedeGroup.position.x = currentX;
 
-      // --- T-REX PHYSICS ---
-      // Running cadence (11 rad/s)
+      // --- T-REX REALISTIC KINEMATICS ---
       const tStep = Math.sin(elapsed * 11);
       const tBounce = Math.abs(tStep) * 0.45;
       trexGroup.position.y = -3.2 + tBounce;
 
-      // Leg stride alternation
+      // Subtle breathing expansion
+      trexBody.scale.x = 1.15 + Math.sin(elapsed * 3) * 0.03;
+
+      // Leg stride alternation with shock absorption
       tLegL.rotation.x = tStep * 0.72;
       tLegR.rotation.x = -tStep * 0.72;
 
-      // Counter-phase tail swing
-      trexTail.rotation.y = -Math.sin(elapsed * 11) * 0.42;
-      trexTail.rotation.z = Math.cos(elapsed * 11) * 0.15;
+      // Multi-segment serpentine whipping tail motion
+      tailSeg1.rotation.y = -Math.sin(elapsed * 11) * 0.32;
+      tailSeg2.rotation.y = -Math.sin(elapsed * 11 - 0.4) * 0.42;
+      tailSeg3.rotation.y = -Math.sin(elapsed * 11 - 0.8) * 0.52;
 
       // Head bobbing & roaring jaw
       trexHead.rotation.x = Math.sin(elapsed * 11) * 0.12;
       trexHead.rotation.z = Math.sin(elapsed * 5.5) * 0.08;
-      trexJaw.rotation.x = 0.2 + Math.abs(Math.sin(elapsed * 6)) * 0.35; // Roaring mouth!
+      trexJaw.rotation.x = 0.2 + Math.abs(Math.sin(elapsed * 6)) * 0.35; // Roaring jaw opening
 
-      // Cute arm pumping
+      // Arm pumping
       tArmL.rotation.x = -0.7 + Math.sin(elapsed * 14) * 0.55;
       tArmR.rotation.x = -0.7 - Math.sin(elapsed * 14) * 0.55;
 
-      // Foot stomp dust detection
+      // Foot contact dust detection
       const currentTRexSign = Math.sign(tStep);
       if (currentTRexSign !== prevTRexStepSign && Math.abs(tStep) < 0.2) {
         triggerDustPuff(trexGroup.position.x, -3.2, trexGroup.position.z, 1.2);
@@ -844,7 +931,6 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       }
 
       // --- VELOCIRAPTOR FAST SPRINT ---
-      // Rapid sprint cycle (22 rad/s)
       const rStep = Math.sin(elapsed * 22);
       raptorGroup.position.y = -3.6 + Math.abs(rStep) * 0.38;
       rLegL.rotation.x = rStep * 0.95;
@@ -864,7 +950,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       // --- STEGOSAURUS HEAVY STRIDE ---
       const sStep = Math.sin(elapsed * 7.5);
       stegoGroup.position.y = -3.3 + Math.abs(sStep) * 0.2;
-      stegoTail.rotation.y = Math.sin(elapsed * 10) * 0.55; // Spiked tail swing!
+      stegoTail.rotation.y = Math.sin(elapsed * 10) * 0.55;
 
       // --- BRACHIOSAURUS MAJESTIC SWAY ---
       bHead.position.y = 19.6 + Math.sin(elapsed * 3.5) * 0.6;
@@ -874,7 +960,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
       const wingFlap = Math.sin(elapsed * 18) * 0.45;
       ptWingL.rotation.z = wingFlap;
       ptWingR.rotation.z = -wingFlap;
-      pteroGroup.position.y = 9.5 + Math.sin(elapsed * 4.5) * 0.6;
+      pteroGroup.position.y = 9.8 + Math.sin(elapsed * 4.5) * 0.6;
 
       // --- DUST PARTICLES PHYSICS ---
       dustPool.forEach((p) => {
@@ -889,12 +975,12 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
         p.mesh.position.x += p.vx * 0.016;
         p.mesh.position.y += p.vy * 0.016;
         p.mesh.position.z += p.vz * 0.016;
-        p.mesh.scale.multiplyScalar(1.02); // expands
+        p.mesh.scale.multiplyScalar(1.02);
         (p.mesh.material as THREE.MeshBasicMaterial).opacity = 0.65 * (1 - lifeFrac);
       });
 
-      // --- SPEED LINES ANIMATION ---
-      speedLines.forEach((sl, idx) => {
+      // --- SPEED LINES ---
+      speedLines.forEach((sl) => {
         sl.position.x -= 0.6;
         if (sl.position.x < -18) {
           sl.position.x = 12 + Math.random() * 6;
@@ -909,7 +995,7 @@ export function DinoStampedeFloatingEffect({ onComplete, isReducedMotion = false
         l.mesh.position.y += Math.sin(elapsed * 3 + l.swayPhase) * 0.02;
       });
 
-      // --- SMOOTH GLOBAL FADE-OUT (PAST 70% PROGRESS) ---
+      // --- SMOOTH GLOBAL FADE-OUT PAST 70% PROGRESS ---
       let overallOpacity = 1.0;
       if (progress > 0.70) {
         overallOpacity = Math.max(0, 1 - (progress - 0.70) / 0.30);
