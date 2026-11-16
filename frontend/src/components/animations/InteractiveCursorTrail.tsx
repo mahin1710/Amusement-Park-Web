@@ -20,7 +20,7 @@ export function InteractiveCursorTrail() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Respect reduced motion accessibility setting
+    // Respect user's reduced-motion preference
     const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (isReduced) return;
 
@@ -30,16 +30,25 @@ export function InteractiveCursorTrail() {
     if (!ctx) return;
 
     let animId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let cssWidth = window.innerWidth;
+    let cssHeight = window.innerHeight;
 
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+    // Retina & High-DPI Support for Ultra-Crisp Sparkles
+    const setupCanvasResolution = () => {
+      if (!canvas || !ctx) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cssWidth = window.innerWidth;
+      cssHeight = window.innerHeight;
+      canvas.width = Math.floor(cssWidth * dpr);
+      canvas.height = Math.floor(cssHeight * dpr);
+      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
+      ctx.scale(dpr, dpr); // Scale for high-DPI
     };
-    window.addEventListener("resize", handleResize);
 
+    setupCanvasResolution();
+    window.addEventListener("resize", setupCanvasResolution);
+
+    // Authentic Magic Island Amusement Park Palette
     const sparkles: Sparkle[] = [];
     const colors = ["#FFD93D", "#FF6B35", "#38BDF8", "#55C98B", "#F472B6"];
 
@@ -49,32 +58,50 @@ export function InteractiveCursorTrail() {
     let currentY = 0;
     let isHolding = false;
     let activePointerId: number | null = null;
-    let moveThrottleTimer = 0;
-    let lastHoldSpawn = 0;
+    let lastMoveThrottle = 0;
+    let lastHoldEmission = 0;
+    let lastDownTimestamp = 0;
 
-    // Helper to spawn a single authentic amusement park star sparkle
-    const spawnSparkle = (x: number, y: number, speedMultiplier = 1.0, jitterRadius = 8) => {
-      if (sparkles.length > 55) sparkles.shift();
+    // Helper: Spawn authentic 4-point star sparkle with physics
+    const spawnSparkle = (
+      x: number,
+      y: number,
+      speedMultiplier = 1.0,
+      jitter = 8,
+      sizeBoost = 1.0
+    ) => {
+      if (sparkles.length > 70) sparkles.shift();
       const angle = Math.random() * Math.PI * 2;
-      const speed = (Math.random() * 1.8 + 0.4) * speedMultiplier;
+      const speed = (Math.random() * 1.9 + 0.5) * speedMultiplier;
       sparkles.push({
-        x: x + (Math.random() - 0.5) * jitterRadius,
-        y: y + (Math.random() - 0.5) * jitterRadius,
+        x: x + (Math.random() - 0.5) * jitter,
+        y: y + (Math.random() - 0.5) * jitter,
         vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed + 0.3,
-        size: Math.random() * 4.5 + 2.5,
+        vy: Math.sin(angle) * speed + 0.28,
+        size: (Math.random() * 4.2 + 2.8) * sizeBoost,
         alpha: 1,
         color: colors[Math.floor(Math.random() * colors.length)],
         rotation: Math.random() * Math.PI,
-        vRot: (Math.random() - 0.5) * 0.15,
+        vRot: (Math.random() - 0.5) * 0.16,
       });
     };
 
-    // 1. POINTER DOWN (Mouse Click & Hold OR Touch & Hold)
-    const handlePointerDown = (e: PointerEvent) => {
-      // For mouse, only trigger on primary left click
+    // Trigger an immediate rich burst (used for single tap or click start)
+    const triggerBurst = (x: number, y: number, count = 4) => {
+      for (let i = 0; i < count; i++) {
+        spawnSparkle(x, y, 1.45, 14, 1.15);
+      }
+    };
+
+    // =============================================================
+    // 1. POINTER & MOUSE DOWN (CLICK & HOLD / TOUCH & HOLD)
+    // =============================================================
+    const onPointerDown = (e: PointerEvent) => {
+      // For mouse input, ensure it is the primary (left) button
       if (e.pointerType === "mouse" && e.button !== 0) return;
 
+      const now = performance.now();
+      lastDownTimestamp = now;
       isHolding = true;
       activePointerId = e.pointerId;
       currentX = e.clientX;
@@ -82,62 +109,145 @@ export function InteractiveCursorTrail() {
       lastX = e.clientX;
       lastY = e.clientY;
 
-      // Immediate burst of 2-3 sparkles on press
-      for (let i = 0; i < 3; i++) {
-        spawnSparkle(currentX, currentY, 1.4, 12);
-      }
+      triggerBurst(currentX, currentY, 4);
     };
 
-    // 2. POINTER MOVE (Mouse Movement Trail OR Dragging while Holding)
-    const handlePointerMove = (e: PointerEvent) => {
+    // =============================================================
+    // 2. POINTER & MOUSE MOVE (TRAIL & DRAG FOLLOWING)
+    // =============================================================
+    const onPointerMove = (e: PointerEvent) => {
       currentX = e.clientX;
       currentY = e.clientY;
 
+      // Real-time mouse buttons validation (if mouse is down and moving)
+      if (e.pointerType === "mouse") {
+        if (e.buttons & 1) {
+          isHolding = true;
+        } else if (e.buttons === 0 && isHolding) {
+          isHolding = false;
+        }
+      }
+
       const now = performance.now();
-      if (now - moveThrottleTimer < 16) return; // ~60fps throttle
-      moveThrottleTimer = now;
+      if (now - lastMoveThrottle < 16) return; // ~60fps throttle
+      lastMoveThrottle = now;
 
       const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
       if (dist < 4) return;
       lastX = e.clientX;
       lastY = e.clientY;
 
-      // Spawn trail sparkles along movement path
+      // Spawn movement sparkles
       const count = Math.min(isHolding ? 3 : 2, Math.floor(dist / 14) + 1);
       for (let i = 0; i < count; i++) {
         spawnSparkle(e.clientX, e.clientY, isHolding ? 1.3 : 1.0, 8);
       }
     };
 
-    // 3. POINTER UP & CANCEL (Release Mouse / Lift Finger)
-    const handlePointerUp = (e: PointerEvent) => {
-      if (activePointerId === null || e.pointerId === activePointerId) {
+    // =============================================================
+    // 3. POINTER UP & CANCEL (RELEASE)
+    // =============================================================
+    const onPointerUp = (e: PointerEvent) => {
+      if (activePointerId === null || e.pointerId === activePointerId || e.pointerType === "mouse") {
         isHolding = false;
         activePointerId = null;
       }
     };
 
-    const handlePointerCancel = (e: PointerEvent) => {
-      if (activePointerId === null || e.pointerId === activePointerId) {
+    const onPointerCancel = (e: PointerEvent) => {
+      // Don't kill touch hold if finger is still physically on screen
+      if (e.pointerType === "mouse" || activePointerId === e.pointerId) {
         isHolding = false;
         activePointerId = null;
       }
     };
 
-    // Safety fallback when window loses focus or pointer exits viewport
-    const handleWindowBlur = () => {
+    // =============================================================
+    // 4. DEDICATED TOUCHSCREEN EVENT LISTENERS (MOBILE / TABLET)
+    // =============================================================
+    // Ensures mobile browsers that intercept pointer events for scrolling
+    // continue to support touch tap, touch-and-hold, and dragging smoothly.
+    const onTouchStart = (e: TouchEvent) => {
+      if (!e.touches || e.touches.length === 0) return;
+      const touch = e.touches[0];
+      const now = performance.now();
+
+      // Avoid duplicate burst if pointerdown already fired in this instant
+      const isDuplicate = now - lastDownTimestamp < 35;
+      lastDownTimestamp = now;
+
+      isHolding = true;
+      currentX = touch.clientX;
+      currentY = touch.clientY;
+      lastX = touch.clientX;
+      lastY = touch.clientY;
+
+      if (!isDuplicate) {
+        triggerBurst(currentX, currentY, 4);
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!e.touches || e.touches.length === 0) return;
+      const touch = e.touches[0];
+      currentX = touch.clientX;
+      currentY = touch.clientY;
+      isHolding = true;
+
+      const now = performance.now();
+      if (now - lastMoveThrottle < 16) return;
+      lastMoveThrottle = now;
+
+      const dist = Math.hypot(touch.clientX - lastX, touch.clientY - lastY);
+      if (dist < 4) return;
+      lastX = touch.clientX;
+      lastY = touch.clientY;
+
+      const count = Math.min(3, Math.floor(dist / 14) + 1);
+      for (let i = 0; i < count; i++) {
+        spawnSparkle(touch.clientX, touch.clientY, 1.25, 8);
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (!e.touches || e.touches.length === 0) {
+        isHolding = false;
+        activePointerId = null;
+      }
+    };
+
+    const onTouchCancel = (e: TouchEvent) => {
+      if (!e.touches || e.touches.length === 0) {
+        isHolding = false;
+        activePointerId = null;
+      }
+    };
+
+    // Safety fallback when window loses focus or pointer exits document
+    const onWindowBlur = () => {
       isHolding = false;
       activePointerId = null;
     };
 
-    window.addEventListener("pointerdown", handlePointerDown, { passive: true });
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    window.addEventListener("pointerup", handlePointerUp, { passive: true });
-    window.addEventListener("pointercancel", handlePointerCancel, { passive: true });
-    window.addEventListener("blur", handleWindowBlur);
-    document.addEventListener("mouseleave", handleWindowBlur);
+    // Use capturing phase ({ capture: true, passive: true }) so buttons & child
+    // elements never stop or swallow cursor events!
+    const listenerOpts: AddEventListenerOptions = { capture: true, passive: true };
 
-    // 4-Point Star Drawing Logic (Existing Authentic Amusement Park Shape)
+    window.addEventListener("pointerdown", onPointerDown, listenerOpts);
+    window.addEventListener("pointermove", onPointerMove, listenerOpts);
+    window.addEventListener("pointerup", onPointerUp, listenerOpts);
+    window.addEventListener("pointercancel", onPointerCancel, listenerOpts);
+
+    // Native Touch Events for guaranteed mobile/tablet support
+    window.addEventListener("touchstart", onTouchStart, listenerOpts);
+    window.addEventListener("touchmove", onTouchMove, listenerOpts);
+    window.addEventListener("touchend", onTouchEnd, listenerOpts);
+    window.addEventListener("touchcancel", onTouchCancel, listenerOpts);
+
+    window.addEventListener("blur", onWindowBlur);
+    document.addEventListener("mouseleave", onWindowBlur);
+
+    // 4-Point Star Drawing Logic (Authentic Theme Park Diamond Star)
     const drawStar = (cx: number, cy: number, spikes: number, outerRadius: number, innerRadius: number) => {
       let rot = (Math.PI / 2) * 3;
       let x = cx;
@@ -161,27 +271,27 @@ export function InteractiveCursorTrail() {
       ctx.closePath();
     };
 
-    // Render Loop with Continuous Hold-to-Activate Magic Generation
+    // Animation Render Loop
     const render = () => {
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, cssWidth, cssHeight);
       const now = performance.now();
 
-      // CONTINUOUS HOLD-TO-ACTIVATE EMISSION:
-      // While mouse button or touchscreen is held down, continuously emit new sparkles
+      // CONTINUOUS HOLD-TO-ACTIVATE GENERATION:
+      // While mouse button or finger is held down, stream continuous sparkles
       if (isHolding) {
-        if (now - lastHoldSpawn > 32) { // ~30 fps continuous sparkle stream
-          lastHoldSpawn = now;
-          spawnSparkle(currentX, currentY, 1.2, 10);
+        if (now - lastHoldEmission > 32) {
+          lastHoldEmission = now;
+          spawnSparkle(currentX, currentY, 1.2, 12, 1.05);
         }
       }
 
-      // Update and Draw Existing Sparkles
+      // Update and Render Existing Sparkles
       for (let i = sparkles.length - 1; i >= 0; i--) {
         const s = sparkles[i];
         s.x += s.vx;
         s.y += s.vy;
         s.rotation += s.vRot;
-        s.alpha -= 0.024;
+        s.alpha -= 0.024; // Smooth ~0.7s lifetime
 
         if (s.alpha <= 0) {
           sparkles.splice(i, 1);
@@ -204,13 +314,20 @@ export function InteractiveCursorTrail() {
     render();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("pointerdown", handlePointerDown);
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("pointerup", handlePointerUp);
-      window.removeEventListener("pointercancel", handlePointerCancel);
-      window.removeEventListener("blur", handleWindowBlur);
-      document.removeEventListener("mouseleave", handleWindowBlur);
+      window.removeEventListener("resize", setupCanvasResolution);
+
+      window.removeEventListener("pointerdown", onPointerDown, listenerOpts);
+      window.removeEventListener("pointermove", onPointerMove, listenerOpts);
+      window.removeEventListener("pointerup", onPointerUp, listenerOpts);
+      window.removeEventListener("pointercancel", onPointerCancel, listenerOpts);
+
+      window.removeEventListener("touchstart", onTouchStart, listenerOpts);
+      window.removeEventListener("touchmove", onTouchMove, listenerOpts);
+      window.removeEventListener("touchend", onTouchEnd, listenerOpts);
+      window.removeEventListener("touchcancel", onTouchCancel, listenerOpts);
+
+      window.removeEventListener("blur", onWindowBlur);
+      document.removeEventListener("mouseleave", onWindowBlur);
       cancelAnimationFrame(animId);
     };
   }, []);
@@ -218,7 +335,7 @@ export function InteractiveCursorTrail() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[80] overflow-hidden"
+      className="fixed inset-0 pointer-events-none z-[99999] overflow-hidden select-none"
       aria-hidden="true"
     />
   );
