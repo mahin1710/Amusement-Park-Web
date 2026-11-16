@@ -452,6 +452,12 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     splashCrown.scale.set(0.001, 0.001, 0.001);
     sceneGroup.add(splashCrown);
 
+    const spoutGeo = registerGeo(new THREE.ConeGeometry(1.2, 3.2, 12, 1, true));
+    const spoutMesh = new THREE.Mesh(spoutGeo, splashWaterMat);
+    spoutMesh.position.set(13.8, 1.5, -4.2);
+    spoutMesh.scale.set(0.001, 0.001, 0.001);
+    sceneGroup.add(spoutMesh);
+
     const dropletMeshGeo = registerGeo(new THREE.DodecahedronGeometry(0.22, 1));
     const splashDroplets: { mesh: THREE.Mesh; vx: number; vy: number; vz: number; startX: number; startY: number; startZ: number; active: boolean }[] = [];
     for (let i = 0; i < 70; i++) {
