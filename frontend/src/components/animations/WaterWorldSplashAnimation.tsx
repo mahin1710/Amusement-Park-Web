@@ -18,7 +18,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
 
     // --- SCENE, CAMERA, RENDERER ---
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x0284c7, 0.015);
+    scene.fog = new THREE.FogExp2(0x0284c7, 0.012);
 
     const initW = container.clientWidth || window.innerWidth || 1200;
     const initH = container.clientHeight || window.innerHeight || 800;
@@ -44,145 +44,139 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     aquaLight.position.set(0, 10, 15);
     scene.add(aquaLight);
 
-    // --- 1. CONTINUOUS 3D OCEAN WAVE SURGE (Curling Barrel & Crest) ---
-    const waveGroup = new THREE.Group();
-    scene.add(waveGroup);
-
-    const wavePoints = [
-      new THREE.Vector3(-36, -3, -4),
-      new THREE.Vector3(-22, -1, -2),
-      new THREE.Vector3(-8, 3.5, 1),
-      new THREE.Vector3(2, 7.8, 4),   // Crest
-      new THREE.Vector3(12, 3.5, 5),  // Barrel lip
-      new THREE.Vector3(24, 0, 2),
-      new THREE.Vector3(38, -2, -3),
+    // --- 3D WATER SLIDE FLUME CHUTE ---
+    const slidePoints = [
+      new THREE.Vector3(-36, 16, -6),
+      new THREE.Vector3(-22, 12, -2),
+      new THREE.Vector3(-10, 4, 3),
+      new THREE.Vector3(0, 8, 2),
+      new THREE.Vector3(12, 1.5, 4),
+      new THREE.Vector3(22, -1.8, 3),
+      new THREE.Vector3(36, -2.0, -2),
     ];
-    const waveCurve = new THREE.CatmullRomCurve3(wavePoints);
+    const slideCurve = new THREE.CatmullRomCurve3(slidePoints);
 
-    const waterMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0284c7,
-      roughness: 0.08,
-      metalness: 0.1,
-      transmission: 0.78,
-      ior: 1.333,
-      reflectivity: 0.92,
+    const flumeMat = new THREE.MeshPhysicalMaterial({
+      color: 0x06b6d4,
+      roughness: 0.1,
+      metalness: 0.15,
+      transmission: 0.65,
+      ior: 1.45,
       clearcoat: 1.0,
       transparent: true,
       opacity: 0.9,
     });
 
-    const foamMat = new THREE.MeshStandardMaterial({
-      color: 0xf0fdfa,
-      roughness: 0.2,
+    const waterMat = new THREE.MeshPhysicalMaterial({
+      color: 0x0284c7,
+      roughness: 0.04,
+      metalness: 0.08,
+      transmission: 0.85,
+      ior: 1.333,
+      clearcoat: 1.0,
       transparent: true,
-      opacity: 0.88,
+      opacity: 0.92,
     });
 
-    // Wave Body
-    const waveBodyGeo = new THREE.TubeGeometry(waveCurve, 80, 3.2, 18, false);
-    const waveBody = new THREE.Mesh(waveBodyGeo, waterMat);
-    waveGroup.add(waveBody);
+    const flumeGeo = new THREE.TubeGeometry(slideCurve, 80, 2.2, 18, false);
+    const flumeMesh = new THREE.Mesh(flumeGeo, flumeMat);
+    scene.add(flumeMesh);
 
-    // Frothy White Crest Tube
-    const crestGeo = new THREE.TubeGeometry(waveCurve, 80, 1.1, 12, false);
-    const crestMesh = new THREE.Mesh(crestGeo, foamMat);
-    crestMesh.position.y += 0.5;
-    waveGroup.add(crestMesh);
+    const waterStreamGeo = new THREE.TubeGeometry(slideCurve, 80, 1.6, 14, false);
+    const waterStream = new THREE.Mesh(waterStreamGeo, waterMat);
+    waterStream.position.y -= 0.2;
+    scene.add(waterStream);
 
-    // --- 2. LEAPING PLAYFUL DOLPHIN ---
-    const dolphinMat = new THREE.MeshStandardMaterial({ color: 0x0369a1, roughness: 0.25 });
-    const dolphinBellyMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2 });
+    // --- RIDER ON RAFT ---
+    const riderGroup = new THREE.Group();
+    scene.add(riderGroup);
 
-    const dolphin = new THREE.Group();
-    dolphin.position.set(0, 9, 3.5);
+    const raftMat = new THREE.MeshStandardMaterial({ color: 0xffd93d, roughness: 0.2 });
+    const raftStripeMat = new THREE.MeshStandardMaterial({ color: 0xef4444, roughness: 0.2 });
+    const skinMat = new THREE.MeshStandardMaterial({ color: 0xfed7aa, roughness: 0.35 });
+    const shirtMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.3 });
 
-    const dBody = new THREE.Mesh(new THREE.SphereGeometry(1.6, 16, 16), dolphinMat);
-    dBody.scale.set(0.8, 0.75, 2.4);
-    dolphin.add(dBody);
+    const raft = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.6, 16, 28), raftMat);
+    raft.rotation.x = Math.PI / 2;
+    riderGroup.add(raft);
 
-    const dBelly = new THREE.Mesh(new THREE.SphereGeometry(1.3, 14, 14), dolphinBellyMat);
-    dBelly.scale.set(0.7, 0.5, 2.1);
-    dBelly.position.set(0, -0.3, 0);
-    dolphin.add(dBelly);
+    const raftStripe = new THREE.Mesh(new THREE.TorusGeometry(1.62, 0.22, 16, 28), raftStripeMat);
+    raftStripe.rotation.x = Math.PI / 2;
+    riderGroup.add(raftStripe);
 
-    const dFin = new THREE.Mesh(new THREE.ConeGeometry(0.35, 1.1, 4), dolphinMat);
-    dFin.rotation.x = -0.5;
-    dFin.position.set(0, 0.9, -0.3);
-    dolphin.add(dFin);
+    const riderTorso = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.4, 1.2, 10), shirtMat);
+    riderTorso.position.y = 1.0;
+    riderGroup.add(riderTorso);
 
-    scene.add(dolphin);
+    const riderHead = new THREE.Mesh(new THREE.SphereGeometry(0.55, 14, 14), skinMat);
+    riderHead.position.set(0, 1.9, 0);
+    riderGroup.add(riderHead);
 
-    // --- 3. DYNAMIC WATER SPLASH DROPLETS ---
+    const armGeo = new THREE.CylinderGeometry(0.12, 0.12, 1.1, 8);
+    const armL = new THREE.Mesh(armGeo, skinMat);
+    armL.position.set(-0.7, 1.4, 0);
+    armL.rotation.z = 0.7;
+    riderGroup.add(armL);
+
+    const armR = new THREE.Mesh(armGeo, skinMat);
+    armR.position.set(0.7, 1.4, 0);
+    armR.rotation.z = -0.7;
+    riderGroup.add(armR);
+
+    // Splash Particles
     const splashDroplets: { mesh: THREE.Mesh; vx: number; vy: number; vz: number; life: number; age: number }[] = [];
-    const dropGeo = new THREE.DodecahedronGeometry(0.45, 1);
-    const dropMat = new THREE.MeshStandardMaterial({ color: 0xe0f2fe, roughness: 0.1, transparent: true, opacity: 0.9 });
+    const dropGeo = new THREE.DodecahedronGeometry(0.4, 1);
+    const dropMat = new THREE.MeshPhysicalMaterial({ color: 0xbae6fd, transmission: 0.85, roughness: 0.05, clearcoat: 1.0 });
 
-    for (let i = 0; i < 70; i++) {
+    for (let i = 0; i < 50; i++) {
       const drop = new THREE.Mesh(dropGeo, dropMat);
-      drop.position.set(-8 + Math.random() * 16, 3 + Math.random() * 4, 2 + Math.random() * 4);
+      drop.position.set(16 + (Math.random() - 0.5) * 8, -1 + Math.random() * 2, 3 + (Math.random() - 0.5) * 4);
       scene.add(drop);
       splashDroplets.push({
         mesh: drop,
-        vx: 2 + Math.random() * 8,
-        vy: 5 + Math.random() * 12,
-        vz: (Math.random() - 0.5) * 5,
-        life: 1.0 + Math.random() * 0.5,
+        vx: (Math.random() - 0.4) * 10,
+        vy: 6 + Math.random() * 12,
+        vz: (Math.random() - 0.5) * 6,
+        life: 0.9 + Math.random() * 0.4,
         age: Math.random() * 0.8,
       });
     }
 
-    // Floating Bubbles
-    const bubbles: { mesh: THREE.Mesh; speed: number; x0: number; wFreq: number }[] = [];
-    const bGeo = new THREE.SphereGeometry(0.5, 12, 12);
-    const bMat = new THREE.MeshStandardMaterial({ color: 0xbae6fd, transparent: true, opacity: 0.6 });
-
-    for (let i = 0; i < 35; i++) {
-      const b = new THREE.Mesh(bGeo, bMat);
-      const initX = -25 + Math.random() * 50;
-      b.position.set(initX, Math.random() * 25, (Math.random() - 0.5) * 20);
-      scene.add(b);
-      bubbles.push({
-        mesh: b,
-        speed: 1.5 + Math.random() * 2.5,
-        x0: initX,
-        wFreq: 1 + Math.random() * 2,
-      });
-    }
-
     const startTime = performance.now();
+    const duration = 4.5;
     let animFrame: number;
 
     const animate = () => {
       const now = performance.now();
       const elapsed = (now - startTime) / 1000;
+      const progress = Math.min(1, elapsed / duration);
 
-      // Wave undulation
-      waveGroup.position.y = Math.sin(elapsed * 4) * 0.6;
-      waveGroup.position.x = Math.sin(elapsed * 2) * 1.5;
+      // Traversal along slide curve
+      const pt = slideCurve.getPointAt(progress);
+      const tang = slideCurve.getTangentAt(progress).normalize();
+      riderGroup.position.copy(pt);
+      riderGroup.position.y += 0.9;
+      riderGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), tang);
+      riderGroup.rotation.z += Math.sin(elapsed * 10) * 0.2;
 
-      // Dolphin leaping arc
-      const leap = (elapsed * 1.2) % 1;
-      dolphin.position.y = 7.5 + Math.sin(leap * Math.PI) * 4.0;
-      dolphin.position.x = -6 + leap * 12;
-      dolphin.rotation.x = 0.4 - leap * 0.85;
+      armL.rotation.x = Math.sin(elapsed * 16) * 0.4;
+      armR.rotation.x = -Math.sin(elapsed * 16) * 0.4;
 
-      // Droplets physics
+      // Update splash droplets
       splashDroplets.forEach((d) => {
         d.age += 0.016;
         if (d.age > d.life) d.age = 0;
         const t = d.age;
-        d.mesh.position.y = 4 + d.vy * t - 0.5 * 24 * t * t;
-      });
-
-      // Bubbles rising
-      bubbles.forEach((b) => {
-        b.mesh.position.y += b.speed * 0.016;
-        b.mesh.position.x = b.x0 + Math.sin(elapsed * b.wFreq) * 1.2;
-        if (b.mesh.position.y > 25) b.mesh.position.y = -4;
+        d.mesh.position.y = -1.2 + d.vy * t - 0.5 * 24 * t * t;
       });
 
       renderer.render(scene, camera);
-      animFrame = requestAnimationFrame(animate);
+
+      if (progress < 1) {
+        animFrame = requestAnimationFrame(animate);
+      } else {
+        onComplete?.();
+      }
     };
 
     animFrame = requestAnimationFrame(animate);
@@ -203,17 +197,13 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       }
       renderer.dispose();
     };
-  }, []);
+  }, [onComplete]);
 
   return (
     <div className="relative w-full h-full overflow-hidden flex items-center justify-center select-none pointer-events-none">
-      {/* 3D WebGL Canvas Mount */}
       <div ref={mountRef} className="absolute inset-0 z-10 w-full h-full" />
-
-      {/* Tropical Water Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0284C7]/50 via-[#38BDF8]/30 to-[#0369A1]/65 -z-10" />
 
-      {/* Action Banner */}
       <motion.div
         className="absolute z-40 top-16 sm:top-20 flex flex-col items-center pointer-events-none"
         initial={{ scale: 0, rotate: -6, opacity: 0 }}
@@ -222,17 +212,9 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       >
         <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#0EA5E9] border-3 border-white text-white font-heading font-black text-lg sm:text-2xl tracking-wider shadow-2xl flex items-center gap-3">
           <span className="text-2xl animate-pulse">🌊</span>
-          <span>WATER WORLD TSUNAMI WAVES!</span>
-          <span className="text-2xl animate-bounce">🐬</span>
+          <span>WATER WORLD 3D WATER SLIDE RIDE!</span>
+          <span className="text-2xl">🏄‍♂️</span>
         </div>
-        <motion.span
-          className="mt-2 text-xs sm:text-sm font-heading font-black text-sky-100 uppercase tracking-widest drop-shadow-md bg-black/40 px-4 py-1 rounded-full border border-white/20"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          Bangladesh&apos;s Largest Ocean Wave Pool & Surf Kingdom
-        </motion.span>
       </motion.div>
     </div>
   );

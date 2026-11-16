@@ -53,8 +53,8 @@ export default function AttractionsPage() {
       realmHref: "/water-park",
       realmLabelEn: "Explore Water World Realm",
       realmLabelBn: "ওয়াটার ওয়ার্ল্ড রিয়েলম দেখুন",
-      animationTagEn: "🌊 3D Ocean Waves & Tsunami Surge",
-      animationTagBn: "🌊 ৩ডি সামুদ্রিক ঢেউ ও সুনামি ওয়েভ",
+      animationTagEn: "🌊 3D Water Slide Ride & Splash",
+      animationTagBn: "🌊 ৩ডি ওয়াটার স্লাইড ও স্প্ল্যাশ",
     },
     {
       id: "dino-world",
