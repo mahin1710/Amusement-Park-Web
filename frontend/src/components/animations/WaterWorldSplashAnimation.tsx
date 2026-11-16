@@ -78,7 +78,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         sceneGroup.scale.set(0.9, 0.9, 0.9);
       } else {
         sceneGroup.position.set(-16.0, -0.6, 0);
-        sceneGroup.scale.set(1.0, 1.0, 1.0);
+        sceneGroup.scale.set(0.5, 0.5, 0.5);
       }
     };
     updateGroupPosition(initW);
