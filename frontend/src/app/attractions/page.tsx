@@ -73,8 +73,8 @@ export default function AttractionsPage() {
       realmHref: "/dino-zone",
       realmLabelEn: "Explore Dino World Realm",
       realmLabelBn: "ডাইনো ওয়ার্ল্ড রিয়েলম দেখুন",
-      animationTagEn: "🦖 3D Running Dinosaurs",
-      animationTagBn: "🦖 ৩ডি রানিং ডাইনোসর",
+      animationTagEn: "🦖 3D Animated T-Rex Dinosaur",
+      animationTagBn: "🦖 ৩ডি অ্যানিমেটেড টি-রেক্স ডাইনোসর",
     },
     {
       id: "thrill-world",
