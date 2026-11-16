@@ -2,11 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { Compass, Waves, Footprints, FerrisWheel, ArrowRight, Sparkles } from "lucide-react";
+import { Compass, Waves, Footprints, FerrisWheel, ArrowRight, Sparkles, Play } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
+import { useAttractionAnimation } from "@/context/AnimationContext";
 
 export function ChooseAdventureSection() {
   const { isBangla } = useTranslation();
+  const { playAnimation } = useAttractionAnimation();
 
   return (
     <section
@@ -44,6 +46,18 @@ export function ChooseAdventureSection() {
               <div className="absolute top-4 left-4 bg-[#38BDF8] text-[#172554] text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
                 {isBangla ? "বাংলাদেশের সর্ববৃহৎ ওয়েভ পুল" : "Largest Wave Pool in BD"}
               </div>
+
+              {/* 3D Cartoon Animation Launcher Button */}
+              <button
+                type="button"
+                onClick={() => playAnimation("water-world")}
+                className="absolute bottom-3 left-4 text-xs text-[#172554] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFD93D]/95 hover:bg-[#FFD93D] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all"
+                title="Play 3D Water Slide & Splash Animation"
+              >
+                <Play className="w-3.5 h-3.5 fill-current text-[#172554]" />
+                <span>{isBangla ? "৩ডি ওয়াটার স্লাইড" : "3D Splash Cartoon"}</span>
+              </button>
+
               <div className="absolute bottom-3 right-4 text-xs text-white font-heading font-semibold flex items-center gap-1.5 backdrop-blur-md bg-black/50 px-3 py-1 rounded-full border border-white/20">
                 <i className="fa-solid fa-camera text-[#38BDF8]"></i> {isBangla ? "আসল ড্রোন ভিউ" : "Authentic Aerial Photo"}
               </div>
@@ -77,13 +91,23 @@ export function ChooseAdventureSection() {
                 </div>
               </div>
 
-              <Link
-                className="btn-park-primary w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2"
-                href="/water-park"
-              >
-                <span>{isBangla ? "ওয়াটার পার্ক ঘুরে দেখুন" : "Explore Water World"}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex items-center gap-2.5 mt-auto">
+                <Link
+                  className="btn-park-primary flex-1 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2"
+                  href="/water-park"
+                >
+                  <span>{isBangla ? "ওয়াটার পার্ক দেখুন" : "Explore Water World"}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => playAnimation("water-world")}
+                  className="h-11 w-11 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] border-2 border-white shadow-md flex items-center justify-center shrink-0 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+                  title="Watch 3D Cartoon Water Slide Animation"
+                >
+                  <Play className="w-4 h-4 fill-current ml-0.5 text-[#172554]" />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -99,6 +123,17 @@ export function ChooseAdventureSection() {
               <div className="absolute top-4 left-4 bg-[#8B5CF6] text-white text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
                 {isBangla ? "দেশের বৃহত্তম ডাইনোসর সংগ্রহ" : "Largest Dino Variety in BD"}
               </div>
+
+              {/* 3D Cartoon Animation Launcher Button */}
+              <button
+                type="button"
+                onClick={() => playAnimation("dino-world")}
+                className="absolute bottom-3 left-4 text-xs text-[#172554] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFD93D]/95 hover:bg-[#FFD93D] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all"
+                title="Play 3D Running Dinosaurs Animation"
+              >
+                <Play className="w-3.5 h-3.5 fill-current text-[#172554]" />
+                <span>{isBangla ? "৩ডি ডাইনোসর" : "3D Dino Stampede"}</span>
+              </button>
             </div>
 
             <div className="p-7 flex-1 flex flex-col justify-between">
@@ -129,13 +164,23 @@ export function ChooseAdventureSection() {
                 </div>
               </div>
 
-              <Link
-                className="btn-park-secondary w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2"
-                href="/dino-zone"
-              >
-                <span>{isBangla ? "ডাইনো জোন ঘুরে দেখুন" : "Explore Dino World"}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex items-center gap-2.5 mt-auto">
+                <Link
+                  className="btn-park-secondary flex-1 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2"
+                  href="/dino-zone"
+                >
+                  <span>{isBangla ? "ডাইনো জোন দেখুন" : "Explore Dino World"}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => playAnimation("dino-world")}
+                  className="h-11 w-11 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] border-2 border-white shadow-md flex items-center justify-center shrink-0 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+                  title="Watch 3D Cartoon Running Dinosaurs Animation"
+                >
+                  <Play className="w-4 h-4 fill-current ml-0.5 text-[#172554]" />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -151,6 +196,17 @@ export function ChooseAdventureSection() {
               <div className="absolute top-4 left-4 bg-[#FF6B35] text-white text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
                 {isBangla ? "রোমাঞ্চকর অ্যামিউজমেন্ট রাইডস" : "Amazing Thrill Rides"}
               </div>
+
+              {/* 3D Cartoon Animation Launcher Button */}
+              <button
+                type="button"
+                onClick={() => playAnimation("thrill-world")}
+                className="absolute bottom-3 left-4 text-xs text-[#172554] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFD93D]/95 hover:bg-[#FFD93D] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all"
+                title="Play 3D Roller Coaster Rush Animation"
+              >
+                <Play className="w-3.5 h-3.5 fill-current text-[#172554]" />
+                <span>{isBangla ? "৩ডি কোস্টার" : "3D Coaster Rush"}</span>
+              </button>
             </div>
 
             <div className="p-7 flex-1 flex flex-col justify-between">
@@ -181,13 +237,23 @@ export function ChooseAdventureSection() {
                 </div>
               </div>
 
-              <Link
-                className="btn-park-primary w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2"
-                href="/amusement-park"
-              >
-                <span>{isBangla ? "অ্যামিউজমেন্ট রাইডস দেখুন" : "Explore Thrill World"}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex items-center gap-2.5 mt-auto">
+                <Link
+                  className="btn-park-primary flex-1 text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2"
+                  href="/amusement-park"
+                >
+                  <span>{isBangla ? "অ্যামিউজমেন্ট রাইডস দেখুন" : "Explore Thrill World"}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => playAnimation("thrill-world")}
+                  className="h-11 w-11 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] border-2 border-white shadow-md flex items-center justify-center shrink-0 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+                  title="Watch 3D Cartoon Roller Coaster Animation"
+                >
+                  <Play className="w-4 h-4 fill-current ml-0.5 text-[#172554]" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
