@@ -1,16 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { Waves, Sparkles, ShieldCheck, MessageCircle, ArrowRight, Sun, LifeBuoy, Play } from "lucide-react";
+import { Waves, Sparkles, ShieldCheck, MessageCircle, ArrowRight, Sun, LifeBuoy } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
 import { ATTRACTIONS_DATA } from "@/data/attractions";
 import { buildWhatsAppLink } from "@/config/business";
-import { WaterSplashFloatingEffect } from "@/components/animations/WaterSplashFloatingEffect";
 
 export default function WaterParkPage() {
   const { t, isBangla } = useTranslation();
-  const [playSplash, setPlaySplash] = useState(true);
   const waterRides = ATTRACTIONS_DATA.filter((a) => a.zone === "water-park");
 
   const waLink = buildWhatsAppLink({
@@ -20,11 +18,6 @@ export default function WaterParkPage() {
 
   return (
     <div className="min-h-screen bg-[#FFF9ED] text-[#172554] relative">
-      {/* 100% Transparent Floating 3D Water Splash (Passes across screen over page content) */}
-      {playSplash && (
-        <WaterSplashFloatingEffect onComplete={() => setPlaySplash(false)} />
-      )}
-
       {/* Hero Banner with Authentic Water World Photograph */}
       <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
         <img
@@ -59,16 +52,6 @@ export default function WaterParkPage() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <button
-              type="button"
-              onClick={() => setPlaySplash(true)}
-              className="px-7 py-3.5 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
-              title="Watch 3D Water Wave Simulation Float Across Screen"
-            >
-              <Waves className="w-4 h-4 text-[#172554]" />
-              <span>{isBangla ? "৩ডি ওয়াটার ওয়েভ এফেক্ট" : "3D Water Wave Simulation"}</span>
-            </button>
-
             <Link
               href="#rides"
               className="btn-park-primary px-7 py-3.5 rounded-full text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"

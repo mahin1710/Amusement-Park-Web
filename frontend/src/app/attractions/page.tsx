@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Waves, Footprints, FerrisWheel, ArrowRight, Compass, Sparkles, Play } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
 import { ATTRACTIONS_DATA } from "@/data/attractions";
-import { WaterSplashFloatingEffect } from "@/components/animations/WaterSplashFloatingEffect";
 import { DinoStampedeFloatingEffect } from "@/components/animations/DinoStampedeFloatingEffect";
 import { RollerCoasterFloatingEffect } from "@/components/animations/RollerCoasterFloatingEffect";
 
@@ -53,8 +52,8 @@ export default function AttractionsPage() {
       realmHref: "/water-park",
       realmLabelEn: "Explore Water World Realm",
       realmLabelBn: "ওয়াটার ওয়ার্ল্ড রিয়েলম দেখুন",
-      animationTagEn: "🌊 3D Water Wave Simulation",
-      animationTagBn: "🌊 ৩ডি ওয়াটার ওয়েভ সিমুলেশন",
+      animationTagEn: "",
+      animationTagBn: "",
     },
     {
       id: "dino-world",
@@ -100,7 +99,11 @@ export default function AttractionsPage() {
 
   const handleCategorySelect = (catId: CategoryKey) => {
     setSelectedCategory(catId);
-    setActiveFloatingEffect(catId);
+    if (catId !== "water-world") {
+      setActiveFloatingEffect(catId);
+    } else {
+      setActiveFloatingEffect(null);
+    }
   };
 
   const currentCategoryMeta = categories.find((c) => c.id === selectedCategory) || categories[0];
@@ -109,9 +112,6 @@ export default function AttractionsPage() {
   return (
     <div className="min-h-screen bg-[#FFF9ED] text-[#172554] py-16 relative">
       {/* 100% Transparent Floating Animation Across the Screen */}
-      {activeFloatingEffect === "water-world" && (
-        <WaterSplashFloatingEffect onComplete={() => setActiveFloatingEffect(null)} />
-      )}
       {activeFloatingEffect === "dino-world" && (
         <DinoStampedeFloatingEffect onComplete={() => setActiveFloatingEffect(null)} />
       )}
@@ -166,13 +166,17 @@ export default function AttractionsPage() {
                     : "border-[#FED7AA] bg-white hover:border-[#FFD93D] hover:shadow-lg hover:-translate-y-1"
                 }`}
               >
-                {/* 3D Animated Feature Badge */}
-                <div className="mb-3">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-heading font-black bg-amber-100/80 text-amber-900 border border-amber-300/60 shadow-2xs group-hover:bg-[#FFD93D] group-hover:text-[#172554] transition-colors">
-                    <Sparkles className="w-3 h-3 text-[#FF6B35]" />
-                    <span>{isBangla ? cat.animationTagBn : cat.animationTagEn}</span>
-                  </span>
-                </div>
+                {/* 3D Animated Feature Badge (Only for zones with 3D animation) */}
+                {cat.animationTagEn ? (
+                  <div className="mb-3">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-heading font-black bg-amber-100/80 text-amber-900 border border-amber-300/60 shadow-2xs group-hover:bg-[#FFD93D] group-hover:text-[#172554] transition-colors">
+                      <Sparkles className="w-3 h-3 text-[#FF6B35]" />
+                      <span>{isBangla ? cat.animationTagBn : cat.animationTagEn}</span>
+                    </span>
+                  </div>
+                ) : (
+                  <div className="mb-3 h-6" />
+                )}
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
