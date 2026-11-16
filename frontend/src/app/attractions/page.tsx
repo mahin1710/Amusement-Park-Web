@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Waves, Footprints, FerrisWheel, ArrowRight, Compass, Sparkles, Play } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
-import { useAttractionAnimation } from "@/context/AnimationContext";
 import { ATTRACTIONS_DATA } from "@/data/attractions";
+import { WaterSplashFloatingEffect } from "@/components/animations/WaterSplashFloatingEffect";
+import { DinoStampedeFloatingEffect } from "@/components/animations/DinoStampedeFloatingEffect";
+import { RollerCoasterFloatingEffect } from "@/components/animations/RollerCoasterFloatingEffect";
 
 type CategoryKey = "water-world" | "dino-world" | "thrill-world";
 
@@ -30,8 +32,8 @@ interface CategoryMeta {
 
 export default function AttractionsPage() {
   const { isBangla } = useTranslation();
-  const { playAnimation } = useAttractionAnimation();
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey>("water-world");
+  const [activeFloatingEffect, setActiveFloatingEffect] = useState<CategoryKey | null>(null);
 
   const categories: (CategoryMeta & { animationTagEn: string; animationTagBn: string })[] = [
     {
@@ -98,14 +100,24 @@ export default function AttractionsPage() {
 
   const handleCategorySelect = (catId: CategoryKey) => {
     setSelectedCategory(catId);
-    playAnimation(catId);
+    setActiveFloatingEffect(catId);
   };
 
   const currentCategoryMeta = categories.find((c) => c.id === selectedCategory) || categories[0];
   const currentAttractions = ATTRACTIONS_DATA.filter((a) => a.zone === currentCategoryMeta.zone);
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] py-16">
+    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] py-16 relative">
+      {/* 100% Transparent Floating Animation Across the Screen */}
+      {activeFloatingEffect === "water-world" && (
+        <WaterSplashFloatingEffect onComplete={() => setActiveFloatingEffect(null)} />
+      )}
+      {activeFloatingEffect === "dino-world" && (
+        <DinoStampedeFloatingEffect onComplete={() => setActiveFloatingEffect(null)} />
+      )}
+      {activeFloatingEffect === "thrill-world" && (
+        <RollerCoasterFloatingEffect onComplete={() => setActiveFloatingEffect(null)} />
+      )}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
@@ -241,9 +253,9 @@ export default function AttractionsPage() {
             {/* Play 3D Cartoon Animation Button */}
             <button
               type="button"
-              onClick={() => playAnimation(currentCategoryMeta.id)}
+              onClick={() => setActiveFloatingEffect(currentCategoryMeta.id)}
               className="px-4 py-2.5 rounded-full bg-gradient-to-r from-[#FFD93D] via-[#F59E0B] to-[#FF6B35] text-[#172554] font-heading font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-2 cursor-pointer border-2 border-white"
-              title="Watch full-screen 3D cartoon animation"
+              title="Watch floating 3D cartoon animation across page"
             >
               <Play className="w-4 h-4 fill-current text-[#172554]" />
               <span>{isBangla ? "৩ডি কার্টুন দেখুন" : "Play 3D Cartoon"}</span>

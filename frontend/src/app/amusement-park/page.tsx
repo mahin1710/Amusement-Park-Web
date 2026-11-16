@@ -1,16 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { FerrisWheel, Check, Sparkles, MessageCircle, ArrowRight, Zap, Play } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
-import { useAttractionAnimation } from "@/context/AnimationContext";
 import { ATTRACTIONS_DATA } from "@/data/attractions";
 import { buildWhatsAppLink } from "@/config/business";
+import { RollerCoasterFloatingEffect } from "@/components/animations/RollerCoasterFloatingEffect";
 
 export default function AmusementParkPage() {
   const { isBangla } = useTranslation();
-  const { playAnimation } = useAttractionAnimation();
+  const [playCoaster, setPlayCoaster] = useState(true);
   const amusementRides = ATTRACTIONS_DATA.filter((a) => a.zone === "amusement-park");
 
   const waLink = buildWhatsAppLink({
@@ -19,7 +19,12 @@ export default function AmusementParkPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554]">
+    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] relative">
+      {/* 100% Transparent Floating 3D Roller Coaster (Zooms across screen over page content) */}
+      {playCoaster && (
+        <RollerCoasterFloatingEffect onComplete={() => setPlayCoaster(false)} />
+      )}
+
       {/* Hero Banner with Authentic Amusement Park Photography */}
       <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden">
         <img
@@ -51,12 +56,12 @@ export default function AmusementParkPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <button
               type="button"
-              onClick={() => playAnimation("thrill-world")}
+              onClick={() => setPlayCoaster(true)}
               className="px-7 py-3.5 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
-              title="Watch 3D Roller Coaster Animation"
+              title="Watch 3D Roller Coaster Zoom Across Screen"
             >
               <Play className="w-4 h-4 fill-current text-[#172554]" />
-              <span>{isBangla ? "৩ডি রোলারকোস্টার কার্টুন" : "Play 3D Coaster Cartoon"}</span>
+              <span>{isBangla ? "রোলারকোস্টার এফেক্ট" : "Floating Coaster Rush"}</span>
             </button>
 
             <Link

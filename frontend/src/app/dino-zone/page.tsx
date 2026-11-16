@@ -1,16 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Footprints, Check, Sparkles, MessageCircle, ArrowRight, Bone, Play } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
-import { useAttractionAnimation } from "@/context/AnimationContext";
 import { ATTRACTIONS_DATA } from "@/data/attractions";
 import { buildWhatsAppLink } from "@/config/business";
+import { DinoStampedeFloatingEffect } from "@/components/animations/DinoStampedeFloatingEffect";
 
 export default function DinoZonePage() {
   const { t, isBangla } = useTranslation();
-  const { playAnimation } = useAttractionAnimation();
+  const [playStampede, setPlayStampede] = useState(true);
   const dinoAttractions = ATTRACTIONS_DATA.filter((a) => a.zone === "dino-zone");
 
   const waLink = buildWhatsAppLink({
@@ -19,7 +19,12 @@ export default function DinoZonePage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554]">
+    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] relative">
+      {/* 100% Transparent Floating 3D Dinosaur Stampede (Runs across screen over page content) */}
+      {playStampede && (
+        <DinoStampedeFloatingEffect onComplete={() => setPlayStampede(false)} />
+      )}
+
       {/* Hero Banner with Authentic Dino Zone Photography */}
       <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden">
         <img
@@ -51,12 +56,12 @@ export default function DinoZonePage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <button
               type="button"
-              onClick={() => playAnimation("dino-world")}
+              onClick={() => setPlayStampede(true)}
               className="px-7 py-3.5 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
-              title="Watch 3D Running Dinosaurs Animation"
+              title="Watch 3D Dinosaurs Run Across Screen"
             >
               <Play className="w-4 h-4 fill-current text-[#172554]" />
-              <span>{isBangla ? "৩ডি ডাইনোসর কার্টুন" : "Play 3D Dino Stampede"}</span>
+              <span>{isBangla ? "ডাইনোসর স্ট্যাম্পিড এফেক্ট" : "Floating Dino Stampede"}</span>
             </button>
 
             <Link
