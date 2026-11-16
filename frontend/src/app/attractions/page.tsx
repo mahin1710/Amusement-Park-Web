@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Waves, Footprints, FerrisWheel, ArrowRight, Compass, Sparkles } from "lucide-react";
+import { Waves, Footprints, FerrisWheel, ArrowRight, Compass, Sparkles, Play } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
+import { useAttractionAnimation } from "@/context/AnimationContext";
 import { ATTRACTIONS_DATA } from "@/data/attractions";
 
 type CategoryKey = "water-world" | "dino-world" | "thrill-world";
@@ -29,9 +30,10 @@ interface CategoryMeta {
 
 export default function AttractionsPage() {
   const { isBangla } = useTranslation();
+  const { playAnimation } = useAttractionAnimation();
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey>("water-world");
 
-  const categories: CategoryMeta[] = [
+  const categories: (CategoryMeta & { animationTagEn: string; animationTagBn: string })[] = [
     {
       id: "water-world",
       zone: "water-park",
@@ -49,6 +51,8 @@ export default function AttractionsPage() {
       realmHref: "/water-park",
       realmLabelEn: "Explore Water World Realm",
       realmLabelBn: "ওয়াটার ওয়ার্ল্ড রিয়েলম দেখুন",
+      animationTagEn: "🌊 3D Water Slide & Splash",
+      animationTagBn: "🌊 ৩ডি ওয়াটার স্লাইড ও স্প্ল্যাশ",
     },
     {
       id: "dino-world",
@@ -67,6 +71,8 @@ export default function AttractionsPage() {
       realmHref: "/dino-zone",
       realmLabelEn: "Explore Dino World Realm",
       realmLabelBn: "ডাইনো ওয়ার্ল্ড রিয়েলম দেখুন",
+      animationTagEn: "🦖 3D Running Dinosaurs",
+      animationTagBn: "🦖 ৩ডি রানিং ডাইনোসর",
     },
     {
       id: "thrill-world",
@@ -85,8 +91,15 @@ export default function AttractionsPage() {
       realmHref: "/amusement-park",
       realmLabelEn: "Explore Thrill World Realm",
       realmLabelBn: "থ্রিল ওয়ার্ল্ড রিয়েলম দেখুন",
+      animationTagEn: "🎢 3D Coaster Loop Rush",
+      animationTagBn: "🎢 ৩ডি রোলারকোস্টার লুপ",
     },
   ];
+
+  const handleCategorySelect = (catId: CategoryKey) => {
+    setSelectedCategory(catId);
+    playAnimation(catId);
+  };
 
   const currentCategoryMeta = categories.find((c) => c.id === selectedCategory) || categories[0];
   const currentAttractions = ATTRACTIONS_DATA.filter((a) => a.zone === currentCategoryMeta.zone);
@@ -134,13 +147,21 @@ export default function AttractionsPage() {
             return (
               <button
                 key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`text-left p-6 sm:p-7 rounded-3xl border-2 transition-all duration-300 cursor-pointer flex flex-col justify-between group ${
+                onClick={() => handleCategorySelect(cat.id)}
+                className={`text-left p-6 sm:p-7 rounded-3xl border-2 transition-all duration-300 cursor-pointer flex flex-col justify-between group relative overflow-hidden ${
                   isSelected
                     ? `${cat.activeBorder} ${cat.activeBg} bg-white shadow-xl scale-[1.02]`
-                    : "border-[#FED7AA] bg-white hover:border-[#FFD93D] hover:shadow-md hover:-translate-y-0.5"
+                    : "border-[#FED7AA] bg-white hover:border-[#FFD93D] hover:shadow-lg hover:-translate-y-1"
                 }`}
               >
+                {/* 3D Animated Feature Badge */}
+                <div className="mb-3">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-heading font-black bg-amber-100/80 text-amber-900 border border-amber-300/60 shadow-2xs group-hover:bg-[#FFD93D] group-hover:text-[#172554] transition-colors">
+                    <Sparkles className="w-3 h-3 text-[#FF6B35]" />
+                    <span>{isBangla ? cat.animationTagBn : cat.animationTagEn}</span>
+                  </span>
+                </div>
+
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div
@@ -161,7 +182,7 @@ export default function AttractionsPage() {
                     </div>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-black font-heading text-[#172554] tracking-tight">
+                  <h3 className="text-2xl sm:text-3xl font-black font-heading text-[#172554] tracking-tight group-hover:text-[#FF6B35] transition-colors">
                     {isBangla ? cat.nameBn : cat.nameEn}
                   </h3>
 
@@ -177,21 +198,26 @@ export default function AttractionsPage() {
                 <div className="pt-4 mt-5 border-t border-[#FED7AA]/50 flex items-center justify-between text-xs font-heading font-black">
                   <span className={isSelected ? cat.themeColor : "text-[#172554]/75"}>
                     {isSelected
-                      ? (isBangla ? "বর্তমানে প্রদর্শিত হচ্ছে" : "Currently Viewing")
+                      ? (isBangla ? "অ্যানিমেশন চলছে / প্রদর্শিত হচ্ছে" : "Click to Replay Cartoon")
                       : (isBangla ? "দেখতে ক্লিক করুন" : "Click to View")}
                   </span>
-                  <ArrowRight
-                    className={`w-4 h-4 transition-transform ${
-                      isSelected ? `${cat.themeColor} translate-x-1` : "text-[#172554]/50 group-hover:translate-x-1"
-                    }`}
-                  />
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF6B35] opacity-0 group-hover:opacity-100 transition-opacity">
+                      ▶ Play 3D
+                    </span>
+                    <ArrowRight
+                      className={`w-4 h-4 transition-transform ${
+                        isSelected ? `${cat.themeColor} translate-x-1` : "text-[#172554]/50 group-hover:translate-x-1"
+                      }`}
+                    />
+                  </div>
                 </div>
               </button>
             );
           })}
         </div>
 
-        {/* Selected Category Header Banner */}
+        {/* Selected Category Header Banner with 3D Cartoon Player */}
         <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-sm mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${currentCategoryMeta.badgeBg}`}>
@@ -211,7 +237,18 @@ export default function AttractionsPage() {
             </div>
           </div>
 
-          <div className="shrink-0">
+          <div className="flex items-center gap-3 shrink-0 flex-wrap">
+            {/* Play 3D Cartoon Animation Button */}
+            <button
+              type="button"
+              onClick={() => playAnimation(currentCategoryMeta.id)}
+              className="px-4 py-2.5 rounded-full bg-gradient-to-r from-[#FFD93D] via-[#F59E0B] to-[#FF6B35] text-[#172554] font-heading font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-2 cursor-pointer border-2 border-white"
+              title="Watch full-screen 3D cartoon animation"
+            >
+              <Play className="w-4 h-4 fill-current text-[#172554]" />
+              <span>{isBangla ? "৩ডি কার্টুন দেখুন" : "Play 3D Cartoon"}</span>
+            </button>
+
             <Link
               href={currentCategoryMeta.realmHref}
               className="btn-park-primary text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-md hover:scale-105 transition-transform"

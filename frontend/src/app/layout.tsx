@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { Fredoka, Poppins, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { AnimationProvider } from "@/context/AnimationContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
+import { AttractionAnimationModal } from "@/components/animations/AttractionAnimationModal";
+import { InteractiveCursorTrail } from "@/components/animations/InteractiveCursorTrail";
 import { siteConfig } from "@/config/site";
 
 const fredoka = Fredoka({
@@ -91,10 +94,14 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-[#FFF9ED] text-[#172554] antialiased flex flex-col font-sans selection:bg-[#FFD93D] selection:text-[#172554]">
         <LanguageProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <FloatingWhatsApp />
+          <AnimationProvider>
+            <InteractiveCursorTrail />
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <FloatingWhatsApp />
+            <AttractionAnimationModal />
+          </AnimationProvider>
         </LanguageProvider>
       </body>
     </html>
