@@ -81,20 +81,20 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     scene.add(sunGlint);
 
     // FIXED STATIONARY POSITION ON THE LEFT SIDE OF THE SCREEN
-    // (Shifted 1 inch further left for optimal composition)
+    // (Shifted 0.25 inch right: desktop -20.6)
     const sceneGroup = new THREE.Group();
     const updateGroupPosition = (width: number) => {
       if (width < 768) {
         // Mobile view: compact scale, shifted left & lower
-        sceneGroup.position.set(-12.0, -2.0, -3);
+        sceneGroup.position.set(-11.6, -2.0, -3);
         sceneGroup.scale.set(0.60, 0.60, 0.60);
       } else if (width < 1200) {
         // Tablet / Medium screen
-        sceneGroup.position.set(-17.2, -2.2, -1);
+        sceneGroup.position.set(-16.7, -2.2, -1);
         sceneGroup.scale.set(0.72, 0.72, 0.72);
       } else {
-        // Desktop view: shifted 1 inch further left (-21.2), lower down (-2.4), 0.80 scale
-        sceneGroup.position.set(-21.2, -2.4, 0);
+        // Desktop view: shifted 0.25 inch right to -20.6, lower down (-2.4), 0.80 scale
+        sceneGroup.position.set(-20.6, -2.4, 0);
         sceneGroup.scale.set(0.80, 0.80, 0.80);
       }
     };
@@ -311,30 +311,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     towerGroup.add(tubeEntry);
 
     // =============================================================
-    // 2. STRAIGHT CHUTE SLIDE (Left Side of Tower)
-    // =============================================================
-    const chutePts = [
-      new THREE.Vector3(-4.5, 10.5, 1.5),
-      new THREE.Vector3(-8.5, 7.0, 3.5),
-      new THREE.Vector3(-12.5, 3.5, 5.5),
-      new THREE.Vector3(-15.5, 0.4, 7.0),
-    ];
-    const chuteCurve = new THREE.CatmullRomCurve3(chutePts);
-    const chuteGeo = registerGeo(new THREE.TubeGeometry(chuteCurve, 40, 0.9, 10, false));
-    const straightChute = new THREE.Mesh(chuteGeo, blueSlideMat);
-    sceneGroup.add(straightChute);
-
-    // Chute Support Columns
-    const chuteLeg1 = new THREE.Mesh(registerGeo(new THREE.CylinderGeometry(0.2, 0.2, 6.8, 8)), redStructureMat);
-    chuteLeg1.position.set(-8.5, 3.4, 3.5);
-    sceneGroup.add(chuteLeg1);
-
-    const chuteLeg2 = new THREE.Mesh(registerGeo(new THREE.CylinderGeometry(0.2, 0.2, 3.4, 8)), redStructureMat);
-    chuteLeg2.position.set(-12.5, 1.7, 5.5);
-    sceneGroup.add(chuteLeg2);
-
-    // =============================================================
-    // 3. THE SPIRAL WATER SLIDE (Right Side of Tower)
+    // 2. THE SPIRAL WATER SLIDE (Right Side of Tower)
     // =============================================================
     const spiralPoints = [
       new THREE.Vector3(-2.2, 11.0, -1.2), // Entry

@@ -71,13 +71,13 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     const sceneGroup = new THREE.Group();
     const updateGroupPosition = (width: number) => {
       if (width < 768) {
-        sceneGroup.position.set(-12.0, -2.0, -3);
+        sceneGroup.position.set(-11.6, -2.0, -3);
         sceneGroup.scale.set(0.60, 0.60, 0.60);
       } else if (width < 1200) {
-        sceneGroup.position.set(-17.2, -2.2, -1);
+        sceneGroup.position.set(-16.7, -2.2, -1);
         sceneGroup.scale.set(0.72, 0.72, 0.72);
       } else {
-        sceneGroup.position.set(-21.2, -2.4, 0);
+        sceneGroup.position.set(-20.6, -2.4, 0);
         sceneGroup.scale.set(0.80, 0.80, 0.80);
       }
     };
@@ -257,20 +257,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     towerGroup.add(tubeEntry);
 
     // =============================================================
-    // 2. STRAIGHT CHUTE SLIDE
-    // =============================================================
-    const chutePts = [
-      new THREE.Vector3(-4.5, 10.5, 1.5),
-      new THREE.Vector3(-8.5, 7.0, 3.5),
-      new THREE.Vector3(-12.5, 3.5, 5.5),
-      new THREE.Vector3(-15.5, 0.4, 7.0),
-    ];
-    const chuteCurve = new THREE.CatmullRomCurve3(chutePts);
-    const straightChute = new THREE.Mesh(registerGeo(new THREE.TubeGeometry(chuteCurve, 40, 0.9, 10, false)), blueSlideMat);
-    sceneGroup.add(straightChute);
-
-    // =============================================================
-    // 3. THE SPIRAL WATER SLIDE
+    // 2. THE SPIRAL WATER SLIDE
     // =============================================================
     const spiralPoints = [
       new THREE.Vector3(-2.2, 11.0, -1.2),
