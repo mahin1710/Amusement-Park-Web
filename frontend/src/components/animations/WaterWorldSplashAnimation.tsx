@@ -23,8 +23,8 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     const initH = container.clientHeight || window.innerHeight || 800;
 
     const camera = new THREE.PerspectiveCamera(46, initW / initH, 0.1, 1000);
-    camera.position.set(0, 13.5, 30);
-    camera.lookAt(2.5, 4.5, 0);
+    camera.position.set(0, 13.0, 30);
+    camera.lookAt(0, 4.5, 0);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -67,7 +67,21 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     sunGlint.position.set(22, 22, 12);
     scene.add(sunGlint);
 
+    // FIXED STATIONARY POSITION ON THE LEFT SIDE
     const sceneGroup = new THREE.Group();
+    const updateGroupPosition = (width: number) => {
+      if (width < 768) {
+        sceneGroup.position.set(-8.5, -0.4, -4);
+        sceneGroup.scale.set(0.75, 0.75, 0.75);
+      } else if (width < 1200) {
+        sceneGroup.position.set(-13.5, -0.6, -1);
+        sceneGroup.scale.set(0.9, 0.9, 0.9);
+      } else {
+        sceneGroup.position.set(-16.0, -0.6, 0);
+        sceneGroup.scale.set(1.0, 1.0, 1.0);
+      }
+    };
+    updateGroupPosition(initW);
     scene.add(sceneGroup);
 
     // =============================================================
@@ -79,7 +93,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         roughness: 0.22,
         metalness: 0.12,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.0,
         side: THREE.DoubleSide,
       })
     );
@@ -90,7 +104,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         roughness: 0.22,
         metalness: 0.12,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.0,
         side: THREE.DoubleSide,
       })
     );
@@ -101,7 +115,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         roughness: 0.35,
         metalness: 0.2,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.0,
       })
     );
 
@@ -110,7 +124,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         color: 0x991b1b,
         roughness: 0.45,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.0,
       })
     );
 
@@ -119,7 +133,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         color: 0xb45309,
         roughness: 0.5,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.0,
       })
     );
 
@@ -129,7 +143,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         metalness: 0.4,
         roughness: 0.25,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.0,
       })
     );
 
@@ -138,7 +152,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         color: 0xf1f5f9,
         roughness: 0.2,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.0,
       })
     );
 
@@ -148,7 +162,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         roughness: 0.15,
         metalness: 0.18,
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.0,
       })
     );
 
@@ -158,7 +172,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         roughness: 0.1,
         metalness: 0.2,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.0,
         side: THREE.DoubleSide,
       })
     );
@@ -169,7 +183,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         roughness: 0.08,
         metalness: 0.3,
         transparent: true,
-        opacity: 0.92,
+        opacity: 0.0,
       })
     );
 
@@ -177,7 +191,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       new THREE.MeshBasicMaterial({
         color: 0x7dd3fc,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.0,
         side: THREE.DoubleSide,
       })
     );
@@ -186,17 +200,20 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       new THREE.MeshBasicMaterial({
         color: 0xffffff,
         transparent: true,
-        opacity: 0.85,
+        opacity: 0.0,
         side: THREE.DoubleSide,
       })
     );
 
-    const skinMat = registerMat(new THREE.MeshStandardMaterial({ color: 0xfdba74, roughness: 0.4, transparent: true, opacity: 0.98 }));
-    const vestMat = registerMat(new THREE.MeshStandardMaterial({ color: 0xf97316, roughness: 0.3, transparent: true, opacity: 0.98 }));
-    const capMat = registerMat(new THREE.MeshStandardMaterial({ color: 0x06b6d4, roughness: 0.2, transparent: true, opacity: 0.98 }));
-    const shortsMat = registerMat(new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.3, transparent: true, opacity: 0.98 }));
-    const eyeWhiteMat = registerMat(new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.1, transparent: true, opacity: 0.98 }));
-    const pupilMat = registerMat(new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.1, transparent: true, opacity: 0.98 }));
+    const skinMat = registerMat(new THREE.MeshStandardMaterial({ color: 0xfdba74, roughness: 0.4, transparent: true, opacity: 0.0 }));
+    const vestMat = registerMat(new THREE.MeshStandardMaterial({ color: 0xf97316, roughness: 0.3, transparent: true, opacity: 0.0 }));
+    const capMat = registerMat(new THREE.MeshStandardMaterial({ color: 0x06b6d4, roughness: 0.2, transparent: true, opacity: 0.0 }));
+    const shortsMat = registerMat(new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.3, transparent: true, opacity: 0.0 }));
+    const eyeWhiteMat = registerMat(new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.1, transparent: true, opacity: 0.0 }));
+    const pupilMat = registerMat(new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.1, transparent: true, opacity: 0.0 }));
+
+    const structureMaterials = [yellowSlideMat, blueSlideMat, redStructureMat, redRoofMat, deckMat, collarMat, poolWallMat];
+    const riderMaterials = [skinMat, vestMat, capMat, shortsMat, eyeWhiteMat, pupilMat];
 
     // =============================================================
     // 1. TOWER PLATFORM & HUT
@@ -356,11 +373,11 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     poolGroup.position.set(13.8, -0.1, -4.2);
     sceneGroup.add(poolGroup);
 
-    const poolBorder = new THREE.Mesh(registerGeo(new THREE.BoxGeometry(11.5, 0.7, 9.5)), poolWallMat);
+    const poolBorder = new THREE.Mesh(registerGeo(new THREE.BoxGeometry(9.5, 0.7, 8.5)), poolWallMat);
     poolBorder.position.set(0, -0.25, 0);
     poolGroup.add(poolBorder);
 
-    const poolWaterGeo = registerGeo(new THREE.PlaneGeometry(10.5, 8.5, 48, 48));
+    const poolWaterGeo = registerGeo(new THREE.PlaneGeometry(8.5, 7.5, 40, 40));
     poolWaterGeo.rotateX(-Math.PI / 2);
     const poolWaterMesh = new THREE.Mesh(poolWaterGeo, poolWaterMat);
     poolWaterMesh.position.set(0, 0.05, 0);
@@ -393,7 +410,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
 
     const pupilGeo = registerGeo(new THREE.SphereGeometry(0.05, 8, 8));
     const pupilL = new THREE.Mesh(pupilGeo, pupilMat);
-    pupL: pupilL.position.set(-0.16, 0.98, 0.5);
+    pupilL.position.set(-0.16, 0.98, 0.5);
     const pupilR = new THREE.Mesh(pupilGeo, pupilMat);
     pupilR.position.set(0.16, 0.98, 0.5);
     riderGroup.add(pupilL);
@@ -403,12 +420,12 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     torso.position.set(0, 0.38, 0);
     riderGroup.add(torso);
 
-    const armGeo = registerGeo(new THREE.CylinderGeometry(0.1, 0.08, 0.65, 8));
-    armGeo.rotateZ(Math.PI / 2);
-    const armL = new THREE.Mesh(armGeo, skinMat);
+    const riderArmGeo = registerGeo(new THREE.CylinderGeometry(0.1, 0.08, 0.65, 8));
+    riderArmGeo.rotateZ(Math.PI / 2);
+    const armL = new THREE.Mesh(riderArmGeo, skinMat);
     armL.position.set(-0.55, 0.7, 0.05);
     armL.rotation.z = 0.85;
-    const armR = new THREE.Mesh(armGeo, skinMat);
+    const armR = new THREE.Mesh(riderArmGeo, skinMat);
     armR.position.set(0.55, 0.7, 0.05);
     armR.rotation.z = -0.85;
     riderGroup.add(armL);
@@ -422,6 +439,10 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     legR.position.set(0.22, 0.05, 0.38);
     riderGroup.add(legL);
     riderGroup.add(legR);
+
+    // Initial position
+    const startPt = spiralCurve.getPointAt(0.001);
+    riderGroup.position.set(startPt.x, startPt.y + 0.35, startPt.z);
 
     // =============================================================
     // 6. SPLASHDOWN EFFECTS
@@ -472,11 +493,11 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     sceneGroup.add(foamMesh);
 
     // =============================================================
-    // 7. TIMELINE & KINEMATICS
+    // 7. TIMELINE & KINEMATICS (STATIONARY ON LEFT SIDE)
     // =============================================================
     const clock = new THREE.Clock();
     const startTime = performance.now();
-    const duration = 6.2;
+    const duration = 5.8;
     let animFrame: number;
 
     const splashTriggerU = 0.82;
@@ -486,11 +507,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     const animate = () => {
       const now = performance.now();
       const elapsed = (now - startTime) / 1000;
-      const progress = Math.min(1, elapsed / duration);
       const time = clock.getElapsedTime();
-
-      // Screen Traversal
-      sceneGroup.position.x = -32 + progress * 54;
 
       // Pool Waves
       for (let i = 0; i < poolPosAttr.count; i++) {
@@ -502,12 +519,12 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       poolWaterGeo.computeVertexNormals();
 
       // Rider Kinematics
-      const slideStart = 0.4;
-      const slideEnd = 3.7;
+      const slideStart = 0.85;
+      const slideEnd = 3.1;
       let slideProg = 0;
       if (elapsed > slideStart) {
         const p = Math.min(1, (elapsed - slideStart) / (slideEnd - slideStart));
-        slideProg = Math.pow(p, 1.35) * splashTriggerU;
+        slideProg = Math.pow(p, 1.3) * splashTriggerU;
       }
 
       if (slideProg < splashTriggerU) {
@@ -536,7 +553,7 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         }
 
         const splashElapsed = elapsed - splashStartTime;
-        riderGroup.position.set(13.8 + Math.min(splashElapsed * 0.8, 1.2), 0.35 + Math.sin(time * 4) * 0.08, -4.2);
+        riderGroup.position.set(13.8 + Math.min(splashElapsed * 0.6, 1.0), 0.30 + Math.sin(time * 4) * 0.07, -4.2);
         riderGroup.quaternion.identity();
         riderGroup.rotation.y = -Math.PI / 6;
         armL.rotation.z = 1.2 + Math.sin(time * 8) * 0.2;
@@ -546,12 +563,14 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       // Splash Effects
       if (splashInitiated) {
         const dt = elapsed - splashStartTime;
-        if (dt < 1.4) {
+        if (dt < 1.3) {
           const crownScale = Math.min(1.4, dt * 3.5);
           splashCrown.scale.set(crownScale, crownScale * 1.2, crownScale);
-          splashWaterMat.opacity = 0.85 * Math.max(0, 1 - dt / 1.4);
+          spoutMesh.scale.set(crownScale * 0.7, crownScale * 1.5, crownScale * 0.7);
+          splashWaterMat.opacity = 0.85 * Math.max(0, 1 - dt / 1.3);
         } else {
           splashCrown.scale.set(0.001, 0.001, 0.001);
+          spoutMesh.scale.set(0.001, 0.001, 0.001);
         }
 
         splashDroplets.forEach((d) => {
@@ -586,20 +605,29 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
         }
       }
 
-      // Fade-Out
-      let globalOpacity = 1.0;
-      if (progress > 0.74) {
-        globalOpacity = Math.max(0, 1 - (progress - 0.74) / 0.26);
-      }
-      materialsToDispose.forEach((mat) => {
-        if ("opacity" in mat) {
-          (mat as THREE.Material & { opacity: number }).opacity *= globalOpacity;
-        }
+      // STAGED VANISHING
+      const fadeIn = Math.min(1, elapsed / 0.85);
+
+      const riderFade = elapsed >= 3.6 ? Math.max(0, 1 - (elapsed - 3.6) / 0.8) : 1;
+      const currentRiderOpacity = fadeIn * riderFade;
+      riderMaterials.forEach((m) => {
+        m.opacity = 0.98 * currentRiderOpacity;
       });
+
+      const slideFade = elapsed >= 4.2 ? Math.max(0, 1 - (elapsed - 4.2) / 1.6) : 1;
+      const currentSlideOpacity = fadeIn * slideFade;
+      structureMaterials.forEach((m) => {
+        m.opacity = 0.98 * currentSlideOpacity;
+      });
+
+      const waterFade = elapsed >= 4.4 ? Math.max(0, 1 - (elapsed - 4.4) / 1.4) : 1;
+      const currentWaterOpacity = fadeIn * waterFade;
+      poolWaterMat.opacity = 0.90 * currentWaterOpacity;
+      dropletMat.opacity = 0.92 * currentWaterOpacity;
 
       renderer.render(scene, camera);
 
-      if (progress < 1) {
+      if (elapsed < duration) {
         animFrame = requestAnimationFrame(animate);
       } else {
         onComplete?.();
@@ -610,9 +638,12 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
 
     const handleResize = () => {
       if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
+      const w = container.clientWidth || window.innerWidth;
+      const h = container.clientHeight || window.innerHeight;
+      camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(w, h);
+      updateGroupPosition(w);
     };
     window.addEventListener("resize", handleResize);
 
@@ -634,15 +665,15 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       <div className="absolute inset-0 bg-gradient-to-b from-[#0284C7]/50 via-[#38BDF8]/30 to-[#0369A1]/65 -z-10" />
 
       <motion.div
-        className="absolute z-40 top-16 sm:top-20 flex flex-col items-center pointer-events-none"
+        className="absolute z-40 top-16 sm:top-20 left-6 sm:left-12 flex items-center pointer-events-none"
         initial={{ scale: 0, rotate: -6, opacity: 0 }}
         animate={{ scale: 1, rotate: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.15, type: "spring", stiffness: 260, damping: 20 }}
       >
-        <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#0EA5E9] border-3 border-white text-white font-heading font-black text-lg sm:text-2xl tracking-wider shadow-2xl flex items-center gap-3">
-          <span className="text-2xl animate-pulse">🏄‍♂️</span>
+        <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#0EA5E9] border-2 border-white text-white font-heading font-black text-sm sm:text-base tracking-wider shadow-2xl flex items-center gap-2.5">
+          <span className="text-xl animate-pulse">🏄‍♂️</span>
           <span>WATER WORLD 3D WATER SLIDER RIDE!</span>
-          <span className="text-2xl">💦</span>
+          <span className="text-xl">💦</span>
         </div>
       </motion.div>
     </div>
