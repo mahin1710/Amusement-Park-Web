@@ -421,19 +421,19 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     sceneGroup.add(centerMast);
 
     // Cantilever Support Arms branching out to hold slide tiers
-    const armGeo = registerGeo(new THREE.CylinderGeometry(0.14, 0.14, 3.8, 8));
-    armGeo.rotateZ(Math.PI / 2);
+    const bracketArmGeo = registerGeo(new THREE.CylinderGeometry(0.14, 0.14, 3.8, 8));
+    bracketArmGeo.rotateZ(Math.PI / 2);
 
-    const arm1 = new THREE.Mesh(armGeo, redStructureMat);
+    const arm1 = new THREE.Mesh(bracketArmGeo, redStructureMat);
     arm1.position.set(3.2, 8.5, 0.5);
     sceneGroup.add(arm1);
 
-    const arm2 = new THREE.Mesh(armGeo, redStructureMat);
+    const arm2 = new THREE.Mesh(bracketArmGeo, redStructureMat);
     arm2.position.set(0.0, 5.7, -3.0);
     arm2.rotation.y = Math.PI / 2.2;
     sceneGroup.add(arm2);
 
-    const arm3 = new THREE.Mesh(armGeo, redStructureMat);
+    const arm3 = new THREE.Mesh(bracketArmGeo, redStructureMat);
     arm3.position.set(2.8, 2.2, 2.4);
     sceneGroup.add(arm3);
 

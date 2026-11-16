@@ -63,10 +63,10 @@ export default function WaterParkPage() {
               type="button"
               onClick={() => setPlaySplash(true)}
               className="px-7 py-3.5 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
-              title="Watch 3D Water Wave Simulation Float Across Screen"
+              title="Watch 3D Water Slider Ride & Splashdown Float Across Screen"
             >
               <Waves className="w-4 h-4 text-[#172554]" />
-              <span>{isBangla ? "৩ডি ওয়াটার ওয়েভ এফেক্ট" : "3D Water Wave Simulation"}</span>
+              <span>{isBangla ? "৩ডি ওয়াটার স্লাইডার রাইড" : "3D Water Slider Ride"}</span>
             </button>
 
             <Link
