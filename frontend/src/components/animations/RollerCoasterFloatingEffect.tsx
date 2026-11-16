@@ -310,18 +310,7 @@ export function RollerCoasterFloatingEffect({ onComplete, isReducedMotion = fals
       coasterSystemGroup.add(tie);
     }
 
-    // Heavy Structural Support Pylons (Ground anchored columns)
-    const pylonPoints = [0.12, 0.35, 0.62, 0.85];
-    pylonPoints.forEach((u) => {
-      const pt = trackCurve.getPointAt(u);
-      const pylonHeight = pt.y - (-8.0);
-      if (pylonHeight > 1.0) {
-        const pGeo = new THREE.CylinderGeometry(0.4, 0.5, pylonHeight, 10);
-        const pMesh = new THREE.Mesh(pGeo, pylonMat);
-        pMesh.position.set(pt.x, pt.y - pylonHeight / 2, pt.z);
-        coasterSystemGroup.add(pMesh);
-      }
-    });
+    // Clean floating roller coaster without vertical ground pillars
 
     // =============================================================
     // 2. DETAILED 3D ROLLER COASTER TRAIN (Lead Car + 2 Trailing Cars)
