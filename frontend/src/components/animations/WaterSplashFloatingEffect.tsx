@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { Sparkles } from "lucide-react";
 
 interface Props {
   onComplete?: () => void;
@@ -26,14 +26,14 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     const container = mountRef.current;
     if (!container) return;
 
-    // --- THREE.JS SCENE SETUP (100% Transparent) ---
+    // --- THREE.JS SCENE SETUP (100% Transparent Overlay) ---
     const scene = new THREE.Scene();
 
     const initW = container.clientWidth || window.innerWidth || 1200;
     const initH = container.clientHeight || window.innerHeight || 800;
 
     const camera = new THREE.PerspectiveCamera(46, initW / initH, 0.1, 1000);
-    camera.position.set(0, 4, 34);
+    camera.position.set(0, 4, 38);
     camera.lookAt(0, 2, 0);
 
     const renderer = new THREE.WebGLRenderer({
@@ -41,156 +41,257 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       alpha: true,
       powerPreference: "high-performance",
     });
-    renderer.setClearColor(0x000000, 0); // Completely transparent
+    renderer.setClearColor(0x000000, 0); // 100% transparent
     renderer.setSize(initW, initH);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // --- LIGHTS ---
+    // --- LIGHTS (Sunlight, Aqua Point Lights, Ambient) ---
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xfff7ed, 2.0);
-    sunLight.position.set(15, 30, 25);
+    const sunLight = new THREE.DirectionalLight(0xfff7ed, 2.4);
+    sunLight.position.set(20, 35, 25);
     scene.add(sunLight);
 
-    const aquaPoint = new THREE.PointLight(0x38bdf8, 3, 50);
+    const aquaPoint = new THREE.PointLight(0x38bdf8, 3.5, 60);
     aquaPoint.position.set(0, 10, 15);
     scene.add(aquaPoint);
 
-    // --- MAIN WATER SURGE HIERARCHY ---
+    const cyanRim = new THREE.DirectionalLight(0x06b6d4, 1.8);
+    cyanRim.position.set(-20, 10, -10);
+    scene.add(cyanRim);
+
+    // Group holding the entire water system
     const waterSystemGroup = new THREE.Group();
     scene.add(waterSystemGroup);
 
-    // 1. Curving Water Wave Tube
+    // --- 1. CONTINUOUS 3D FLUID WATER FLUME & WAVE SPLINE ---
+    // Smooth Catmull-Rom spline wave path spanning across the screen
     const wavePoints = [
-      new THREE.Vector3(-14, -6, -4),
-      new THREE.Vector3(-8, -2, -2),
-      new THREE.Vector3(-2, 2.5, 0),
-      new THREE.Vector3(3, 4.0, 2),
-      new THREE.Vector3(8, 1.5, 1),
-      new THREE.Vector3(14, -4, -3),
+      new THREE.Vector3(-36, -2, -4),
+      new THREE.Vector3(-22, 3, -1),
+      new THREE.Vector3(-10, 8, 3),   // Crest peak
+      new THREE.Vector3(2, 2, 4),     // Splash impact valley
+      new THREE.Vector3(14, 7, 1),    // Secondary swell
+      new THREE.Vector3(25, 3, -2),
+      new THREE.Vector3(36, 0, -4),   // Exit
     ];
     const waveCurve = new THREE.CatmullRomCurve3(wavePoints);
-    const waveGeo = new THREE.TubeGeometry(waveCurve, 60, 2.4, 16, false);
-    const waveMat = new THREE.MeshStandardMaterial({
+
+    // Materials with Physical Glass/Water Properties
+    const waterBodyMat = new THREE.MeshPhysicalMaterial({
       color: 0x0284c7,
-      roughness: 0.1,
-      metalness: 0.25,
+      roughness: 0.08,
+      metalness: 0.1,
+      transmission: 0.72,
+      ior: 1.333,
+      reflectivity: 0.9,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      transparent: true,
+      opacity: 0.88,
+    });
+
+    const foamCrestMat = new THREE.MeshStandardMaterial({
+      color: 0xf0fdfa,
+      roughness: 0.25,
+      metalness: 0.15,
       transparent: true,
       opacity: 0.82,
     });
-    const waveMesh = new THREE.Mesh(waveGeo, waveMat);
-    waterSystemGroup.add(waveMesh);
 
-    // Frothy White Wave Crest
-    const crestGeo = new THREE.TubeGeometry(waveCurve, 60, 1.2, 12, false);
-    const crestMat = new THREE.MeshStandardMaterial({
-      color: 0xe0f2fe,
-      roughness: 0.2,
-      metalness: 0.1,
-      transparent: true,
-      opacity: 0.75,
-    });
-    const crestMesh = new THREE.Mesh(crestGeo, crestMat);
-    crestMesh.position.y += 0.8;
-    waterSystemGroup.add(crestMesh);
+    // Outer Main Wave Tube
+    const mainWaveGeo = new THREE.TubeGeometry(waveCurve, 80, 2.2, 16, false);
+    const mainWaveMesh = new THREE.Mesh(mainWaveGeo, waterBodyMat);
+    waterSystemGroup.add(mainWaveMesh);
 
-    // 2. Cartoon Character Surfing on Inflatable Ring
-    const riderGroup = new THREE.Group();
-    riderGroup.position.set(2, 4.8, 2);
-
-    // Inflatable Torus Ring
-    const tubeGeo = new THREE.TorusGeometry(1.4, 0.55, 14, 24);
-    const tubeMat = new THREE.MeshToonMaterial({ color: 0xffd93d, transparent: true, opacity: 0.95 });
-    const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
-    tubeMesh.rotation.x = Math.PI / 2;
-    riderGroup.add(tubeMesh);
-
-    // Cartoon Character Head
-    const headGeo = new THREE.SphereGeometry(0.9, 18, 18);
-    const skinMat = new THREE.MeshToonMaterial({ color: 0xfed7aa, transparent: true, opacity: 0.95 });
-    const headMesh = new THREE.Mesh(headGeo, skinMat);
-    headMesh.position.set(0, 1.1, 0);
-    riderGroup.add(headMesh);
-
-    // Blue Swimming Goggles
-    const goggleMat = new THREE.MeshToonMaterial({ color: 0x0284c7, transparent: true, opacity: 0.95 });
-    const goggle1 = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.1, 10, 18), goggleMat);
-    goggle1.position.set(-0.35, 1.2, 0.85);
-    riderGroup.add(goggle1);
-
-    const goggle2 = goggle1.clone();
-    goggle2.position.set(0.35, 1.2, 0.85);
-    riderGroup.add(goggle2);
-
-    // Raised Waving Arms
-    const armGeo = new THREE.CylinderGeometry(0.18, 0.18, 1.2, 8);
-    const leftArm = new THREE.Mesh(armGeo, skinMat);
-    leftArm.position.set(-1.2, 1.6, 0);
-    leftArm.rotation.z = 0.7;
-    riderGroup.add(leftArm);
-
-    const rightArm = new THREE.Mesh(armGeo, skinMat);
-    rightArm.position.set(1.2, 1.6, 0);
-    rightArm.rotation.z = -0.7;
-    riderGroup.add(rightArm);
-
-    waterSystemGroup.add(riderGroup);
-
-    // 3. Flying 3D Water Droplets
-    const dropletCount = 130;
-    const dropletGeo = new THREE.DodecahedronGeometry(0.32, 1);
-    const dropletMat = new THREE.MeshStandardMaterial({
+    // Inner Luminous Core Tube
+    const coreWaveGeo = new THREE.TubeGeometry(waveCurve, 80, 1.3, 12, false);
+    const coreWaveMat = new THREE.MeshStandardMaterial({
       color: 0x38bdf8,
       roughness: 0.1,
       metalness: 0.2,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.65,
     });
+    const coreWaveMesh = new THREE.Mesh(coreWaveGeo, coreWaveMat);
+    waterSystemGroup.add(coreWaveMesh);
 
-    const droplets: {
+    // Frothy White Crest Tube on upper edge
+    const crestGeo = new THREE.TubeGeometry(waveCurve, 80, 0.7, 10, false);
+    const crestMesh = new THREE.Mesh(crestGeo, foamCrestMat);
+    crestMesh.position.y += 1.3;
+    waterSystemGroup.add(crestMesh);
+
+    // --- 2. SURFING CARTOON MASCOT ON INFLATABLE RING ---
+    const surferGroup = new THREE.Group();
+    waterSystemGroup.add(surferGroup);
+
+    // Inflatable Torus Ring (Yellow & Orange)
+    const tubeGeo = new THREE.TorusGeometry(1.6, 0.65, 16, 28);
+    const tubeMat = new THREE.MeshToonMaterial({ color: 0xffd93d, transparent: true, opacity: 0.95 });
+    const tubeMesh = new THREE.Mesh(tubeGeo, tubeMat);
+    tubeMesh.rotation.x = Math.PI / 2;
+    surferGroup.add(tubeMesh);
+
+    // Inner accent stripe
+    const stripeGeo = new THREE.TorusGeometry(1.62, 0.25, 16, 28);
+    const stripeMat = new THREE.MeshToonMaterial({ color: 0xff6b35, transparent: true, opacity: 0.95 });
+    const stripeMesh = new THREE.Mesh(stripeGeo, stripeMat);
+    stripeMesh.rotation.x = Math.PI / 2;
+    surferGroup.add(stripeMesh);
+
+    // Cartoon Character Head & Face
+    const headGeo = new THREE.SphereGeometry(1.0, 18, 18);
+    const skinMat = new THREE.MeshToonMaterial({ color: 0xfed7aa, transparent: true, opacity: 0.95 });
+    const headMesh = new THREE.Mesh(headGeo, skinMat);
+    headMesh.position.set(0, 1.25, 0);
+    surferGroup.add(headMesh);
+
+    // Swimming Goggles (Aqua frame with glossy dark lenses)
+    const goggleMat = new THREE.MeshToonMaterial({ color: 0x0284c7, transparent: true, opacity: 0.95 });
+    const lensMat = new THREE.MeshStandardMaterial({ color: 0x172554, roughness: 0.1, metalness: 0.4, transparent: true, opacity: 0.95 });
+
+    const goggleL = new THREE.Mesh(new THREE.TorusGeometry(0.35, 0.11, 10, 18), goggleMat);
+    goggleL.position.set(-0.4, 1.35, 0.95);
+    const lensL = new THREE.Mesh(new THREE.CircleGeometry(0.28, 16), lensMat);
+    lensL.position.set(-0.4, 1.35, 0.96);
+    surferGroup.add(goggleL);
+    surferGroup.add(lensL);
+
+    const goggleR = goggleL.clone();
+    goggleR.position.set(0.4, 1.35, 0.95);
+    const lensR = lensL.clone();
+    lensR.position.set(0.4, 1.35, 0.96);
+    surferGroup.add(goggleR);
+    surferGroup.add(lensR);
+
+    // Waving Cartoon Arms (Raised high shouting with excitement!)
+    const armGeo = new THREE.CylinderGeometry(0.2, 0.2, 1.3, 8);
+    const leftArm = new THREE.Mesh(armGeo, skinMat);
+    leftArm.position.set(-1.3, 1.8, 0);
+    leftArm.rotation.z = 0.75;
+    surferGroup.add(leftArm);
+
+    const rightArm = new THREE.Mesh(armGeo, skinMat);
+    rightArm.position.set(1.3, 1.8, 0);
+    rightArm.rotation.z = -0.75;
+    surferGroup.add(rightArm);
+
+    // --- 3. MULTI-SCALE 3D WATER SPLASH PARTICLES ---
+    // Tier 1: Heavy Cannon Splash Droplets (Large Dodecahedrons)
+    const heavyDropletMat = new THREE.MeshPhysicalMaterial({
+      color: 0x38bdf8,
+      roughness: 0.05,
+      metalness: 0.1,
+      transmission: 0.8,
+      ior: 1.333,
+      reflectivity: 0.9,
+      clearcoat: 1.0,
+      transparent: true,
+      opacity: 0.9,
+    });
+    const heavyGeo = new THREE.DodecahedronGeometry(0.55, 1);
+    const heavyDroplets: {
       mesh: THREE.Mesh;
       vel: THREE.Vector3;
-      originX: number;
-      originY: number;
-      originZ: number;
+      origin: THREE.Vector3;
       gravity: number;
       lifetime: number;
       age: number;
     }[] = [];
 
-    for (let i = 0; i < dropletCount; i++) {
-      const dMesh = new THREE.Mesh(dropletGeo, dropletMat.clone());
-      const origX = (Math.random() - 0.5) * 12;
-      const origY = Math.random() * 3 + 1;
-      const origZ = (Math.random() - 0.5) * 6;
-      dMesh.position.set(origX, origY, origZ);
-      waterSystemGroup.add(dMesh);
+    for (let i = 0; i < 40; i++) {
+      const mesh = new THREE.Mesh(heavyGeo, heavyDropletMat.clone());
+      const orig = new THREE.Vector3(
+        (Math.random() - 0.5) * 8,
+        Math.random() * 2 + 1,
+        (Math.random() - 0.5) * 5
+      );
+      mesh.position.copy(orig);
+      surferGroup.add(mesh);
 
-      droplets.push({
-        mesh: dMesh,
+      heavyDroplets.push({
+        mesh,
+        origin: orig,
+        vel: new THREE.Vector3(
+          (Math.random() - 0.3) * 10,
+          Math.random() * 10 + 6,
+          (Math.random() - 0.5) * 8
+        ),
+        gravity: 0.32,
+        lifetime: Math.random() * 1.4 + 0.8,
+        age: Math.random() * 1.4,
+      });
+    }
+
+    // Tier 2: Medium Spray Droplets
+    const medGeo = new THREE.DodecahedronGeometry(0.3, 1);
+    const medDroplets: {
+      mesh: THREE.Mesh;
+      vel: THREE.Vector3;
+      origin: THREE.Vector3;
+      gravity: number;
+      lifetime: number;
+      age: number;
+    }[] = [];
+
+    for (let i = 0; i < 60; i++) {
+      const mesh = new THREE.Mesh(medGeo, heavyDropletMat.clone());
+      const orig = new THREE.Vector3(
+        (Math.random() - 0.5) * 12,
+        Math.random() * 3,
+        (Math.random() - 0.5) * 6
+      );
+      mesh.position.copy(orig);
+      surferGroup.add(mesh);
+
+      medDroplets.push({
+        mesh,
+        origin: orig,
         vel: new THREE.Vector3(
           (Math.random() - 0.3) * 8,
           Math.random() * 8 + 4,
           (Math.random() - 0.5) * 6
         ),
-        originX: origX,
-        originY: origY,
-        originZ: origZ,
-        gravity: 0.25,
-        lifetime: Math.random() * 1.5 + 1.0,
-        age: Math.random() * 1.5,
+        gravity: 0.24,
+        lifetime: Math.random() * 1.2 + 0.6,
+        age: Math.random() * 1.2,
       });
     }
 
-    // 4. Subtle Floating Bubbles
-    const bubbleCount = 35;
-    const bubbleGeo = new THREE.SphereGeometry(0.42, 14, 14);
-    const bubbleMat = new THREE.MeshStandardMaterial({
+    // --- 4. 3D WATER JET STREAM LINES (Matching Coaster Wind Lines!) ---
+    const jetLinesGroup = new THREE.Group();
+    scene.add(jetLinesGroup);
+
+    const jetLineGeo = new THREE.CylinderGeometry(0.06, 0.06, 7.0, 6);
+    const jetLineMat = new THREE.MeshBasicMaterial({ color: 0xbae6fd, transparent: true, opacity: 0.75 });
+    const jetLines: THREE.Mesh[] = [];
+
+    for (let i = 0; i < 24; i++) {
+      const lineMesh = new THREE.Mesh(jetLineGeo, jetLineMat);
+      lineMesh.rotation.z = Math.PI / 2;
+      lineMesh.position.set(
+        (Math.random() - 0.5) * 36,
+        Math.random() * 14 - 1,
+        (Math.random() - 0.5) * 12
+      );
+      jetLinesGroup.add(lineMesh);
+      jetLines.push(lineMesh);
+    }
+
+    // --- 5. FLOATING IRIDESCENT BUBBLES ---
+    const bubbleCount = 40;
+    const bubbleGeo = new THREE.SphereGeometry(0.48, 14, 14);
+    const bubbleMat = new THREE.MeshPhysicalMaterial({
       color: 0xbae6fd,
-      roughness: 0.05,
+      roughness: 0.04,
       metalness: 0.1,
+      transmission: 0.85,
+      ior: 1.1,
+      reflectivity: 0.95,
+      clearcoat: 1.0,
       transparent: true,
       opacity: 0.6,
     });
@@ -204,9 +305,9 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
 
     for (let i = 0; i < bubbleCount; i++) {
       const bMesh = new THREE.Mesh(bubbleGeo, bubbleMat.clone());
-      const bx = (Math.random() - 0.5) * 18;
-      const by = Math.random() * 8 - 2;
-      const bz = (Math.random() - 0.5) * 10;
+      const bx = (Math.random() - 0.5) * 30;
+      const by = Math.random() * 12 - 2;
+      const bz = (Math.random() - 0.5) * 12;
       bMesh.position.set(bx, by, bz);
       waterSystemGroup.add(bMesh);
 
@@ -219,9 +320,16 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       });
     }
 
-    // --- ANIMATION TIMELINE (Traversing across screen from Left to Right) ---
+    // Expanding 3D Ripple Rings on water entry
+    const rippleGeo = new THREE.RingGeometry(0.6, 1.4, 28);
+    const rippleMat = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide, transparent: true, opacity: 0.8 });
+    const rippleRing = new THREE.Mesh(rippleGeo, rippleMat);
+    rippleRing.rotation.x = -Math.PI / 2;
+    surferGroup.add(rippleRing);
+
+    // --- ANIMATION TIMELINE & FLUID PHYSICS ---
     const startTime = performance.now();
-    const duration = 4.0; // 4.0 seconds total traversal
+    const duration = 4.0; // 4.0s traversal across screen
     let animFrame: number;
 
     const animate = () => {
@@ -229,23 +337,52 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       const elapsed = (now - startTime) / 1000;
       const progress = Math.min(1, elapsed / duration);
 
-      // Horizontal travel: x goes from -34 (left offscreen) to +34 (right offscreen)
-      const currentX = -34 + progress * 68;
-      // Gentle wavy path vertically
-      const currentY = Math.sin(progress * Math.PI * 3) * 1.5;
-      waterSystemGroup.position.set(currentX, currentY, 0);
+      // Traversal progress with fluid acceleration curve
+      const easedProgress = Math.pow(progress, 0.96);
 
-      // Rider gentle banking
-      riderGroup.rotation.z = Math.sin(elapsed * 8) * 0.25;
-      leftArm.rotation.x = Math.sin(elapsed * 12) * 0.4;
-      rightArm.rotation.x = -Math.sin(elapsed * 12) * 0.4;
+      // Position surfer dynamically along the wave spline
+      const currentPoint = waveCurve.getPointAt(easedProgress);
+      const tangent = waveCurve.getTangentAt(easedProgress).normalize();
 
-      // Update 3D droplets physics
-      droplets.forEach((d) => {
+      surferGroup.position.copy(currentPoint);
+      surferGroup.position.y += 1.4; // ride atop the wave
+      surferGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), tangent);
+      surferGroup.rotation.z += Math.sin(elapsed * 10) * 0.2; // banking
+
+      // Animate mascot waving arms with excitement
+      leftArm.rotation.x = Math.sin(elapsed * 16) * 0.45;
+      rightArm.rotation.x = -Math.sin(elapsed * 16) * 0.45;
+
+      // Animate ripple ring expansion
+      const rScale = 1 + (elapsed % 0.8) * 4;
+      rippleRing.scale.set(rScale, rScale, 1);
+      (rippleRing.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 1 - (elapsed % 0.8) * 1.2);
+
+      // Update Heavy & Medium Splash Droplets Physics
+      heavyDroplets.forEach((d) => {
         d.age += 0.016;
         if (d.age > d.lifetime) {
           d.age = 0;
-          d.mesh.position.set(d.originX, d.originY, d.originZ);
+          d.mesh.position.copy(d.origin);
+          d.vel.set(
+            (Math.random() - 0.3) * 10,
+            Math.random() * 10 + 6,
+            (Math.random() - 0.5) * 8
+          );
+        } else {
+          d.mesh.position.x += d.vel.x * 0.016;
+          d.mesh.position.y += d.vel.y * 0.016;
+          d.mesh.position.z += d.vel.z * 0.016;
+          d.vel.y -= d.gravity;
+          d.mesh.rotation.x += 0.04;
+        }
+      });
+
+      medDroplets.forEach((d) => {
+        d.age += 0.016;
+        if (d.age > d.lifetime) {
+          d.age = 0;
+          d.mesh.position.copy(d.origin);
           d.vel.set(
             (Math.random() - 0.3) * 8,
             Math.random() * 8 + 4,
@@ -259,34 +396,47 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
         }
       });
 
-      // Update floating bubbles
-      bubbleMeshes.forEach((b) => {
-        b.mesh.position.y += b.speedY * 0.016;
-        b.mesh.position.x = b.baseX + Math.sin(elapsed * b.wobbleSpeed) * 0.8;
-        if (b.mesh.position.y > 8) {
-          b.mesh.position.y = -3;
+      // Animate water jet stream lines rushing past (high velocity flow)
+      jetLines.forEach((line) => {
+        line.position.x -= 2.0;
+        if (line.position.x < -36) {
+          line.position.x = 36;
+          line.position.y = Math.random() * 14 - 1;
+          line.position.z = (Math.random() - 0.5) * 12;
         }
       });
 
-      // Smooth Fade-out as it approaches the right edge (after 68% progress)
+      // Animate floating bubbles
+      bubbleMeshes.forEach((b) => {
+        b.mesh.position.y += b.speedY * 0.016;
+        b.mesh.position.x = b.baseX + Math.sin(elapsed * b.wobbleSpeed) * 0.8;
+        if (b.mesh.position.y > 10) {
+          b.mesh.position.y = -2;
+        }
+      });
+
+      // Smooth Fade-out as it approaches the right edge (past 68% progress)
       let overallOpacity = 1;
       if (progress > 0.68) {
         overallOpacity = Math.max(0, 1 - (progress - 0.68) / 0.32);
       }
 
-      waveMat.opacity = 0.82 * overallOpacity;
-      crestMat.opacity = 0.75 * overallOpacity;
+      waterBodyMat.opacity = 0.88 * overallOpacity;
+      foamCrestMat.opacity = 0.82 * overallOpacity;
+      coreWaveMat.opacity = 0.65 * overallOpacity;
       tubeMat.opacity = 0.95 * overallOpacity;
+      stripeMat.opacity = 0.95 * overallOpacity;
       skinMat.opacity = 0.95 * overallOpacity;
-      dropletMat.opacity = 0.85 * overallOpacity;
+      heavyDropletMat.opacity = 0.9 * overallOpacity;
+      jetLineMat.opacity = 0.75 * overallOpacity;
       bubbleMat.opacity = 0.6 * overallOpacity;
+      rippleMat.opacity = 0.8 * overallOpacity;
 
       renderer.render(scene, camera);
 
       if (progress < 1) {
         animFrame = requestAnimationFrame(animate);
       } else {
-        // Complete & Clean up
         setIsVisible(false);
         onComplete?.();
       }

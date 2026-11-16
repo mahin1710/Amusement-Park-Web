@@ -26,15 +26,20 @@ export default function DinoZonePage() {
       )}
 
       {/* Hero Banner with Authentic Dino Zone Photography */}
-      <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
         <img
           src="/images/Dino%20World/Dino%20Cover%20PIC.webp"
           alt="Dino Zone Jurassic Jungle"
           className="absolute inset-0 w-full h-full object-cover object-center filter brightness-105 contrast-100"
+          style={{ willChange: "transform" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/30 to-[#172554]/40"></div>
+        {/* Subtle Top & Text Contrast Vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-[#172554]/25 to-black/25 pointer-events-none z-10"></div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 text-center">
+        {/* Seamless Bottom-Edge Blend into #FFF9ED (Matches Homepage Smooth Scroll Quality) */}
+        <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20"></div>
+
+        <div className="relative z-30 max-w-5xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#059669] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#55C98B]/40 backdrop-blur-md">
             <Footprints className="w-4 h-4 text-[#059669]" />
             <span>{isBangla ? "জুরাসিক কিংডম ডাইনো জোন" : "Jurassic Kingdom Dino Zone"}</span>
@@ -108,15 +113,16 @@ export default function DinoZonePage() {
           {dinoAttractions.map((ride) => (
             <div
               key={ride.id}
-              className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group"
+              className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
+              style={{ isolation: "isolate" }}
             >
-              <div className="relative h-60 w-full overflow-hidden">
+              <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#FED7AA]/60 bg-slate-100 rounded-t-[26px]">
                 <img
                   src={ride.imageUrl}
                   alt={ride.name.en}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 transform-gpu"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
                 <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#059669] text-xs font-black shadow-md border border-emerald-200">
                   {isBangla ? ride.thrillLevelBn : ride.thrillLevel}
                 </div>
@@ -163,7 +169,7 @@ export default function DinoZonePage() {
       </section>
 
       {/* Real Dino World Photo Showcase Gallery */}
-      <section className="py-16 bg-[#FFF9ED] border-t border-[#FED7AA]/60">
+      <section className="py-16 sm:py-20 bg-[#FFF9ED] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#059669] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-emerald-200 shadow-xs">
@@ -193,12 +199,13 @@ export default function DinoZonePage() {
             ].map((pic, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-4/3 bg-white"
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-white transform-gpu"
+                style={{ isolation: "isolate" }}
               >
                 <img
                   src={pic.src}
                   alt={pic.labelEn}
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 transform-gpu"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
                   <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
