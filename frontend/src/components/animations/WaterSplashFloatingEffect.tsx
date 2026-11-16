@@ -44,9 +44,10 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     renderer.setClearColor(0x000000, 0);
     renderer.setSize(initW, initH);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
-    // --- PROCEDURAL CAUSTIC & FOAM CANVAS TEXTURES ---
+    // --- PROCEDURAL CAUSTIC & SEAFOAM CANVAS TEXTURES ---
     const createCausticTexture = () => {
       const canvas = document.createElement("canvas");
       canvas.width = 512;
@@ -54,23 +55,23 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       const ctx = canvas.getContext("2d");
       if (!ctx) return null;
 
-      // Base deep cyan gradient
+      // Base deep ocean gradient
       const grad = ctx.createLinearGradient(0, 0, 512, 512);
       grad.addColorStop(0, "#0284c7");
-      grad.addColorStop(0.5, "#06b6d4");
+      grad.addColorStop(0.45, "#06b6d4");
       grad.addColorStop(1, "#0369a1");
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, 512, 512);
 
-      // Overlapping glowing caustic rings
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.28)";
-      ctx.lineWidth = 3;
-      for (let i = 0; i < 45; i++) {
+      // Shimmering refractive caustic light ribbons
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
+      ctx.lineWidth = 3.5;
+      for (let i = 0; i < 50; i++) {
         const cx = (i * 73) % 512;
         const cy = (i * 97) % 512;
-        const r = 25 + (i % 5) * 12;
+        const r = 24 + (i % 6) * 14;
         ctx.beginPath();
-        ctx.ellipse(cx, cy, r, r * 0.65, (i * 0.3), 0, Math.PI * 2);
+        ctx.ellipse(cx, cy, r, r * 0.6, i * 0.35, 0, Math.PI * 2);
         ctx.stroke();
       }
 
@@ -91,12 +92,12 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, 256, 256);
 
-      // Soft seafoam bubbly patterns
-      ctx.fillStyle = "rgba(224, 242, 254, 0.75)";
-      for (let i = 0; i < 60; i++) {
-        const x = (i * 47) % 256;
-        const y = (i * 61) % 256;
-        const r = 4 + (i % 4) * 5;
+      // Bubbly seafoam clusters
+      ctx.fillStyle = "rgba(224, 242, 254, 0.8)";
+      for (let i = 0; i < 75; i++) {
+        const x = (i * 43) % 256;
+        const y = (i * 67) % 256;
+        const r = 3 + (i % 5) * 4;
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
         ctx.fill();
@@ -112,12 +113,13 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     const causticTex = createCausticTexture();
     const foamTex = createFoamTexture();
 
-    // --- RICH SUNLIGHT & OCEAN LIGHTING ---
-    const ambientLight = new THREE.AmbientLight(0xffedd5, 1.3);
+    // --- RICH SUNLIGHT & TROPICAL WATER LIGHTING ---
+    const ambientLight = new THREE.AmbientLight(0xffedd5, 1.35);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xfff7ed, 2.6);
+    const sunLight = new THREE.DirectionalLight(0xfff7ed, 2.7);
     sunLight.position.set(22, 38, 25);
+    sunLight.castShadow = true;
     scene.add(sunLight);
 
     const aquaPoint = new THREE.PointLight(0x38bdf8, 3.8, 65);
@@ -128,7 +130,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     deepCyanRim.position.set(-28, 14, -14);
     scene.add(deepCyanRim);
 
-    // Master group holding the entire rolling wave system
+    // Master group for wave system
     const waveSystemGroup = new THREE.Group();
     scene.add(waveSystemGroup);
 
@@ -139,19 +141,19 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       return mat;
     };
 
-    // --- PBR PHYSICAL WATER MATERIALS ---
+    // --- PBR PHYSICAL WATER & FOAM MATERIALS ---
     const oceanWaterMat = registerMat(
       new THREE.MeshPhysicalMaterial({
         color: 0x0284c7,
-        roughness: 0.06,
+        roughness: 0.05,
         metalness: 0.08,
-        transmission: 0.78,
+        transmission: 0.8,
         ior: 1.333,
-        reflectivity: 0.94,
+        reflectivity: 0.95,
         clearcoat: 1.0,
         clearcoatRoughness: 0.04,
         transparent: true,
-        opacity: 0.92,
+        opacity: 0.94,
         map: causticTex || undefined,
         side: THREE.DoubleSide,
       })
@@ -162,19 +164,19 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
         color: 0x06b6d4,
         roughness: 0.04,
         metalness: 0.1,
-        transmission: 0.85,
+        transmission: 0.86,
         ior: 1.333,
-        reflectivity: 0.95,
+        reflectivity: 0.96,
         clearcoat: 1.0,
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.92,
       })
     );
 
     const foamCrestMat = registerMat(
       new THREE.MeshStandardMaterial({
         color: 0xf8fafc,
-        roughness: 0.28,
+        roughness: 0.26,
         metalness: 0.05,
         transparent: true,
         opacity: 0.92,
@@ -186,12 +188,12 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     const secondarySwellMat = registerMat(
       new THREE.MeshPhysicalMaterial({
         color: 0x38bdf8,
-        roughness: 0.1,
-        transmission: 0.7,
+        roughness: 0.08,
+        transmission: 0.72,
         ior: 1.333,
-        clearcoat: 0.8,
+        clearcoat: 0.85,
         transparent: true,
-        opacity: 0.82,
+        opacity: 0.84,
         side: THREE.DoubleSide,
       })
     );
@@ -201,7 +203,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
         color: 0xbae6fd,
         roughness: 0.04,
         metalness: 0.1,
-        transmission: 0.85,
+        transmission: 0.88,
         ior: 1.333,
         clearcoat: 1.0,
         transparent: true,
@@ -231,20 +233,19 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     );
 
     // =============================================================
-    // 1. DYNAMIC SUBDIVIDED 3D OCEAN WAVE SURFACE
+    // 1. SUBDIVIDED 3D OCEAN WAVE SURFACE (Harmonic Gerstner Waves)
     // =============================================================
-    const waveWidth = 66;
-    const waveDepth = 22;
-    const waveSegmentsW = 64;
-    const waveSegmentsD = 28;
+    const waveWidth = 68;
+    const waveDepth = 24;
+    const waveSegmentsW = 68;
+    const waveSegmentsD = 30;
 
     const waveSurfaceGeo = new THREE.PlaneGeometry(waveWidth, waveDepth, waveSegmentsW, waveSegmentsD);
-    waveSurfaceGeo.rotateX(-Math.PI / 2.3); // Tilted forward towards camera
+    waveSurfaceGeo.rotateX(-Math.PI / 2.3);
     const waveSurfaceMesh = new THREE.Mesh(waveSurfaceGeo, oceanWaterMat);
     waveSurfaceMesh.position.set(0, -1.0, 0);
     waveSystemGroup.add(waveSurfaceMesh);
 
-    // Store original positions for dynamic vertex wave displacement
     const posAttr = waveSurfaceGeo.attributes.position;
     const origPositions = new Float32Array(posAttr.array.length);
     origPositions.set(posAttr.array);
@@ -255,34 +256,33 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     const barrelGroup = new THREE.Group();
     waveSystemGroup.add(barrelGroup);
 
-    // Wave barrel curling tube
     const barrelCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-22, -1.5, 0),
-      new THREE.Vector3(-10, 2.8, 2.5),
-      new THREE.Vector3(0, 7.5, 4.5),   // Peak crest
-      new THREE.Vector3(7, 4.8, 6.2),   // Overhanging curl
+      new THREE.Vector3(-24, -1.5, 0),
+      new THREE.Vector3(-11, 2.8, 2.5),
+      new THREE.Vector3(0, 7.6, 4.5),   // Peak crest
+      new THREE.Vector3(7, 4.8, 6.2),   // Overhanging barrel lip
       new THREE.Vector3(14, 0.5, 4.0),  // Crash impact trough
-      new THREE.Vector3(24, 1.2, 0.5),  // Rebound swell
+      new THREE.Vector3(25, 1.2, 0.5),  // Rebound swell
     ]);
-    const barrelGeo = new THREE.TubeGeometry(barrelCurve, 60, 2.4, 18, false);
+    const barrelGeo = new THREE.TubeGeometry(barrelCurve, 65, 2.4, 18, false);
     const barrelMesh = new THREE.Mesh(barrelGeo, barrelWaterMat);
     barrelGroup.add(barrelMesh);
 
-    // Breaking White-Water Crest Lip
+    // White-Water Foam Lip
     const crestCurve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-18, 0.5, 1.2),
-      new THREE.Vector3(-8, 4.5, 3.2),
-      new THREE.Vector3(0, 8.2, 4.8),
+      new THREE.Vector3(-20, 0.5, 1.2),
+      new THREE.Vector3(-9, 4.5, 3.2),
+      new THREE.Vector3(0, 8.3, 4.8),
       new THREE.Vector3(6, 6.8, 6.5),
       new THREE.Vector3(12, 2.5, 5.2),
-      new THREE.Vector3(20, 0.8, 2.5),
+      new THREE.Vector3(21, 0.8, 2.5),
     ]);
-    const crestGeo = new THREE.TubeGeometry(crestCurve, 60, 1.05, 14, false);
+    const crestGeo = new THREE.TubeGeometry(crestCurve, 65, 1.1, 14, false);
     const crestMesh = new THREE.Mesh(crestGeo, foamCrestMat);
     crestMesh.position.y += 0.3;
     barrelGroup.add(crestMesh);
 
-    // Secondary Rolling Swells (Foreground & Background for Depth)
+    // Secondary Rolling Swells (Multi-Plane Depth)
     const frontSwellCurve = new THREE.CatmullRomCurve3([
       new THREE.Vector3(-34, -4.5, 7.5),
       new THREE.Vector3(-16, -3.2, 8.5),
@@ -291,7 +291,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       new THREE.Vector3(34, -4.6, 7.0),
     ]);
     const frontSwellMesh = new THREE.Mesh(
-      new THREE.TubeGeometry(frontSwellCurve, 45, 1.4, 12, false),
+      new THREE.TubeGeometry(frontSwellCurve, 50, 1.4, 12, false),
       secondarySwellMat
     );
     waveSystemGroup.add(frontSwellMesh);
@@ -304,64 +304,62 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
       new THREE.Vector3(34, -1.8, -8.0),
     ]);
     const backSwellMesh = new THREE.Mesh(
-      new THREE.TubeGeometry(backSwellCurve, 45, 1.6, 12, false),
+      new THREE.TubeGeometry(backSwellCurve, 50, 1.6, 12, false),
       secondarySwellMat
     );
     waveSystemGroup.add(backSwellMesh);
 
     // =============================================================
-    // 3. LEAPING PLAYFUL DOLPHIN (Natural Anatomy & Fluid Motion)
+    // 3. LEAPING PLAYFUL DOLPHIN (Wet Clearcoat Specular Sheen)
     // =============================================================
     const dolphinGroup = new THREE.Group();
     dolphinGroup.position.set(-2, 8.5, 4.2);
     waveSystemGroup.add(dolphinGroup);
 
     const dolphinSkinMat = registerMat(
-      new THREE.MeshStandardMaterial({
+      new THREE.MeshPhysicalMaterial({
         color: 0x0284c7,
-        roughness: 0.18,
-        metalness: 0.12,
+        roughness: 0.15,
+        metalness: 0.1,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.05,
         transparent: true,
         opacity: 0.98,
       })
     );
     const dolphinBellyMat = registerMat(
-      new THREE.MeshStandardMaterial({
+      new THREE.MeshPhysicalMaterial({
         color: 0xffffff,
-        roughness: 0.2,
+        roughness: 0.18,
+        clearcoat: 0.9,
         transparent: true,
         opacity: 0.98,
       })
     );
 
-    // Smooth Torpedo Body
     const dBodyGeo = new THREE.SphereGeometry(1.5, 20, 20);
     dBodyGeo.scale(0.8, 0.75, 2.5);
     const dolphinBody = new THREE.Mesh(dBodyGeo, dolphinSkinMat);
     dolphinGroup.add(dolphinBody);
 
-    // White Underbelly
     const dBellyGeo = new THREE.SphereGeometry(1.25, 16, 16);
     dBellyGeo.scale(0.7, 0.52, 2.2);
     const dolphinBelly = new THREE.Mesh(dBellyGeo, dolphinBellyMat);
     dolphinBelly.position.set(0, -0.28, 0);
     dolphinGroup.add(dolphinBelly);
 
-    // Beak / Rostrum
     const beakGeo = new THREE.ConeGeometry(0.35, 1.2, 12);
     beakGeo.rotateX(Math.PI / 2);
     const beak = new THREE.Mesh(beakGeo, dolphinSkinMat);
     beak.position.set(0, -0.08, 2.9);
     dolphinGroup.add(beak);
 
-    // Curved Dorsal Fin
     const dFinGeo = new THREE.ConeGeometry(0.32, 1.15, 6);
     dFinGeo.rotateX(-0.5);
     const dorsalFin = new THREE.Mesh(dFinGeo, dolphinSkinMat);
     dorsalFin.position.set(0, 0.95, -0.2);
     dolphinGroup.add(dorsalFin);
 
-    // Pectoral Flippers
     const flipperGeo = new THREE.BoxGeometry(1.3, 0.1, 0.55);
     const flipperL = new THREE.Mesh(flipperGeo, dolphinSkinMat);
     flipperL.position.set(-1.05, -0.25, 0.6);
@@ -373,7 +371,6 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     flipperR.rotation.z = 0.4;
     dolphinGroup.add(flipperR);
 
-    // Articulated Tail Fluke
     const tailGroup = new THREE.Group();
     tailGroup.position.set(0, 0, -2.7);
     const flukeGeo = new THREE.BoxGeometry(1.7, 0.08, 0.65);
@@ -387,7 +384,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     const surferGroup = new THREE.Group();
     surferGroup.position.set(6.0, 3.5, 6.0);
     surferGroup.rotation.y = -Math.PI / 3;
-    surferGroup.rotation.z = 0.38; // Leaning into the curl
+    surferGroup.rotation.z = 0.38;
     waveSystemGroup.add(surferGroup);
 
     const boardMat = registerMat(
@@ -414,7 +411,6 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     const boardStripe = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.17, 4.42), boardStripeMat);
     surferGroup.add(boardStripe);
 
-    // Surfer Mascot
     const skinMat = registerMat(new THREE.MeshStandardMaterial({ color: 0xfed7aa, roughness: 0.28, transparent: true, opacity: 0.98 }));
     const shirtMat = registerMat(new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.35, transparent: true, opacity: 0.98 }));
 
@@ -442,7 +438,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     surferGroup.add(armR);
 
     // =============================================================
-    // 5. PARABOLIC WATER DROPLET CANNON & SEA SPRAY
+    // 5. PARABOLIC WATER DROPLETS & SEA SPRAY CANNON
     // =============================================================
     interface WaveDroplet {
       mesh: THREE.Mesh;
@@ -460,7 +456,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     const dropletPool: WaveDroplet[] = [];
     const dropletGeo = new THREE.DodecahedronGeometry(0.44, 1);
 
-    for (let i = 0; i < 65; i++) {
+    for (let i = 0; i < 75; i++) {
       const dMesh = new THREE.Mesh(dropletGeo, dropletMat);
       const origX = -12 + Math.random() * 24;
       const origY = 3.5 + Math.random() * 4.5;
@@ -510,7 +506,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
     const lineGeo = new THREE.CylinderGeometry(0.04, 0.04, 4.5, 6);
     lineGeo.rotateZ(Math.PI / 2);
 
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 18; i++) {
       const sMesh = new THREE.Mesh(lineGeo, sprayMistMat);
       sMesh.position.set(
         -14 + Math.random() * 28,
@@ -615,7 +611,7 @@ export function WaterSplashFloatingEffect({ onComplete, isReducedMotion = false 
 
       allMaterials.forEach((mat) => {
         if ("opacity" in mat) {
-          (mat as THREE.Material & { opacity: number }).opacity = 0.92 * overallOpacity;
+          (mat as THREE.Material & { opacity: number }).opacity = 0.94 * overallOpacity;
         }
       });
 
