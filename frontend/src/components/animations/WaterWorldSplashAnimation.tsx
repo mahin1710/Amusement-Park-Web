@@ -366,9 +366,9 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       {/* Comic Action Sticker Banner */}
       <motion.div
         className="absolute z-40 top-16 sm:top-20 flex flex-col items-center pointer-events-none"
-        initial={{ scale: 0, rotate: -12, opacity: 0 }}
-        animate={{ scale: [0, 1.2, 1], rotate: [-12, 3, 0], opacity: [0, 1, 1] }}
-        transition={{ duration: 0.5, delay: 0.2, type: "spring", stiffness: 280 }}
+        initial={{ scale: 0, rotate: -8, opacity: 0 }}
+        animate={{ scale: 1, rotate: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.15, type: "spring", stiffness: 260, damping: 20 }}
       >
         <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#0EA5E9] border-3 border-white text-white font-heading font-black text-lg sm:text-2xl tracking-wider shadow-2xl flex items-center gap-3">
           <span className="text-2xl animate-spin">🌊</span>

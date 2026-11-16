@@ -2,13 +2,15 @@
 
 import React from "react";
 import Link from "next/link";
-import { FerrisWheel, Check, Sparkles, MessageCircle, ArrowRight, Zap } from "lucide-react";
+import { FerrisWheel, Check, Sparkles, MessageCircle, ArrowRight, Zap, Play } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
+import { useAttractionAnimation } from "@/context/AnimationContext";
 import { ATTRACTIONS_DATA } from "@/data/attractions";
 import { buildWhatsAppLink } from "@/config/business";
 
 export default function AmusementParkPage() {
   const { isBangla } = useTranslation();
+  const { playAnimation } = useAttractionAnimation();
   const amusementRides = ATTRACTIONS_DATA.filter((a) => a.zone === "amusement-park");
 
   const waLink = buildWhatsAppLink({
@@ -47,6 +49,16 @@ export default function AmusementParkPage() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <button
+              type="button"
+              onClick={() => playAnimation("thrill-world")}
+              className="px-7 py-3.5 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              title="Watch 3D Roller Coaster Animation"
+            >
+              <Play className="w-4 h-4 fill-current text-[#172554]" />
+              <span>{isBangla ? "৩ডি রোলারকোস্টার কার্টুন" : "Play 3D Coaster Cartoon"}</span>
+            </button>
+
             <Link
               href="#rides"
               className="btn-park-primary px-7 py-3.5 rounded-full text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"
