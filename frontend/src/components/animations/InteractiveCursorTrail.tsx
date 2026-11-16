@@ -18,11 +18,11 @@ export function InteractiveCursorTrail() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    // Only enable on desktop devices with mouse pointer & no reduced motion
     if (typeof window === "undefined") return;
-    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+    // Respect reduced motion accessibility setting
     const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (isTouch || isReduced) return;
+    if (isReduced) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -42,42 +42,102 @@ export function InteractiveCursorTrail() {
 
     const sparkles: Sparkle[] = [];
     const colors = ["#FFD93D", "#FF6B35", "#38BDF8", "#55C98B", "#F472B6"];
+
     let lastX = 0;
     let lastY = 0;
-    let throttleTimer = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let isHolding = false;
+    let activePointerId: number | null = null;
+    let moveThrottleTimer = 0;
+    let lastHoldSpawn = 0;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    // Helper to spawn a single authentic amusement park star sparkle
+    const spawnSparkle = (x: number, y: number, speedMultiplier = 1.0, jitterRadius = 8) => {
+      if (sparkles.length > 55) sparkles.shift();
+      const angle = Math.random() * Math.PI * 2;
+      const speed = (Math.random() * 1.8 + 0.4) * speedMultiplier;
+      sparkles.push({
+        x: x + (Math.random() - 0.5) * jitterRadius,
+        y: y + (Math.random() - 0.5) * jitterRadius,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed + 0.3,
+        size: Math.random() * 4.5 + 2.5,
+        alpha: 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * Math.PI,
+        vRot: (Math.random() - 0.5) * 0.15,
+      });
+    };
+
+    // 1. POINTER DOWN (Mouse Click & Hold OR Touch & Hold)
+    const handlePointerDown = (e: PointerEvent) => {
+      // For mouse, only trigger on primary left click
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+
+      isHolding = true;
+      activePointerId = e.pointerId;
+      currentX = e.clientX;
+      currentY = e.clientY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+
+      // Immediate burst of 2-3 sparkles on press
+      for (let i = 0; i < 3; i++) {
+        spawnSparkle(currentX, currentY, 1.4, 12);
+      }
+    };
+
+    // 2. POINTER MOVE (Mouse Movement Trail OR Dragging while Holding)
+    const handlePointerMove = (e: PointerEvent) => {
+      currentX = e.clientX;
+      currentY = e.clientY;
+
       const now = performance.now();
-      if (now - throttleTimer < 16) return; // ~60fps throttle
-      throttleTimer = now;
+      if (now - moveThrottleTimer < 16) return; // ~60fps throttle
+      moveThrottleTimer = now;
 
       const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
       if (dist < 4) return;
       lastX = e.clientX;
       lastY = e.clientY;
 
-      // Spawn 1-2 subtle amusement park sparkles
-      const count = Math.min(2, Math.floor(dist / 15) + 1);
+      // Spawn trail sparkles along movement path
+      const count = Math.min(isHolding ? 3 : 2, Math.floor(dist / 14) + 1);
       for (let i = 0; i < count; i++) {
-        if (sparkles.length > 35) sparkles.shift();
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 1.8 + 0.4;
-        sparkles.push({
-          x: e.clientX + (Math.random() - 0.5) * 8,
-          y: e.clientY + (Math.random() - 0.5) * 8,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed + 0.3,
-          size: Math.random() * 4.5 + 2.5,
-          alpha: 1,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          rotation: Math.random() * Math.PI,
-          vRot: (Math.random() - 0.5) * 0.15,
-        });
+        spawnSparkle(e.clientX, e.clientY, isHolding ? 1.3 : 1.0, 8);
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    // 3. POINTER UP & CANCEL (Release Mouse / Lift Finger)
+    const handlePointerUp = (e: PointerEvent) => {
+      if (activePointerId === null || e.pointerId === activePointerId) {
+        isHolding = false;
+        activePointerId = null;
+      }
+    };
 
+    const handlePointerCancel = (e: PointerEvent) => {
+      if (activePointerId === null || e.pointerId === activePointerId) {
+        isHolding = false;
+        activePointerId = null;
+      }
+    };
+
+    // Safety fallback when window loses focus or pointer exits viewport
+    const handleWindowBlur = () => {
+      isHolding = false;
+      activePointerId = null;
+    };
+
+    window.addEventListener("pointerdown", handlePointerDown, { passive: true });
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("pointerup", handlePointerUp, { passive: true });
+    window.addEventListener("pointercancel", handlePointerCancel, { passive: true });
+    window.addEventListener("blur", handleWindowBlur);
+    document.addEventListener("mouseleave", handleWindowBlur);
+
+    // 4-Point Star Drawing Logic (Existing Authentic Amusement Park Shape)
     const drawStar = (cx: number, cy: number, spikes: number, outerRadius: number, innerRadius: number) => {
       let rot = (Math.PI / 2) * 3;
       let x = cx;
@@ -101,9 +161,21 @@ export function InteractiveCursorTrail() {
       ctx.closePath();
     };
 
+    // Render Loop with Continuous Hold-to-Activate Magic Generation
     const render = () => {
       ctx.clearRect(0, 0, width, height);
+      const now = performance.now();
 
+      // CONTINUOUS HOLD-TO-ACTIVATE EMISSION:
+      // While mouse button or touchscreen is held down, continuously emit new sparkles
+      if (isHolding) {
+        if (now - lastHoldSpawn > 32) { // ~30 fps continuous sparkle stream
+          lastHoldSpawn = now;
+          spawnSparkle(currentX, currentY, 1.2, 10);
+        }
+      }
+
+      // Update and Draw Existing Sparkles
       for (let i = sparkles.length - 1; i >= 0; i--) {
         const s = sparkles[i];
         s.x += s.vx;
@@ -133,7 +205,12 @@ export function InteractiveCursorTrail() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+      window.removeEventListener("pointercancel", handlePointerCancel);
+      window.removeEventListener("blur", handleWindowBlur);
+      document.removeEventListener("mouseleave", handleWindowBlur);
       cancelAnimationFrame(animId);
     };
   }, []);
