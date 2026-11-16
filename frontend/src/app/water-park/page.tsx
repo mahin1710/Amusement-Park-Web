@@ -54,8 +54,8 @@ export default function WaterParkPage() {
 
           <p className="mt-5 text-base sm:text-lg text-white font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] max-w-2xl mx-auto leading-relaxed">
             {isBangla
-              ? "সরাসরি ড্রোন ভিউতে দেখুন আমাদের বিশাল কৃত্রিম সামুদ্রিক ঢেউয়ের পুল, চার লেনের স্পিড স্লাইডার এবং রেইনবো ব্রিজের নিচে লেজি রিভার।"
-              : "Experience the real wonder: expansive computerized ocean wave pool, towering multi-lane speed slides, lazy river, and family splash lagoons."}
+              ? "সরাসরি ড্রোন ভিউতে দেখুন আমাদের বিশাল কৃত্রিম সামুদ্রিক ঢেউয়ের পুল, সুনামি বে এবং রেইনবো ব্রিজের নিচে মনোরম লেজি রিভার।"
+              : "Experience the real wonder: expansive computerized ocean wave pool, tsunami surf bays, lazy river, and family splash lagoons."}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -63,10 +63,10 @@ export default function WaterParkPage() {
               type="button"
               onClick={() => setPlaySplash(true)}
               className="px-7 py-3.5 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
-              title="Watch 3D Water Splash Float Across Screen"
+              title="Watch 3D Tsunami Ocean Waves Float Across Screen"
             >
-              <Play className="w-4 h-4 fill-current text-[#172554]" />
-              <span>{isBangla ? "ওয়াটার স্প্ল্যাশ এফেক্ট" : "Floating Water Splash"}</span>
+              <Waves className="w-4 h-4 text-[#172554]" />
+              <span>{isBangla ? "সুনামি ওয়েভ এফেক্ট" : "Floating Ocean Waves"}</span>
             </button>
 
             <Link
