@@ -9,7 +9,7 @@ interface Props {
   isReducedMotion?: boolean;
 }
 
-export function DinoWorldStampedeAnimation({ isReducedMotion = false }: Props) {
+export function DinoWorldStampedeAnimation({ onComplete, isReducedMotion = false }: Props) {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const [screenRumble, setScreenRumble] = useState(false);
 
@@ -21,17 +21,15 @@ export function DinoWorldStampedeAnimation({ isReducedMotion = false }: Props) {
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x14532d, 0.012);
 
-    const camera = new THREE.PerspectiveCamera(
-      48,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      1000
-    );
+    const initW = container.clientWidth || window.innerWidth || 1200;
+    const initH = container.clientHeight || window.innerHeight || 800;
+
+    const camera = new THREE.PerspectiveCamera(48, initW / initH, 0.1, 1000);
     camera.position.set(0, 8, 38);
     camera.lookAt(0, 4, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(initW, initH);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
@@ -282,6 +280,91 @@ export function DinoWorldStampedeAnimation({ isReducedMotion = false }: Props) {
     raptorGroup.rotation.y = Math.PI / 2;
     scene.add(raptorGroup);
 
+    // --- 5. 3D CARTOON STEGOSAURUS (Amber/Orange with Dorsal Plates & Spiked Tail) ---
+    const stegoGroup = new THREE.Group();
+    const stegoMat = new THREE.MeshToonMaterial({ color: 0xf59e0b });
+    const plateMat = new THREE.MeshToonMaterial({ color: 0xd97706 });
+    const spikeMat = new THREE.MeshToonMaterial({ color: 0xffedd5 });
+
+    // Stego Body
+    const stegoBody = new THREE.Mesh(new THREE.SphereGeometry(2.3, 16, 16), stegoMat);
+    stegoBody.scale.set(1.0, 1.2, 1.7);
+    stegoBody.position.set(0, 3.2, 0);
+    stegoGroup.add(stegoBody);
+
+    // Stego Head
+    const stegoHead = new THREE.Mesh(new THREE.ConeGeometry(0.7, 1.8, 12), stegoMat);
+    stegoHead.rotation.x = Math.PI / 2.3;
+    stegoHead.position.set(0, 2.4, 3.2);
+    stegoGroup.add(stegoHead);
+
+    // Stego Back Plates (Double alternating row)
+    const plateGeo = new THREE.ConeGeometry(0.75, 1.4, 4);
+    for (let i = 0; i < 6; i++) {
+      const zOffset = -2.2 + i * 0.9;
+      const p1 = new THREE.Mesh(plateGeo, plateMat);
+      p1.position.set(-0.4, 4.8 + Math.sin(i * 0.6) * 0.4, zOffset);
+      p1.rotation.y = Math.PI / 4;
+      stegoGroup.add(p1);
+
+      const p2 = new THREE.Mesh(plateGeo, plateMat);
+      p2.position.set(0.4, 4.8 + Math.sin(i * 0.6) * 0.4, zOffset + 0.4);
+      p2.rotation.y = Math.PI / 4;
+      stegoGroup.add(p2);
+    }
+
+    // Stego Spiked Tail (Thagomizer)
+    const stegoTailGroup = new THREE.Group();
+    stegoTailGroup.position.set(0, 3.0, -2.6);
+    const stegoTailMesh = new THREE.Mesh(new THREE.ConeGeometry(0.8, 4.2, 12), stegoMat);
+    stegoTailMesh.rotation.x = -Math.PI / 2.1;
+    stegoTailMesh.position.set(0, 0, -2.0);
+    stegoTailGroup.add(stegoTailMesh);
+
+    const sp1 = new THREE.Mesh(new THREE.ConeGeometry(0.2, 1.2, 8), spikeMat);
+    sp1.position.set(-0.7, 0.4, -3.6);
+    sp1.rotation.z = 1.1;
+    stegoTailGroup.add(sp1);
+
+    const sp2 = new THREE.Mesh(new THREE.ConeGeometry(0.2, 1.2, 8), spikeMat);
+    sp2.position.set(0.7, 0.4, -3.6);
+    sp2.rotation.z = -1.1;
+    stegoTailGroup.add(sp2);
+
+    const sp3 = new THREE.Mesh(new THREE.ConeGeometry(0.2, 1.1, 8), spikeMat);
+    sp3.position.set(-0.6, 0.6, -3.0);
+    sp3.rotation.z = 1.0;
+    stegoTailGroup.add(sp3);
+
+    const sp4 = new THREE.Mesh(new THREE.ConeGeometry(0.2, 1.1, 8), spikeMat);
+    sp4.position.set(0.6, 0.6, -3.0);
+    sp4.rotation.z = -1.0;
+    stegoTailGroup.add(sp4);
+
+    stegoGroup.add(stegoTailGroup);
+
+    // Stego 4 Legs
+    const stegoLegGeo = new THREE.CylinderGeometry(0.45, 0.55, 2.0, 10);
+    const sLeg1 = new THREE.Mesh(stegoLegGeo, stegoMat);
+    sLeg1.position.set(-1.2, 1.0, 1.2);
+    stegoGroup.add(sLeg1);
+
+    const sLeg2 = new THREE.Mesh(stegoLegGeo, stegoMat);
+    sLeg2.position.set(1.2, 1.0, 1.2);
+    stegoGroup.add(sLeg2);
+
+    const sLeg3 = new THREE.Mesh(stegoLegGeo, stegoMat);
+    sLeg3.position.set(-1.2, 1.0, -1.2);
+    stegoGroup.add(sLeg3);
+
+    const sLeg4 = new THREE.Mesh(stegoLegGeo, stegoMat);
+    sLeg4.position.set(1.2, 1.0, -1.2);
+    stegoGroup.add(sLeg4);
+
+    stegoGroup.position.set(-42, 0, -2);
+    stegoGroup.rotation.y = Math.PI / 2;
+    scene.add(stegoGroup);
+
     // --- 3D DUST CLOUD PARTICLES ---
     const dustParticles: THREE.Mesh[] = [];
     const dustGeo = new THREE.DodecahedronGeometry(0.45, 1);
@@ -346,6 +429,20 @@ export function DinoWorldStampedeAnimation({ isReducedMotion = false }: Props) {
       bLeg1.rotation.x = Math.sin(elapsed * 4) * 0.3;
       bLeg2.rotation.x = -Math.sin(elapsed * 4) * 0.3;
       brachioHead.position.y = 18.2 + Math.sin(elapsed * 4) * 0.6;
+
+      // Stegosaurus trots in midground with swinging spiked tail
+      stegoGroup.position.x = -45 + elapsed * 15;
+      const stegoStep = Math.sin(elapsed * 10);
+      sLeg1.rotation.x = stegoStep * 0.6;
+      sLeg2.rotation.x = -stegoStep * 0.6;
+      sLeg3.rotation.x = -stegoStep * 0.6;
+      sLeg4.rotation.x = stegoStep * 0.6;
+      stegoTailGroup.rotation.y = Math.sin(elapsed * 12) * 0.45;
+
+      // Auto complete when dinosaurs finish stampede
+      if (elapsed > 4.5) {
+        onComplete?.();
+      }
 
       // Dynamic camera tracking
       camera.position.x = Math.sin(elapsed * 0.5) * 2;

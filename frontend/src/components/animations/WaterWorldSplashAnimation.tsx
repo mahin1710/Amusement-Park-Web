@@ -20,20 +20,54 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x0284c7, 0.015);
 
-    const camera = new THREE.PerspectiveCamera(
-      50,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      1000
-    );
+    const initW = container.clientWidth || window.innerWidth || 1200;
+    const initH = container.clientHeight || window.innerHeight || 800;
+
+    const camera = new THREE.PerspectiveCamera(50, initW / initH, 0.1, 1000);
     camera.position.set(0, 15, 45);
     camera.lookAt(0, 4, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(initW, initH);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
+
+    // --- FLOATING BACKGROUND BUBBLES ---
+    const bubbleCount = 40;
+    const bubbleGeo = new THREE.SphereGeometry(0.5, 14, 14);
+    const bubbleMat = new THREE.MeshStandardMaterial({
+      color: 0xbae6fd,
+      roughness: 0.1,
+      metalness: 0.2,
+      transparent: true,
+      opacity: 0.55,
+    });
+    const bubbleMeshes: {
+      mesh: THREE.Mesh;
+      speed: number;
+      wobbleSpeed: number;
+      wobbleDist: number;
+      initialX: number;
+    }[] = [];
+
+    for (let i = 0; i < bubbleCount; i++) {
+      const bMesh = new THREE.Mesh(bubbleGeo, bubbleMat);
+      const initX = (Math.random() - 0.5) * 60;
+      const initY = Math.random() * 35 - 5;
+      const initZ = (Math.random() - 0.5) * 35 - 5;
+      const sc = Math.random() * 0.7 + 0.35;
+      bMesh.scale.set(sc, sc, sc);
+      bMesh.position.set(initX, initY, initZ);
+      scene.add(bMesh);
+      bubbleMeshes.push({
+        mesh: bMesh,
+        speed: Math.random() * 3 + 2,
+        wobbleSpeed: Math.random() * 3 + 1,
+        wobbleDist: Math.random() * 1.5 + 0.5,
+        initialX: initX,
+      });
+    }
 
     // --- LIGHTS ---
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
@@ -277,7 +311,21 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
           waveRing2.scale.set(s2, s2, 1);
           (waveRing2.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 1 - (splashElapsed - 0.25) * 0.8);
         }
+
+        // Auto complete when splash settles
+        if (splashElapsed > 2.6) {
+          onComplete?.();
+        }
       }
+
+      // Animate floating background bubbles
+      bubbleMeshes.forEach((b) => {
+        b.mesh.position.y += b.speed * 0.016;
+        b.mesh.position.x = b.initialX + Math.sin(elapsed * b.wobbleSpeed) * b.wobbleDist;
+        if (b.mesh.position.y > 35) {
+          b.mesh.position.y = -5;
+        }
+      });
 
       // Subtle dynamic camera drift
       camera.position.x = Math.sin(elapsed * 0.6) * 3;

@@ -9,7 +9,7 @@ interface Props {
   isReducedMotion?: boolean;
 }
 
-export function ThrillWorldCoasterAnimation({ isReducedMotion = false }: Props) {
+export function ThrillWorldCoasterAnimation({ onComplete, isReducedMotion = false }: Props) {
   const mountRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -20,17 +20,15 @@ export function ThrillWorldCoasterAnimation({ isReducedMotion = false }: Props) 
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x1e1b4b, 0.012);
 
-    const camera = new THREE.PerspectiveCamera(
-      52,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      1000
-    );
+    const initW = container.clientWidth || window.innerWidth || 1200;
+    const initH = container.clientHeight || window.innerHeight || 800;
+
+    const camera = new THREE.PerspectiveCamera(52, initW / initH, 0.1, 1000);
     camera.position.set(0, 16, 46);
     camera.lookAt(0, 8, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(initW, initH);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
@@ -203,6 +201,25 @@ export function ThrillWorldCoasterAnimation({ isReducedMotion = false }: Props) 
       particleMeshes.push(pMesh);
     }
 
+    // --- 3D CARTOON SPEED WIND LINES ---
+    const speedLinesGroup = new THREE.Group();
+    const lineGeo = new THREE.CylinderGeometry(0.05, 0.05, 8, 6);
+    const lineMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.75 });
+    const speedLines: THREE.Mesh[] = [];
+
+    for (let i = 0; i < 24; i++) {
+      const lineMesh = new THREE.Mesh(lineGeo, lineMat);
+      lineMesh.rotation.z = Math.PI / 2;
+      lineMesh.position.set(
+        (Math.random() - 0.5) * 40,
+        Math.random() * 20 + 4,
+        (Math.random() - 0.5) * 20
+      );
+      speedLinesGroup.add(lineMesh);
+      speedLines.push(lineMesh);
+    }
+    scene.add(speedLinesGroup);
+
     const startTime = performance.now();
     const animDuration = 3.6; // 3.6s loop
     let animFrame: number;
@@ -247,6 +264,21 @@ export function ThrillWorldCoasterAnimation({ isReducedMotion = false }: Props) 
         pm.rotation.y += 0.06;
         pm.position.y += Math.sin(elapsed * 4 + idx) * 0.05;
       });
+
+      // Animate high-velocity speed wind lines rushing past
+      speedLines.forEach((line) => {
+        line.position.x -= 2.2;
+        if (line.position.x < -40) {
+          line.position.x = 40;
+          line.position.y = Math.random() * 24 + 4;
+          line.position.z = (Math.random() - 0.5) * 22;
+        }
+      });
+
+      // Auto complete when coaster finishes exhilarating lap
+      if (elapsed > 4.6) {
+        onComplete?.();
+      }
 
       renderer.render(scene, camera);
       animFrame = requestAnimationFrame(animate);

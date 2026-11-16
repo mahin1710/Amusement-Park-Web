@@ -76,8 +76,13 @@ export function ChooseAdventureSection() {
                   <Waves className="w-4 h-4" />
                   <span>{isBangla ? "জলরাজ্যের রোমাঞ্চ" : "Aquatic Paradise"}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#172554] font-heading uppercase mb-2">
-                  {isBangla ? "ওয়াটার ওয়ার্ল্ড" : "Water World"}
+                <h3
+                  onClick={() => playAnimation("water-world")}
+                  className="text-2xl sm:text-3xl font-black text-[#172554] hover:text-[#0284C7] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
+                  title="Click to play 3D Water Slide Cartoon"
+                >
+                  <span>{isBangla ? "ওয়াটার ওয়ার্ল্ড" : "Water World"}</span>
+                  <Play className="w-4 h-4 text-[#38BDF8] opacity-60 group-hover/title:opacity-100 fill-current transition-opacity" />
                 </h3>
                 <p className="text-xs sm:text-sm text-[#3B4B75] leading-relaxed mb-6 font-sans">
                   {isBangla
@@ -120,7 +125,11 @@ export function ChooseAdventureSection() {
 
           {/* Realm 2: DINO KINGDOM */}
           <div className="park-card overflow-hidden flex flex-col justify-between group">
-            <div className="relative h-68 overflow-hidden bg-slate-100">
+            <div
+              className="relative h-68 overflow-hidden bg-slate-100 cursor-pointer"
+              onClick={() => playAnimation("dino-world")}
+              title="Click to play 3D Dino World Cartoon Animation"
+            >
               <img
                 alt="Magic Island Dino Zone featuring prehistoric animatronic dinosaurs and elevated wooden jungle boardwalks"
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
@@ -134,7 +143,10 @@ export function ChooseAdventureSection() {
               {/* 3D Cartoon Animation Launcher Button */}
               <button
                 type="button"
-                onClick={() => playAnimation("dino-world")}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playAnimation("dino-world");
+                }}
                 className="absolute bottom-3 left-4 text-xs text-[#172554] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFD93D]/95 hover:bg-[#FFD93D] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all"
                 title="Play 3D Running Dinosaurs Animation"
               >
@@ -149,8 +161,13 @@ export function ChooseAdventureSection() {
                   <Footprints className="w-4 h-4" />
                   <span>{isBangla ? "প্রাগৈতিহাসিক অভিযান" : "Prehistoric Safari"}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#172554] font-heading uppercase mb-2">
-                  {isBangla ? "ডাইনো ওয়ার্ল্ড" : "Dino World"}
+                <h3
+                  onClick={() => playAnimation("dino-world")}
+                  className="text-2xl sm:text-3xl font-black text-[#172554] hover:text-[#7C3AED] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
+                  title="Click to play 3D Dino Stampede Cartoon"
+                >
+                  <span>{isBangla ? "ডাইনো ওয়ার্ল্ড" : "Dino World"}</span>
+                  <Play className="w-4 h-4 text-[#8B5CF6] opacity-60 group-hover/title:opacity-100 fill-current transition-opacity" />
                 </h3>
                 <p className="text-xs sm:text-sm text-[#3B4B75] leading-relaxed mb-6 font-sans">
                   {isBangla
@@ -193,7 +210,11 @@ export function ChooseAdventureSection() {
 
           {/* Realm 3: THRILL GALAXY */}
           <div className="park-card overflow-hidden flex flex-col justify-between group">
-            <div className="relative h-68 overflow-hidden bg-slate-100">
+            <div
+              className="relative h-68 overflow-hidden bg-slate-100 cursor-pointer"
+              onClick={() => playAnimation("thrill-world")}
+              title="Click to play 3D Thrill World Cartoon Animation"
+            >
               <img
                 alt="Magic Island Amusement Park thrill rides including roller coasters, spinning pendulum, and family attractions"
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
@@ -207,7 +228,10 @@ export function ChooseAdventureSection() {
               {/* 3D Cartoon Animation Launcher Button */}
               <button
                 type="button"
-                onClick={() => playAnimation("thrill-world")}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  playAnimation("thrill-world");
+                }}
                 className="absolute bottom-3 left-4 text-xs text-[#172554] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFD93D]/95 hover:bg-[#FFD93D] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg cursor-pointer hover:scale-105 active:scale-95 transition-all"
                 title="Play 3D Roller Coaster Rush Animation"
               >
@@ -222,8 +246,13 @@ export function ChooseAdventureSection() {
                   <FerrisWheel className="w-4 h-4" />
                   <span>{isBangla ? "আকাশছোঁয়া রোমাঞ্চ" : "Skyline Sensation"}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black text-[#172554] font-heading uppercase mb-2">
-                  {isBangla ? "থ্রিল ওয়ার্ল্ড" : "Thrill World"}
+                <h3
+                  onClick={() => playAnimation("thrill-world")}
+                  className="text-2xl sm:text-3xl font-black text-[#172554] hover:text-[#C2410C] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
+                  title="Click to play 3D Coaster Rush Cartoon"
+                >
+                  <span>{isBangla ? "থ্রিল ওয়ার্ল্ড" : "Thrill World"}</span>
+                  <Play className="w-4 h-4 text-[#FF6B35] opacity-60 group-hover/title:opacity-100 fill-current transition-opacity" />
                 </h3>
                 <p className="text-xs sm:text-sm text-[#3B4B75] leading-relaxed mb-6 font-sans">
                   {isBangla
