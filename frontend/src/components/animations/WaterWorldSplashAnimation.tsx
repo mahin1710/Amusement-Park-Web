@@ -23,156 +23,74 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
     const initW = container.clientWidth || window.innerWidth || 1200;
     const initH = container.clientHeight || window.innerHeight || 800;
 
-    const camera = new THREE.PerspectiveCamera(46, initW / initH, 0.1, 1000);
-    camera.position.set(0, 8, 42);
-    camera.lookAt(0, 3, 0);
+    const camera = new THREE.PerspectiveCamera(60, initW / initH, 0.1, 1000);
+    camera.position.set(0, 15, 25);
+    camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(initW, initH);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
-    // --- LIGHTS ---
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+    // --- LIGHTING ---
+    const ambientLight = new THREE.AmbientLight(0x335577, 1.5);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xfff7ed, 2.5);
-    sunLight.position.set(20, 40, 25);
-    scene.add(sunLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    directionalLight.position.set(10, 20, 10);
+    directionalLight.castShadow = true;
+    scene.add(directionalLight);
 
-    const aquaLight = new THREE.PointLight(0x38bdf8, 3.5, 60);
-    aquaLight.position.set(0, 10, 15);
-    scene.add(aquaLight);
+    // --- WATER PLANE GEOMETRY & MATERIAL ---
+    const size = 50;
+    const segments = 128;
+    const geometry = new THREE.PlaneGeometry(size, size, segments, segments);
+    geometry.rotateX(-Math.PI / 2);
 
-    // --- 3D WATER SLIDE FLUME CHUTE ---
-    const slidePoints = [
-      new THREE.Vector3(-36, 16, -6),
-      new THREE.Vector3(-22, 12, -2),
-      new THREE.Vector3(-10, 4, 3),
-      new THREE.Vector3(0, 8, 2),
-      new THREE.Vector3(12, 1.5, 4),
-      new THREE.Vector3(22, -1.8, 3),
-      new THREE.Vector3(36, -2.0, -2),
-    ];
-    const slideCurve = new THREE.CatmullRomCurve3(slidePoints);
-
-    const flumeMat = new THREE.MeshPhysicalMaterial({
-      color: 0x06b6d4,
-      roughness: 0.1,
-      metalness: 0.15,
-      transmission: 0.65,
-      ior: 1.45,
-      clearcoat: 1.0,
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x1e88e5,
+      roughness: 0.2,
+      metalness: 0.1,
+      wireframe: false,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.94,
     });
 
-    const waterMat = new THREE.MeshPhysicalMaterial({
-      color: 0x0284c7,
-      roughness: 0.04,
-      metalness: 0.08,
-      transmission: 0.85,
-      ior: 1.333,
-      clearcoat: 1.0,
-      transparent: true,
-      opacity: 0.92,
-    });
+    const water = new THREE.Mesh(geometry, material);
+    scene.add(water);
 
-    const flumeGeo = new THREE.TubeGeometry(slideCurve, 80, 2.2, 18, false);
-    const flumeMesh = new THREE.Mesh(flumeGeo, flumeMat);
-    scene.add(flumeMesh);
-
-    const waterStreamGeo = new THREE.TubeGeometry(slideCurve, 80, 1.6, 14, false);
-    const waterStream = new THREE.Mesh(waterStreamGeo, waterMat);
-    waterStream.position.y -= 0.2;
-    scene.add(waterStream);
-
-    // --- RIDER ON RAFT ---
-    const riderGroup = new THREE.Group();
-    scene.add(riderGroup);
-
-    const raftMat = new THREE.MeshStandardMaterial({ color: 0xffd93d, roughness: 0.2 });
-    const raftStripeMat = new THREE.MeshStandardMaterial({ color: 0xef4444, roughness: 0.2 });
-    const skinMat = new THREE.MeshStandardMaterial({ color: 0xfed7aa, roughness: 0.35 });
-    const shirtMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.3 });
-
-    const raft = new THREE.Mesh(new THREE.TorusGeometry(1.6, 0.6, 16, 28), raftMat);
-    raft.rotation.x = Math.PI / 2;
-    riderGroup.add(raft);
-
-    const raftStripe = new THREE.Mesh(new THREE.TorusGeometry(1.62, 0.22, 16, 28), raftStripeMat);
-    raftStripe.rotation.x = Math.PI / 2;
-    riderGroup.add(raftStripe);
-
-    const riderTorso = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.4, 1.2, 10), shirtMat);
-    riderTorso.position.y = 1.0;
-    riderGroup.add(riderTorso);
-
-    const riderHead = new THREE.Mesh(new THREE.SphereGeometry(0.55, 14, 14), skinMat);
-    riderHead.position.set(0, 1.9, 0);
-    riderGroup.add(riderHead);
-
-    const armGeo = new THREE.CylinderGeometry(0.12, 0.12, 1.1, 8);
-    const armL = new THREE.Mesh(armGeo, skinMat);
-    armL.position.set(-0.7, 1.4, 0);
-    armL.rotation.z = 0.7;
-    riderGroup.add(armL);
-
-    const armR = new THREE.Mesh(armGeo, skinMat);
-    armR.position.set(0.7, 1.4, 0);
-    armR.rotation.z = -0.7;
-    riderGroup.add(armR);
-
-    // Splash Particles
-    const splashDroplets: { mesh: THREE.Mesh; vx: number; vy: number; vz: number; life: number; age: number }[] = [];
-    const dropGeo = new THREE.DodecahedronGeometry(0.4, 1);
-    const dropMat = new THREE.MeshPhysicalMaterial({ color: 0xbae6fd, transmission: 0.85, roughness: 0.05, clearcoat: 1.0 });
-
-    for (let i = 0; i < 50; i++) {
-      const drop = new THREE.Mesh(dropGeo, dropMat);
-      drop.position.set(16 + (Math.random() - 0.5) * 8, -1 + Math.random() * 2, 3 + (Math.random() - 0.5) * 4);
-      scene.add(drop);
-      splashDroplets.push({
-        mesh: drop,
-        vx: (Math.random() - 0.4) * 10,
-        vy: 6 + Math.random() * 12,
-        vz: (Math.random() - 0.5) * 6,
-        life: 0.9 + Math.random() * 0.4,
-        age: Math.random() * 0.8,
-      });
-    }
+    const clock = new THREE.Clock();
+    const posAttr = geometry.attributes.position;
+    const originalPositions = posAttr.array.slice();
 
     const startTime = performance.now();
-    const duration = 4.5;
+    const duration = 4.8;
     let animFrame: number;
 
     const animate = () => {
       const now = performance.now();
       const elapsed = (now - startTime) / 1000;
-      const progress = Math.min(1, elapsed / duration);
+      const time = clock.getElapsedTime();
 
-      // Traversal along slide curve
-      const pt = slideCurve.getPointAt(progress);
-      const tang = slideCurve.getTangentAt(progress).normalize();
-      riderGroup.position.copy(pt);
-      riderGroup.position.y += 0.9;
-      riderGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), tang);
-      riderGroup.rotation.z += Math.sin(elapsed * 10) * 0.2;
+      // Sum of sine waves for natural water movement
+      for (let i = 0; i < posAttr.count; i++) {
+        const x = originalPositions[i * 3];
+        const z = originalPositions[i * 3 + 2];
 
-      armL.rotation.x = Math.sin(elapsed * 16) * 0.4;
-      armR.rotation.x = -Math.sin(elapsed * 16) * 0.4;
+        const wave1 = Math.sin(x * 0.3 + time * 1.5) * 0.5;
+        const wave2 = Math.cos(z * 0.2 + time * 1.0) * 0.4;
+        const wave3 = Math.sin((x + z) * 0.15 + time * 2.0) * 0.3;
 
-      // Update splash droplets
-      splashDroplets.forEach((d) => {
-        d.age += 0.016;
-        if (d.age > d.life) d.age = 0;
-        const t = d.age;
-        d.mesh.position.y = -1.2 + d.vy * t - 0.5 * 24 * t * t;
-      });
+        posAttr.setY(i, wave1 + wave2 + wave3);
+      }
+
+      posAttr.needsUpdate = true;
+      geometry.computeVertexNormals();
 
       renderer.render(scene, camera);
 
-      if (progress < 1) {
+      if (elapsed < duration) {
         animFrame = requestAnimationFrame(animate);
       } else {
         onComplete?.();
@@ -195,6 +113,8 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      geometry.dispose();
+      material.dispose();
       renderer.dispose();
     };
   }, [onComplete]);
@@ -212,8 +132,8 @@ export function WaterWorldSplashAnimation({ onComplete, isReducedMotion = false 
       >
         <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#0EA5E9] border-3 border-white text-white font-heading font-black text-lg sm:text-2xl tracking-wider shadow-2xl flex items-center gap-3">
           <span className="text-2xl animate-pulse">🌊</span>
-          <span>WATER WORLD 3D WATER SLIDE RIDE!</span>
-          <span className="text-2xl">🏄‍♂️</span>
+          <span>WATER WORLD 3D WATER WAVE SIMULATION!</span>
+          <span className="text-2xl">✨</span>
         </div>
       </motion.div>
     </div>

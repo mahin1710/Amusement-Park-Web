@@ -106,16 +106,6 @@ export function RollerCoasterFloatingEffect({ onComplete, isReducedMotion = fals
       })
     );
 
-    const pylonMat = registerMat(
-      new THREE.MeshStandardMaterial({
-        color: 0x1e293b,
-        metalness: 0.7,
-        roughness: 0.35,
-        transparent: true,
-        opacity: 0.85,
-      })
-    );
-
     // Candy-Coat Car Body Finishes
     const leadCarRedMat = registerMat(
       new THREE.MeshPhysicalMaterial({
