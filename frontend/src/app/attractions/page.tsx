@@ -283,11 +283,12 @@ export default function AttractionsPage() {
               href={`/attractions/${ride.id}`}
               className="park-card overflow-hidden flex flex-col justify-between group cursor-pointer"
             >
-              <div className="relative h-64 w-full overflow-hidden bg-slate-100">
+              <div className="relative h-64 w-full overflow-hidden bg-[#FFF9ED]">
                 <img
                   src={ride.imageUrl}
                   alt={ride.name.en}
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                  className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-108 transition-transform duration-700"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent"></div>
 

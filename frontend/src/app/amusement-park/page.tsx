@@ -26,18 +26,20 @@ export default function AmusementParkPage() {
       )}
 
       {/* Hero Banner with Authentic Amusement Park Photography */}
-      <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
-        <img
-          src="/images/Thrill%20World/Thrill%20Cover%20Pic.png"
-          alt="Amusement Park Rollercoaster"
-          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-105 contrast-100"
-          style={{ willChange: "transform" }}
-        />
-        {/* Subtle Top & Text Contrast Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-[#172554]/25 to-black/25 pointer-events-none z-10"></div>
+      <section className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
+        <div className="absolute inset-0 z-0 overflow-hidden w-full">
+          <img
+            src="/images/Thrill%20World/Thrill%20Cover%20Pic.png"
+            alt="Amusement Park Rollercoaster"
+            className="w-full h-[calc(100%+6px)] -top-1 object-cover object-center filter brightness-105 contrast-100"
+            loading="eager"
+          />
+          {/* Subtle Top & Text Contrast Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-[#172554]/25 to-black/25 pointer-events-none z-10" />
 
-        {/* Seamless Bottom-Edge Blend into #FFF9ED (Matches Homepage Smooth Scroll Quality) */}
-        <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20"></div>
+          {/* Seamless Bottom-Edge Blend into #FFF9ED (Slightly overflows boundary to eliminate subpixel gaps) */}
+          <div className="absolute inset-x-0 -bottom-[2px] h-24 sm:h-32 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20" />
+        </div>
 
         <div className="relative z-30 max-w-5xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#FF6B35] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#FF6B35]/40 backdrop-blur-md">
@@ -93,35 +95,37 @@ export default function AmusementParkPage() {
       </section>
 
       {/* Attractions Grid */}
-      <section id="rides" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FFEDD5] text-[#FF6B35] text-xs uppercase tracking-widest font-black mb-3 border border-[#FF6B35]/40">
-            <FerrisWheel className="w-4 h-4" />
-            <span>{isBangla ? "মেকানিক্যাল রাইডস" : "Signature Thrill Rides"}</span>
+      <section id="rides" className="py-16 sm:py-20 bg-[#FFF9ED] relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FFEDD5] text-[#FF6B35] text-xs uppercase tracking-widest font-black mb-3 border border-[#FF6B35]/40">
+              <FerrisWheel className="w-4 h-4" />
+              <span>{isBangla ? "মেকানিক্যাল রাইডস" : "Signature Thrill Rides"}</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-[#172554] font-heading tracking-tight">
+              {isBangla ? "অ্যামিউজমেন্ট পার্কের সেরা রাইডস" : "SIGNATURE AMUSEMENT RIDES"}
+            </h2>
+            <p className="mt-3 text-[#172554]/75 text-sm sm:text-base leading-relaxed font-medium">
+              {isBangla
+                ? "আন্তর্জাতিক নিরাপত্তা প্রত্যয়ন ও কম্পিউটারাইজড ম্যাগনেটিক সিকিউরিটি সিস্টেমে নির্মিত আধুনিক রাইডস।"
+                : "Manufactured to rigorous international amusement engineering standards with magnetic fail-safe locks."}
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-[#172554] font-heading tracking-tight">
-            {isBangla ? "অ্যামিউজমেন্ট পার্কের সেরা রাইডস" : "SIGNATURE AMUSEMENT RIDES"}
-          </h2>
-          <p className="mt-3 text-[#172554]/75 text-sm sm:text-base leading-relaxed font-medium">
-            {isBangla
-              ? "আন্তর্জাতিক নিরাপত্তা প্রত্যয়ন ও কম্পিউটারাইজড ম্যাগনেটিক সিকিউরিটি সিস্টেমে নির্মিত আধুনিক রাইডস।"
-              : "Manufactured to rigorous international amusement engineering standards with magnetic fail-safe locks."}
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {amusementRides.map((ride) => (
-            <div
-              key={ride.id}
-              className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
-              style={{ isolation: "isolate" }}
-            >
-              <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#FED7AA]/60 bg-slate-100 rounded-t-[26px]">
-                <img
-                  src={ride.imageUrl}
-                  alt={ride.name.en}
-                  className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 transform-gpu"
-                />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {amusementRides.map((ride) => (
+              <div
+                key={ride.id}
+                className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
+                style={{ isolation: "isolate" }}
+              >
+                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#FED7AA]/60 bg-[#FFF9ED] rounded-t-[26px]">
+                  <img
+                    src={ride.imageUrl}
+                    alt={ride.name.en}
+                    className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-106 transition-transform duration-700"
+                    loading="lazy"
+                  />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
                 <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#FF6B35] text-xs font-black shadow-md border border-amber-200">
                   {isBangla ? ride.thrillLevelBn : ride.thrillLevel}
@@ -166,6 +170,7 @@ export default function AmusementParkPage() {
             </div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* Real Thrill World Photo Showcase Gallery */}
@@ -199,13 +204,14 @@ export default function AmusementParkPage() {
             ].map((pic, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-white transform-gpu"
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFF9ED]"
                 style={{ isolation: "isolate" }}
               >
                 <img
                   src={pic.src}
                   alt={pic.labelEn}
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 transform-gpu"
+                  className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-108 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
                   <span className="text-white text-xs font-heading font-bold drop-shadow-sm">

@@ -78,35 +78,37 @@ export default function WaterParkPage() {
       </section>
 
       {/* Highlights Grid */}
-      <section id="rides" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#E0F2FE] text-[#0284C7] text-xs uppercase tracking-widest font-black mb-3 border border-[#38BDF8]/40">
-            <Waves className="w-4 h-4" />
-            <span>{isBangla ? "সিগনেচার রাইডস" : "Signature Water Attractions"}</span>
+      <section id="rides" className="py-16 sm:py-20 bg-[#FFF9ED] relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#E0F2FE] text-[#0284C7] text-xs uppercase tracking-widest font-black mb-3 border border-[#38BDF8]/40">
+              <Waves className="w-4 h-4" />
+              <span>{isBangla ? "সিগনেচার রাইডস" : "Signature Water Attractions"}</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-[#172554] font-heading tracking-tight">
+              {isBangla ? "ওয়াটার রাইডস ও আকর্ষণসমূহ" : "WATER RIDES & ATTRACTIONS"}
+            </h2>
+            <p className="mt-3 text-[#172554]/75 text-sm sm:text-base leading-relaxed font-medium">
+              {isBangla
+                ? "আন্তর্জাতিক লাইফগার্ড দল ও সার্বক্ষণিক বিশুদ্ধ ওয়াটার ফিল্ট্রেশন প্রযুক্তিতে নিশ্চিত সর্বোচ্চ আনন্দ ও নিরাপত্তা।"
+                : "Equipped with advanced multi-stage water filtration systems and certified lifeguard oversight at every pool."}
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-[#172554] font-heading tracking-tight">
-            {isBangla ? "ওয়াটার রাইডস ও আকর্ষণসমূহ" : "WATER RIDES & ATTRACTIONS"}
-          </h2>
-          <p className="mt-3 text-[#172554]/75 text-sm sm:text-base leading-relaxed font-medium">
-            {isBangla
-              ? "আন্তর্জাতিক লাইফগার্ড দল ও সার্বক্ষণিক বিশুদ্ধ ওয়াটার ফিল্ট্রেশন প্রযুক্তিতে নিশ্চিত সর্বোচ্চ আনন্দ ও নিরাপত্তা।"
-              : "Equipped with advanced multi-stage water filtration systems and certified lifeguard oversight at every pool."}
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {waterRides.map((ride) => (
-            <div
-              key={ride.id}
-              className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
-              style={{ isolation: "isolate" }}
-            >
-              <div className="relative h-64 sm:h-72 w-full overflow-hidden border-b-2 border-[#FED7AA]/60 bg-slate-100 rounded-t-[26px]">
-                <img
-                  src={ride.imageUrl}
-                  alt={ride.name.en}
-                  className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700 transform-gpu"
-                />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {waterRides.map((ride) => (
+              <div
+                key={ride.id}
+                className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
+                style={{ isolation: "isolate" }}
+              >
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden border-b-2 border-[#FED7AA]/60 bg-[#FFF9ED] rounded-t-[26px]">
+                  <img
+                    src={ride.imageUrl}
+                    alt={ride.name.en}
+                    className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-106 transition-transform duration-700"
+                    loading="lazy"
+                  />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
                 <div className="absolute top-4 left-4 flex gap-2">
                   <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#172554] font-black text-xs shadow-md border border-amber-200">
@@ -147,6 +149,7 @@ export default function WaterParkPage() {
             </div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* Real Water World Photo Showcase Gallery */}
@@ -180,13 +183,14 @@ export default function WaterParkPage() {
             ].map((pic, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-white transform-gpu"
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFF9ED]"
                 style={{ isolation: "isolate" }}
               >
                 <img
                   src={pic.src}
                   alt={pic.labelEn}
-                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 transform-gpu"
+                  className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-108 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
                   <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
@@ -200,7 +204,7 @@ export default function WaterParkPage() {
       </section>
 
       {/* Safety & Amenities Strip */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white border-y border-amber-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 rounded-3xl bg-[#FFF9ED] border-2 border-amber-200/80 flex items-start gap-4 shadow-sm">

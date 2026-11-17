@@ -170,6 +170,7 @@ export default function DinoZonePage() {
             </div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* Real Dino World Photo Showcase Gallery */}
