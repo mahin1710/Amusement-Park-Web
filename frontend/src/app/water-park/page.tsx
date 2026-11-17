@@ -19,18 +19,20 @@ export default function WaterParkPage() {
   return (
     <div className="min-h-screen bg-[#FFF9ED] text-[#172554] relative">
       {/* Hero Banner with Authentic Water World Photograph */}
-      <section className="relative h-[72vh] min-h-[540px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
-        <img
-          src="/images/Water%20World/Water%20Cover%20Pic.png"
-          alt="Magic Island Aerial Wave Pool and Mega Water Slides"
-          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-105 contrast-100"
-          style={{ willChange: "transform" }}
-        />
-        {/* Subtle Top & Text Contrast Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-[#172554]/25 to-black/25 pointer-events-none z-10"></div>
+      <section className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
+        <div className="absolute inset-0 z-0 overflow-hidden w-full">
+          <img
+            src="/images/Water%20World/Water%20Cover%20Pic.png"
+            alt="Magic Island Aerial Wave Pool and Mega Water Slides"
+            className="w-full h-[calc(100%+6px)] -top-1 object-cover object-center filter brightness-105 contrast-100"
+            loading="eager"
+          />
+          {/* Subtle Top & Text Contrast Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-[#172554]/25 to-black/25 pointer-events-none z-10" />
 
-        {/* Seamless Bottom-Edge Blend into #FFF9ED (Matches Homepage Smooth Scroll Quality) */}
-        <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20"></div>
+          {/* Seamless Bottom-Edge Blend into #FFF9ED (Slightly overflows boundary to eliminate subpixel gaps) */}
+          <div className="absolute inset-x-0 -bottom-[2px] h-24 sm:h-32 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20" />
+        </div>
 
         <div className="relative z-30 max-w-5xl mx-auto px-4 text-center -translate-y-8 sm:-translate-y-12">
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#38BDF8]/40 backdrop-blur-md">

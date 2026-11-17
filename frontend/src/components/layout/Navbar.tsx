@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Globe, Menu, X, ArrowRight } from "lucide-react";
@@ -11,14 +11,37 @@ export function Navbar() {
   const { locale, setLocale, isBangla } = useTranslation();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const threshold = window.innerWidth < 768 ? 160 : 200;
-      setIsScrolled(window.scrollY > threshold);
+    let ticking = false;
+
+    const updateScroll = () => {
+      const scrollY =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      const maxScroll = window.innerWidth < 768 ? 90 : 120;
+      const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
+
+      if (headerRef.current) {
+        headerRef.current.style.setProperty("--scroll-p", progress.toFixed(4));
+      }
+      setScrollProgress(progress);
+      ticking = false;
     };
-    handleScroll();
+
+    updateScroll();
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScroll);
+        ticking = true;
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll, { passive: true });
     return () => {
@@ -47,9 +70,13 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 bg-[#FFF9ED]/80 backdrop-blur-md border-b-2 border-[#FED7AA]/60 transition-all duration-300 ease-in-out ${
-        isScrolled ? "py-2 sm:py-2.5 shadow-sm shadow-orange-950/5" : "py-3 sm:py-4 shadow-xs"
-      }`}
+      ref={headerRef}
+      className="sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 bg-[#FFF9ED]/85 backdrop-blur-md border-b-2 border-[#FED7AA]/60 transition-shadow duration-200 [--scroll-p:0] [--nav-logo-max:48px] [--nav-logo-min:40px] sm:[--nav-logo-max:56px] sm:[--nav-logo-min:44px] lg:[--nav-logo-max:64px] lg:[--nav-logo-min:48px]"
+      style={{
+        paddingTop: `calc(clamp(8px, 1rem - 0.5rem * var(--scroll-p, ${scrollProgress}), 1rem))`,
+        paddingBottom: `calc(clamp(8px, 1rem - 0.5rem * var(--scroll-p, ${scrollProgress}), 1rem))`,
+        boxShadow: `0 4px 12px -2px rgba(67, 20, 7, calc(0.04 + 0.04 * var(--scroll-p, ${scrollProgress})))`,
+      }}
       data-purpose="internal-page-navigation"
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
@@ -57,44 +84,45 @@ export function Navbar() {
         <Link
           href="/"
           aria-label="Anowar City Magic Island Home"
-          className="flex items-center gap-2.5 sm:gap-3 group shrink-0 transition-transform duration-200"
+          className="flex items-center gap-2.5 sm:gap-3 group shrink-0"
         >
           <div
-            className={`shrink-0 flex items-center justify-center bg-white border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105 transition-all duration-300 ease-in-out ${
-              isScrolled
-                ? "h-10 sm:h-11 lg:h-12 w-auto p-1 rounded-xl shadow-xs"
-                : "h-12 sm:h-14 lg:h-16 w-auto p-1.5 rounded-2xl shadow-sm"
-            }`}
+            className="shrink-0 flex items-center justify-center bg-white border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105"
+            style={{
+              height: `calc(var(--nav-logo-max) - (var(--nav-logo-max) - var(--nav-logo-min)) * var(--scroll-p, ${scrollProgress}))`,
+              padding: `calc(clamp(4px, 6px - 2px * var(--scroll-p, ${scrollProgress}), 6px))`,
+              borderRadius: `calc(clamp(12px, 16px - 4px * var(--scroll-p, ${scrollProgress}), 16px))`,
+            }}
           >
             <img
               src="/images/Magic%20Island%20Logo.jpg"
               alt="Anowar City Magic Island Official Logo"
-              className="h-full w-auto object-contain transition-all duration-300 ease-in-out"
+              className="h-full w-auto object-contain"
             />
           </div>
-          <div className="flex flex-col justify-center transition-all duration-300 ease-in-out">
+          <div className="flex flex-col justify-center">
             <span
-              className={`font-bold uppercase font-heading leading-none text-[#FF6B35] transition-all duration-300 ease-in-out ${
-                isScrolled
-                  ? "text-[9px] sm:text-[10px] tracking-[0.20em] mb-0.5"
-                  : "text-[10px] sm:text-[11px] tracking-[0.22em] mb-1"
-              }`}
+              className="font-bold uppercase font-heading leading-none text-[#FF6B35]"
+              style={{
+                fontSize: `calc(clamp(9px, 11px - 2px * var(--scroll-p, ${scrollProgress}), 11px))`,
+                letterSpacing: `calc(0.22em - 0.02em * var(--scroll-p, ${scrollProgress}))`,
+                marginBottom: `calc(clamp(2px, 4px - 2px * var(--scroll-p, ${scrollProgress}), 4px))`,
+              }}
             >
               {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
             </span>
             <span
-              className={`font-black tracking-tight text-[#172554] font-heading leading-none transition-all duration-300 ease-in-out ${
-                isScrolled
-                  ? "text-base sm:text-lg lg:text-xl"
-                  : "text-xl sm:text-2xl"
-              }`}
+              className="font-black tracking-tight text-[#172554] font-heading leading-none"
+              style={{
+                fontSize: `calc(clamp(1rem, 1.5rem - 0.25rem * var(--scroll-p, ${scrollProgress}), 1.5rem))`,
+              }}
             >
               MAGIC ISLAND
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links with Modern Rounded Orange Hover */}
+        {/* Desktop Navigation Links with Smooth Proportional Sizing */}
         <nav
           aria-label="Site Navigation"
           className="hidden lg:flex items-center gap-2 xl:gap-2.5 flex-wrap justify-center"
@@ -107,6 +135,13 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 className={`nav-pill-btn ${isActive ? "active" : ""}`}
+                style={{
+                  paddingTop: `calc(clamp(6px, 8px - 2px * var(--scroll-p, ${scrollProgress}), 8px))`,
+                  paddingBottom: `calc(clamp(6px, 8px - 2px * var(--scroll-p, ${scrollProgress}), 8px))`,
+                  paddingLeft: `calc(clamp(14px, 18px - 4px * var(--scroll-p, ${scrollProgress}), 18px))`,
+                  paddingRight: `calc(clamp(14px, 18px - 4px * var(--scroll-p, ${scrollProgress}), 18px))`,
+                  fontSize: `calc(clamp(0.75rem, 0.8125rem - 0.0625rem * var(--scroll-p, ${scrollProgress}), 0.8125rem))`,
+                }}
               >
                 <span>{isBangla ? item.labelBn : item.labelEn}</span>
               </Link>
@@ -122,7 +157,13 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             title="Inquire via WhatsApp"
-            className="hidden sm:inline-flex items-center gap-2 h-9 sm:h-10 px-3.5 sm:px-4 text-xs font-heading font-semibold rounded-full bg-[#55C98B] hover:bg-[#43B878] text-white shadow-md shadow-emerald-500/20 transition-all hover:scale-105 duration-200 whitespace-nowrap cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-2 font-heading font-semibold rounded-full bg-[#55C98B] hover:bg-[#43B878] text-white shadow-md shadow-emerald-500/20 transition-transform hover:scale-105 duration-200 whitespace-nowrap cursor-pointer"
+            style={{
+              height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
+              paddingLeft: `calc(clamp(12px, 16px - 4px * var(--scroll-p, ${scrollProgress}), 16px))`,
+              paddingRight: `calc(clamp(12px, 16px - 4px * var(--scroll-p, ${scrollProgress}), 16px))`,
+              fontSize: `calc(clamp(11px, 12px - 1px * var(--scroll-p, ${scrollProgress}), 12px))`,
+            }}
           >
             <i className="fa-brands fa-whatsapp text-sm"></i>
             <span className="hidden xl:inline">{businessConfig.hotlines.whatsapp}</span>
@@ -134,7 +175,13 @@ export function Navbar() {
             onClick={toggleLanguage}
             type="button"
             title="Switch Language"
-            className="nav-pill-btn !h-9 sm:!h-10 !px-3 sm:!px-3.5 !text-xs cursor-pointer"
+            className="nav-pill-btn cursor-pointer"
+            style={{
+              height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
+              paddingLeft: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
+              paddingRight: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
+              fontSize: `calc(clamp(11px, 12px - 1px * var(--scroll-p, ${scrollProgress}), 12px))`,
+            }}
           >
             <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
             <span>
@@ -155,7 +202,11 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden h-9 w-9 sm:h-10 sm:w-10 rounded-full border-2 border-[#FED7AA] bg-white text-[#172554] hover:text-[#FF6B35] flex items-center justify-center transition-transform active:scale-95 shadow-sm cursor-pointer"
+            className="lg:hidden rounded-full border-2 border-[#FED7AA] bg-white text-[#172554] hover:text-[#FF6B35] flex items-center justify-center transition-transform active:scale-95 shadow-sm cursor-pointer"
+            style={{
+              height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
+              width: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
+            }}
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
