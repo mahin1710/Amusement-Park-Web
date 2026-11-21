@@ -12,24 +12,24 @@ export default function TicketsPage() {
   const { t, isBangla } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] py-16">
+    <div className="min-h-screen bg-[#FFFDF5] text-[#173B42] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-100 text-sky-800 text-xs font-bold uppercase tracking-widest mb-4 border border-sky-200">
-            <Ticket className="w-3.5 h-3.5 text-sky-600" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#087E8B]/15 text-[#087E8B] text-xs font-bold uppercase tracking-widest mb-4 border border-[#087E8B]/25">
+            <Ticket className="w-3.5 h-3.5 text-[#087E8B]" />
             <span>{t("tickets.badge")}</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight font-heading uppercase">
+          <h1 className="text-3xl sm:text-5xl font-black text-[#173B42] tracking-tight font-heading uppercase">
             {t("tickets.title")}
           </h1>
-          <p className="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
+          <p className="mt-4 text-[#173B42]/80 text-sm sm:text-base leading-relaxed font-normal">
             {t("tickets.subtitle")}
           </p>
 
           {/* Pricing Notice */}
-          <div className="mt-6 p-4 rounded-xl bg-white border border-slate-200 text-slate-600 text-xs flex items-center justify-center gap-2.5 max-w-2xl mx-auto text-left sm:text-center shadow-sm">
-            <ShieldAlert className="w-5 h-5 text-sky-600 shrink-0" />
+          <div className="mt-6 p-4 rounded-xl bg-white border border-[#087E8B]/20 text-[#173B42]/80 text-xs flex items-center justify-center gap-2.5 max-w-2xl mx-auto text-left sm:text-center shadow-sm">
+            <ShieldAlert className="w-5 h-5 text-[#087E8B] shrink-0" />
             <span>{t("tickets.placeholderBanner")}</span>
           </div>
         </div>
@@ -48,12 +48,12 @@ export default function TicketsPage() {
                 key={pkg.id}
                 className={`relative rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 ${
                   isFeatured
-                    ? "bg-white border-2 border-sky-600 shadow-xl"
-                    : "bg-white border border-slate-200 shadow-md"
+                    ? "bg-white border-2 border-[#087E8B] shadow-xl"
+                    : "bg-white border border-[#087E8B]/20 shadow-md"
                 }`}
               >
                 {isFeatured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#FF7A24] text-white font-bold text-[11px] uppercase tracking-wider shadow flex items-center gap-1.5 whitespace-nowrap">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#FF795C] text-white font-bold text-[11px] uppercase tracking-wider shadow flex items-center gap-1.5 whitespace-nowrap">
                     <Star className="w-3.5 h-3.5 fill-white" />
                     <span>{isBangla ? pkg.badge?.bn : pkg.badge?.en}</span>
                   </div>
@@ -61,32 +61,32 @@ export default function TicketsPage() {
 
                 <div className="p-6">
                   <div className="min-h-[60px]">
-                    <h3 className="text-xl font-bold text-slate-900 font-heading">
+                    <h3 className="text-xl font-bold text-[#173B42] font-heading">
                       {isBangla ? pkg.title.bn : pkg.title.en}
                     </h3>
-                    <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-[#173B42]/70 mt-1 line-clamp-2 leading-relaxed">
                       {isBangla ? pkg.subtitle.bn : pkg.subtitle.en}
                     </p>
                   </div>
 
-                  <div className="my-5 p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                  <div className="my-5 p-4 rounded-xl bg-[#FFFDF5] border border-[#087E8B]/20 space-y-2">
                     <div className="flex items-baseline justify-between">
-                      <span className="text-xs text-slate-600 font-medium">{t("tickets.adult")}:</span>
+                      <span className="text-xs text-[#173B42]/75 font-medium">{t("tickets.adult")}:</span>
                       <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-black text-slate-900 font-heading">
+                        <span className="text-2xl font-black text-[#173B42] font-heading">
                           ৳{pkg.pricing.adultPriceBDT.toLocaleString()}
                         </span>
-                        <span className="text-[11px] text-slate-500">/{t("tickets.perPerson")}</span>
+                        <span className="text-[11px] text-[#173B42]/60">/{t("tickets.perPerson")}</span>
                       </div>
                     </div>
 
-                    <div className="flex items-baseline justify-between pt-1 border-t border-slate-200">
-                      <span className="text-xs text-slate-600 font-medium">{t("tickets.child")}:</span>
+                    <div className="flex items-baseline justify-between pt-1 border-t border-[#087E8B]/15">
+                      <span className="text-xs text-[#173B42]/75 font-medium">{t("tickets.child")}:</span>
                       <div className="flex items-baseline gap-1">
-                        <span className="text-base font-bold text-sky-700 font-heading">
+                        <span className="text-base font-bold text-[#087E8B] font-heading">
                           ৳{pkg.pricing.childPriceBDT.toLocaleString()}
                         </span>
-                        <span className="text-[10px] text-slate-500">/{t("tickets.perPerson")}</span>
+                        <span className="text-[10px] text-[#173B42]/60">/{t("tickets.perPerson")}</span>
                       </div>
                     </div>
 
@@ -99,13 +99,13 @@ export default function TicketsPage() {
                   </div>
 
                   <div className="space-y-2 text-xs">
-                    <p className="font-bold text-slate-900 uppercase tracking-wider text-[11px]">
+                    <p className="font-bold text-[#173B42] uppercase tracking-wider text-[11px]">
                       {t("tickets.whatsIncluded")}
                     </p>
-                    <ul className="space-y-2 text-slate-600">
+                    <ul className="space-y-2 text-[#173B42]/80">
                       {(isBangla ? pkg.perks.bn : pkg.perks.en).map((perk, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <Check className="w-3.5 h-3.5 text-sky-600 shrink-0 mt-0.5 font-bold" />
+                          <Check className="w-3.5 h-3.5 text-[#087E8B] shrink-0 mt-0.5 font-bold" />
                           <span className="leading-tight">{perk}</span>
                         </li>
                       ))}
@@ -116,7 +116,7 @@ export default function TicketsPage() {
                 <div className="p-6 pt-0 space-y-2.5">
                   <Link
                     href={`/booking?package=${pkg.id}`}
-                    className="w-full gradient-orange-cta py-3 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 text-center"
+                    className="w-full btn-park-primary py-3 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 text-center"
                   >
                     <Ticket className="w-4 h-4" />
                     <span>{t("tickets.bookOnlineBtn")}</span>
@@ -127,9 +127,9 @@ export default function TicketsPage() {
                       href={waLink.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-2.5 rounded-xl border border-sky-300 text-sky-700 bg-white hover:bg-sky-50 text-xs font-bold flex items-center justify-center gap-2 transition-colors"
+                      className="w-full py-2.5 rounded-xl border border-[#087E8B]/30 text-[#087E8B] bg-white hover:bg-[#087E8B]/10 text-xs font-bold flex items-center justify-center gap-2 transition-colors"
                     >
-                      <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                      <MessageCircle className="w-3.5 h-3.5 text-[#26865D]" />
                       <span>{t("tickets.whatsappBtn")}</span>
                     </a>
                   )}
@@ -142,10 +142,10 @@ export default function TicketsPage() {
         {/* Add-On Services Section */}
         <section className="mb-20">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-heading">
+            <h2 className="text-2xl sm:text-3xl font-black text-[#173B42] font-heading">
               {isBangla ? "অতিরিক্ত প্রিমিয়াম সেবা ও সুবিধাসমূহ" : "Optional Add-On Services & Amenities"}
             </h2>
-            <p className="mt-2 text-slate-600 text-xs sm:text-sm">
+            <p className="mt-2 text-[#173B42]/75 text-xs sm:text-sm">
               {isBangla ? "অনলাইন বুকিংয়ের সময় আপনার টিকেটের সাথে সহজে যুক্ত করুন" : "Add these comfort perks to your online reservation during checkout"}
             </p>
           </div>
@@ -163,27 +163,27 @@ export default function TicketsPage() {
               return (
                 <div
                   key={addon.id}
-                  className="rounded-2xl bg-white border border-slate-200 p-5 flex flex-col justify-between space-y-4 shadow-sm hover:-translate-y-1 transition-all"
+                  className="rounded-2xl bg-white border border-[#087E8B]/20 p-5 flex flex-col justify-between space-y-4 shadow-sm hover:-translate-y-1 transition-all"
                 >
                   <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold">
+                    <div className="w-10 h-10 rounded-xl bg-[#087E8B]/15 text-[#087E8B] flex items-center justify-center font-bold">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900 font-heading">
+                      <h4 className="text-sm font-bold text-[#173B42] font-heading">
                         {isBangla ? addon.name.bn : addon.name.en}
                       </h4>
-                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                      <p className="text-xs text-[#173B42]/75 mt-1 leading-relaxed">
                         {isBangla ? addon.description.bn : addon.description.en}
                       </p>
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-baseline justify-between">
-                    <span className="text-base font-black text-slate-900 font-heading">
+                  <div className="pt-3 border-t border-[#087E8B]/15 flex items-baseline justify-between">
+                    <span className="text-base font-black text-[#173B42] font-heading">
                       ৳{addon.priceBDT}
                     </span>
-                    <span className="text-[11px] text-slate-500 font-medium">
+                    <span className="text-[11px] text-[#173B42]/60 font-medium">
                       {addon.perPerson ? (isBangla ? "জনপ্রতি" : "per person") : (isBangla ? "প্রতি আইটেম" : "per item")}
                     </span>
                   </div>

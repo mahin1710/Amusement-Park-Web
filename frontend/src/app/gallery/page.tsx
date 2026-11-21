@@ -205,18 +205,18 @@ export default function GalleryPage() {
   const filtered = GALLERY_DATA.filter((item) => activeTab === "all" || item.category === activeTab);
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] py-16">
+    <div className="min-h-screen bg-[#FFFDF5] text-[#173B42] py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-amber-100/90 text-[#FF6B35] text-xs font-black uppercase tracking-widest mb-4 border border-amber-200">
-            <Camera className="w-4 h-4 text-[#FF6B35]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#087E8B]/10 text-[#087E8B] text-xs font-black uppercase tracking-widest mb-4 border border-[#087E8B]/25">
+            <Camera className="w-4 h-4 text-[#087E8B]" />
             <span>{isBangla ? "মেমোরিজ অ্যান্ড গ্যালারি" : "Photo Gallery"}</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#172554] font-heading tracking-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#173B42] font-heading tracking-tight">
             {isBangla ? "ম্যাজিক আইল্যান্ডের জাদুকরী মুহূর্ত" : "MOMENTS AT MAGIC ISLAND"}
           </h1>
-          <p className="mt-4 text-[#172554]/75 text-sm sm:text-base leading-relaxed font-medium">
+          <p className="mt-4 text-[#173B42]/75 text-sm sm:text-base leading-relaxed font-medium">
             {isBangla
               ? "দর্শনার্থীদের উচ্ছ্বাস, রোমাঞ্চকর রাইড এবং অনাবিল পারিবারিক আনন্দের আসল চিত্র।"
               : "Discover real smiles, exhilarating splashes, roaring prehistoric encounters, and magical island moments."}
@@ -240,8 +240,8 @@ export default function GalleryPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider transition-all cursor-pointer ${
                   isActive
-                    ? "bg-[#FF6B35] text-white shadow-lg scale-105"
-                    : "bg-white border-2 border-amber-200 text-[#172554] hover:bg-amber-50"
+                    ? "bg-[#087E8B] text-white shadow-lg scale-105"
+                    : "bg-white border-2 border-[#087E8B]/20 text-[#173B42] hover:bg-[#087E8B]/10"
                 }`}
               >
                 {Icon && <Icon className="w-4 h-4" />}
@@ -257,26 +257,26 @@ export default function GalleryPage() {
             <div
               key={item.id}
               onClick={() => setSelectedPhoto(item)}
-              className="group relative h-72 rounded-3xl overflow-hidden cursor-pointer bg-white border-2 border-amber-200/80 shadow-md hover:border-[#FF6B35] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+              className="group relative h-72 rounded-3xl overflow-hidden cursor-pointer bg-white border-2 border-[#087E8B]/20 shadow-md hover:border-[#087E8B] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
             >
               <img
                 src={item.imageUrl}
                 alt={item.titleEn}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/85 via-[#172554]/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#12304A]/90 via-[#12304A]/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
 
               {/* Hover Zoom Icon */}
-              <div className="absolute top-4 right-4 p-2 rounded-full bg-[#172554]/80 text-[#FFD93D] opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-4 right-4 p-2 rounded-full bg-[#12304A]/80 text-[#FFC857] opacity-0 group-hover:opacity-100 transition-opacity">
                 <Maximize2 className="w-4 h-4" />
               </div>
 
               {/* Title & Caption */}
               <div className="absolute bottom-4 left-4 right-4 space-y-1">
-                <span className="text-[10px] uppercase font-black text-[#FFD93D] tracking-wider">
+                <span className="text-[10px] uppercase font-black text-[#FFC857] tracking-wider">
                   {item.category}
                 </span>
-                <h3 className="text-sm font-black text-white group-hover:text-[#FFD93D] transition-colors font-heading">
+                <h3 className="text-sm font-black text-white group-hover:text-[#FFC857] transition-colors font-heading">
                   {isBangla ? item.titleBn : item.titleEn}
                 </h3>
                 <p className="text-[11px] text-white/80 line-clamp-1 font-medium">
@@ -291,21 +291,21 @@ export default function GalleryPage() {
       {/* Lightbox Modal */}
       {selectedPhoto && (
         <div
-          className="fixed inset-0 z-50 bg-[#172554]/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+          className="fixed inset-0 z-50 bg-[#12304A]/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
           onClick={() => setSelectedPhoto(null)}
         >
           <div
-            className="relative max-w-4xl w-full rounded-3xl overflow-hidden bg-white border-2 border-amber-200 shadow-2xl"
+            className="relative max-w-4xl w-full rounded-3xl overflow-hidden bg-white border-2 border-[#087E8B]/30 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedPhoto(null)}
-              className="absolute top-4 right-4 z-10 p-2.5 rounded-full bg-[#172554]/80 text-white hover:text-[#FFD93D] transition-colors"
+              className="absolute top-4 right-4 z-10 p-2.5 rounded-full bg-[#12304A]/80 text-white hover:text-[#FFC857] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="relative max-h-[65vh] w-full overflow-hidden bg-[#172554] flex items-center justify-center">
+            <div className="relative max-h-[65vh] w-full overflow-hidden bg-[#12304A] flex items-center justify-center">
               <img
                 src={selectedPhoto.imageUrl}
                 alt={selectedPhoto.titleEn}
@@ -313,14 +313,14 @@ export default function GalleryPage() {
               />
             </div>
 
-            <div className="p-6 bg-white border-t border-amber-100 space-y-1">
-              <span className="text-xs uppercase font-black text-[#FF6B35]">
+            <div className="p-6 bg-white border-t border-[#087E8B]/15 space-y-1">
+              <span className="text-xs uppercase font-black text-[#087E8B]">
                 {selectedPhoto.category.toUpperCase()}
               </span>
-              <h3 className="text-xl font-black text-[#172554] font-heading">
+              <h3 className="text-xl font-black text-[#173B42] font-heading">
                 {isBangla ? selectedPhoto.titleBn : selectedPhoto.titleEn}
               </h3>
-              <p className="text-sm text-[#172554]/80 font-medium">
+              <p className="text-sm text-[#173B42]/80 font-medium">
                 {isBangla ? selectedPhoto.captionBn : selectedPhoto.captionEn}
               </p>
             </div>

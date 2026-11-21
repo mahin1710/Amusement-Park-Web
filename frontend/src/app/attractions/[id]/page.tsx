@@ -37,14 +37,14 @@ export default function AttractionDetailPage() {
   if (!attraction) {
     // If not found in data
     return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center bg-[#FFF9ED]">
-        <div className="w-16 h-16 rounded-full bg-[#FFD93D] flex items-center justify-center text-3xl mb-4">
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center bg-[#FFFDF5]">
+        <div className="w-16 h-16 rounded-full bg-[#FFC857] flex items-center justify-center text-3xl mb-4">
           🎡
         </div>
-        <h1 className="text-3xl font-heading font-bold text-[#172554] mb-2">
+        <h1 className="text-3xl font-heading font-bold text-[#173B42] mb-2">
           {isBangla ? "আকর্ষণটি খুঁজে পাওয়া যায়নি" : "Attraction Not Found"}
         </h1>
-        <p className="text-[#3B4B75] mb-6">
+        <p className="text-[#173B42]/75 mb-6">
           {isBangla
             ? "অনুগ্রহ করে আমাদের আকর্ষণ তালিকা থেকে অন্য একটি রাইড বেছে নিন।"
             : "Please choose from our complete list of rides and experiences."}
@@ -95,9 +95,9 @@ export default function AttractionDetailPage() {
   )}`;
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554]">
+    <div className="min-h-screen bg-[#FFFDF5] text-[#173B42]">
       {/* 1. ATTRACTION HERO SECTION */}
-      <section className="relative min-h-[65vh] flex items-end justify-center pb-16 pt-32 overflow-hidden bg-[#172554]">
+      <section className="relative min-h-[65vh] flex items-end justify-center pb-16 pt-32 overflow-hidden bg-[#12304A]">
         {/* Large Background Photograph */}
         <img
           src={attraction.imageUrl}
@@ -105,15 +105,15 @@ export default function AttractionDetailPage() {
           className="absolute inset-0 w-full h-full object-cover object-center scale-105 filter brightness-105 contrast-100"
         />
         {/* Soft Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#172554] via-[#172554]/60 to-black/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#12304A] via-[#12304A]/60 to-black/30"></div>
 
         {/* Back Link Floating in Top Left */}
         <div className="absolute top-24 left-4 sm:left-8 z-20">
           <Link
             href="/attractions"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 hover:bg-white text-[#172554] font-heading font-bold text-xs shadow-md transition-transform hover:-translate-x-1"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 hover:bg-white text-[#173B42] font-heading font-bold text-xs shadow-md transition-transform hover:-translate-x-1"
           >
-            <ArrowLeft className="w-4 h-4 text-[#FF6B35]" />
+            <ArrowLeft className="w-4 h-4 text-[#087E8B]" />
             <span>{isBangla ? "সকল আকর্ষণে ফিরুন" : "Back to Attractions"}</span>
           </Link>
         </div>
@@ -121,11 +121,11 @@ export default function AttractionDetailPage() {
         {/* Hero Content Banner */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white flex flex-col items-center">
           {/* Zone Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border-2 border-[#FFD93D] text-[#172554] font-heading font-bold text-xs uppercase tracking-wider mb-4 shadow-md">
-            <ZoneIcon className="w-4 h-4 text-[#FF6B35]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border-2 border-[#FFC857] text-[#173B42] font-heading font-bold text-xs uppercase tracking-wider mb-4 shadow-md">
+            <ZoneIcon className="w-4 h-4 text-[#FF795C]" />
             <span>{isBangla ? zoneMeta.nameBn : zoneMeta.nameEn}</span>
             <span className="text-slate-300">•</span>
-            <span className="text-[#0284C7]">{isBangla ? attraction.thrillLevelBn : attraction.thrillLevel}</span>
+            <span className="text-[#087E8B]">{isBangla ? attraction.thrillLevelBn : attraction.thrillLevel}</span>
           </div>
 
           {/* Attraction Headline */}
@@ -134,18 +134,18 @@ export default function AttractionDetailPage() {
           </h1>
 
           {/* Tagline */}
-          <p className="text-base sm:text-xl text-yellow-100 font-heading font-medium max-w-2xl leading-relaxed mb-6">
+          <p className="text-base sm:text-xl text-[#FFC857] font-heading font-medium max-w-2xl leading-relaxed mb-6">
             {isBangla ? attraction.tagline.bn : attraction.tagline.en}
           </p>
 
           {/* Quick Stat Highlights */}
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-heading font-semibold">
             <span className="px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#FFD93D]" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#FFC857]" />
               <span>{isBangla ? attraction.heightRequirementBn : attraction.heightRequirement}</span>
             </span>
             <span className="px-3.5 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <Clock className="w-3.5 h-3.5 text-[#35C6C8]" />
               <span>{isBangla ? "সারাদিন খোলা" : "Continuous Operations"}</span>
             </span>
           </div>
@@ -158,22 +158,22 @@ export default function AttractionDetailPage() {
           {/* Left Column: Introduction & Features (7 cols) */}
           <div className="lg:col-span-7 space-y-8">
             {/* Introduction Card */}
-            <div className="p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-md space-y-4">
-              <div className="inline-flex items-center gap-2 text-xs font-heading font-bold text-[#FF6B35] uppercase tracking-wider">
-                <Sparkles className="w-4 h-4 text-[#FFD93D]" />
+            <div className="p-8 rounded-3xl bg-white border-2 border-[#087E8B]/20 shadow-md space-y-4">
+              <div className="inline-flex items-center gap-2 text-xs font-heading font-bold text-[#087E8B] uppercase tracking-wider">
+                <Sparkles className="w-4 h-4 text-[#FFC857]" />
                 <span>{isBangla ? "আকর্ষণ পরিচিতি" : "About This Attraction"}</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#172554]">
+              <h2 className="text-2xl sm:text-3xl font-bold font-heading text-[#173B42]">
                 {isBangla ? "অবিস্মরণীয় রোমাঞ্চ ও আনন্দের অভিজ্ঞতা" : "Experience the Thrill Firsthand"}
               </h2>
-              <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-sans">
+              <p className="text-[#173B42]/80 text-sm sm:text-base leading-relaxed font-sans">
                 {isBangla ? attraction.description.bn : attraction.description.en}
               </p>
             </div>
 
             {/* Key Features & Highlights */}
-            <div className="p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-md space-y-6">
-              <h3 className="text-xl font-bold font-heading text-[#172554] flex items-center gap-2">
+            <div className="p-8 rounded-3xl bg-white border-2 border-[#087E8B]/20 shadow-md space-y-6">
+              <h3 className="text-xl font-bold font-heading text-[#173B42] flex items-center gap-2">
                 <span>🎯</span>
                 <span>{isBangla ? "বিশেষ বৈশিষ্ট্য ও সুবিধাসমূহ" : "Key Highlights & Experience Specs"}</span>
               </h3>
@@ -181,12 +181,12 @@ export default function AttractionDetailPage() {
                 {(isBangla ? attraction.features.bn : attraction.features.en).map((feat, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-2xl bg-[#FFF9ED] border border-[#FED7AA] flex items-start gap-3"
+                    className="p-3.5 rounded-2xl bg-[#FFFDF5] border border-[#087E8B]/20 flex items-start gap-3"
                   >
-                    <div className="w-6 h-6 rounded-full bg-[#55C98B] text-white flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
+                    <div className="w-6 h-6 rounded-full bg-[#26865D] text-white flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
                       <Check className="w-3.5 h-3.5" />
                     </div>
-                    <span className="text-xs sm:text-sm font-medium text-[#172554] leading-snug">
+                    <span className="text-xs sm:text-sm font-medium text-[#173B42] leading-snug">
                       {feat}
                     </span>
                   </div>
@@ -195,15 +195,15 @@ export default function AttractionDetailPage() {
             </div>
 
             {/* Safety & Guest Guidelines */}
-            <div className="p-6 rounded-3xl bg-[#FFF7ED] border-2 border-[#FED7AA] flex items-start gap-4">
-              <div className="w-10 h-10 rounded-2xl bg-[#FF6B35] text-white flex items-center justify-center shrink-0 font-bold">
+            <div className="p-6 rounded-3xl bg-white border-2 border-[#087E8B]/20 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-2xl bg-[#FF795C] text-white flex items-center justify-center shrink-0 font-bold">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-sm font-heading font-bold text-[#172554]">
+                <h4 className="text-sm font-heading font-bold text-[#173B42]">
                   {isBangla ? "নিরাপত্তা ও রাইডার গাইডলাইন" : "Safety & Guest Guidelines"}
                 </h4>
-                <p className="text-xs text-[#3B4B75] leading-relaxed">
+                <p className="text-xs text-[#173B42]/75 leading-relaxed">
                   {isBangla
                     ? "সকল রাইডে প্রবেশের পূর্বে অপারেটরের দেওয়া নির্দেশনা মেনে চলুন। প্রয়োজনীয় নিরাপত্তা বেল্ট বা লাইফজ্যাকেট পরিধান করা বাধ্যতামূলক।"
                     : "Please listen closely to certified ride attendants. Follow all height, harness, and water safety instructions."}
@@ -215,19 +215,19 @@ export default function AttractionDetailPage() {
           {/* Right Column: Demo Preview & Action Widget (5 cols) */}
           <div className="lg:col-span-5 space-y-8">
             {/* Visual Demo / Preview Section */}
-            <div className="p-6 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-md space-y-4">
+            <div className="p-6 rounded-3xl bg-white border-2 border-[#087E8B]/20 shadow-md space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-base font-heading font-bold text-[#172554] flex items-center gap-2">
+                <h3 className="text-base font-heading font-bold text-[#173B42] flex items-center gap-2">
                   <span>🎬</span>
                   <span>{isBangla ? "ভিজ্যুয়াল প্রিভিউ ও ঝলক" : "Visual Preview & Sensation"}</span>
                 </h3>
-                <span className="text-[10px] font-heading font-bold px-2.5 py-1 rounded-full bg-[#FFD93D] text-[#172554]">
+                <span className="text-[10px] font-heading font-bold px-2.5 py-1 rounded-full bg-[#FFC857] text-[#173B42]">
                   {isBangla ? "ইন্টারেক্টিভ" : "Interactive"}
                 </span>
               </div>
 
               {/* Demo Player Frame (Secondary & Respects No-Autoplay) */}
-              <div className="relative h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-[#FED7AA] bg-[#172554] group">
+              <div className="relative h-64 sm:h-72 rounded-2xl overflow-hidden border-2 border-[#087E8B]/20 bg-[#12304A] group">
                 <img
                   src={attraction.imageUrl}
                   alt={`${attraction.name.en} preview`}
@@ -241,7 +241,7 @@ export default function AttractionDetailPage() {
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-white">
                   <button
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-16 h-16 rounded-full bg-[#FF6B35] hover:bg-[#FFD93D] hover:text-[#172554] text-white flex items-center justify-center shadow-xl transition-all duration-300 transform group-hover:scale-110 cursor-pointer mb-2"
+                    className="w-16 h-16 rounded-full bg-[#087E8B] hover:bg-[#FFC857] hover:text-[#173B42] text-white flex items-center justify-center shadow-xl transition-all duration-300 transform group-hover:scale-110 cursor-pointer mb-2"
                     aria-label={isPlaying ? "Pause Preview" : "Play Preview"}
                   >
                     {isPlaying ? <Pause className="w-7 h-7" /> : <Play className="w-7 h-7 ml-1" />}
@@ -270,7 +270,7 @@ export default function AttractionDetailPage() {
                 </div>
               </div>
 
-              <p className="text-[11px] text-[#3B4B75] text-center italic">
+              <p className="text-[11px] text-[#173B42]/70 text-center italic">
                 {isBangla
                   ? "আনোয়ার সিটি ম্যাজিক আইল্যান্ডের আকর্ষণসমূহের আসল আবহ ও অনুভূতি।"
                   : "Authentic atmosphere of Anowar City Magic Island attractions."}
@@ -278,11 +278,11 @@ export default function AttractionDetailPage() {
             </div>
 
             {/* Visit Inquiry Box */}
-            <div className="p-6 rounded-3xl bg-gradient-to-br from-[#FFF7ED] to-[#FFF9ED] border-2 border-[#FFD93D] shadow-md space-y-4">
-              <h4 className="text-lg font-heading font-bold text-[#172554]">
+            <div className="p-6 rounded-3xl bg-gradient-to-br from-white to-[#FFFDF5] border-2 border-[#087E8B]/25 shadow-md space-y-4">
+              <h4 className="text-lg font-heading font-bold text-[#173B42]">
                 {isBangla ? "এই আকর্ষণটি উপভোগ করতে চান?" : "Want to Experience This Attraction?"}
               </h4>
-              <p className="text-xs text-[#3B4B75] leading-relaxed">
+              <p className="text-xs text-[#173B42]/75 leading-relaxed">
                 {isBangla
                   ? "পারিবারিক ভ্রমণ বা বন্ধুদের সাথে আসার জন্য আমাদের অফিসিয়াল হোয়াটসঅ্যাপে সরাসরি মেসেজ দিয়ে সময়সূচী ও বিস্তারিত জেনে নিন।"
                   : "Planning your trip with family or friends? Contact our park team directly via WhatsApp for opening hours and tips."}
@@ -302,15 +302,15 @@ export default function AttractionDetailPage() {
       </section>
 
       {/* 3. EXPLORE MORE ATTRACTIONS */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[#FFFDF5] border-t border-[#087E8B]/15">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFF2B2] text-[#172554] text-xs font-heading font-bold mb-2">
-                <Compass className="w-3.5 h-3.5 text-[#FF6B35]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFC857]/20 border border-[#FFC857]/40 text-[#173B42] text-xs font-heading font-bold mb-2">
+                <Compass className="w-3.5 h-3.5 text-[#FF795C]" />
                 <span>{isBangla ? "আইল্যান্ডের আরও রোমাঞ্চ" : "Continue Your Adventure"}</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-black font-heading text-[#172554]">
+              <h2 className="text-2xl sm:text-4xl font-black font-heading text-[#173B42]">
                 {isBangla ? "অন্যান্য সেরা আকর্ষণসমূহ" : "Explore More Attractions"}
               </h2>
             </div>
@@ -336,22 +336,22 @@ export default function AttractionDetailPage() {
                     alt={item.name.en}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-[#172554] text-[11px] font-heading font-bold shadow">
+                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/95 text-[#173B42] text-[11px] font-heading font-bold shadow">
                     {isBangla ? item.thrillLevelBn : item.thrillLevel}
                   </div>
                 </div>
 
                 <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-lg font-bold font-heading text-[#172554] group-hover:text-[#FF6B35] transition-colors">
+                    <h3 className="text-lg font-bold font-heading text-[#173B42] group-hover:text-[#087E8B] transition-colors">
                       {isBangla ? item.name.bn : item.name.en}
                     </h3>
-                    <p className="text-xs text-[#3B4B75] mt-1 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-[#173B42]/75 mt-1 line-clamp-2 leading-relaxed">
                       {isBangla ? item.description.bn : item.description.en}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-[#FED7AA]/40 flex items-center justify-between text-xs font-heading font-bold text-[#FF6B35]">
+                  <div className="pt-3 border-t border-[#087E8B]/15 flex items-center justify-between text-xs font-heading font-bold text-[#087E8B]">
                     <span>{isBangla ? "বিস্তারিত দেখুন" : "Explore Ride"}</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>

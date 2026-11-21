@@ -45,10 +45,10 @@ export default function AttractionsPage() {
       descriptionEn: "Experience massive ocean surges, computerized tidal surf waves, and joyful shallow family splash lagoons.",
       descriptionBn: "বিশাল সামুদ্রিক উত্তাল ঢেউয়ের পুল, সুনামি বে এবং পুরো পরিবারের অনাবিল জলকেলির স্বর্গরাজ্য।",
       icon: Waves,
-      themeColor: "text-[#0284C7]",
-      activeBorder: "border-[#0284C7] ring-4 ring-[#0284C7]/20 shadow-lg",
-      activeBg: "bg-sky-50/80",
-      badgeBg: "bg-[#0284C7] text-white",
+      themeColor: "text-[#087E8B]",
+      activeBorder: "border-[#087E8B] ring-4 ring-[#087E8B]/20 shadow-lg",
+      activeBg: "bg-[#35C6C8]/10",
+      badgeBg: "bg-[#087E8B] text-white",
       realmHref: "/water-park",
       realmLabelEn: "Explore Water World Realm",
       realmLabelBn: "ওয়াটার ওয়ার্ল্ড রিয়েলম দেখুন",
@@ -65,10 +65,10 @@ export default function AttractionsPage() {
       descriptionEn: "Encounter 45-foot animatronic predators, elevated canopy trails, interactive fossil digs, and prehistoric wonders.",
       descriptionBn: "৪৫ ফুট উঁচু জীবন্ত গর্জনরত টি-রেক্স, ঝুলন্ত ফুটব্রিজ ট্রেইল ও খুদে প্রত্নতাত্ত্বিকদের ফসিল ল্যাব।",
       icon: Footprints,
-      themeColor: "text-[#059669]",
-      activeBorder: "border-[#059669] ring-4 ring-[#059669]/20 shadow-lg",
-      activeBg: "bg-emerald-50/80",
-      badgeBg: "bg-[#059669] text-white",
+      themeColor: "text-[#26865D]",
+      activeBorder: "border-[#26865D] ring-4 ring-[#26865D]/20 shadow-lg",
+      activeBg: "bg-[#26865D]/10",
+      badgeBg: "bg-[#26865D] text-white",
       realmHref: "/dino-zone",
       realmLabelEn: "Explore Dino World Realm",
       realmLabelBn: "ডাইনো ওয়ার্ল্ড রিয়েলম দেখুন",
@@ -85,10 +85,10 @@ export default function AttractionsPage() {
       descriptionEn: "Defy gravity on steel looping coasters, panoramic 360-degree observation wheels, neon dodging karts, and pirate pendulums.",
       descriptionBn: "উচ্চগতির রোলারকোস্টার, ১৫০ ফুট প্যানোরামিক স্কাই হুইল, নিওন বাম্পার কার ও রোমাঞ্চকর পাইরেট সুইং।",
       icon: FerrisWheel,
-      themeColor: "text-[#FF6B35]",
-      activeBorder: "border-[#FF6B35] ring-4 ring-[#FF6B35]/20 shadow-lg",
-      activeBg: "bg-orange-50/80",
-      badgeBg: "bg-[#FF6B35] text-white",
+      themeColor: "text-[#FF795C]",
+      activeBorder: "border-[#FF795C] ring-4 ring-[#FF795C]/20 shadow-lg",
+      activeBg: "bg-[#FF795C]/10",
+      badgeBg: "bg-[#FF795C] text-white",
       realmHref: "/amusement-park",
       realmLabelEn: "Explore Thrill World Realm",
       realmLabelBn: "থ্রিল ওয়ার্ল্ড রিয়েলম দেখুন",
@@ -110,7 +110,7 @@ export default function AttractionsPage() {
   const currentAttractions = ATTRACTIONS_DATA.filter((a) => a.zone === currentCategoryMeta.zone);
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] py-16 relative">
+    <div className="min-h-screen bg-[#FFFDF5] text-[#173B42] py-16 relative">
       {/* 100% Transparent Floating Animation Across the Screen */}
       {activeFloatingEffect === "dino-world" && (
         <DinoStampedeFloatingEffect onComplete={() => setActiveFloatingEffect(null)} />
@@ -121,14 +121,14 @@ export default function AttractionsPage() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFD93D] shadow-sm mb-4">
-            <Compass className="w-4 h-4 text-[#FF6B35]" />
-            <span className="font-heading text-xs font-bold uppercase tracking-wider text-[#172554]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFC857] shadow-sm mb-4">
+            <Compass className="w-4 h-4 text-[#FF795C]" />
+            <span className="font-heading text-xs font-bold uppercase tracking-wider text-[#173B42]">
               {isBangla ? "সকল রাইডস ও আকর্ষণসমূহ" : "Explore All Attractions"}
             </span>
           </div>
 
-          <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-black text-[#172554] tracking-tight leading-tight">
+          <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-black text-[#173B42] tracking-tight leading-tight">
             {isBangla ? (
               <>
                 রোমাঞ্চ ও আনন্দের <br />
@@ -142,7 +142,7 @@ export default function AttractionsPage() {
             )}
           </h1>
 
-          <p className="mt-4 text-[#3B4B75] text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-sans">
+          <p className="mt-4 text-[#173B42]/80 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-sans">
             {isBangla
               ? "নিচের ৩টি প্রধান ক্যাটাগরি থেকে ঘুরে দেখুন বাংলাদেশের সর্ববৃহৎ কৃত্রিম ওয়েভ পুল, জীবন্ত ডাইনোসর সাফারি এবং আকাশছোঁয়া রোলারকোস্টার।"
               : "Explore our premier attractions organized across three core realms: Water World, Dino World, and Thrill World. Click any ride to view its full details."}
@@ -163,14 +163,14 @@ export default function AttractionsPage() {
                 className={`text-left p-6 sm:p-7 rounded-3xl border-2 transition-all duration-300 cursor-pointer flex flex-col justify-between group relative overflow-hidden ${
                   isSelected
                     ? `${cat.activeBorder} ${cat.activeBg} bg-white shadow-xl scale-[1.02]`
-                    : "border-[#FED7AA] bg-white hover:border-[#FFD93D] hover:shadow-lg hover:-translate-y-1"
+                    : "border-[#087E8B]/20 bg-white hover:border-[#FFC857] hover:shadow-lg hover:-translate-y-1"
                 }`}
               >
                 {/* 3D Animated Feature Badge (Only for zones with 3D animation) */}
                 {cat.animationTagEn ? (
                   <div className="mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-heading font-black bg-amber-100/80 text-amber-900 border border-amber-300/60 shadow-2xs group-hover:bg-[#FFD93D] group-hover:text-[#172554] transition-colors">
-                      <Sparkles className="w-3 h-3 text-[#FF6B35]" />
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-heading font-black bg-amber-100/80 text-amber-900 border border-amber-300/60 shadow-2xs group-hover:bg-[#FFC857] group-hover:text-[#173B42] transition-colors">
+                      <Sparkles className="w-3 h-3 text-[#FF795C]" />
                       <span>{isBangla ? cat.animationTagBn : cat.animationTagEn}</span>
                     </span>
                   </div>
@@ -182,48 +182,48 @@ export default function AttractionsPage() {
                   <div className="flex items-center justify-between mb-4">
                     <div
                       className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm ${
-                        isSelected ? cat.badgeBg : "bg-[#FFF9ED] border-2 border-[#FED7AA]"
+                        isSelected ? cat.badgeBg : "bg-[#FFFDF5] border-2 border-[#087E8B]/20"
                       }`}
                     >
                       <Icon className={`w-6 h-6 ${isSelected ? "text-white" : cat.themeColor}`} />
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-heading font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#FFF9ED] border border-[#FED7AA] text-[#172554]">
+                      <span className="text-[11px] font-heading font-black uppercase tracking-wider px-3 py-1 rounded-full bg-[#FFFDF5] border border-[#087E8B]/20 text-[#173B42]">
                         {idx + 1}. {isBangla ? `${count}টি আকর্ষণ` : `${count} Rides`}
                       </span>
                       {isSelected && (
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#55C98B] animate-pulse"></span>
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#26865D] animate-pulse"></span>
                       )}
                     </div>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-black font-heading text-[#172554] tracking-tight group-hover:text-[#FF6B35] transition-colors">
+                  <h3 className="text-2xl sm:text-3xl font-black font-heading text-[#173B42] tracking-tight group-hover:text-[#087E8B] transition-colors">
                     {isBangla ? cat.nameBn : cat.nameEn}
                   </h3>
 
-                  <p className="text-xs font-heading font-bold text-[#FF6B35] mt-1 line-clamp-1">
+                  <p className="text-xs font-heading font-bold text-[#FF795C] mt-1 line-clamp-1">
                     {isBangla ? cat.taglineBn : cat.taglineEn}
                   </p>
 
-                  <p className="mt-2.5 text-xs text-[#3B4B75] leading-relaxed line-clamp-2 font-sans">
+                  <p className="mt-2.5 text-xs text-[#173B42]/75 leading-relaxed line-clamp-2 font-sans">
                     {isBangla ? cat.descriptionBn : cat.descriptionEn}
                   </p>
                 </div>
 
-                <div className="pt-4 mt-5 border-t border-[#FED7AA]/50 flex items-center justify-between text-xs font-heading font-black">
-                  <span className={isSelected ? cat.themeColor : "text-[#172554]/75"}>
+                <div className="pt-4 mt-5 border-t border-[#087E8B]/15 flex items-center justify-between text-xs font-heading font-black">
+                  <span className={isSelected ? cat.themeColor : "text-[#173B42]/75"}>
                     {isSelected
                       ? (isBangla ? "অ্যানিমেশন চলছে / প্রদর্শিত হচ্ছে" : "Click to Replay Cartoon")
                       : (isBangla ? "দেখতে ক্লিক করুন" : "Click to View")}
                   </span>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF6B35] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF795C] opacity-0 group-hover:opacity-100 transition-opacity">
                       ▶ Play 3D
                     </span>
                     <ArrowRight
                       className={`w-4 h-4 transition-transform ${
-                        isSelected ? `${cat.themeColor} translate-x-1` : "text-[#172554]/50 group-hover:translate-x-1"
+                        isSelected ? `${cat.themeColor} translate-x-1` : "text-[#173B42]/50 group-hover:translate-x-1"
                       }`}
                     />
                   </div>
@@ -234,20 +234,20 @@ export default function AttractionsPage() {
         </div>
 
         {/* Selected Category Header Banner with 3D Cartoon Player */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-sm mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#087E8B]/20 shadow-sm mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-sm ${currentCategoryMeta.badgeBg}`}>
               {React.createElement(currentCategoryMeta.icon, { className: "w-7 h-7 text-white" })}
             </div>
             <div>
-              <div className="inline-flex items-center gap-2 text-xs font-heading font-black uppercase tracking-wider text-[#FF6B35] mb-1">
+              <div className="inline-flex items-center gap-2 text-xs font-heading font-black uppercase tracking-wider text-[#FF795C] mb-1">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>{isBangla ? "নির্বাচিত ক্যাটাগরি" : "Selected Category"}</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-black font-heading text-[#172554]">
+              <h2 className="text-2xl sm:text-4xl font-black font-heading text-[#173B42]">
                 {isBangla ? currentCategoryMeta.nameBn : currentCategoryMeta.nameEn}
               </h2>
-              <p className="text-xs sm:text-sm text-[#3B4B75] mt-1 font-sans">
+              <p className="text-xs sm:text-sm text-[#173B42]/75 mt-1 font-sans">
                 {isBangla ? currentCategoryMeta.taglineBn : currentCategoryMeta.taglineEn}
               </p>
             </div>
@@ -258,10 +258,10 @@ export default function AttractionsPage() {
             <button
               type="button"
               onClick={() => setActiveFloatingEffect(currentCategoryMeta.id)}
-              className="px-4 py-2.5 rounded-full bg-gradient-to-r from-[#FFD93D] via-[#F59E0B] to-[#FF6B35] text-[#172554] font-heading font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-2 cursor-pointer border-2 border-white"
+              className="px-4 py-2.5 rounded-full bg-gradient-to-r from-[#FFC857] via-[#FF795C] to-[#087E8B] text-white font-heading font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-2 cursor-pointer border-2 border-white"
               title="Watch floating 3D cartoon animation across page"
             >
-              <Play className="w-4 h-4 fill-current text-[#172554]" />
+              <Play className="w-4 h-4 fill-current text-white" />
               <span>{isBangla ? "৩ডি কার্টুন দেখুন" : "Play 3D Cartoon"}</span>
             </button>
 
@@ -283,18 +283,18 @@ export default function AttractionsPage() {
               href={`/attractions/${ride.id}`}
               className="park-card overflow-hidden flex flex-col justify-between group cursor-pointer"
             >
-              <div className="relative h-64 w-full overflow-hidden bg-[#FFF9ED]">
+              <div className="relative h-64 w-full overflow-hidden bg-[#FFFDF5]">
                 <img
                   src={ride.imageUrl}
                   alt={ride.name.en}
                   className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-108 transition-transform duration-700"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12304A]/80 via-transparent to-transparent"></div>
 
                 {/* Badges */}
                 <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="px-3 py-1 rounded-full bg-white/95 text-[#172554] text-xs font-heading font-bold shadow-md">
+                  <span className="px-3 py-1 rounded-full bg-white/95 text-[#173B42] text-xs font-heading font-bold shadow-md">
                     {isBangla ? ride.thrillLevelBn : ride.thrillLevel}
                   </span>
                   <span className={`px-3 py-1 rounded-full text-xs font-heading font-black uppercase shadow-md ${currentCategoryMeta.badgeBg}`}>
@@ -303,7 +303,7 @@ export default function AttractionsPage() {
                 </div>
 
                 {/* Dedicated Page Indicator Badge in Bottom Right */}
-                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#FF6B35] font-heading font-bold text-[11px] shadow flex items-center gap-1 group-hover:bg-[#FF6B35] group-hover:text-white transition-colors">
+                <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#087E8B] font-heading font-bold text-[11px] shadow flex items-center gap-1 group-hover:bg-[#087E8B] group-hover:text-white transition-colors">
                   <span>{isBangla ? "সম্পূর্ণ পেজ দেখুন" : "View Page"}</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </div>
@@ -311,22 +311,22 @@ export default function AttractionsPage() {
 
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div>
-                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#172554] group-hover:text-[#FF6B35] transition-colors leading-tight">
+                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#173B42] group-hover:text-[#087E8B] transition-colors leading-tight">
                     {isBangla ? ride.name.bn : ride.name.en}
                   </h3>
-                  <p className="text-xs font-heading font-semibold text-[#FF6B35] mt-1 line-clamp-1">
+                  <p className="text-xs font-heading font-semibold text-[#FF795C] mt-1 line-clamp-1">
                     {isBangla ? ride.tagline.bn : ride.tagline.en}
                   </p>
-                  <p className="mt-2.5 text-xs text-[#3B4B75] leading-relaxed line-clamp-3 font-sans">
+                  <p className="mt-2.5 text-xs text-[#173B42]/75 leading-relaxed line-clamp-3 font-sans">
                     {isBangla ? ride.description.bn : ride.description.en}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#FED7AA]/40 flex items-center justify-between text-xs">
-                  <span className="text-[#3B4B75] text-[11px] font-sans">
+                <div className="pt-4 border-t border-[#087E8B]/15 flex items-center justify-between text-xs">
+                  <span className="text-[#173B42]/70 text-[11px] font-sans">
                     {isBangla ? ride.heightRequirementBn : ride.heightRequirement}
                   </span>
-                  <span className="font-heading font-bold text-[#FF6B35] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  <span className="font-heading font-bold text-[#087E8B] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                     <span>{isBangla ? "বিস্তারিত" : "Explore"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
