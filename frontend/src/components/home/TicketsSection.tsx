@@ -20,7 +20,7 @@ export function TicketsSection() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-100 border border-orange-200 text-[#FF7A24] text-xs uppercase tracking-widest font-bold mb-3 shadow-sm">
             {isBangla ? "সাশ্রয়ী পারিবারিক বিনোদন প্যাকেজ" : "Affordable Family Entertainment"}
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 uppercase tracking-tight font-heading">
+          <h2 className="section-heading-main text-slate-900 tracking-tight">
             {isBangla ? "প্রবেশ টিকেট ও" : "ADMISSION"}{" "}
             <span className="gradient-orange-text">
               {isBangla ? "প্যাকেজ পাস" : "PACKAGES & PASSES"}
