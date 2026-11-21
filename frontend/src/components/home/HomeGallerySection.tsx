@@ -116,25 +116,25 @@ export function HomeGallerySection() {
 
   return (
     <section
-      className="py-12 sm:py-16 bg-[#FFF9ED] relative"
+      className="py-12 sm:py-16 bg-[#FFFDF5] relative"
       data-purpose="experience-gallery"
       id="gallery"
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFD93D] text-[#172554] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
-            <Camera className="w-4 h-4 text-[#FF6B35]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFC857] text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
+            <Camera className="w-4 h-4 text-[#087E8B]" />
             <span>{isBangla ? "আসল মুহূর্ত ও ভিজ্যুয়ালস" : "Memorable Park Moments"}</span>
           </div>
 
-          <h2 className="section-heading-main text-[#172554] tracking-tight">
+          <h2 className="section-heading-main text-[#173B42] tracking-tight">
             {isBangla ? "স্মরণীয় মুহূর্ত ও" : "EXPERIENCE"}{" "}
             <span className="text-gradient-park">
               {isBangla ? "গ্যালারি ঝলক" : "MAGIC ISLAND MOMENTS"}
             </span>
           </h2>
 
-          <p className="text-[#3B4B75] text-sm sm:text-base max-w-xl mt-2 font-sans leading-relaxed">
+          <p className="text-[#173B42]/80 text-sm sm:text-base max-w-xl mt-2 font-sans leading-relaxed">
             {isBangla
               ? "আমাদের ফটকের ভেতরে প্রবেশ করার আগেই দেখে নিন বিশাল ওয়েভ লেগুন, ডাইনোসর সাফারি এবং অ্যামিউজমেন্ট পার্কের জীবন্ত দৃশ্য।"
               : "Glimpse the joy awaiting you inside our gates across our aquatic wave lagoon, prehistoric dinosaur jungle, and thrill attractions."}
@@ -142,7 +142,7 @@ export function HomeGallerySection() {
 
           {/* Gallery Filter Tabs */}
           <div
-            className="flex flex-wrap gap-2 mt-6 p-1.5 rounded-full bg-white border-2 border-[#FED7AA] shadow-sm"
+            className="flex flex-wrap gap-2 mt-6 p-1.5 rounded-full bg-white border-2 border-[#087E8B]/20 shadow-sm"
             data-purpose="gallery-filters"
           >
             {filters.map((f) => (
@@ -151,8 +151,8 @@ export function HomeGallerySection() {
                 onClick={() => setSelectedFilter(f.id)}
                 className={`px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   selectedFilter === f.id
-                    ? "bg-[#FF6B35] text-white shadow-md shadow-orange-500/20"
-                    : "text-[#172554] hover:bg-[#FFF2B2]"
+                    ? "bg-[#087E8B] text-white shadow-md shadow-[#087E8B]/20"
+                    : "text-[#173B42] hover:bg-[#FFFDF5]"
                 }`}
               >
                 {isBangla ? f.labelBn : f.labelEn}
@@ -167,16 +167,16 @@ export function HomeGallerySection() {
             <div
               key={item.id}
               onClick={() => setLightboxImage(item.src)}
-              className={`${item.span} relative rounded-3xl overflow-hidden border-2 border-[#FED7AA] shadow-md group cursor-pointer ${item.height}`}
+              className={`${item.span} relative rounded-3xl overflow-hidden border-2 border-[#087E8B]/20 shadow-md group cursor-pointer ${item.height}`}
             >
               <img
                 alt={item.titleEn}
                 className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-700"
                 src={item.src}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/85 via-[#172554]/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/85 via-[#173B42]/25 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
 
-              <div className="absolute top-4 left-4 bg-[#FF6B35] text-white text-[11px] font-heading font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md">
+              <div className="absolute top-4 left-4 bg-[#087E8B] text-white text-[11px] font-heading font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md">
                 {isBangla ? item.tagBn : item.tagEn}
               </div>
 
@@ -189,7 +189,7 @@ export function HomeGallerySection() {
                     {isBangla ? item.descBn : item.descEn}
                   </p>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-[#FFD93D] group-hover:text-[#172554] transition-colors shadow">
+                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-[#FFC857] group-hover:text-[#173B42] transition-colors shadow">
                   <Maximize2 className="w-4 h-4" />
                 </div>
               </div>
@@ -212,7 +212,7 @@ export function HomeGallerySection() {
             />
             <button
               onClick={() => setLightboxImage(null)}
-              className="absolute -top-12 right-0 text-white hover:text-[#FFD93D] p-2 cursor-pointer transition-colors"
+              className="absolute -top-12 right-0 text-white hover:text-[#FFC857] p-2 cursor-pointer transition-colors"
               aria-label="Close Lightbox"
             >
               <X className="w-7 h-7" />

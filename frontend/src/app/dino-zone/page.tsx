@@ -19,14 +19,14 @@ export default function DinoZonePage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] relative">
+    <div className="min-h-screen bg-[#FFFDF5] text-[#173B42] relative">
       {/* 100% Transparent Floating 3D Dinosaur Stampede (Runs across screen over page content) */}
       {playStampede && (
         <DinoStampedeFloatingEffect onComplete={() => setPlayStampede(false)} />
       )}
 
       {/* Hero Banner with Authentic Dino Zone Photography */}
-      <section className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
+      <section className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex items-center justify-center overflow-hidden bg-[#FFFDF5]">
         <div className="absolute inset-0 z-0 overflow-hidden w-full">
           <img
             src="/images/Dino%20World/Dino%20Cover%20PIC.webp"
@@ -35,21 +35,21 @@ export default function DinoZonePage() {
             loading="eager"
           />
           {/* Subtle Top & Text Contrast Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-[#172554]/25 to-black/25 pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/70 via-[#173B42]/25 to-black/25 pointer-events-none z-10" />
 
-          {/* Seamless Bottom-Edge Blend into #FFF9ED (Slightly overflows boundary to eliminate subpixel gaps) */}
-          <div className="absolute inset-x-0 -bottom-[2px] h-24 sm:h-32 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20" />
+          {/* Seamless Bottom-Edge Blend into #FFFDF5 (Slightly overflows boundary to eliminate subpixel gaps) */}
+          <div className="absolute inset-x-0 -bottom-[2px] h-24 sm:h-32 bg-gradient-to-t from-[#FFFDF5] via-[#FFFDF5]/85 to-transparent pointer-events-none z-20" />
         </div>
 
         <div className="relative z-30 max-w-5xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#059669] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#55C98B]/40 backdrop-blur-md">
-            <Footprints className="w-4 h-4 text-[#059669]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#26865D] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#26865D]/40 backdrop-blur-md">
+            <Footprints className="w-4 h-4 text-[#26865D]" />
             <span>{isBangla ? "জুরাসিক কিংডম ডাইনো জোন" : "Jurassic Kingdom Dino Zone"}</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] font-heading leading-tight tracking-tight">
             {isBangla ? "প্রাগৈতিহাসিক দানবদের" : "WHERE PREHISTORIC GIANTS"} <br />
-            <span className="text-[#FFD93D] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
+            <span className="text-[#FFC857] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
               {isBangla ? "জীবন্ত গর্জন ও রাজত্ব" : "ROAR AND WALK AGAIN"}
             </span>
           </h1>
@@ -64,10 +64,10 @@ export default function DinoZonePage() {
             <button
               type="button"
               onClick={() => setPlayStampede(true)}
-              className="px-7 py-3.5 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="px-7 py-3.5 rounded-full bg-[#FFC857] hover:bg-[#FFC857]/90 text-[#173B42] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
               title="Watch 3D Dinosaurs Run Across Screen"
             >
-              <Play className="w-4 h-4 fill-current text-[#172554]" />
+              <Play className="w-4 h-4 fill-current text-[#173B42]" />
               <span>{isBangla ? "ডাইনোসর স্ট্যাম্পিড এফেক্ট" : "Floating Dino Stampede"}</span>
             </button>
 
@@ -84,9 +84,9 @@ export default function DinoZonePage() {
                 href={waLink.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-3.5 rounded-full bg-white text-[#172554] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#55C98B] hover:bg-[#55C98B]/10 shadow-lg hover:scale-105 transition-all"
+                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#26865D] hover:bg-[#26865D]/10 shadow-lg hover:scale-105 transition-all"
               >
-                <MessageCircle className="w-4 h-4 text-[#55C98B]" />
+                <MessageCircle className="w-4 h-4 text-[#26865D]" />
                 <span>{isBangla ? "হোয়াটসঅ্যাপে যোগাযোগ" : "WhatsApp Inquiry"}</span>
               </a>
             )}
@@ -95,17 +95,17 @@ export default function DinoZonePage() {
       </section>
 
       {/* Attractions Grid */}
-      <section id="attractions" className="py-16 sm:py-20 bg-[#FFF9ED] relative">
+      <section id="attractions" className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#DCFCE7] text-[#059669] text-xs uppercase tracking-widest font-black mb-3 border border-[#55C98B]/40">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#26865D]/15 text-[#26865D] text-xs uppercase tracking-widest font-black mb-3 border border-[#26865D]/40">
               <Footprints className="w-4 h-4" />
               <span>{isBangla ? "জুরাসিক সাফারি" : "Prehistoric Safari"}</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#173B42] font-heading tracking-tight">
               {isBangla ? "ডাইনো জোনের আকর্ষণসমূহ" : "DINO ZONE ATTRACTIONS"}
             </h2>
-            <p className="mt-3 text-[#172554]/75 text-sm sm:text-base leading-relaxed font-medium">
+            <p className="mt-3 text-[#173B42]/75 text-sm sm:text-base leading-relaxed font-medium">
               {isBangla
                 ? "উন্নত রোবোটিক্স ও সিনেমাটিক সাউন্ড ইফেক্টসে নির্মিত দক্ষিণ এশিয়ার অন্যতম আধুনিক জুরাসিক এক্সপেরিয়েন্স।"
                 : "Engineered with advanced animatronics, realistic roaring motion, and prehistoric safari atmospheres."}
@@ -119,7 +119,7 @@ export default function DinoZonePage() {
                 className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
                 style={{ isolation: "isolate" }}
               >
-                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#FED7AA]/60 bg-[#FFF9ED] rounded-t-[26px]">
+                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#26865D]/30 bg-[#FFFDF5] rounded-t-[26px]">
                   <img
                     src={ride.imageUrl}
                     alt={ride.name.en}
@@ -127,37 +127,37 @@ export default function DinoZonePage() {
                     loading="lazy"
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
-                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#059669] text-xs font-black shadow-md border border-emerald-200">
+                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#26865D] text-xs font-black shadow-md border border-[#26865D]/30">
                   {isBangla ? ride.thrillLevelBn : ride.thrillLevel}
                 </div>
               </div>
 
               <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-xl font-black text-[#172554] font-heading">
+                  <h3 className="text-xl font-black text-[#173B42] font-heading">
                     {isBangla ? ride.name.bn : ride.name.en}
                   </h3>
-                  <p className="text-xs font-black text-[#059669] mt-1 uppercase tracking-wide">
+                  <p className="text-xs font-black text-[#26865D] mt-1 uppercase tracking-wide">
                     {isBangla ? ride.tagline.bn : ride.tagline.en}
                   </p>
-                  <p className="mt-3 text-sm text-[#172554]/80 leading-relaxed font-medium">
+                  <p className="mt-3 text-sm text-[#173B42]/80 leading-relaxed font-medium">
                     {isBangla ? ride.description.bn : ride.description.en}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-amber-100 space-y-2 text-xs text-[#172554]/80">
-                  <p className="font-black text-[#172554]">
+                <div className="pt-3 border-t border-[#26865D]/20 space-y-2 text-xs text-[#173B42]/80">
+                  <p className="font-black text-[#173B42]">
                     {isBangla ? "আকর্ষণের বিবরণ:" : "Key Features:"}
                   </p>
                   {(isBangla ? ride.features.bn : ride.features.en).slice(0, 2).map((f, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#059669] shrink-0 font-bold" />
+                      <Check className="w-3.5 h-3.5 text-[#26865D] shrink-0 font-bold" />
                       <span>{f}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-3 border-t border-amber-100 flex justify-end">
+                <div className="pt-3 border-t border-[#26865D]/20 flex justify-end">
                   <Link
                     href={`/attractions/${ride.id}`}
                     className="btn-park-primary w-full py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:scale-105 transition-transform"
@@ -174,17 +174,17 @@ export default function DinoZonePage() {
       </section>
 
       {/* Real Dino World Photo Showcase Gallery */}
-      <section className="py-16 sm:py-20 bg-[#FFF9ED] relative">
+      <section className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#059669] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-emerald-200 shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#FF6B35]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#26865D] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#26865D]/40 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#FF795C]" />
               <span>{isBangla ? "আসল ডাইনো পার্ক গ্যালারি" : "Authentic Dino World Gallery"}</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-[#173B42] font-heading tracking-tight">
               {isBangla ? "ডাইনো ওয়ার্ল্ডের আসল মুহূর্ত" : "REAL MOMENTS AT DINO WORLD"}
             </h2>
-            <p className="mt-2 text-[#172554]/75 text-xs sm:text-sm font-sans">
+            <p className="mt-2 text-[#173B42]/75 text-xs sm:text-sm font-sans">
               {isBangla
                 ? "আমাদের ম্যাজিক আইল্যান্ড জুরাসিক ডাইনো পার্কের জীবন্ত অ্যানিমেট্রনিক ডাইনোসর ও সাফারি ট্রেইলের আসল ছবি।"
                 : "Real snapshot highlights capturing our roaring animatronics, tropical boardwalks, and Jurassic adventures."}
@@ -204,7 +204,7 @@ export default function DinoZonePage() {
             ].map((pic, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFF9ED]"
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#26865D]/30 shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFFDF5]"
                 style={{ isolation: "isolate" }}
               >
                 <img
@@ -213,7 +213,7 @@ export default function DinoZonePage() {
                   className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-108 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
                   <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
                     {isBangla ? pic.labelBn : pic.labelEn}
                   </span>
@@ -225,18 +225,18 @@ export default function DinoZonePage() {
       </section>
 
       {/* Educational & School Program Banner */}
-      <section className="py-16 bg-white border-y border-amber-100">
+      <section className="py-16 bg-white border-y border-[#26865D]/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="park-card rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-[#FFF9ED]">
+          <div className="park-card rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-[#FFFDF5]">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 text-xs font-black text-[#059669] uppercase tracking-wider">
-                <Bone className="w-4 h-4 text-[#059669]" />
+              <div className="inline-flex items-center gap-2 text-xs font-black text-[#26865D] uppercase tracking-wider">
+                <Bone className="w-4 h-4 text-[#26865D]" />
                 <span>{isBangla ? "স্কুল ও শিক্ষামূলক ট্রিপ" : "Educational School Expeditions"}</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-[#172554] font-heading">
+              <h3 className="text-2xl sm:text-3xl font-black text-[#173B42] font-heading">
                 {isBangla ? "শিক্ষার্থীদের জন্য জুরাসিক সায়েন্স ট্রেইল" : "Inspire Future Paleontologists"}
               </h3>
-              <p className="text-xs sm:text-sm text-[#172554]/80 max-w-xl leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-[#173B42]/80 max-w-xl leading-relaxed font-medium">
                 {isBangla
                   ? "স্কুল শিক্ষার্থীদের জন্য বিশেষজ্ঞ গাইডের নেতৃত্বে প্রাগৈতিহাসিক জীববৈচিত্র্য, ডাইনোসরের বিলুপ্তি ও ফসিল গবেষণার ইন্টারঅ্যাক্টিভ হ্যান্ডস-অন সেশন।"
                   : "Guided field trips exploring dinosaur evolution, fossil preservation, and biology. Special educational packages available."}

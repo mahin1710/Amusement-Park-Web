@@ -19,14 +19,14 @@ export default function AmusementParkPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] relative">
+    <div className="min-h-screen bg-[#FFFDF5] text-[#173B42] relative">
       {/* 100% Transparent Floating 3D Roller Coaster (Zooms across screen over page content) */}
       {playCoaster && (
         <RollerCoasterFloatingEffect onComplete={() => setPlayCoaster(false)} />
       )}
 
       {/* Hero Banner with Authentic Amusement Park Photography */}
-      <section className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
+      <section className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex items-center justify-center overflow-hidden bg-[#FFFDF5]">
         <div className="absolute inset-0 z-0 overflow-hidden w-full">
           <img
             src="/images/Thrill%20World/Thrill%20Cover%20Pic.png"
@@ -35,21 +35,21 @@ export default function AmusementParkPage() {
             loading="eager"
           />
           {/* Subtle Top & Text Contrast Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-[#172554]/25 to-black/25 pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/70 via-[#173B42]/25 to-black/25 pointer-events-none z-10" />
 
-          {/* Seamless Bottom-Edge Blend into #FFF9ED (Slightly overflows boundary to eliminate subpixel gaps) */}
-          <div className="absolute inset-x-0 -bottom-[2px] h-24 sm:h-32 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20" />
+          {/* Seamless Bottom-Edge Blend into #FFFDF5 (Slightly overflows boundary to eliminate subpixel gaps) */}
+          <div className="absolute inset-x-0 -bottom-[2px] h-24 sm:h-32 bg-gradient-to-t from-[#FFFDF5] via-[#FFFDF5]/85 to-transparent pointer-events-none z-20" />
         </div>
 
         <div className="relative z-30 max-w-5xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#FF6B35] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#FF6B35]/40 backdrop-blur-md">
-            <FerrisWheel className="w-4 h-4 text-[#FF6B35]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#FF795C] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#FF795C]/40 backdrop-blur-md">
+            <FerrisWheel className="w-4 h-4 text-[#FF795C]" />
             <span>{isBangla ? "গ্যালাক্সি থ্রিলস অ্যামিউজমেন্ট পার্ক" : "Galaxy Thrills Amusement Park"}</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] font-heading leading-tight tracking-tight">
             {isBangla ? "উচ্চগতির রোমাঞ্চ ও" : "HIGH-VELOCITY THRILLS &"} <br />
-            <span className="text-[#FFD93D] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
+            <span className="text-[#FFC857] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
               {isBangla ? "আকাশছোঁয়া রোলারকোস্টার" : "SKYLINE MEGA COASTERS"}
             </span>
           </h1>
@@ -64,10 +64,10 @@ export default function AmusementParkPage() {
             <button
               type="button"
               onClick={() => setPlayCoaster(true)}
-              className="px-7 py-3.5 rounded-full bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="px-7 py-3.5 rounded-full bg-[#FFC857] hover:bg-[#FFC857]/90 text-[#173B42] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
               title="Watch 3D Roller Coaster Zoom Across Screen"
             >
-              <Play className="w-4 h-4 fill-current text-[#172554]" />
+              <Play className="w-4 h-4 fill-current text-[#173B42]" />
               <span>{isBangla ? "রোলারকোস্টার এফেক্ট" : "Floating Coaster Rush"}</span>
             </button>
 
@@ -84,9 +84,9 @@ export default function AmusementParkPage() {
                 href={waLink.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-3.5 rounded-full bg-white text-[#172554] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#55C98B] hover:bg-[#55C98B]/10 shadow-lg hover:scale-105 transition-all"
+                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#26865D] hover:bg-[#26865D]/10 shadow-lg hover:scale-105 transition-all"
               >
-                <MessageCircle className="w-4 h-4 text-[#55C98B]" />
+                <MessageCircle className="w-4 h-4 text-[#26865D]" />
                 <span>{isBangla ? "হোয়াটসঅ্যাপে যোগাযোগ" : "WhatsApp Inquiry"}</span>
               </a>
             )}
@@ -95,17 +95,17 @@ export default function AmusementParkPage() {
       </section>
 
       {/* Attractions Grid */}
-      <section id="rides" className="py-16 sm:py-20 bg-[#FFF9ED] relative">
+      <section id="rides" className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FFEDD5] text-[#FF6B35] text-xs uppercase tracking-widest font-black mb-3 border border-[#FF6B35]/40">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FF795C]/15 text-[#FF795C] text-xs uppercase tracking-widest font-black mb-3 border border-[#FF795C]/40">
               <FerrisWheel className="w-4 h-4" />
               <span>{isBangla ? "মেকানিক্যাল রাইডস" : "Signature Thrill Rides"}</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#173B42] font-heading tracking-tight">
               {isBangla ? "অ্যামিউজমেন্ট পার্কের সেরা রাইডস" : "SIGNATURE AMUSEMENT RIDES"}
             </h2>
-            <p className="mt-3 text-[#172554]/75 text-sm sm:text-base leading-relaxed font-medium">
+            <p className="mt-3 text-[#173B42]/75 text-sm sm:text-base leading-relaxed font-medium">
               {isBangla
                 ? "আন্তর্জাতিক নিরাপত্তা প্রত্যয়ন ও কম্পিউটারাইজড ম্যাগনেটিক সিকিউরিটি সিস্টেমে নির্মিত আধুনিক রাইডস।"
                 : "Manufactured to rigorous international amusement engineering standards with magnetic fail-safe locks."}
@@ -119,7 +119,7 @@ export default function AmusementParkPage() {
                 className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
                 style={{ isolation: "isolate" }}
               >
-                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#FED7AA]/60 bg-[#FFF9ED] rounded-t-[26px]">
+                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#FF795C]/30 bg-[#FFFDF5] rounded-t-[26px]">
                   <img
                     src={ride.imageUrl}
                     alt={ride.name.en}
@@ -127,31 +127,31 @@ export default function AmusementParkPage() {
                     loading="lazy"
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
-                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#FF6B35] text-xs font-black shadow-md border border-amber-200">
+                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#FF795C] text-xs font-black shadow-md border border-amber-200">
                   {isBangla ? ride.thrillLevelBn : ride.thrillLevel}
                 </div>
               </div>
 
               <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-xl font-black text-[#172554] font-heading">
+                  <h3 className="text-xl font-black text-[#173B42] font-heading">
                     {isBangla ? ride.name.bn : ride.name.en}
                   </h3>
-                  <p className="text-xs font-black text-[#FF6B35] mt-1 uppercase tracking-wide">
+                  <p className="text-xs font-black text-[#FF795C] mt-1 uppercase tracking-wide">
                     {isBangla ? ride.tagline.bn : ride.tagline.en}
                   </p>
-                  <p className="mt-3 text-sm text-[#172554]/80 leading-relaxed font-medium">
+                  <p className="mt-3 text-sm text-[#173B42]/80 leading-relaxed font-medium">
                     {isBangla ? ride.description.bn : ride.description.en}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-amber-100 space-y-2 text-xs text-[#172554]/80">
-                  <p className="font-black text-[#172554]">
+                <div className="pt-3 border-t border-amber-100 space-y-2 text-xs text-[#173B42]/80">
+                  <p className="font-black text-[#173B42]">
                     {isBangla ? "রাইডের বৈশিষ্ট্য:" : "Ride Specs & Highlights:"}
                   </p>
                   {(isBangla ? ride.features.bn : ride.features.en).slice(0, 2).map((f, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#FF6B35] shrink-0 font-bold" />
+                      <Check className="w-3.5 h-3.5 text-[#FF795C] shrink-0 font-bold" />
                       <span>{f}</span>
                     </div>
                   ))}
@@ -174,17 +174,17 @@ export default function AmusementParkPage() {
       </section>
 
       {/* Real Thrill World Photo Showcase Gallery */}
-      <section className="py-16 sm:py-20 bg-[#FFF9ED] relative">
+      <section className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#C2410C] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-orange-200 shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#FF6B35]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#FF795C] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#FF795C]/40 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#FF795C]" />
               <span>{isBangla ? "আসল থ্রিল পার্ক গ্যালারি" : "Authentic Thrill World Gallery"}</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-[#173B42] font-heading tracking-tight">
               {isBangla ? "থ্রিল ওয়ার্ল্ডের আসল মুহূর্ত" : "REAL MOMENTS AT THRILL WORLD"}
             </h2>
-            <p className="mt-2 text-[#172554]/75 text-xs sm:text-sm font-sans">
+            <p className="mt-2 text-[#173B42]/75 text-xs sm:text-sm font-sans">
               {isBangla
                 ? "আমাদের ম্যাজিক আইল্যান্ড অ্যামিউজমেন্ট পার্কের রাইডস ও কার্নিভাল আমেজের আসল ছবি।"
                 : "Real snapshot highlights capturing our high-altitude rides, family swings, and carnival atmosphere."}
@@ -204,7 +204,7 @@ export default function AmusementParkPage() {
             ].map((pic, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFF9ED]"
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#FF795C]/30 shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFFDF5]"
                 style={{ isolation: "isolate" }}
               >
                 <img
@@ -213,7 +213,7 @@ export default function AmusementParkPage() {
                   className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-108 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
                   <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
                     {isBangla ? pic.labelBn : pic.labelEn}
                   </span>
@@ -225,18 +225,18 @@ export default function AmusementParkPage() {
       </section>
 
       {/* Night Spectacular & Illumination Section */}
-      <section className="py-16 bg-white border-y border-amber-100">
+      <section className="py-16 bg-white border-y border-[#FF795C]/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="park-card rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-[#FFF9ED]">
+          <div className="park-card rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-[#FFFDF5]">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 text-xs font-black text-[#FF6B35] uppercase tracking-wider">
-                <Zap className="w-4 h-4 text-[#FF6B35]" />
+              <div className="inline-flex items-center gap-2 text-xs font-black text-[#FF795C] uppercase tracking-wider">
+                <Zap className="w-4 h-4 text-[#FF795C]" />
                 <span>{isBangla ? "সান্ধ্যকালীন মিউজিক্যাল শো" : "Evening Illumination & Stunts"}</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-[#172554] font-heading">
+              <h3 className="text-2xl sm:text-3xl font-black text-[#173B42] font-heading">
                 {isBangla ? "সূর্যাস্তের পর রঙিন আলোর জাদুকরী রূপ" : "Nightfall Spectacles & Stunt Shows"}
               </h3>
-              <p className="text-xs sm:text-sm text-[#172554]/80 max-w-xl leading-relaxed font-medium">
+              <p className="text-xs sm:text-sm text-[#173B42]/80 max-w-xl leading-relaxed font-medium">
                 {isBangla
                   ? "সন্ধ্যা নামলেই স্কাই হুইল এবং রোলারকোস্টার জুড়ে জ্বলে ওঠে লক্ষাধিক রঙিন এলইডি বাতি। সাথে উপভোগ করুন সেন্ট্রাল লেকে লেজার ও মিউজিক্যাল ফোয়ারা শো।"
                   : "As darkness falls, Magic Island transforms into a glowing wonderland with 200,000+ synchronized LED fixtures and lakeside laser shows."}

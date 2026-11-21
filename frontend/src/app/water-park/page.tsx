@@ -17,9 +17,9 @@ export default function WaterParkPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#FFF9ED] text-[#172554] relative">
+    <div className="min-h-screen bg-[#FFFDF5] text-[#173B42] relative">
       {/* Hero Banner with Authentic Water World Photograph */}
-      <section className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex items-center justify-center overflow-hidden bg-[#FFF9ED]">
+      <section className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex items-center justify-center overflow-hidden bg-[#FFFDF5]">
         <div className="absolute inset-0 z-0 overflow-hidden w-full">
           <img
             src="/images/Water%20World/Water%20Cover%20Pic.png"
@@ -28,21 +28,21 @@ export default function WaterParkPage() {
             loading="eager"
           />
           {/* Subtle Top & Text Contrast Vignette */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/70 via-[#172554]/25 to-black/25 pointer-events-none z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/70 via-[#173B42]/25 to-black/25 pointer-events-none z-10" />
 
-          {/* Seamless Bottom-Edge Blend into #FFF9ED (Slightly overflows boundary to eliminate subpixel gaps) */}
-          <div className="absolute inset-x-0 -bottom-[2px] h-24 sm:h-32 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/85 to-transparent pointer-events-none z-20" />
+          {/* Seamless Bottom-Edge Blend into #FFFDF5 (Slightly overflows boundary to eliminate subpixel gaps) */}
+          <div className="absolute inset-x-0 -bottom-[2px] h-24 sm:h-32 bg-gradient-to-t from-[#FFFDF5] via-[#FFFDF5]/85 to-transparent pointer-events-none z-20" />
         </div>
 
         <div className="relative z-30 max-w-5xl mx-auto px-4 text-center -translate-y-8 sm:-translate-y-12">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#38BDF8]/40 backdrop-blur-md">
-            <Waves className="w-4 h-4 text-[#0284C7]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#087E8B] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#35C6C8]/40 backdrop-blur-md">
+            <Waves className="w-4 h-4 text-[#087E8B]" />
             <span>{isBangla ? "ম্যাজিক আইল্যান্ড ওয়াটার পার্ক • আসল ড্রোন ভিউ" : "Magic Island Water Park • Authentic Drone View"}</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] font-heading leading-tight tracking-tight">
             {isBangla ? "বাংলাদেশের সর্ববৃহৎ" : "BANGLADESH'S LARGEST"} <br />
-            <span className="text-[#FFD93D] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
+            <span className="text-[#FFC857] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
               {isBangla ? "ওয়েভ পুল ও ওয়াটার কিংডম" : "WAVE POOL & WATER OASIS"}
             </span>
           </h1>
@@ -67,9 +67,9 @@ export default function WaterParkPage() {
                 href={waLink.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-3.5 rounded-full bg-white text-[#172554] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#55C98B] hover:bg-[#55C98B]/10 shadow-lg hover:scale-105 transition-all"
+                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#26865D] hover:bg-[#26865D]/10 shadow-lg hover:scale-105 transition-all"
               >
-                <MessageCircle className="w-4 h-4 text-[#55C98B]" />
+                <MessageCircle className="w-4 h-4 text-[#26865D]" />
                 <span>{isBangla ? "হোয়াটসঅ্যাপে যোগাযোগ" : "WhatsApp Inquiry"}</span>
               </a>
             )}
@@ -78,17 +78,17 @@ export default function WaterParkPage() {
       </section>
 
       {/* Highlights Grid */}
-      <section id="rides" className="py-16 sm:py-20 bg-[#FFF9ED] relative">
+      <section id="rides" className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#E0F2FE] text-[#0284C7] text-xs uppercase tracking-widest font-black mb-3 border border-[#38BDF8]/40">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#35C6C8]/15 text-[#087E8B] text-xs uppercase tracking-widest font-black mb-3 border border-[#35C6C8]/40">
               <Waves className="w-4 h-4" />
               <span>{isBangla ? "সিগনেচার রাইডস" : "Signature Water Attractions"}</span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-[#173B42] font-heading tracking-tight">
               {isBangla ? "ওয়াটার রাইডস ও আকর্ষণসমূহ" : "WATER RIDES & ATTRACTIONS"}
             </h2>
-            <p className="mt-3 text-[#172554]/75 text-sm sm:text-base leading-relaxed font-medium">
+            <p className="mt-3 text-[#173B42]/75 text-sm sm:text-base leading-relaxed font-medium">
               {isBangla
                 ? "আন্তর্জাতিক লাইফগার্ড দল ও সার্বক্ষণিক বিশুদ্ধ ওয়াটার ফিল্ট্রেশন প্রযুক্তিতে নিশ্চিত সর্বোচ্চ আনন্দ ও নিরাপত্তা।"
                 : "Equipped with advanced multi-stage water filtration systems and certified lifeguard oversight at every pool."}
@@ -102,7 +102,7 @@ export default function WaterParkPage() {
                 className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
                 style={{ isolation: "isolate" }}
               >
-                <div className="relative h-64 sm:h-72 w-full overflow-hidden border-b-2 border-[#FED7AA]/60 bg-[#FFF9ED] rounded-t-[26px]">
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden border-b-2 border-[#35C6C8]/30 bg-[#FFFDF5] rounded-t-[26px]">
                   <img
                     src={ride.imageUrl}
                     alt={ride.name.en}
@@ -111,7 +111,7 @@ export default function WaterParkPage() {
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
                 <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#172554] font-black text-xs shadow-md border border-amber-200">
+                  <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-[#173B42] font-black text-xs shadow-md border border-[#35C6C8]/30">
                     {isBangla ? ride.thrillLevelBn : ride.thrillLevel}
                   </span>
                 </div>
@@ -119,21 +119,21 @@ export default function WaterParkPage() {
 
               <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-4">
                 <div>
-                  <h3 className="text-2xl font-black text-[#172554] font-heading">
+                  <h3 className="text-2xl font-black text-[#173B42] font-heading">
                     {isBangla ? ride.name.bn : ride.name.en}
                   </h3>
-                  <p className="text-xs font-bold text-[#0284C7] mt-1">
+                  <p className="text-xs font-bold text-[#087E8B] mt-1">
                     {isBangla ? ride.tagline.bn : ride.tagline.en}
                   </p>
-                  <p className="mt-3 text-sm text-[#172554]/80 leading-relaxed font-medium">
+                  <p className="mt-3 text-sm text-[#173B42]/80 leading-relaxed font-medium">
                     {isBangla ? ride.description.bn : ride.description.en}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-amber-100 flex items-center justify-between text-xs">
-                  <span className="text-[#172554]/70 font-medium">
+                <div className="pt-4 border-t border-[#35C6C8]/20 flex items-center justify-between text-xs">
+                  <span className="text-[#173B42]/70 font-medium">
                     {isBangla ? "উচ্চতা:" : "Height:"}{" "}
-                    <strong className="text-[#172554] font-bold">
+                    <strong className="text-[#173B42] font-bold">
                       {isBangla ? ride.heightRequirementBn : ride.heightRequirement}
                     </strong>
                   </span>
@@ -153,17 +153,17 @@ export default function WaterParkPage() {
       </section>
 
       {/* Real Water World Photo Showcase Gallery */}
-      <section className="py-16 sm:py-20 bg-[#FFF9ED] relative">
+      <section className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#0284C7] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#BAE6FD] shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#FF6B35]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#087E8B] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#35C6C8]/40 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#087E8B]" />
               <span>{isBangla ? "আসল ওয়াটার পার্ক গ্যালারি" : "Authentic Water Park Gallery"}</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#172554] font-heading tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-[#173B42] font-heading tracking-tight">
               {isBangla ? "ওয়াটার ওয়ার্ল্ডের আসল মুহূর্ত" : "REAL MOMENTS AT WATER WORLD"}
             </h2>
-            <p className="mt-2 text-[#172554]/75 text-xs sm:text-sm font-sans">
+            <p className="mt-2 text-[#173B42]/75 text-xs sm:text-sm font-sans">
               {isBangla
                 ? "আমাদের ম্যাজিক আইল্যান্ড ওয়াটার পার্কের আসল দৃশ্যপট ও দর্শনার্থীদের রোমাঞ্চকর সব স্মৃতি।"
                 : "Real snapshot highlights capturing the thrills, family fun, and ocean waves at Magic Island."}
@@ -183,7 +183,7 @@ export default function WaterParkPage() {
             ].map((pic, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden border-2 border-[#FED7AA] shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFF9ED]"
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#35C6C8]/30 shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFFDF5]"
                 style={{ isolation: "isolate" }}
               >
                 <img
@@ -192,7 +192,7 @@ export default function WaterParkPage() {
                   className="w-full h-[calc(100%+2px)] -top-[1px] object-cover group-hover:scale-108 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
                   <span className="text-white text-xs font-heading font-bold drop-shadow-sm">
                     {isBangla ? pic.labelBn : pic.labelEn}
                   </span>
@@ -204,40 +204,40 @@ export default function WaterParkPage() {
       </section>
 
       {/* Safety & Amenities Strip */}
-      <section className="py-16 bg-white border-y border-amber-100">
+      <section className="py-16 bg-white border-y border-[#35C6C8]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-3xl bg-[#FFF9ED] border-2 border-amber-200/80 flex items-start gap-4 shadow-sm">
-              <div className="w-12 h-12 rounded-2xl bg-[#38BDF8] text-white flex items-center justify-center shrink-0 shadow-md">
+            <div className="p-6 rounded-3xl bg-[#FFFDF5] border-2 border-[#35C6C8]/25 flex items-start gap-4 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-[#35C6C8] text-white flex items-center justify-center shrink-0 shadow-md">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-black text-[#172554] text-base font-heading">{isBangla ? "১০০% সার্টিফাইড লাইফগার্ড" : "100% Certified Lifeguards"}</h4>
-                <p className="text-xs text-[#172554]/75 mt-1.5 leading-relaxed font-medium">
+                <h4 className="font-black text-[#173B42] text-base font-heading">{isBangla ? "১০০% সার্টিফাইড লাইফগার্ড" : "100% Certified Lifeguards"}</h4>
+                <p className="text-xs text-[#173B42]/75 mt-1.5 leading-relaxed font-medium">
                   {isBangla ? "প্রতিটি পুল এবং স্লাইডারে প্রশিক্ষণপ্রাপ্ত রেসকিউ টিম সার্বক্ষণিক সদা জাগ্রত।" : "Continuous surveillance by licensed water rescue personnel across all pools."}
                 </p>
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#FFF9ED] border-2 border-amber-200/80 flex items-start gap-4 shadow-sm">
-              <div className="w-12 h-12 rounded-2xl bg-[#FF6B35] text-white flex items-center justify-center shrink-0 shadow-md">
+            <div className="p-6 rounded-3xl bg-[#FFFDF5] border-2 border-[#FF795C]/25 flex items-start gap-4 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-[#FF795C] text-white flex items-center justify-center shrink-0 shadow-md">
                 <LifeBuoy className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-black text-[#172554] text-base font-heading">{isBangla ? "ফ্রি লাইফ জ্যাকেট" : "Free Life Jackets"}</h4>
-                <p className="text-xs text-[#172554]/75 mt-1.5 leading-relaxed font-medium">
+                <h4 className="font-black text-[#173B42] text-base font-heading">{isBangla ? "ফ্রি লাইফ জ্যাকেট" : "Free Life Jackets"}</h4>
+                <p className="text-xs text-[#173B42]/75 mt-1.5 leading-relaxed font-medium">
                   {isBangla ? "শিশু ও বয়স্ক সবার জন্য বিভিন্ন সাইজের লাইফ জ্যাকেট সম্পূর্ণ ফ্রি।" : "All vest sizes provided complimentary throughout the day for visitors."}
                 </p>
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#FFF9ED] border-2 border-amber-200/80 flex items-start gap-4 shadow-sm">
-              <div className="w-12 h-12 rounded-2xl bg-[#55C98B] text-white flex items-center justify-center shrink-0 shadow-md">
+            <div className="p-6 rounded-3xl bg-[#FFFDF5] border-2 border-[#26865D]/25 flex items-start gap-4 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-[#26865D] text-white flex items-center justify-center shrink-0 shadow-md">
                 <Sun className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-black text-[#172554] text-base font-heading">{isBangla ? "ইউভি ফিল্টারড ওয়াটার" : "UV Filtered Water"}</h4>
-                <p className="text-xs text-[#172554]/75 mt-1.5 leading-relaxed font-medium">
+                <h4 className="font-black text-[#173B42] text-base font-heading">{isBangla ? "ইউভি ফিল্টারড ওয়াটার" : "UV Filtered Water"}</h4>
+                <p className="text-xs text-[#173B42]/75 mt-1.5 leading-relaxed font-medium">
                   {isBangla ? "অত্যাধুনিক অতিবেগুনী ফিল্ট্রেশন যা ত্বকের সুরক্ষা শতভাগ নিশ্চিত করে।" : "Hospital-grade multi-cycle UV sterilization for gentle, crystal-pure water."}
                 </p>
               </div>

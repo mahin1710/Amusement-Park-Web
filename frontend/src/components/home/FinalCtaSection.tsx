@@ -12,26 +12,26 @@ export function FinalCtaSection() {
 
   return (
     <section
-      className="relative pt-16 pb-16 sm:pt-20 sm:pb-20 overflow-hidden bg-[#FFF9ED] text-white"
+      className="relative pt-16 pb-16 sm:pt-20 sm:pb-20 overflow-hidden bg-[#FFFDF5] text-white"
       data-purpose="final-visit-invitation"
     >
-      {/* Background Aerial Drone Image with Smooth Shading (Light Warm Cream -> Deep Theme Park Navy) */}
+      {/* Background Aerial Drone Image with Smooth Shading (Warm Ivory -> Midnight Navy) */}
       <div className="absolute inset-0 z-0">
         <img
           alt="Anowar City Magic Island Aerial Overview"
           className="w-full h-full object-cover object-center filter brightness-90 contrast-105"
           src="/images/magic-island-waterpark-aerial.jpg"
         />
-        {/* Layer 1: Smooth Vertical Shading from preceding #FFF9ED light background into rich deep navy */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF9ED] via-[#172554]/80 via-30% to-[#172554] to-85%"></div>
+        {/* Layer 1: Smooth Vertical Shading from preceding #FFFDF5 light background into rich deep navy */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF5] via-[#12304A]/80 via-30% to-[#12304A] to-85%"></div>
 
         {/* Layer 2: Ambient Dark Overlay at bottom for seamless connection to Footer */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#172554] via-transparent to-transparent opacity-90"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#12304A] via-transparent to-transparent opacity-90"></div>
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Floating Sparkle Crown */}
-        <div className="w-16 h-16 rounded-3xl bg-[#FF6B35] text-white flex items-center justify-center text-3xl mb-6 shadow-xl border-2 border-[#FFD93D] animate-float-slow">
+        <div className="w-16 h-16 rounded-3xl bg-[#FF795C] text-white flex items-center justify-center text-3xl mb-6 shadow-xl border-2 border-[#FFC857] animate-float-slow">
           🎡
         </div>
 
@@ -40,12 +40,12 @@ export function FinalCtaSection() {
           {isBangla ? (
             <>
               আপনার পরবর্তী অবিস্মরণীয় অ্যাডভেঞ্চার <br />
-              <span className="text-[#FFD93D]">শুরু হোক এখানেই!</span>
+              <span className="text-[#FFC857]">শুরু হোক এখানেই!</span>
             </>
           ) : (
             <>
               Your Next Unforgettable Adventure <br />
-              <span className="text-[#FFD93D]">Starts Right Here!</span>
+              <span className="text-[#FFC857]">Starts Right Here!</span>
             </>
           )}
         </h2>
@@ -63,7 +63,7 @@ export function FinalCtaSection() {
             href="/attractions"
             className="btn-park-primary text-base sm:text-lg px-9 py-4 shadow-2xl flex items-center gap-3"
           >
-            <Compass className="w-5 h-5 text-[#FFD93D]" />
+            <Compass className="w-5 h-5 text-[#FFC857]" />
             <span>{isBangla ? "ম্যাজিক আইল্যান্ড ঘুরে দেখুন" : "Explore Magic Island"}</span>
             <ArrowRight className="w-5 h-5" />
           </Link>

@@ -175,31 +175,31 @@ export function StayPriceCalculator() {
 
   return (
     <div
-      className="mt-12 sm:mt-16 park-card p-6 sm:p-10 bg-white border-2 border-[#FED7AA] rounded-3xl shadow-xl transition-all"
+      className="mt-12 sm:mt-16 park-card p-6 sm:p-10 bg-white border-2 border-[#D9B66F]/40 rounded-3xl shadow-xl transition-all"
       data-purpose="stay-price-calculator"
       id="stay-calculator"
     >
       {/* Calculator Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#FED7AA]/50 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#D9B66F]/30 mb-8">
         <div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFF7ED] border border-[#FED7AA] text-[#FF6B35] text-xs font-heading font-bold uppercase tracking-wider mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF6B35]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FFFDF5] border border-[#D9B66F]/50 text-[#087E8B] text-xs font-heading font-bold uppercase tracking-wider mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#087E8B]" />
             <span>
               {isBangla
                 ? "স্বয়ংক্রিয় দিন/রাত ও রুম ভাড়া ক্যালকুলেটর"
                 : "Automatic Stay & Room Price Calculator"}
             </span>
           </div>
-          <h3 className="text-2xl sm:text-3xl font-semibold font-heading text-[#172554] tracking-tight">
+          <h3 className="text-2xl sm:text-3xl font-semibold font-heading text-[#173B42] tracking-tight">
             {isBangla ? "আপনার রিসোর্ট স্টে হিসাব করুন" : "Calculate Your Resort Stay & Costs"}
           </h3>
-          <p className="text-xs sm:text-sm text-[#3B4B75] mt-1 font-sans font-normal">
+          <p className="text-xs sm:text-sm text-[#173B42]/80 mt-1 font-sans font-normal">
             {isBangla
               ? "চেক-ইন ও চেক-আউট তারিখ/সময় নির্বাচন করুন এবং স্বয়ংক্রিয়ভাবে চার্জেবল দিন ও মোট ভাড়া দেখুন।"
               : "Select your check-in & check-out dates/times, choose multiple room categories, and see exact chargeable days."}
           </p>
-          <div className="mt-2.5 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#FFF9ED] border border-[#FFD93D] text-xs font-heading font-bold text-[#172554] shadow-2xs">
-            <Clock className="w-3.5 h-3.5 text-[#FF6B35]" />
+          <div className="mt-2.5 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#FFFDF5] border border-[#FFC857] text-xs font-heading font-bold text-[#173B42] shadow-2xs">
+            <Clock className="w-3.5 h-3.5 text-[#087E8B]" />
             <span>
               {isBangla
                 ? "১ আবাসন ঘণ্টা ১০:০০ AM - ০৯:৩০ AM"
@@ -211,7 +211,7 @@ export function StayPriceCalculator() {
         <button
           onClick={handleReset}
           type="button"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border border-slate-200 text-xs font-heading font-semibold text-slate-600 hover:text-[#FF6B35] hover:border-[#FF6B35] hover:bg-[#FFF7ED] transition-all cursor-pointer self-start sm:self-auto shrink-0"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border border-slate-200 text-xs font-heading font-semibold text-slate-600 hover:text-[#087E8B] hover:border-[#087E8B] hover:bg-[#FFFDF5] transition-all cursor-pointer self-start sm:self-auto shrink-0"
           title="Reset to default dates & rooms"
         >
           <RotateCcw className="w-3.5 h-3.5" />
@@ -222,16 +222,16 @@ export function StayPriceCalculator() {
       {/* 1. Date & Time Selection Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Check-in Selector Card */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA]/80 shadow-xs">
-          <div className="flex items-center gap-2 mb-4 text-[#172554]">
-            <div className="w-8 h-8 rounded-full bg-[#FFD93D] flex items-center justify-center text-[#172554] font-bold text-sm">
+        <div className="p-5 sm:p-6 rounded-2xl bg-[#FFFDF5] border-2 border-[#D9B66F]/30 shadow-xs">
+          <div className="flex items-center gap-2 mb-4 text-[#173B42]">
+            <div className="w-8 h-8 rounded-full bg-[#FFC857] flex items-center justify-center text-[#173B42] font-bold text-sm">
               {isBangla ? "১" : "1"}
             </div>
             <div>
-              <h4 className="font-heading font-semibold text-base text-[#172554] leading-tight">
+              <h4 className="font-heading font-semibold text-base text-[#173B42] leading-tight">
                 {isBangla ? "চেক-ইন তারিখ ও সময়" : "Check-in Date & Time"}
               </h4>
-              <span className="text-[11px] text-[#3B4B75] font-sans font-normal">
+              <span className="text-[11px] text-[#173B42]/80 font-sans font-normal">
                 {isBangla ? "আপনার পছন্দমতো চেক-ইন সময়" : "Select your preferred arrival time"}
               </span>
             </div>
@@ -239,8 +239,8 @@ export function StayPriceCalculator() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-heading font-medium text-[#172554] mb-1.5 flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#FF6B35]" />
+              <label className="block text-xs font-heading font-medium text-[#173B42] mb-1.5 flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 text-[#087E8B]" />
                 <span>{isBangla ? "চেক-ইন তারিখ" : "Check-in Date"}</span>
               </label>
               <input
@@ -248,35 +248,35 @@ export function StayPriceCalculator() {
                 min={initialDates.today}
                 value={checkInDate}
                 onChange={(e) => handleCheckInDateChange(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#FED7AA] bg-white text-xs sm:text-sm font-sans font-medium text-[#172554] focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent cursor-pointer shadow-xs"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9B66F]/40 bg-white text-xs sm:text-sm font-sans font-medium text-[#173B42] focus:outline-none focus:ring-2 focus:ring-[#087E8B] focus:border-transparent cursor-pointer shadow-xs"
               />
             </div>
             <div>
-              <label className="block text-xs font-heading font-medium text-[#172554] mb-1.5 flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#FF6B35]" />
+              <label className="block text-xs font-heading font-medium text-[#173B42] mb-1.5 flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-[#087E8B]" />
                 <span>{isBangla ? "চেক-ইন সময়" : "Check-in Time"}</span>
               </label>
               <input
                 type="time"
                 value={checkInTime}
                 onChange={(e) => setCheckInTime(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#FED7AA] bg-white text-xs sm:text-sm font-sans font-medium text-[#172554] focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent cursor-pointer shadow-xs"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9B66F]/40 bg-white text-xs sm:text-sm font-sans font-medium text-[#173B42] focus:outline-none focus:ring-2 focus:ring-[#087E8B] focus:border-transparent cursor-pointer shadow-xs"
               />
             </div>
           </div>
         </div>
 
         {/* Check-out Selector Card */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA]/80 shadow-xs">
-          <div className="flex items-center gap-2 mb-4 text-[#172554]">
-            <div className="w-8 h-8 rounded-full bg-[#FFD93D] flex items-center justify-center text-[#172554] font-bold text-sm">
+        <div className="p-5 sm:p-6 rounded-2xl bg-[#FFFDF5] border-2 border-[#D9B66F]/30 shadow-xs">
+          <div className="flex items-center gap-2 mb-4 text-[#173B42]">
+            <div className="w-8 h-8 rounded-full bg-[#FFC857] flex items-center justify-center text-[#173B42] font-bold text-sm">
               {isBangla ? "২" : "2"}
             </div>
             <div>
-              <h4 className="font-heading font-semibold text-base text-[#172554] leading-tight">
+              <h4 className="font-heading font-semibold text-base text-[#173B42] leading-tight">
                 {isBangla ? "চেক-আউট তারিখ ও সময়" : "Check-out Date & Time"}
               </h4>
-              <span className="text-[11px] text-[#3B4B75] font-sans font-normal">
+              <span className="text-[11px] text-[#173B42]/80 font-sans font-normal">
                 {isBangla ? "আপনার সুবিধাজনক চেক-আউট সময়" : "Select your preferred departure time"}
               </span>
             </div>
@@ -284,8 +284,8 @@ export function StayPriceCalculator() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-heading font-medium text-[#172554] mb-1.5 flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <label className="block text-xs font-heading font-medium text-[#173B42] mb-1.5 flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 text-[#087E8B]" />
                 <span>{isBangla ? "চেক-আউট তারিখ" : "Check-out Date"}</span>
               </label>
               <input
@@ -293,19 +293,19 @@ export function StayPriceCalculator() {
                 min={checkInDate || initialDates.today}
                 value={checkOutDate}
                 onChange={(e) => setCheckOutDate(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#FED7AA] bg-white text-xs sm:text-sm font-sans font-medium text-[#172554] focus:outline-none focus:ring-2 focus:ring-[#38BDF8] focus:border-transparent cursor-pointer shadow-xs"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9B66F]/40 bg-white text-xs sm:text-sm font-sans font-medium text-[#173B42] focus:outline-none focus:ring-2 focus:ring-[#087E8B] focus:border-transparent cursor-pointer shadow-xs"
               />
             </div>
             <div>
-              <label className="block text-xs font-heading font-medium text-[#172554] mb-1.5 flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <label className="block text-xs font-heading font-medium text-[#173B42] mb-1.5 flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-[#087E8B]" />
                 <span>{isBangla ? "চেক-আউট সময়" : "Check-out Time"}</span>
               </label>
               <input
                 type="time"
                 value={checkOutTime}
                 onChange={(e) => setCheckOutTime(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#FED7AA] bg-white text-xs sm:text-sm font-sans font-medium text-[#172554] focus:outline-none focus:ring-2 focus:ring-[#38BDF8] focus:border-transparent cursor-pointer shadow-xs"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9B66F]/40 bg-white text-xs sm:text-sm font-sans font-medium text-[#173B42] focus:outline-none focus:ring-2 focus:ring-[#087E8B] focus:border-transparent cursor-pointer shadow-xs"
               />
             </div>
           </div>
@@ -314,8 +314,8 @@ export function StayPriceCalculator() {
 
       {/* Friendly Guide Note when inputs are empty */}
       {stay.isIncomplete && (
-        <div className="p-4 rounded-2xl bg-[#FFF7ED] border-2 border-[#FED7AA] text-[#B45309] flex items-center gap-3 mb-8">
-          <Info className="w-5 h-5 text-[#FF6B35] shrink-0" />
+        <div className="p-4 rounded-2xl bg-[#FFFDF5] border-2 border-[#D9B66F]/40 text-[#173B42] flex items-center gap-3 mb-8">
+          <Info className="w-5 h-5 text-[#087E8B] shrink-0" />
           <p className="text-xs sm:text-sm font-heading font-medium">
             {isBangla
               ? "আপনার সুবিধাজনক চেক-ইন ও চেক-আউট তারিখ এবং সময় নির্বাচন করুন।"
@@ -336,18 +336,18 @@ export function StayPriceCalculator() {
 
       {/* 2. Visual Stay Duration Breakdown (Prominently Highlighted!) */}
       {stay.isValid && (
-        <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#172554] to-[#1e3a8a] text-white shadow-lg mb-8">
+        <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#12304A] to-[#173B42] text-white shadow-lg mb-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center sm:text-left">
             {/* Chargeable Days (Visual Hero Metric) */}
             <div className="sm:border-r sm:border-white/15 sm:pr-4 flex flex-col justify-center items-center sm:items-start">
-              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#FFD93D] mb-1">
+              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#FFC857] mb-1">
                 {isBangla ? "চার্জেবল দিন (ভাড়া হিসাব)" : "Chargeable Accommodation"}
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl sm:text-5xl font-black font-heading text-white">
                   {isBangla ? toBnDigits(stay.chargeableDays) : stay.chargeableDays}
                 </span>
-                <span className="text-xl font-bold font-heading text-[#FFD93D]">
+                <span className="text-xl font-bold font-heading text-[#FFC857]">
                   {isBangla ? "দিন" : stay.chargeableDays > 1 ? "Days" : "Day"}
                 </span>
               </div>
@@ -360,7 +360,7 @@ export function StayPriceCalculator() {
 
             {/* Total Stay Duration */}
             <div className="sm:border-r sm:border-white/15 sm:px-4 flex flex-col justify-center items-center sm:items-start">
-              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#38BDF8] mb-1">
+              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#35C6C8] mb-1">
                 {isBangla ? "মোট অবস্থানের সময়" : "Total Stay Duration"}
               </span>
               <div className="text-2xl sm:text-3xl font-bold font-heading text-white">
@@ -375,7 +375,7 @@ export function StayPriceCalculator() {
 
             {/* Calendar Nights */}
             <div className="sm:pl-4 flex flex-col justify-center items-center sm:items-start">
-              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#55C98B] mb-1">
+              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#26865D] mb-1">
                 {isBangla ? "ক্যালেন্ডার রাত" : "Calendar Nights"}
               </span>
               <div className="flex items-baseline gap-2">
@@ -419,11 +419,11 @@ export function StayPriceCalculator() {
       {/* 3. Room Selection with Steppers */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h4 className="font-heading font-bold text-lg text-[#172554] flex items-center gap-2">
-            <Bed className="w-5 h-5 text-[#FF6B35]" />
+          <h4 className="font-heading font-bold text-lg text-[#173B42] flex items-center gap-2">
+            <Bed className="w-5 h-5 text-[#087E8B]" />
             <span>{isBangla ? "রুমের ধরন ও সংখ্যা নির্বাচন করুন" : "Select Room Categories & Quantities"}</span>
           </h4>
-          <span className="text-xs text-[#3B4B75] hidden sm:inline">
+          <span className="text-xs text-[#173B42]/80 hidden sm:inline">
             {isBangla
               ? "একাধিক রুম ক্যাটাগরি একসাথে নির্বাচন করতে পারবেন"
               : "Multiple categories can be selected simultaneously"}
@@ -440,8 +440,8 @@ export function StayPriceCalculator() {
               <div
                 key={room.id}
                 className={`p-5 rounded-2xl border-2 transition-all flex flex-col justify-between ${isSelected
-                  ? "bg-[#FFF9ED] border-[#FF6B35] shadow-md ring-2 ring-[#FF6B35]/20"
-                  : "bg-white border-slate-200 hover:border-[#FED7AA]"
+                  ? "bg-[#FFFDF5] border-[#087E8B] shadow-md ring-2 ring-[#087E8B]/20"
+                  : "bg-white border-slate-200 hover:border-[#087E8B]/40"
                   }`}
               >
                 <div
@@ -459,14 +459,14 @@ export function StayPriceCalculator() {
                       className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform"
                       loading="lazy"
                     />
-                    <div className="absolute top-2 left-2 bg-[#FF6B35] text-white text-[10px] font-heading font-bold uppercase px-2.5 py-0.5 rounded-full shadow">
+                    <div className="absolute top-2 left-2 bg-[#12304A] text-[#D9B66F] border border-[#D9B66F]/30 text-[10px] font-heading font-bold uppercase px-2.5 py-0.5 rounded-full shadow">
                       {isBangla ? room.badgeBn : room.badgeEn}
                     </div>
 
                     {/* Green Right Check Sign on Selection */}
                     {isSelected && (
                       <div
-                        className="absolute top-2 right-2 bg-emerald-500 text-white w-7 h-7 rounded-full flex items-center justify-center shadow-md animate-in zoom-in-75"
+                        className="absolute top-2 right-2 bg-[#26865D] text-white w-7 h-7 rounded-full flex items-center justify-center shadow-md animate-in zoom-in-75"
                         title={isBangla ? "নির্বাচিত রুম" : "Selected Room"}
                       >
                         <Check className="w-4 h-4 stroke-[3]" />
@@ -474,10 +474,10 @@ export function StayPriceCalculator() {
                     )}
                   </div>
 
-                  <h5 className="font-heading font-semibold text-base text-[#172554] mb-1">
+                  <h5 className="font-heading font-semibold text-base text-[#173B42] mb-1">
                     {isBangla ? room.titleBn : room.titleEn}
                   </h5>
-                  <div className="text-xs text-[#FF6B35] font-heading font-bold mb-3">
+                  <div className="text-xs text-[#087E8B] font-heading font-bold mb-3">
                     {formatCurrency(room.pricePerDayBDT, isBangla)}{" "}
                     <span className="text-[11px] font-normal text-slate-500">
                       / {isBangla ? "দিন (প্রতি রুম)" : "day (per room)"}
@@ -491,9 +491,9 @@ export function StayPriceCalculator() {
                     <button
                       onClick={() => handleQuantityChange(room.id, 1)}
                       type="button"
-                      className="w-full py-2.5 px-3 rounded-xl bg-white border-2 border-[#FED7AA] hover:border-[#FF6B35] hover:bg-[#FFF7ED] text-[#172554] hover:text-[#FF6B35] font-heading font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs group"
+                      className="w-full py-2.5 px-3 rounded-xl bg-white border-2 border-[#087E8B]/30 hover:border-[#087E8B] hover:bg-[#FFFDF5] text-[#173B42] hover:text-[#087E8B] font-heading font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs group"
                     >
-                      <Plus className="w-4 h-4 text-[#FF6B35] group-hover:scale-110 transition-transform" />
+                      <Plus className="w-4 h-4 text-[#087E8B] group-hover:scale-110 transition-transform" />
                       <span>{isBangla ? "রুম নির্বাচন করুন" : "Select Room"}</span>
                     </button>
                   ) : (
@@ -506,19 +506,19 @@ export function StayPriceCalculator() {
                           <button
                             onClick={() => handleQuantityChange(room.id, -1)}
                             type="button"
-                            className="w-8 h-8 rounded-lg border border-slate-300 bg-white text-[#172554] hover:bg-slate-100 flex items-center justify-center transition-all cursor-pointer"
+                            className="w-8 h-8 rounded-lg border border-slate-300 bg-white text-[#173B42] hover:bg-slate-100 flex items-center justify-center transition-all cursor-pointer"
                             aria-label="Decrease quantity"
                           >
                             <Minus className="w-3.5 h-3.5" />
                           </button>
-                          <span className="w-8 text-center font-heading font-black text-sm text-[#172554]">
+                          <span className="w-8 text-center font-heading font-black text-sm text-[#173B42]">
                             {isBangla ? toBnDigits(qty) : qty}
                           </span>
                           <button
                             onClick={() => handleQuantityChange(room.id, 1)}
                             disabled={qty >= 10}
                             type="button"
-                            className="w-8 h-8 rounded-lg bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] flex items-center justify-center transition-all cursor-pointer font-bold"
+                            className="w-8 h-8 rounded-lg bg-[#FFC857] hover:bg-[#FFC857]/90 text-[#173B42] flex items-center justify-center transition-all cursor-pointer font-bold"
                             aria-label="Increase quantity"
                           >
                             <Plus className="w-3.5 h-3.5" />
@@ -529,7 +529,7 @@ export function StayPriceCalculator() {
                       {/* Subtotal preview for this category */}
                       <div className="flex items-baseline justify-between text-xs pt-2 border-t border-dashed border-slate-200">
                         <span className="text-slate-500">{isBangla ? "সাবটোটাল:" : "Subtotal:"}</span>
-                        <strong className="font-heading font-bold text-[#172554]">
+                        <strong className="font-heading font-bold text-[#173B42]">
                           {formatCurrency(subtotal, isBangla)}
                         </strong>
                       </div>
@@ -543,14 +543,14 @@ export function StayPriceCalculator() {
       </div>
 
       {/* 4. Live Price Summary & Breakdown Card */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFF9ED] border-2 border-[#FFD93D] shadow-md">
-        <h4 className="font-heading font-bold text-lg text-[#172554] mb-4 flex items-center gap-2">
-          <Building className="w-5 h-5 text-[#FF6B35]" />
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFDF5] border-2 border-[#D9B66F]/50 shadow-md">
+        <h4 className="font-heading font-bold text-lg text-[#173B42] mb-4 flex items-center gap-2">
+          <Building className="w-5 h-5 text-[#087E8B]" />
           <span>{isBangla ? "ভাড়ার চূড়ান্ত বিবরণী" : "Estimated Cost Breakdown & Summary"}</span>
         </h4>
 
         {/* Selected Items Line-by-Line Breakdown */}
-        <div className="space-y-2.5 pb-4 border-b border-[#FED7AA]">
+        <div className="space-y-2.5 pb-4 border-b border-[#D9B66F]/30">
           {costs.categoryTotals.filter((c) => c.quantity > 0).length === 0 ? (
             <p className="text-xs sm:text-sm text-slate-500 italic py-2">
               {isBangla
@@ -565,8 +565,8 @@ export function StayPriceCalculator() {
                   key={item.id}
                   className="flex flex-col sm:flex-row sm:items-center justify-between text-xs sm:text-sm gap-1"
                 >
-                  <div className="flex items-center gap-2 text-[#172554]">
-                    <span className="w-2 h-2 rounded-full bg-[#FF6B35]"></span>
+                  <div className="flex items-center gap-2 text-[#173B42]">
+                    <span className="w-2 h-2 rounded-full bg-[#087E8B]"></span>
                     <span className="font-semibold">{isBangla ? item.titleBn : item.titleEn}</span>
                     <span className="text-slate-500">
                       ({isBangla ? toBnDigits(item.quantity) : item.quantity}{" "}
@@ -583,7 +583,7 @@ export function StayPriceCalculator() {
                       )})
                     </span>
                   </div>
-                  <strong className="font-heading font-bold text-[#172554] self-end sm:self-auto">
+                  <strong className="font-heading font-bold text-[#173B42] self-end sm:self-auto">
                     {formatCurrency(item.subtotalBDT, isBangla)}
                   </strong>
                 </div>
@@ -592,10 +592,10 @@ export function StayPriceCalculator() {
         </div>
 
         {/* Stay Parameters Quick Reference */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 border-b border-[#FED7AA] text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 border-b border-[#D9B66F]/30 text-xs">
           <div>
             <span className="text-slate-500 block">{isBangla ? "মোট রুম:" : "Total Rooms:"}</span>
-            <strong className="font-heading text-sm text-[#172554]">
+            <strong className="font-heading text-sm text-[#173B42]">
               {isBangla ? toBnDigits(costs.totalRoomsSelected) : costs.totalRoomsSelected}{" "}
               {isBangla ? "টি" : "Room(s)"}
             </strong>
@@ -604,7 +604,7 @@ export function StayPriceCalculator() {
             <span className="text-slate-500 block">
               {isBangla ? "চার্জেবল দিন:" : "Chargeable Days:"}
             </span>
-            <strong className="font-heading text-sm text-[#FF6B35]">
+            <strong className="font-heading text-sm text-[#087E8B]">
               {stay.isValid ? (
                 <>
                   {isBangla ? toBnDigits(stay.chargeableDays) : stay.chargeableDays}{" "}
@@ -619,7 +619,7 @@ export function StayPriceCalculator() {
             <span className="text-slate-500 block">
               {isBangla ? "ক্যালেন্ডার রাত:" : "Calendar Nights:"}
             </span>
-            <strong className="font-heading text-sm text-[#172554]">
+            <strong className="font-heading text-sm text-[#173B42]">
               {stay.isValid ? (
                 <>
                   {isBangla ? toBnDigits(stay.calendarNights) : stay.calendarNights}{" "}
@@ -632,7 +632,7 @@ export function StayPriceCalculator() {
           </div>
           <div>
             <span className="text-slate-500 block">{isBangla ? "মোট সময়:" : "Duration:"}</span>
-            <strong className="font-heading text-sm text-[#172554]">
+            <strong className="font-heading text-sm text-[#173B42]">
               {stay.isValid ? (
                 isBangla ? stay.formattedDurationBn : stay.formattedDurationEn
               ) : (
@@ -645,10 +645,10 @@ export function StayPriceCalculator() {
         {/* Grand Total Bar */}
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <span className="text-xs text-[#3B4B75] uppercase font-heading font-bold block">
+            <span className="text-xs text-[#173B42]/80 uppercase font-heading font-bold block">
               {isBangla ? "সর্বমোট প্রাক্কলিত ভাড়া" : "Grand Total Estimated Cost"}
             </span>
-            <div className="text-3xl sm:text-4xl font-bold font-heading text-[#FF6B35] leading-tight">
+            <div className="text-3xl sm:text-4xl font-bold font-heading text-[#087E8B] leading-tight">
               {formatCurrency(costs.grandTotalBDT, isBangla)}
             </div>
             <span className="text-[11px] text-slate-500 font-sans font-normal">
