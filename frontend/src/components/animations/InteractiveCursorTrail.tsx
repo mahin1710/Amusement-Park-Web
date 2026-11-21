@@ -56,7 +56,7 @@ export function InteractiveCursorTrail() {
     const colors = ["#FFD93D", "#FF6B35", "#38BDF8", "#55C98B", "#F472B6"];
 
     // Pre-allocated Object Pool (Zero Garbage Collection allocation during animation)
-    const MAX_SPARKLES = 90;
+    const MAX_SPARKLES = 130;
     const sparkles: Sparkle[] = [];
     for (let i = 0; i < MAX_SPARKLES; i++) {
       sparkles.push({
@@ -95,7 +95,8 @@ export function InteractiveCursorTrail() {
       const s = sparkles[poolIndex];
       poolIndex = (poolIndex + 1) % MAX_SPARKLES;
 
-      const baseSize = (Math.random() * 3.2 + 3.0) * sizeBoost;
+      // Halka boro (slightly larger, pleasant diamond star size)
+      const baseSize = (Math.random() * 4.2 + 4.8) * sizeBoost;
 
       s.active = true;
       s.x = x; // Pinpoint accurate: exactly at the cursor coordinate
@@ -107,17 +108,18 @@ export function InteractiveCursorTrail() {
       s.alpha = 1.0;
       s.color = colors[Math.floor(Math.random() * colors.length)];
       s.rotation = Math.random() * Math.PI;
-      s.vRot = (Math.random() - 0.5) * 0.14;
+      // Smooth, gentle rotation speed (not too fast)
+      s.vRot = (Math.random() - 0.5) * 0.07;
     };
 
     // Burst at pinpoint on click down / touch tap
     const triggerBurst = (x: number, y: number, count = 4) => {
       // First sparkle sits exactly on the pinpoint
-      spawnSparkle(x, y, 0, 0, 1.2);
+      spawnSparkle(x, y, 0, 0, 1.25);
       for (let i = 1; i < count; i++) {
         const angle = (i * (Math.PI * 2)) / (count - 1);
-        const speed = Math.random() * 0.6 + 0.3;
-        spawnSparkle(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed, 1.0);
+        const speed = Math.random() * 0.5 + 0.25;
+        spawnSparkle(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed, 1.05);
       }
     };
 
@@ -126,7 +128,7 @@ export function InteractiveCursorTrail() {
       const dist = Math.hypot(endX - startX, endY - startY);
       if (dist === 0) return;
 
-      // Density: spawn approximately every 8-12px
+      // Density: spawn smoothly every 8-12px
       const step = isHolding ? 8 : 11;
       const count = Math.min(8, Math.max(1, Math.floor(dist / step)));
 
@@ -311,6 +313,10 @@ export function InteractiveCursorTrail() {
       ctx.translate(cx, cy);
       ctx.rotate(rot);
 
+      // Subtle silky glow around the star for ultra-smooth appearance
+      ctx.shadowColor = color;
+      ctx.shadowBlur = Math.round(outerR * 0.65);
+
       ctx.beginPath();
       // 4 symmetric diamond tips at 0, 90, 180, 270 deg with 4 notches at 45, 135, 225, 315 deg
       for (let i = 0; i < 4; i++) {
@@ -333,9 +339,10 @@ export function InteractiveCursorTrail() {
       ctx.closePath();
       ctx.fill();
 
-      // Bright center core for enhanced brilliance at pinpoint
+      // Bright center core for enhanced brilliance at pinpoint (sharp white core)
+      ctx.shadowBlur = 0;
       ctx.beginPath();
-      ctx.arc(0, 0, innerR * 0.45, 0, Math.PI * 2);
+      ctx.arc(0, 0, Math.max(0.9, innerR * 0.42), 0, Math.PI * 2);
       ctx.fillStyle = "#FFFFFF";
       ctx.fill();
 
@@ -349,11 +356,11 @@ export function InteractiveCursorTrail() {
 
       // Continuous Hold Stream directly at current pointer location
       if (isHolding && currentX !== -9999) {
-        if (now - lastHoldEmission > 30) {
+        if (now - lastHoldEmission > 32) {
           lastHoldEmission = now;
           const angle = Math.random() * Math.PI * 2;
-          const speed = Math.random() * 0.45 + 0.15;
-          spawnSparkle(currentX, currentY, Math.cos(angle) * speed, Math.sin(angle) * speed, 1.1);
+          const speed = Math.random() * 0.4 + 0.15;
+          spawnSparkle(currentX, currentY, Math.cos(angle) * speed, Math.sin(angle) * speed, 1.15);
         }
       }
 
@@ -364,14 +371,16 @@ export function InteractiveCursorTrail() {
 
         // Draw BEFORE moving so the initial frame renders exactly at the pinpoint (cx, cy)
         const currentAlpha = Math.max(0, s.alpha);
-        const currentSize = s.initialSize * (0.3 + 0.7 * currentAlpha);
-        drawStar(s.x, s.y, currentSize, currentSize * 0.38, s.rotation, s.color, currentAlpha);
+        // Silky sinusoidal ease-out for smooth scaling
+        const smoothScale = Math.sin(currentAlpha * (Math.PI * 0.5));
+        const currentSize = s.initialSize * (0.35 + 0.65 * smoothScale);
+        drawStar(s.x, s.y, currentSize, currentSize * 0.36, s.rotation, s.color, currentAlpha);
 
         // Update physics for next frame
         s.x += s.vx;
         s.y += s.vy;
         s.rotation += s.vRot;
-        s.alpha -= 0.032; // Crisp ~0.5s fade-out
+        s.alpha -= 0.020; // Silky smooth gradual fade-out (~0.8s lifecycle)
 
         if (s.alpha <= 0) {
           s.active = false;
