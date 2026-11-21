@@ -160,11 +160,10 @@ export default function AttractionsPage() {
               <button
                 key={cat.id}
                 onClick={() => handleCategorySelect(cat.id)}
-                className={`text-left p-6 sm:p-7 rounded-3xl border-2 transition-all duration-300 cursor-pointer flex flex-col justify-between group relative overflow-hidden ${
-                  isSelected
-                    ? `${cat.activeBorder} ${cat.activeBg} bg-white shadow-xl scale-[1.02]`
-                    : "border-[#087E8B]/20 bg-white hover:border-[#FFC857] hover:shadow-lg hover:-translate-y-1"
-                }`}
+                className={`text-left p-6 sm:p-7 rounded-3xl border-2 transition-all duration-300 cursor-pointer flex flex-col justify-between group relative overflow-hidden ${isSelected
+                  ? `${cat.activeBorder} ${cat.activeBg} bg-white shadow-xl scale-[1.02]`
+                  : "border-[#087E8B]/20 bg-white hover:border-[#FFC857] hover:shadow-lg hover:-translate-y-1"
+                  }`}
               >
                 {/* 3D Animated Feature Badge (Only for zones with 3D animation) */}
                 {cat.animationTagEn ? (
@@ -181,9 +180,8 @@ export default function AttractionsPage() {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div
-                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm ${
-                        isSelected ? cat.badgeBg : "bg-[#FFFDF5] border-2 border-[#087E8B]/20"
-                      }`}
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm ${isSelected ? cat.badgeBg : "bg-[#FFFDF5] border-2 border-[#087E8B]/20"
+                        }`}
                     >
                       <Icon className={`w-6 h-6 ${isSelected ? "text-white" : cat.themeColor}`} />
                     </div>
@@ -222,9 +220,8 @@ export default function AttractionsPage() {
                       ▶ Play 3D
                     </span>
                     <ArrowRight
-                      className={`w-4 h-4 transition-transform ${
-                        isSelected ? `${cat.themeColor} translate-x-1` : "text-[#173B42]/50 group-hover:translate-x-1"
-                      }`}
+                      className={`w-4 h-4 transition-transform ${isSelected ? `${cat.themeColor} translate-x-1` : "text-[#173B42]/50 group-hover:translate-x-1"
+                        }`}
                     />
                   </div>
                 </div>
