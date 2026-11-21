@@ -118,19 +118,18 @@ export function StayPriceCalculator() {
         .filter((c) => c.quantity > 0)
         .map(
           (c) =>
-            `• ${isBangla ? c.titleBn : c.titleEn}: ${
-              isBangla ? toBnDigits(c.quantity) : c.quantity
+            `• ${isBangla ? c.titleBn : c.titleEn}: ${isBangla ? toBnDigits(c.quantity) : c.quantity
             } ${isBangla ? "টি রুম" : "room(s)"} × ${formatCurrency(c.pricePerDayBDT, isBangla)}`
         )
         .join("\n");
 
       const message = isBangla
         ? `হ্যালো ম্যাজিক আইল্যান্ড, আমি রিসোর্ট রুম বুকিং অনুসন্ধান করতে চাই।\n\n` +
-          `নির্বাচিত রুম:\n${selectedRoomsSummary || "রুম তথ্য"}\n\n` +
-          `অনুগ্রহ করে রুমের প্রাপ্যতা ও বুকিং প্রক্রিয়া জানান।`
+        `নির্বাচিত রুম:\n${selectedRoomsSummary || "রুম তথ্য"}\n\n` +
+        `অনুগ্রহ করে রুমের প্রাপ্যতা ও বুকিং প্রক্রিয়া জানান।`
         : `Hello Magic Island, I want to inquire about resort room booking.\n\n` +
-          `Selected Rooms:\n${selectedRoomsSummary || "No room selected"}\n\n` +
-          `Please share room availability and booking details.`;
+        `Selected Rooms:\n${selectedRoomsSummary || "No room selected"}\n\n` +
+        `Please share room availability and booking details.`;
 
       return `https://wa.me/${businessConfig.hotlines.whatsapp.replace(
         /[^0-9]/g,
@@ -142,33 +141,31 @@ export function StayPriceCalculator() {
       .filter((c) => c.quantity > 0)
       .map(
         (c) =>
-          `• ${isBangla ? c.titleBn : c.titleEn}: ${
-            isBangla ? toBnDigits(c.quantity) : c.quantity
-          } ${
-            isBangla ? "টি রুম" : "room(s)"
+          `• ${isBangla ? c.titleBn : c.titleEn}: ${isBangla ? toBnDigits(c.quantity) : c.quantity
+          } ${isBangla ? "টি রুম" : "room(s)"
           } × ${formatCurrency(c.pricePerDayBDT, isBangla)} = ${formatCurrency(c.subtotalBDT, isBangla)}`
       )
       .join("\n");
 
     const message = isBangla
       ? `হ্যালো ম্যাজিক আইল্যান্ড, আমি রিসোর্ট রুম বুকিং অনুসন্ধান করতে চাই।\n\n` +
-        `📅 চেক-ইন: ${stay.checkInFormattedBn}\n` +
-        `📅 চেক-আউট: ${stay.checkOutFormattedBn}\n` +
-        `⏱️ মোট সময়: ${stay.formattedDurationBn}\n` +
-        `🏨 বিলিং দিন (Chargeable): ${toBnDigits(stay.chargeableDays)} দিন\n` +
-        `🌙 ক্যালেন্ডার রাত: ${toBnDigits(stay.calendarNights)} রাত\n\n` +
-        `নির্বাচিত রুম:\n${selectedRoomsSummary || "কনো রুম নির্বাচন করা হয়নি"}\n\n` +
-        `💰 সর্বমোট প্রাক্কলিত ভাড়া: ${formatCurrency(costs.grandTotalBDT, isBangla)}\n\n` +
-        `অনুগ্রহ করে প্রাপ্যতা ও নিশ্চিতকরণ প্রক্রিয়া জানান।`
+      `📅 চেক-ইন: ${stay.checkInFormattedBn}\n` +
+      `📅 চেক-আউট: ${stay.checkOutFormattedBn}\n` +
+      `⏱️ মোট সময়: ${stay.formattedDurationBn}\n` +
+      `🏨 বিলিং দিন (Chargeable): ${toBnDigits(stay.chargeableDays)} দিন\n` +
+      `🌙 ক্যালেন্ডার রাত: ${toBnDigits(stay.calendarNights)} রাত\n\n` +
+      `নির্বাচিত রুম:\n${selectedRoomsSummary || "কনো রুম নির্বাচন করা হয়নি"}\n\n` +
+      `💰 সর্বমোট প্রাক্কলিত ভাড়া: ${formatCurrency(costs.grandTotalBDT, isBangla)}\n\n` +
+      `অনুগ্রহ করে প্রাপ্যতা ও নিশ্চিতকরণ প্রক্রিয়া জানান।`
       : `Hello Magic Island, I want to inquire about resort room booking with this estimate:\n\n` +
-        `📅 Check-in: ${stay.checkInFormattedEn}\n` +
-        `📅 Check-out: ${stay.checkOutFormattedEn}\n` +
-        `⏱️ Total Stay: ${stay.formattedDurationEn}\n` +
-        `🏨 Chargeable Days: ${stay.chargeableDays} Day(s)\n` +
-        `🌙 Calendar Nights: ${stay.calendarNights} Night(s)\n\n` +
-        `Selected Rooms:\n${selectedRoomsSummary || "No room selected"}\n\n` +
-        `💰 Grand Total: ${formatCurrency(costs.grandTotalBDT, isBangla)}\n\n` +
-        `Please confirm availability and booking procedure.`;
+      `📅 Check-in: ${stay.checkInFormattedEn}\n` +
+      `📅 Check-out: ${stay.checkOutFormattedEn}\n` +
+      `⏱️ Total Stay: ${stay.formattedDurationEn}\n` +
+      `🏨 Chargeable Days: ${stay.chargeableDays} Day(s)\n` +
+      `🌙 Calendar Nights: ${stay.calendarNights} Night(s)\n\n` +
+      `Selected Rooms:\n${selectedRoomsSummary || "No room selected"}\n\n` +
+      `💰 Grand Total: ${formatCurrency(costs.grandTotalBDT, isBangla)}\n\n` +
+      `Please confirm availability and booking procedure.`;
 
     return `https://wa.me/${businessConfig.hotlines.whatsapp.replace(
       /[^0-9]/g,
@@ -205,7 +202,7 @@ export function StayPriceCalculator() {
             <Clock className="w-3.5 h-3.5 text-[#FF6B35]" />
             <span>
               {isBangla
-                ? "১ অ্যাকোমোডেশন আওয়ার্স ১০:০০ AM - ০৯:৩০ AM"
+                ? "১ আবাসন ঘণ্টা ১০:০০ AM - ০৯:৩০ AM"
                 : "1 Accommodation Hours 10:00 AM - 09:30 AM"}
             </span>
           </div>
@@ -395,8 +392,8 @@ export function StayPriceCalculator() {
                     ? "ডে-ইউজ / ডে-স্টে"
                     : "Day-use / Day-stay"
                   : isBangla
-                  ? "ওভারনাইট রাত্রিযাপন"
-                  : "Overnight sleepover"}
+                    ? "ওভারনাইট রাত্রিযাপন"
+                    : "Overnight sleepover"}
               </span>
             </div>
           </div>
@@ -442,11 +439,10 @@ export function StayPriceCalculator() {
             return (
               <div
                 key={room.id}
-                className={`p-5 rounded-2xl border-2 transition-all flex flex-col justify-between ${
-                  isSelected
-                    ? "bg-[#FFF9ED] border-[#FF6B35] shadow-md ring-2 ring-[#FF6B35]/20"
-                    : "bg-white border-slate-200 hover:border-[#FED7AA]"
-                }`}
+                className={`p-5 rounded-2xl border-2 transition-all flex flex-col justify-between ${isSelected
+                  ? "bg-[#FFF9ED] border-[#FF6B35] shadow-md ring-2 ring-[#FF6B35]/20"
+                  : "bg-white border-slate-200 hover:border-[#FED7AA]"
+                  }`}
               >
                 <div
                   className={!isSelected ? "cursor-pointer group" : undefined}
@@ -662,11 +658,11 @@ export function StayPriceCalculator() {
                     : "Select room(s) above to view estimated cost")
                 : stay.isValid
                 ? (isBangla
-                    ? "ব্রেকফাস্ট ও ফ্রি পুলসাইড প্রিভিলেজ অন্তর্ভুক্ত"
-                    : "Includes breakfast & complimentary park/pool privileges")
+                  ? "ব্রেকফাস্ট ও ফ্রি পুলসাইড প্রিভিলেজ অন্তর্ভুক্ত"
+                  : "Includes breakfast & complimentary park/pool privileges")
                 : (isBangla
-                    ? "১ দিনের বেস প্রাক্কলন (নির্দিষ্ট ভাড়া জানতে উপরে তারিখ ও সময় দিন)"
-                    : "Base 1-day estimate (select dates & times above to calculate total stay)")}
+                  ? "১ দিনের বেস প্রাক্কলন (নির্দিষ্ট ভাড়া জানতে উপরে তারিখ ও সময় দিন)"
+                  : "Base 1-day estimate (select dates & times above to calculate total stay)")}
             </span>
           </div>
 
