@@ -311,7 +311,7 @@ export default function AttractionsPage() {
 
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div>
-                  <h3 className="font-sans text-xl sm:text-2xl font-bold text-[#172554] group-hover:text-[#FF6B35] transition-colors leading-tight">
+                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#172554] group-hover:text-[#FF6B35] transition-colors leading-tight">
                     {isBangla ? ride.name.bn : ride.name.en}
                   </h3>
                   <p className="text-xs font-heading font-semibold text-[#FF6B35] mt-1 line-clamp-1">

@@ -474,7 +474,7 @@ export function StayPriceCalculator() {
                     )}
                   </div>
 
-                  <h5 className="font-sans font-bold text-base text-[#172554] mb-1">
+                  <h5 className="font-heading font-semibold text-base text-[#172554] mb-1">
                     {isBangla ? room.titleBn : room.titleEn}
                   </h5>
                   <div className="text-xs text-[#FF6B35] font-heading font-bold mb-3">
