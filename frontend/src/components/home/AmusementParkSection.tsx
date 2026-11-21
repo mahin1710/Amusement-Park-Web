@@ -118,7 +118,7 @@ export function AmusementParkSection() {
                 <div className={`inline-block text-[11px] font-heading font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2 ${ride.badgeBg}`}>
                   {isBangla ? ride.thrillBn : ride.thrillEn}
                 </div>
-                <h3 className="text-xl font-bold font-heading text-[#172554] group-hover:text-[#FF6B35] transition-colors mb-2 leading-tight">
+                <h3 className="text-xl font-bold font-sans text-[#172554] group-hover:text-[#FF6B35] transition-colors mb-2 leading-tight">
                   {isBangla ? ride.nameBn : ride.nameEn}
                 </h3>
                 <p className="text-xs text-[#3B4B75] leading-relaxed font-sans">
@@ -194,7 +194,7 @@ export function AmusementParkSection() {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                  <span className="text-white text-xs font-heading font-bold">
+                  <span className="text-white text-xs font-sans font-bold">
                     {isBangla ? pic.titleBn : pic.titleEn}
                   </span>
                 </div>

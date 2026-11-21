@@ -70,7 +70,7 @@ export function ChooseAdventureSection() {
                 </div>
                 <Link
                   href="/water-park"
-                  className="text-2xl sm:text-3xl font-black text-[#172554] hover:text-[#0284C7] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
+                  className="text-2xl sm:text-3xl font-bold text-[#172554] hover:text-[#0284C7] transition-colors cursor-pointer font-sans uppercase mb-2 flex items-center gap-2 group/title"
                   title="Explore Water World"
                 >
                   <span>{isBangla ? "ওয়াটার ওয়ার্ল্ড" : "Water World"}</span>
@@ -141,7 +141,7 @@ export function ChooseAdventureSection() {
                 </div>
                 <Link
                   href="/dino-zone"
-                  className="text-2xl sm:text-3xl font-black text-[#172554] hover:text-[#7C3AED] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
+                  className="text-2xl sm:text-3xl font-bold text-[#172554] hover:text-[#7C3AED] transition-colors cursor-pointer font-sans uppercase mb-2 flex items-center gap-2 group/title"
                   title="Explore Dino World"
                 >
                   <span>{isBangla ? "ডাইনো ওয়ার্ল্ড" : "Dino World"}</span>
@@ -212,7 +212,7 @@ export function ChooseAdventureSection() {
                 </div>
                 <Link
                   href="/amusement-park"
-                  className="text-2xl sm:text-3xl font-black text-[#172554] hover:text-[#C2410C] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
+                  className="text-2xl sm:text-3xl font-bold text-[#172554] hover:text-[#C2410C] transition-colors cursor-pointer font-sans uppercase mb-2 flex items-center gap-2 group/title"
                   title="Explore Thrill World"
                 >
                   <span>{isBangla ? "থ্রিল ওয়ার্ল্ড" : "Thrill World"}</span>

@@ -182,7 +182,7 @@ export function HomeGallerySection() {
 
               <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-white">
                 <div>
-                  <h4 className="text-xl sm:text-2xl font-bold font-heading mb-1 text-white">
+                  <h4 className="text-xl sm:text-2xl font-bold font-sans mb-1 text-white">
                     {isBangla ? item.titleBn : item.titleEn}
                   </h4>
                   <p className="text-xs text-yellow-100 font-sans">

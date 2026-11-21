@@ -167,7 +167,7 @@ export function ResortStaySection() {
                   <div className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#FF6B35] mb-1">
                     {isBangla ? room.categoryBn : room.categoryEn}
                   </div>
-                  <h3 className="text-2xl font-bold font-heading text-[#172554] mb-3">
+                  <h3 className="text-2xl font-bold font-sans text-[#172554] mb-3">
                     {isBangla ? room.titleBn : room.titleEn}
                   </h3>
                   <p className="text-xs text-[#3B4B75] leading-relaxed mb-6 font-sans">

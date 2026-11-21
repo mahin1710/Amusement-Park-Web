@@ -108,7 +108,7 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* STRICT RULE: Zero Waltograph on picture cards, attraction cards, rooms     */
+/* RULE: Inside ALL Picture Cards, Headers use Nunito Sans Font Family        */
 /* -------------------------------------------------------------------------- */
 .park-card,
 .park-card *,
@@ -116,7 +116,8 @@
 .picture-card *,
 [data-card],
 [data-card] * {
-  --font-magical: var(--font-heading), "Poppins", var(--font-bangla), "Hind Siliguri", sans-serif;
+  --font-heading: var(--font-sans), "Nunito Sans", var(--font-bangla), "Hind Siliguri", sans-serif;
+  --font-magical: var(--font-sans), "Nunito Sans", var(--font-bangla), "Hind Siliguri", sans-serif;
 }
 
 .park-card h1, .park-card h2, .park-card h3, .park-card h4, .park-card h5, .park-card h6,
@@ -125,7 +126,7 @@
 .picture-card .font-heading,
 [data-card] h1, [data-card] h2, [data-card] h3, [data-card] h4, [data-card] h5, [data-card] h6,
 [data-card] .font-heading {
-  font-family: var(--font-heading), "Poppins", var(--font-bangla), "Hind Siliguri", sans-serif !important;
+  font-family: var(--font-sans), "Nunito Sans", var(--font-bangla), "Hind Siliguri", sans-serif !important;
   letter-spacing: -0.01em;
 }
 
