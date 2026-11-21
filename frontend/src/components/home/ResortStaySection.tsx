@@ -119,13 +119,13 @@ export function ResortStaySection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#D9B66F]/50 text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFC75F] text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
             <span className="text-base">🏨</span>
             <span>{isBangla ? "রিসোর্ট স্টে ও থাকার সুব্যবস্থা" : "Overnight & Day-Stay Resort Accommodation"}</span>
           </div>
           <h2 className="section-heading-main text-[#173B42] tracking-tight">
             {isBangla ? "লাক্সারি রিসোর্ট রুম ও" : "LUXURY ROOMS & RESORT"}{" "}
-            <span className="text-gradient-park">
+            <span className="text-gradient-resort">
               {isBangla ? "থাকার ব্যবস্থা" : "STAY AVAILABLE"}
             </span>
           </h2>
@@ -141,7 +141,7 @@ export function ResortStaySection() {
           {rooms.map((room) => (
             <div
               key={room.id}
-              className="park-card overflow-hidden flex flex-col justify-between group"
+              className="park-card overflow-hidden flex flex-col justify-between group border-2 border-[#FFC75F]/30 hover:border-[#FFC75F]"
             >
               {/* Actual Room Photograph */}
               <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-100">
@@ -152,11 +152,11 @@ export function ResortStaySection() {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/75 via-transparent to-black/10"></div>
-                <div className="absolute top-4 left-4 bg-[#12304A] text-[#D9B66F] border border-[#D9B66F]/30 text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
+                <div className="absolute top-4 left-4 bg-[#FFC75F] text-[#173B42] border border-[#173B42]/10 text-xs font-heading font-black uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
                   {isBangla ? room.badgeBn : room.badgeEn}
                 </div>
                 <div className="absolute bottom-3 right-4 text-xs text-white font-heading font-semibold flex items-center gap-1.5 backdrop-blur-md bg-black/50 px-3 py-1 rounded-full border border-white/20">
-                  <i className="fa-solid fa-hotel text-[#D9B66F]"></i>{" "}
+                  <i className="fa-solid fa-hotel text-[#FFC75F]"></i>{" "}
                   {isBangla ? "আসল রুমের ছবি" : "Authentic Room Photo"}
                 </div>
               </div>
@@ -164,7 +164,7 @@ export function ResortStaySection() {
               {/* Card Body */}
               <div className="p-7 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#087E8B] mb-1">
+                  <div className="text-[11px] font-heading font-black uppercase tracking-wider text-[#173B42] mb-1">
                     {isBangla ? room.categoryBn : room.categoryEn}
                   </div>
                   <h3 className="text-2xl font-bold font-heading text-[#173B42] mb-3">
@@ -175,10 +175,10 @@ export function ResortStaySection() {
                   </p>
 
                   {/* Room Amenities Checklist */}
-                  <div className="space-y-2 mb-6 pt-4 border-t border-[#D9B66F]/30 text-xs text-[#173B42] font-sans">
+                  <div className="space-y-2 mb-6 pt-4 border-t border-[#FFC75F]/30 text-xs text-[#173B42] font-sans">
                     {(isBangla ? room.featuresBn : room.featuresEn).map((feat, idx) => (
                       <div key={idx} className="flex items-center gap-2">
-                        <i className="fa-solid fa-circle-check text-[#26865D] text-[12px]"></i>
+                        <i className="fa-solid fa-circle-check text-[#FFC75F] text-[12px]"></i>
                         <span>{feat}</span>
                       </div>
                     ))}
@@ -186,7 +186,7 @@ export function ResortStaySection() {
                 </div>
 
                 {/* Rate & Booking Button */}
-                <div className="pt-4 border-t border-[#D9B66F]/30">
+                <div className="pt-4 border-t border-[#FFC75F]/30">
                   <div className="flex items-baseline justify-between mb-4">
                     <span className="text-lg font-bold font-heading text-[#173B42]">
                       {isBangla ? room.rateBn : room.rateEn}
@@ -199,7 +199,7 @@ export function ResortStaySection() {
                     href={whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full btn-park-primary text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-md"
+                    className="w-full btn-park-resort text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-md"
                   >
                     <i className="fa-brands fa-whatsapp text-sm"></i>
                     <span>{isBangla ? "রুম বুকিং অনুসন্ধান করুন" : "Inquire Room Reservation"}</span>
@@ -214,7 +214,7 @@ export function ResortStaySection() {
         <StayPriceCalculator />
 
         {/* Resort Stay Guest Amenities Banner */}
-        <div className="mt-8 sm:mt-10 p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#D9B66F]/40 shadow-md">
+        <div className="mt-8 sm:mt-10 p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FFC75F]/40 shadow-md">
           <div className="text-center max-w-xl mx-auto mb-6">
             <h4 className="text-xl font-bold font-heading text-[#173B42]">
               {isBangla ? "রিসোর্টে অবস্থানকারী অতিথিদের বিশেষ সুবিধাসমূহ" : "Complimentary Resort Guest Privileges"}
@@ -226,38 +226,38 @@ export function ResortStaySection() {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
-            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#D9B66F]/30">
-              <i className="fa-solid fa-wifi text-[#35C6C8] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#FFC75F]/30">
+              <i className="fa-solid fa-wifi text-[#FFC75F] text-xl mb-1.5"></i>
               <div className="text-xs font-heading font-bold text-[#173B42]">
                 {isBangla ? "ফ্রি হাই-স্পিড ওয়াইফাই" : "Free Fast Wi-Fi"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#D9B66F]/30">
+            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#FFC75F]/30">
               <i className="fa-solid fa-person-swimming text-[#35C6C8] text-xl mb-1.5"></i>
               <div className="text-xs font-heading font-bold text-[#173B42]">
                 {isBangla ? "পুলসাইড অ্যাক্সেস" : "Poolside Access"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#D9B66F]/30">
-              <i className="fa-solid fa-utensils text-[#FF795C] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#FFC75F]/30">
+              <i className="fa-solid fa-utensils text-[#FF914D] text-xl mb-1.5"></i>
               <div className="text-xs font-heading font-bold text-[#173B42]">
                 {isBangla ? "কমপ্লিমেন্টারি ব্রেকফাস্ট" : "Free Breakfast"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#D9B66F]/30">
-              <i className="fa-solid fa-shield-halved text-[#26865D] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#FFC75F]/30">
+              <i className="fa-solid fa-shield-halved text-[#00C9A7] text-xl mb-1.5"></i>
               <div className="text-xs font-heading font-bold text-[#173B42]">
                 {isBangla ? "২৪/৭ নিরাপত্তা পাহারা" : "24/7 Security"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#D9B66F]/30">
-              <i className="fa-solid fa-square-parking text-[#087E8B] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#FFC75F]/30">
+              <i className="fa-solid fa-square-parking text-[#845EC2] text-xl mb-1.5"></i>
               <div className="text-xs font-heading font-bold text-[#173B42]">
                 {isBangla ? "সুরক্ষিত ফ্রি পার্কিং" : "Free VIP Parking"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#D9B66F]/30">
-              <i className="fa-solid fa-bell-concierge text-[#FFC857] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-[#FFFDF5] border border-[#FFC75F]/30">
+              <i className="fa-solid fa-bell-concierge text-[#FFC75F] text-xl mb-1.5"></i>
               <div className="text-xs font-heading font-bold text-[#173B42]">
                 {isBangla ? "রুম সার্ভিস ও হেল্পলাইন" : "Room Service"}
               </div>

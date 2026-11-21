@@ -42,14 +42,14 @@ export default function AmusementParkPage() {
         </div>
 
         <div className="relative z-30 max-w-5xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#FF795C] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#FF795C]/40 backdrop-blur-md">
-            <FerrisWheel className="w-4 h-4 text-[#FF795C]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#845EC2] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#845EC2]/40 backdrop-blur-md">
+            <FerrisWheel className="w-4 h-4 text-[#845EC2]" />
             <span>{isBangla ? "গ্যালাক্সি থ্রিলস অ্যামিউজমেন্ট পার্ক" : "Galaxy Thrills Amusement Park"}</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] font-heading leading-tight tracking-tight">
             {isBangla ? "উচ্চগতির রোমাঞ্চ ও" : "HIGH-VELOCITY THRILLS &"} <br />
-            <span className="text-[#FFC857] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
+            <span className="text-[#FF6F91] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
               {isBangla ? "আকাশছোঁয়া রোলারকোস্টার" : "SKYLINE MEGA COASTERS"}
             </span>
           </h1>
@@ -64,16 +64,16 @@ export default function AmusementParkPage() {
             <button
               type="button"
               onClick={() => setPlayCoaster(true)}
-              className="px-7 py-3.5 rounded-full bg-[#FFC857] hover:bg-[#FFC857]/90 text-[#173B42] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="px-7 py-3.5 rounded-full bg-[#D65DB1]/20 hover:bg-[#845EC2] text-[#845EC2] hover:text-white font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
               title="Watch 3D Roller Coaster Zoom Across Screen"
             >
-              <Play className="w-4 h-4 fill-current text-[#173B42]" />
+              <Play className="w-4 h-4 fill-current text-inherit" />
               <span>{isBangla ? "রোলারকোস্টার এফেক্ট" : "Floating Coaster Rush"}</span>
             </button>
 
             <Link
               href="#rides"
-              className="btn-park-primary px-7 py-3.5 rounded-full text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"
+              className="btn-park-thrill px-7 py-3.5 rounded-full text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"
             >
               <Sparkles className="w-4 h-4" />
               <span>{isBangla ? "রাইডস এক্সপ্লোর করুন" : "Explore Rides"}</span>
@@ -84,9 +84,9 @@ export default function AmusementParkPage() {
                 href={waLink.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#26865D] hover:bg-[#26865D]/10 shadow-lg hover:scale-105 transition-all"
+                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#845EC2] hover:bg-[#845EC2]/10 shadow-lg hover:scale-105 transition-all"
               >
-                <MessageCircle className="w-4 h-4 text-[#26865D]" />
+                <MessageCircle className="w-4 h-4 text-[#845EC2]" />
                 <span>{isBangla ? "হোয়াটসঅ্যাপে যোগাযোগ" : "WhatsApp Inquiry"}</span>
               </a>
             )}
@@ -98,8 +98,8 @@ export default function AmusementParkPage() {
       <section id="rides" className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FF795C]/15 text-[#FF795C] text-xs uppercase tracking-widest font-black mb-3 border border-[#FF795C]/40">
-              <FerrisWheel className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#845EC2]/15 text-[#845EC2] text-xs uppercase tracking-widest font-black mb-3 border border-[#845EC2]/40 shadow-xs">
+              <FerrisWheel className="w-4 h-4 text-[#845EC2]" />
               <span>{isBangla ? "মেকানিক্যাল রাইডস" : "Signature Thrill Rides"}</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-[#173B42] font-heading tracking-tight">
@@ -119,7 +119,7 @@ export default function AmusementParkPage() {
                 className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
                 style={{ isolation: "isolate" }}
               >
-                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#FF795C]/30 bg-[#FFFDF5] rounded-t-[26px]">
+                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#845EC2]/30 bg-[#FFFDF5] rounded-t-[26px]">
                   <img
                     src={ride.imageUrl}
                     alt={ride.name.en}
@@ -127,7 +127,7 @@ export default function AmusementParkPage() {
                     loading="lazy"
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
-                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#FF795C] text-xs font-black shadow-md border border-amber-200">
+                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#845EC2] text-xs font-black shadow-md border border-[#D65DB1]/30">
                   {isBangla ? ride.thrillLevelBn : ride.thrillLevel}
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function AmusementParkPage() {
                   <h3 className="text-xl font-black text-[#173B42] font-heading">
                     {isBangla ? ride.name.bn : ride.name.en}
                   </h3>
-                  <p className="text-xs font-black text-[#FF795C] mt-1 uppercase tracking-wide">
+                  <p className="text-xs font-black text-[#D65DB1] mt-1 uppercase tracking-wide">
                     {isBangla ? ride.tagline.bn : ride.tagline.en}
                   </p>
                   <p className="mt-3 text-sm text-[#173B42]/80 leading-relaxed font-medium">
@@ -145,22 +145,22 @@ export default function AmusementParkPage() {
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-amber-100 space-y-2 text-xs text-[#173B42]/80">
+                <div className="pt-3 border-t border-[#845EC2]/20 space-y-2 text-xs text-[#173B42]/80">
                   <p className="font-black text-[#173B42]">
                     {isBangla ? "রাইডের বৈশিষ্ট্য:" : "Ride Specs & Highlights:"}
                   </p>
                   {(isBangla ? ride.features.bn : ride.features.en).slice(0, 2).map((f, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#FF795C] shrink-0 font-bold" />
+                      <Check className="w-3.5 h-3.5 text-[#845EC2] shrink-0 font-bold" />
                       <span>{f}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-3 border-t border-amber-100 flex justify-end">
+                <div className="pt-3 border-t border-[#845EC2]/20 flex justify-end">
                   <Link
                     href={`/attractions/${ride.id}`}
-                    className="btn-park-primary w-full py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:scale-105 transition-transform"
+                    className="btn-park-thrill w-full py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:scale-105 transition-transform"
                   >
                     <span>{isBangla ? "বিস্তারিত দেখুন" : "View Details"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -177,8 +177,8 @@ export default function AmusementParkPage() {
       <section className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#FF795C] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#FF795C]/40 shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#FF795C]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#845EC2] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#845EC2]/40 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#FF6F91]" />
               <span>{isBangla ? "আসল থ্রিল পার্ক গ্যালারি" : "Authentic Thrill World Gallery"}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-[#173B42] font-heading tracking-tight">
@@ -204,7 +204,7 @@ export default function AmusementParkPage() {
             ].map((pic, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden border-2 border-[#FF795C]/30 shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFFDF5]"
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#845EC2]/30 shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFFDF5]"
                 style={{ isolation: "isolate" }}
               >
                 <img
@@ -225,12 +225,12 @@ export default function AmusementParkPage() {
       </section>
 
       {/* Night Spectacular & Illumination Section */}
-      <section className="py-16 bg-white border-y border-[#FF795C]/20">
+      <section className="py-16 bg-white border-y border-[#845EC2]/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="park-card rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-[#FFFDF5]">
+          <div className="park-card rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-[#D65DB1]/10 border-2 border-[#845EC2]/25">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 text-xs font-black text-[#FF795C] uppercase tracking-wider">
-                <Zap className="w-4 h-4 text-[#FF795C]" />
+              <div className="inline-flex items-center gap-2 text-xs font-black text-[#845EC2] uppercase tracking-wider">
+                <Zap className="w-4 h-4 text-[#FF6F91]" />
                 <span>{isBangla ? "সান্ধ্যকালীন মিউজিক্যাল শো" : "Evening Illumination & Stunts"}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-black text-[#173B42] font-heading">
@@ -249,7 +249,7 @@ export default function AmusementParkPage() {
                   href={waLink.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-park-primary px-7 py-3.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                  className="btn-park-thrill px-7 py-3.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>{isBangla ? "হোয়াটসঅ্যাপে যোগাযোগ" : "WhatsApp Inquiry"}</span>

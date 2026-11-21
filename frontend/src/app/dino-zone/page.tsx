@@ -42,14 +42,14 @@ export default function DinoZonePage() {
         </div>
 
         <div className="relative z-30 max-w-5xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#26865D] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#26865D]/40 backdrop-blur-md">
-            <Footprints className="w-4 h-4 text-[#26865D]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/95 text-[#00C9A7] text-xs sm:text-sm font-black uppercase tracking-wider mb-5 shadow-lg border border-[#00C9A7]/40 backdrop-blur-md">
+            <Footprints className="w-4 h-4 text-[#00C9A7]" />
             <span>{isBangla ? "জুরাসিক কিংডম ডাইনো জোন" : "Jurassic Kingdom Dino Zone"}</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] font-heading leading-tight tracking-tight">
             {isBangla ? "প্রাগৈতিহাসিক দানবদের" : "WHERE PREHISTORIC GIANTS"} <br />
-            <span className="text-[#FFC857] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
+            <span className="text-[#00C9A7] drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]">
               {isBangla ? "জীবন্ত গর্জন ও রাজত্ব" : "ROAR AND WALK AGAIN"}
             </span>
           </h1>
@@ -64,16 +64,16 @@ export default function DinoZonePage() {
             <button
               type="button"
               onClick={() => setPlayStampede(true)}
-              className="px-7 py-3.5 rounded-full bg-[#FFC857] hover:bg-[#FFC857]/90 text-[#173B42] font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="px-7 py-3.5 rounded-full bg-[#C4FCEF] hover:bg-[#00C9A7] text-[#173B42] hover:text-white font-heading font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-white shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer"
               title="Watch 3D Dinosaurs Run Across Screen"
             >
-              <Play className="w-4 h-4 fill-current text-[#173B42]" />
+              <Play className="w-4 h-4 fill-current text-inherit" />
               <span>{isBangla ? "ডাইনোসর স্ট্যাম্পিড এফেক্ট" : "Floating Dino Stampede"}</span>
             </button>
 
             <Link
               href="#attractions"
-              className="btn-park-primary px-7 py-3.5 rounded-full text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"
+              className="btn-park-dino px-7 py-3.5 rounded-full text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"
             >
               <Sparkles className="w-4 h-4" />
               <span>{isBangla ? "ডাইনো আকর্ষণসমূহ দেখুন" : "Explore Dino Attractions"}</span>
@@ -84,9 +84,9 @@ export default function DinoZonePage() {
                 href={waLink.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#26865D] hover:bg-[#26865D]/10 shadow-lg hover:scale-105 transition-all"
+                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#00C9A7] hover:bg-[#C4FCEF]/30 shadow-lg hover:scale-105 transition-all"
               >
-                <MessageCircle className="w-4 h-4 text-[#26865D]" />
+                <MessageCircle className="w-4 h-4 text-[#00C9A7]" />
                 <span>{isBangla ? "হোয়াটসঅ্যাপে যোগাযোগ" : "WhatsApp Inquiry"}</span>
               </a>
             )}
@@ -98,8 +98,8 @@ export default function DinoZonePage() {
       <section id="attractions" className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#26865D]/15 text-[#26865D] text-xs uppercase tracking-widest font-black mb-3 border border-[#26865D]/40">
-              <Footprints className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#C4FCEF] text-[#00C9A7] text-xs uppercase tracking-widest font-black mb-3 border border-[#00C9A7]/40 shadow-xs">
+              <Footprints className="w-4 h-4 text-[#00C9A7]" />
               <span>{isBangla ? "জুরাসিক সাফারি" : "Prehistoric Safari"}</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-[#173B42] font-heading tracking-tight">
@@ -119,7 +119,7 @@ export default function DinoZonePage() {
                 className="park-card rounded-3xl overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl transition-all duration-300 bg-white"
                 style={{ isolation: "isolate" }}
               >
-                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#26865D]/30 bg-[#FFFDF5] rounded-t-[26px]">
+                <div className="relative h-60 w-full overflow-hidden border-b-2 border-[#00C9A7]/30 bg-[#FFFDF5] rounded-t-[26px]">
                   <img
                     src={ride.imageUrl}
                     alt={ride.name.en}
@@ -127,7 +127,7 @@ export default function DinoZonePage() {
                     loading="lazy"
                   />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
-                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#26865D] text-xs font-black shadow-md border border-[#26865D]/30">
+                <div className="absolute top-4 left-4 px-3.5 py-1.5 rounded-full bg-white/95 text-[#00C9A7] text-xs font-black shadow-md border border-[#00C9A7]/30">
                   {isBangla ? ride.thrillLevelBn : ride.thrillLevel}
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function DinoZonePage() {
                   <h3 className="text-xl font-black text-[#173B42] font-heading">
                     {isBangla ? ride.name.bn : ride.name.en}
                   </h3>
-                  <p className="text-xs font-black text-[#26865D] mt-1 uppercase tracking-wide">
+                  <p className="text-xs font-black text-[#00C9A7] mt-1 uppercase tracking-wide">
                     {isBangla ? ride.tagline.bn : ride.tagline.en}
                   </p>
                   <p className="mt-3 text-sm text-[#173B42]/80 leading-relaxed font-medium">
@@ -145,22 +145,22 @@ export default function DinoZonePage() {
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-[#26865D]/20 space-y-2 text-xs text-[#173B42]/80">
+                <div className="pt-3 border-t border-[#00C9A7]/20 space-y-2 text-xs text-[#173B42]/80">
                   <p className="font-black text-[#173B42]">
                     {isBangla ? "আকর্ষণের বিবরণ:" : "Key Features:"}
                   </p>
                   {(isBangla ? ride.features.bn : ride.features.en).slice(0, 2).map((f, i) => (
                     <div key={i} className="flex items-center gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#26865D] shrink-0 font-bold" />
+                      <Check className="w-3.5 h-3.5 text-[#00C9A7] shrink-0 font-bold" />
                       <span>{f}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="pt-3 border-t border-[#26865D]/20 flex justify-end">
+                <div className="pt-3 border-t border-[#00C9A7]/20 flex justify-end">
                   <Link
                     href={`/attractions/${ride.id}`}
-                    className="btn-park-primary w-full py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:scale-105 transition-transform"
+                    className="btn-park-dino w-full py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:scale-105 transition-transform"
                   >
                     <span>{isBangla ? "বিস্তারিত দেখুন" : "View Details"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -177,8 +177,8 @@ export default function DinoZonePage() {
       <section className="py-16 sm:py-20 bg-[#FFFDF5] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#26865D] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#26865D]/40 shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#FF795C]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#00C9A7] text-xs uppercase tracking-widest font-heading font-bold mb-3 border-2 border-[#00C9A7]/40 shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#00C9A7]" />
               <span>{isBangla ? "আসল ডাইনো পার্ক গ্যালারি" : "Authentic Dino World Gallery"}</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-[#173B42] font-heading tracking-tight">
@@ -204,7 +204,7 @@ export default function DinoZonePage() {
             ].map((pic, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-2xl overflow-hidden border-2 border-[#26865D]/30 shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFFDF5]"
+                className="group relative rounded-2xl overflow-hidden border-2 border-[#00C9A7]/30 shadow-sm hover:shadow-lg transition-all duration-300 aspect-[4/3] bg-[#FFFDF5]"
                 style={{ isolation: "isolate" }}
               >
                 <img
@@ -225,12 +225,12 @@ export default function DinoZonePage() {
       </section>
 
       {/* Educational & School Program Banner */}
-      <section className="py-16 bg-white border-y border-[#26865D]/20">
+      <section className="py-16 bg-white border-y border-[#00C9A7]/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="park-card rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-[#FFFDF5]">
+          <div className="park-card rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 bg-[#C4FCEF]/15 border-2 border-[#00C9A7]/25">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 text-xs font-black text-[#26865D] uppercase tracking-wider">
-                <Bone className="w-4 h-4 text-[#26865D]" />
+              <div className="inline-flex items-center gap-2 text-xs font-black text-[#00C9A7] uppercase tracking-wider">
+                <Bone className="w-4 h-4 text-[#00C9A7]" />
                 <span>{isBangla ? "স্কুল ও শিক্ষামূলক ট্রিপ" : "Educational School Expeditions"}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-black text-[#173B42] font-heading">
@@ -249,7 +249,7 @@ export default function DinoZonePage() {
                   href={waLink.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-park-primary px-7 py-3.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                  className="btn-park-dino px-7 py-3.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>{isBangla ? "গ্রুপ ট্রিপ আলোচনা করুন" : "Inquire School Trip"}</span>

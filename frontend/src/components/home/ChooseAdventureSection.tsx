@@ -17,8 +17,8 @@ export function ChooseAdventureSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#FFC857] text-[#173B42] text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#087E8B]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#FF914D] text-[#173B42] text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#FF914D]" />
             <span>{isBangla ? "একটি গন্তব্যে ৩টি রোমাঞ্চকর অ্যাডভেঞ্চার জগৎ" : "Three Wonder Realms In One Destination"}</span>
           </div>
 
@@ -51,7 +51,7 @@ export function ChooseAdventureSection() {
 
               {/* 3D Floating Animation Badge */}
               <div
-                className="absolute bottom-3 left-4 text-xs text-[#173B42] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFC857]/95 group-hover:bg-[#FFC857] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg group-hover:scale-105 transition-all"
+                className="absolute bottom-3 left-4 text-xs text-[#173B42] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFC75F]/95 group-hover:bg-[#FFC75F] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg group-hover:scale-105 transition-all"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#087E8B] animate-spin" />
                 <span>{isBangla ? "৩ডি ওয়াটার স্প্ল্যাশ" : "3D Floating Splash"}</span>
@@ -65,7 +65,7 @@ export function ChooseAdventureSection() {
             <div className="p-7 flex-1 flex flex-col justify-between">
               <div>
                 <div className="text-xs font-heading font-bold text-[#087E8B] uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <Waves className="w-4 h-4" />
+                  <Waves className="w-4 h-4 text-[#35C6C8]" />
                   <span>{isBangla ? "জলরাজ্যের রোমাঞ্চ" : "Aquatic Paradise"}</span>
                 </div>
                 <Link
@@ -97,7 +97,7 @@ export function ChooseAdventureSection() {
 
               <div className="mt-auto">
                 <Link
-                  className="btn-park-primary w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 py-3"
+                  className="btn-park-water w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 py-3"
                   href="/water-park"
                 >
                   <span>{isBangla ? "ওয়াটার পার্ক দেখুন" : "Explore Water World"}</span>
@@ -107,7 +107,7 @@ export function ChooseAdventureSection() {
             </div>
           </div>
 
-          {/* Realm 2: DINO KINGDOM */}
+          {/* Realm 2: DINO KINGDOM (Mint Green & Soft Mint Theme) */}
           <div className="park-card overflow-hidden flex flex-col justify-between group">
             <Link
               href="/dino-zone"
@@ -120,32 +120,32 @@ export function ChooseAdventureSection() {
                 src="/images/Dino%20World/Dino%20Cover%20PIC.webp"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/75 via-transparent to-black/10"></div>
-              <div className="absolute top-4 left-4 bg-[#26865D] text-white text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
+              <div className="absolute top-4 left-4 bg-[#00C9A7] text-[#173B42] text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
                 {isBangla ? "দেশের বৃহত্তম ডাইনোসর সংগ্রহ" : "Largest Dino Variety in BD"}
               </div>
 
               {/* 3D Floating Animation Badge */}
               <div
-                className="absolute bottom-3 left-4 text-xs text-[#173B42] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFC857]/95 group-hover:bg-[#FFC857] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg group-hover:scale-105 transition-all"
+                className="absolute bottom-3 left-4 text-xs text-[#173B42] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#C4FCEF] group-hover:bg-[#00C9A7] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg group-hover:scale-105 transition-all"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#26865D] animate-spin" />
+                <Sparkles className="w-3.5 h-3.5 text-[#00C9A7] group-hover:text-white animate-spin" />
                 <span>{isBangla ? "৩ডি ডাইনোসর" : "3D Dino Stampede"}</span>
               </div>
             </Link>
 
             <div className="p-7 flex-1 flex flex-col justify-between">
               <div>
-                <div className="text-xs font-heading font-bold text-[#26865D] uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <Footprints className="w-4 h-4" />
+                <div className="text-xs font-heading font-bold text-[#00C9A7] uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <Footprints className="w-4 h-4 text-[#00C9A7]" />
                   <span>{isBangla ? "প্রাগৈতিহাসিক অভিযান" : "Prehistoric Safari"}</span>
                 </div>
                 <Link
                   href="/dino-zone"
-                  className="text-2xl sm:text-3xl font-black text-[#173B42] hover:text-[#26865D] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
+                  className="text-2xl sm:text-3xl font-black text-[#173B42] hover:text-[#00C9A7] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
                   title="Explore Dino World"
                 >
                   <span>{isBangla ? "ডাইনো ওয়ার্ল্ড" : "Dino World"}</span>
-                  <ArrowRight className="w-4 h-4 text-[#26865D] opacity-60 group-hover/title:opacity-100 group-hover/title:translate-x-1 transition-all" />
+                  <ArrowRight className="w-4 h-4 text-[#00C9A7] opacity-60 group-hover/title:opacity-100 group-hover/title:translate-x-1 transition-all" />
                 </Link>
                 <p className="text-xs sm:text-sm text-[#173B42]/80 leading-relaxed mb-6 font-sans">
                   {isBangla
@@ -154,13 +154,13 @@ export function ChooseAdventureSection() {
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="bg-[#26865D]/15 text-[#26865D] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                  <span className="bg-[#C4FCEF] text-[#00C9A7] text-xs px-3 py-1 rounded-full font-heading font-bold">
                     {isBangla ? "টি-রেক্স এনকাউন্টার" : "T-Rex Valley"}
                   </span>
-                  <span className="bg-[#26865D]/15 text-[#26865D] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                  <span className="bg-[#C4FCEF] text-[#00C9A7] text-xs px-3 py-1 rounded-full font-heading font-bold">
                     {isBangla ? "ফসিল ল্যাব" : "Fossil Dig Lab"}
                   </span>
-                  <span className="bg-[#26865D]/15 text-[#26865D] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                  <span className="bg-[#C4FCEF] text-[#00C9A7] text-xs px-3 py-1 rounded-full font-heading font-bold">
                     {isBangla ? "জুরাসিক ট্রেইল" : "Jungle Boardwalk"}
                   </span>
                 </div>
@@ -168,7 +168,7 @@ export function ChooseAdventureSection() {
 
               <div className="mt-auto">
                 <Link
-                  className="btn-park-secondary w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 py-3"
+                  className="btn-park-dino w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 py-3"
                   href="/dino-zone"
                 >
                   <span>{isBangla ? "ডাইনো জোন দেখুন" : "Explore Dino World"}</span>
@@ -178,7 +178,7 @@ export function ChooseAdventureSection() {
             </div>
           </div>
 
-          {/* Realm 3: THRILL GALAXY */}
+          {/* Realm 3: THRILL GALAXY (Purple, Pink, Coral Pink Theme) */}
           <div className="park-card overflow-hidden flex flex-col justify-between group">
             <Link
               href="/amusement-park"
@@ -191,32 +191,32 @@ export function ChooseAdventureSection() {
                 src="/images/Thrill%20World/Thrill%20Cover%20Pic.png"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/75 via-transparent to-black/10"></div>
-              <div className="absolute top-4 left-4 bg-[#FF795C] text-white text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
+              <div className="absolute top-4 left-4 bg-[#845EC2] text-white text-xs font-heading font-bold uppercase px-3.5 py-1 rounded-full tracking-wider shadow">
                 {isBangla ? "রোমাঞ্চকর অ্যামিউজমেন্ট রাইডস" : "Amazing Thrill Rides"}
               </div>
 
               {/* 3D Floating Animation Badge */}
               <div
-                className="absolute bottom-3 left-4 text-xs text-[#173B42] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FFC857]/95 group-hover:bg-[#FFC857] px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg group-hover:scale-105 transition-all"
+                className="absolute bottom-3 left-4 text-xs text-[#173B42] font-heading font-black flex items-center gap-1.5 backdrop-blur-md bg-[#FCEDF7] group-hover:bg-[#845EC2] group-hover:text-white px-3.5 py-1.5 rounded-full border-2 border-white shadow-lg group-hover:scale-105 transition-all"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#FF795C] animate-spin" />
+                <Sparkles className="w-3.5 h-3.5 text-[#D65DB1] group-hover:text-white animate-spin" />
                 <span>{isBangla ? "৩ডি কোস্টার" : "3D Coaster Rush"}</span>
               </div>
             </Link>
 
             <div className="p-7 flex-1 flex flex-col justify-between">
               <div>
-                <div className="text-xs font-heading font-bold text-[#FF795C] uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <FerrisWheel className="w-4 h-4" />
+                <div className="text-xs font-heading font-bold text-[#845EC2] uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <FerrisWheel className="w-4 h-4 text-[#845EC2]" />
                   <span>{isBangla ? "আকাশছোঁয়া রোমাঞ্চ" : "Skyline Sensation"}</span>
                 </div>
                 <Link
                   href="/amusement-park"
-                  className="text-2xl sm:text-3xl font-black text-[#173B42] hover:text-[#FF795C] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
+                  className="text-2xl sm:text-3xl font-black text-[#173B42] hover:text-[#845EC2] transition-colors cursor-pointer font-heading uppercase mb-2 flex items-center gap-2 group/title"
                   title="Explore Thrill World"
                 >
                   <span>{isBangla ? "থ্রিল ওয়ার্ল্ড" : "Thrill World"}</span>
-                  <ArrowRight className="w-4 h-4 text-[#FF795C] opacity-60 group-hover/title:opacity-100 group-hover/title:translate-x-1 transition-all" />
+                  <ArrowRight className="w-4 h-4 text-[#D65DB1] opacity-60 group-hover/title:opacity-100 group-hover/title:translate-x-1 transition-all" />
                 </Link>
                 <p className="text-xs sm:text-sm text-[#173B42]/80 leading-relaxed mb-6 font-sans">
                   {isBangla
@@ -225,13 +225,13 @@ export function ChooseAdventureSection() {
                 </p>
 
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="bg-[#FF795C]/15 text-[#FF795C] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                  <span className="bg-[#845EC2]/15 text-[#845EC2] text-xs px-3 py-1 rounded-full font-heading font-semibold">
                     {isBangla ? "মেগা কোস্টার" : "Mega Coaster"}
                   </span>
-                  <span className="bg-[#FF795C]/15 text-[#FF795C] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                  <span className="bg-[#D65DB1]/15 text-[#D65DB1] text-xs px-3 py-1 rounded-full font-heading font-semibold">
                     {isBangla ? "স্কাই হুইল" : "150ft Sky Wheel"}
                   </span>
-                  <span className="bg-[#FF795C]/15 text-[#FF795C] text-xs px-3 py-1 rounded-full font-heading font-semibold">
+                  <span className="bg-[#FF6F91]/15 text-[#FF6F91] text-xs px-3 py-1 rounded-full font-heading font-semibold">
                     {isBangla ? "টার্বো বাম্পার" : "Bumper Arena"}
                   </span>
                 </div>
@@ -239,7 +239,7 @@ export function ChooseAdventureSection() {
 
               <div className="mt-auto">
                 <Link
-                  className="btn-park-primary w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 py-3"
+                  className="btn-park-thrill w-full text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 py-3"
                   href="/amusement-park"
                 >
                   <span>{isBangla ? "অ্যামিউজমেন্ট রাইডস দেখুন" : "Explore Thrill World"}</span>
@@ -248,6 +248,7 @@ export function ChooseAdventureSection() {
               </div>
             </div>
           </div>
+        </div>
         </div>
 
         {/* Supporting description positioned below the 3 realm options */}

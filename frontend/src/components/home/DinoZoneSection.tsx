@@ -26,19 +26,19 @@ export function DinoZoneSection() {
                   src="/images/Dino%20World/Dino%20Cover%20PIC.webp"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#173B42]/75 via-transparent to-black/10"></div>
-                <div className="absolute top-4 left-4 bg-[#26865D] text-white font-heading font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+                <div className="absolute top-4 left-4 bg-[#00C9A7] text-[#173B42] font-heading font-bold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider shadow-md">
                   {isBangla ? "প্রাগৈতিহাসিক সাফারি অভিজ্ঞতা" : "Prehistoric Safari Experience"}
                 </div>
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#26865D]/30 shadow-lg flex items-center justify-between">
+                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#00C9A7]/30 shadow-lg flex items-center justify-between">
                   <div>
-                    <div className="text-xs font-heading font-bold text-[#26865D]">
+                    <div className="text-xs font-heading font-bold text-[#00C9A7]">
                       {isBangla ? "৫০টিরও বেশি অ্যানিমেট্রনিক ডাইনোসর" : "Over 50 Animatronic Dinosaurs"}
                     </div>
                     <div className="text-sm sm:text-base font-heading font-bold text-[#173B42] mt-0.5">
                       {isBangla ? "গর্জনকারী সাউন্ড ও মোশন সেন্সর" : "Roaring Soundscapes & Motion Sensors"}
                     </div>
                   </div>
-                  <div className="w-11 h-11 rounded-2xl bg-[#26865D]/15 text-[#26865D] flex items-center justify-center text-xl shrink-0">
+                  <div className="w-11 h-11 rounded-2xl bg-[#C4FCEF] text-[#00C9A7] flex items-center justify-center text-xl shrink-0">
                     🦖
                   </div>
                 </div>
@@ -48,14 +48,14 @@ export function DinoZoneSection() {
 
           {/* Content Column */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#26865D]/15 text-[#26865D] text-xs font-heading font-bold uppercase tracking-wider border-2 border-[#26865D]/30">
-              <Footprints className="w-4 h-4 text-[#26865D]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C4FCEF] text-[#00C9A7] text-xs font-heading font-bold uppercase tracking-wider border-2 border-[#00C9A7]/40">
+              <Footprints className="w-4 h-4 text-[#00C9A7]" />
               <span>{isBangla ? "প্রাগৈতিহাসিক রোমাঞ্চকর অভিযান" : "Prehistoric Dino Kingdom"}</span>
             </div>
 
             <h2 className="section-heading-main text-[#173B42] tracking-tight">
               {isBangla ? "ডাইনো জোন:" : "DINO ZONE:"} <br />
-              <span className="text-[#26865D]">
+              <span className="text-[#00C9A7]">
                 {isBangla ? "প্রাগৈতিহাসিক সাফারি" : "PREHISTORIC SAFARI"}
               </span>
             </h2>
@@ -68,7 +68,7 @@ export function DinoZoneSection() {
 
             {/* 4 Safari Highlights */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-4 rounded-2xl bg-white border-2 border-[#26865D]/25 shadow-xs">
+              <div className="p-4 rounded-2xl bg-[#C4FCEF]/30 border-2 border-[#00C9A7]/30 shadow-xs">
                 <div className="text-[#173B42] font-heading font-bold text-sm mb-1 flex items-center gap-2">
                   <span className="text-base">🌿</span>
                   <span>{isBangla ? "জাঙ্গল ক্যানোপি ওয়াকওয়ে" : "Misty Jungle Boardwalk"}</span>
@@ -80,7 +80,7 @@ export function DinoZoneSection() {
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white border-2 border-[#26865D]/25 shadow-xs">
+              <div className="p-4 rounded-2xl bg-[#C4FCEF]/30 border-2 border-[#00C9A7]/30 shadow-xs">
                 <div className="text-[#173B42] font-heading font-bold text-sm mb-1 flex items-center gap-2">
                   <span className="text-base">🦴</span>
                   <span>{isBangla ? "কিডস ফসিল ডিগ পিট" : "Kids Fossil Dig Pit"}</span>
@@ -92,7 +92,7 @@ export function DinoZoneSection() {
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white border-2 border-[#26865D]/25 shadow-xs">
+              <div className="p-4 rounded-2xl bg-[#C4FCEF]/30 border-2 border-[#00C9A7]/30 shadow-xs">
                 <div className="text-[#173B42] font-heading font-bold text-sm mb-1 flex items-center gap-2">
                   <span className="text-base">🎬</span>
                   <span>{isBangla ? "৫ডি জুরাসিক সিনেমা" : "5D Prehistoric Cinema"}</span>
@@ -104,7 +104,7 @@ export function DinoZoneSection() {
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white border-2 border-[#26865D]/25 shadow-xs">
+              <div className="p-4 rounded-2xl bg-[#C4FCEF]/30 border-2 border-[#00C9A7]/30 shadow-xs">
                 <div className="text-[#173B42] font-heading font-bold text-sm mb-1 flex items-center gap-2">
                   <span className="text-base">📸</span>
                   <span>{isBangla ? "জুরাসিক ফটো পয়েন্ট" : "Jurassic Photo Points"}</span>
@@ -119,14 +119,14 @@ export function DinoZoneSection() {
 
             <div className="pt-3 flex flex-wrap items-center gap-4">
               <Link
-                className="btn-park-secondary text-xs uppercase tracking-wider inline-flex items-center gap-2 shadow-md"
+                className="btn-park-dino text-xs uppercase tracking-wider inline-flex items-center gap-2 shadow-md"
                 href="/dino-zone"
               >
                 <span>{isBangla ? "সম্পূর্ণ ডাইনো জোন এক্সপ্লোর করুন" : "Explore Dino Kingdom"}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                className="btn-park-outline text-xs uppercase tracking-wider inline-flex items-center gap-2"
+                className="px-6 py-3 rounded-full border-2 border-[#00C9A7] text-[#00C9A7] hover:bg-[#C4FCEF] font-heading font-bold text-xs uppercase tracking-wider inline-flex items-center gap-2 transition-colors"
                 href="/attractions/jurassic-t-rex-encounter"
               >
                 <span>{isBangla ? "টি-রেক্স পেজ দেখুন" : "View T-Rex Page"}</span>
@@ -146,7 +146,7 @@ export function DinoZoneSection() {
           ].map((item, i) => (
             <div
               key={i}
-              className="group relative rounded-2xl overflow-hidden border-2 border-[#26865D]/25 shadow-sm hover:shadow-md transition-all duration-300 h-36 sm:h-44 bg-white"
+              className="group relative rounded-2xl overflow-hidden border-2 border-[#00C9A7]/30 shadow-sm hover:shadow-md transition-all duration-300 h-36 sm:h-44 bg-white"
             >
               <img
                 src={item.src}

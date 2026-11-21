@@ -47,7 +47,7 @@ export function FloatingBottomNav() {
     >
       <nav
         aria-label="Floating Navigation Dock"
-        className="flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-full bg-white/95 backdrop-blur-md border-2 border-[#087E8B]/25 shadow-[0_10px_30px_rgba(8,126,139,0.16)] transition-all duration-300"
+        className="flex items-center gap-1 sm:gap-2 p-1.5 sm:p-2 rounded-full bg-white/95 backdrop-blur-md border-2 border-[#FF914D]/25 shadow-[0_10px_30px_rgba(255,145,77,0.16)] transition-all duration-300"
       >
         {navLinks.map((item) => {
           const active = item.isActive(pathname);
@@ -57,8 +57,8 @@ export function FloatingBottomNav() {
               href={item.href}
               className={`rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 font-heading text-xs sm:text-sm font-bold transition-all duration-200 whitespace-nowrap cursor-pointer select-none ${
                 active
-                  ? "bg-[#087E8B] text-white border-2 border-[#087E8B] shadow-md shadow-[#087E8B]/35 scale-102"
-                  : "text-[#173B42] border-2 border-transparent hover:text-[#087E8B] hover:bg-[#FFFDF5] hover:border-[#087E8B]/20"
+                  ? "bg-[#FF914D] text-white border-2 border-[#FF914D] shadow-md shadow-[#FF914D]/35 scale-102"
+                  : "text-[#173B42] border-2 border-transparent hover:text-[#FF914D] hover:bg-[#FFFDF5] hover:border-[#FF914D]/20"
               }`}
             >
               <span>{isBangla ? item.labelBn : item.labelEn}</span>

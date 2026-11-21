@@ -20,8 +20,8 @@ export function AmusementParkSection() {
       descBn:
         "আকাশচুম্বী ড্রপ এবং লুপের মধ্য দিয়ে তীব্রগতির রোমাঞ্চকর রোলারকোস্টার অভিজ্ঞতা।",
       emoji: "🎢",
-      accent: "border-[#FF795C]",
-      badgeBg: "bg-[#FF795C]/15 text-[#FF795C]",
+      accent: "border-[#845EC2]",
+      badgeBg: "bg-[#845EC2]/15 text-[#845EC2]",
     },
     {
       id: "grand-skylight-ferris-wheel",
@@ -34,8 +34,8 @@ export function AmusementParkSection() {
       descBn:
         "১৫০ ফুট উঁচুতে ৩৬টি শীতাতপ নিয়ন্ত্রিত গ্লাস ক্যাপসুল থেকে উপভোগ করুন পুরো পার্কের অপূর্ব দৃশ্য।",
       emoji: "🎡",
-      accent: "border-[#35C6C8]",
-      badgeBg: "bg-[#35C6C8]/15 text-[#087E8B]",
+      accent: "border-[#D65DB1]",
+      badgeBg: "bg-[#D65DB1]/15 text-[#D65DB1]",
     },
     {
       id: "turbo-bumper-grand-prix",
@@ -48,8 +48,8 @@ export function AmusementParkSection() {
       descBn:
         "রঙিন নিয়ন লাইটে সজ্জিত ফ্লোরে বন্ধুদের সাথে ধাক্কাধাক্কির অনাবিল মজার বাম্পার কার।",
       emoji: "🚗",
-      accent: "border-[#26865D]",
-      badgeBg: "bg-[#26865D]/15 text-[#26865D]",
+      accent: "border-[#FF6F91]",
+      badgeBg: "bg-[#FF6F91]/15 text-[#FF6F91]",
     },
     {
       id: "pirate-ship-voyager",
@@ -62,8 +62,8 @@ export function AmusementParkSection() {
       descBn:
         "শূন্যে ৭৫ ডিগ্রি কোণে তীব্র গতিতে দোলা পাইরেট জাহাজে চড়ে উপভোগ করুন রোমাঞ্চ।",
       emoji: "⚓",
-      accent: "border-[#FFC857]",
-      badgeBg: "bg-[#FFC857]/20 text-[#173B42]",
+      accent: "border-[#845EC2]",
+      badgeBg: "bg-[#845EC2]/15 text-[#845EC2]",
     },
   ];
 
@@ -76,13 +76,13 @@ export function AmusementParkSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-[#FF795C] text-xs font-heading font-bold uppercase tracking-wider mb-3 border-2 border-[#FF795C]/30 shadow-xs">
-              <FerrisWheel className="w-4 h-4 text-[#FF795C]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#845EC2]/10 text-[#845EC2] text-xs font-heading font-bold uppercase tracking-wider mb-3 border-2 border-[#845EC2]/30 shadow-xs">
+              <FerrisWheel className="w-4 h-4 text-[#845EC2]" />
               <span>{isBangla ? "আন্তর্জাতিক মানের রোমাঞ্চকর রাইডস" : "World-Class Amusement Rides"}</span>
             </div>
             <h2 className="section-heading-main text-[#173B42] tracking-tight">
               {isBangla ? "অ্যামিউজমেন্ট পার্ক:" : "AMUSEMENT PARK:"}{" "}
-              <span className="text-[#FF795C]">
+              <span className="text-[#845EC2]">
                 {isBangla ? "থ্রিল ও ফ্যামিলি রাইডস" : "THRILL & FAMILY RIDES"}
               </span>
             </h2>
@@ -95,7 +95,7 @@ export function AmusementParkSection() {
           <div className="shrink-0">
             <Link
               href="/attractions"
-              className="btn-park-primary text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+              className="btn-park-thrill text-xs font-bold uppercase tracking-wider inline-flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
             >
               <span>{isBangla ? "সকল রাইডস দেখুন (২৫+)" : "View All 25+ Rides"}</span>
               <ArrowRight className="w-4 h-4" />
@@ -112,13 +112,13 @@ export function AmusementParkSection() {
               className="park-card p-6 flex flex-col justify-between group cursor-pointer h-full"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#FFFDF5] border-2 border-[#FFC857] flex items-center justify-center text-3xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-[#FFFDF5] border-2 border-[#845EC2]/40 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-xs">
                   {ride.emoji}
                 </div>
                 <div className={`inline-block text-[11px] font-heading font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2 ${ride.badgeBg}`}>
                   {isBangla ? ride.thrillBn : ride.thrillEn}
                 </div>
-                <h3 className="text-xl font-bold font-heading text-[#173B42] group-hover:text-[#FF795C] transition-colors mb-2 leading-tight">
+                <h3 className="text-xl font-bold font-heading text-[#173B42] group-hover:text-[#845EC2] transition-colors mb-2 leading-tight">
                   {isBangla ? ride.nameBn : ride.nameEn}
                 </h3>
                 <p className="text-xs text-[#173B42]/80 leading-relaxed font-sans">
@@ -126,7 +126,7 @@ export function AmusementParkSection() {
                 </p>
               </div>
 
-              <div className="pt-4 mt-6 border-t border-[#FF795C]/25 flex items-center justify-between text-xs font-heading font-bold text-[#FF795C]">
+              <div className="pt-4 mt-6 border-t border-[#845EC2]/25 flex items-center justify-between text-xs font-heading font-bold text-[#845EC2]">
                 <span>{isBangla ? "রাইডের বিস্তারিত দেখুন" : "View Dedicated Page"}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
               </div>
@@ -135,11 +135,11 @@ export function AmusementParkSection() {
         </div>
 
         {/* Real Photo Snapshot Strip */}
-        <div className="mt-8 sm:mt-10 p-5 sm:p-6 rounded-3xl bg-white border-2 border-[#FF795C]/25 shadow-sm">
+        <div className="mt-8 sm:mt-10 p-5 sm:p-6 rounded-3xl bg-white border-2 border-[#845EC2]/25 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
-              <span className="w-10 h-10 rounded-2xl bg-[#FF795C]/15 text-[#FF795C] flex items-center justify-center font-bold shadow-xs">
-                <Camera className="w-5 h-5" />
+              <span className="w-10 h-10 rounded-2xl bg-[#845EC2]/15 text-[#845EC2] flex items-center justify-center font-bold shadow-xs">
+                <Camera className="w-5 h-5 text-[#845EC2]" />
               </span>
               <div>
                 <h4 className="font-heading font-black text-lg text-[#173B42]">
@@ -154,10 +154,10 @@ export function AmusementParkSection() {
             </div>
             <Link
               href="/amusement-park"
-              className="px-5 py-2.5 rounded-full bg-[#FFFDF5] hover:bg-[#FFFDF5] text-[#173B42] font-heading font-bold text-xs flex items-center gap-2 transition-colors border border-[#FF795C]/30"
+              className="px-5 py-2.5 rounded-full bg-[#FFFDF5] hover:bg-[#FFFDF5] text-[#845EC2] font-heading font-bold text-xs flex items-center gap-2 transition-colors border border-[#845EC2]/30"
             >
               <span>{isBangla ? "থ্রিল পার্ক পেজে যান" : "Explore Thrill Park"}</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#FF795C]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#845EC2]" />
             </Link>
           </div>
 

@@ -19,7 +19,7 @@ export function Footer() {
           {/* Brand Column (Span 2) */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="h-14 sm:h-16 w-auto shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white border-2 border-[#FFC857] shadow-md overflow-hidden">
+              <div className="h-14 sm:h-16 w-auto shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white border-2 border-[#FF914D] shadow-md overflow-hidden">
                 <img
                   src="/images/Magic%20Island%20Logo.jpg"
                   alt="Anowar City Magic Island Official Logo"
@@ -27,12 +27,12 @@ export function Footer() {
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] text-[#FFC857] uppercase font-heading leading-tight">
+                <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] text-[#FF914D] uppercase font-heading leading-tight">
                   {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
                 </span>
                 <span className="text-xl sm:text-2xl font-bold tracking-wide text-white font-magical leading-tight flex items-center gap-1.5">
                   MAGIC ISLAND
-                  <span className="inline-block w-2 h-2 rounded-full bg-[#FF795C] animate-ping"></span>
+                  <span className="inline-block w-2 h-2 rounded-full bg-[#FF914D] animate-ping"></span>
                 </span>
                 <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider text-[#35C6C8] uppercase font-sans leading-tight">
                   {isBangla ? "আপনার রোমাঞ্চের জাদুকরী গন্তব্য" : "YOUR ADVENTURE DESTINATION"}
