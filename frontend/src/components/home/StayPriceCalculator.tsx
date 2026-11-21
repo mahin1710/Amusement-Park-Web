@@ -182,6 +182,14 @@ export function StayPriceCalculator() {
               ? "চেক-ইন ও চেক-আউট তারিখ/সময় নির্বাচন করুন এবং স্বয়ংক্রিয়ভাবে চার্জেবল দিন ও মোট ভাড়া দেখুন।"
               : "Select your check-in & check-out dates/times, choose multiple room categories, and see exact chargeable days."}
           </p>
+          <div className="mt-2.5 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#FFF9ED] border border-[#FFD93D] text-xs font-heading font-bold text-[#172554] shadow-2xs">
+            <Clock className="w-3.5 h-3.5 text-[#FF6B35]" />
+            <span>
+              {isBangla
+                ? "১ স্টে আওয়ার্স: ১০:০০ AM - ০৯:০০ PM"
+                : "1 Stay Hours: 10:00 AM - 09:00 PM"}
+            </span>
+          </div>
         </div>
 
         <button
