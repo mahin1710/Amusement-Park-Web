@@ -46,7 +46,7 @@ export default function AttractionsPage() {
       descriptionBn: "বিশাল সামুদ্রিক উত্তাল ঢেউয়ের পুল, সুনামি বে এবং পুরো পরিবারের অনাবিল জলকেলির স্বর্গরাজ্য।",
       icon: Waves,
       themeColor: "text-[#087E8B]",
-      activeBorder: "border-[#087E8B] ring-4 ring-[#087E8B]/20 shadow-lg",
+      activeBorder: "border-[#35C6C8] ring-4 ring-[#35C6C8]/25 shadow-lg",
       activeBg: "bg-[#35C6C8]/10",
       badgeBg: "bg-[#087E8B] text-white",
       realmHref: "/water-park",
@@ -65,10 +65,10 @@ export default function AttractionsPage() {
       descriptionEn: "Encounter 45-foot animatronic predators, elevated canopy trails, interactive fossil digs, and prehistoric wonders.",
       descriptionBn: "৪৫ ফুট উঁচু জীবন্ত গর্জনরত টি-রেক্স, ঝুলন্ত ফুটব্রিজ ট্রেইল ও খুদে প্রত্নতাত্ত্বিকদের ফসিল ল্যাব।",
       icon: Footprints,
-      themeColor: "text-[#26865D]",
-      activeBorder: "border-[#26865D] ring-4 ring-[#26865D]/20 shadow-lg",
-      activeBg: "bg-[#26865D]/10",
-      badgeBg: "bg-[#26865D] text-white",
+      themeColor: "text-[#00C9A7]",
+      activeBorder: "border-[#00C9A7] ring-4 ring-[#00C9A7]/25 shadow-lg",
+      activeBg: "bg-[#C4FCEF]/30",
+      badgeBg: "bg-[#00C9A7] text-[#173B42]",
       realmHref: "/dino-zone",
       realmLabelEn: "Explore Dino World Realm",
       realmLabelBn: "ডাইনো ওয়ার্ল্ড রিয়েলম দেখুন",
@@ -85,10 +85,10 @@ export default function AttractionsPage() {
       descriptionEn: "Defy gravity on steel looping coasters, panoramic 360-degree observation wheels, neon dodging karts, and pirate pendulums.",
       descriptionBn: "উচ্চগতির রোলারকোস্টার, ১৫০ ফুট প্যানোরামিক স্কাই হুইল, নিওন বাম্পার কার ও রোমাঞ্চকর পাইরেট সুইং।",
       icon: FerrisWheel,
-      themeColor: "text-[#FF795C]",
-      activeBorder: "border-[#FF795C] ring-4 ring-[#FF795C]/20 shadow-lg",
-      activeBg: "bg-[#FF795C]/10",
-      badgeBg: "bg-[#FF795C] text-white",
+      themeColor: "text-[#845EC2]",
+      activeBorder: "border-[#845EC2] ring-4 ring-[#845EC2]/25 shadow-lg",
+      activeBg: "bg-[#D65DB1]/10",
+      badgeBg: "bg-[#845EC2] text-white",
       realmHref: "/amusement-park",
       realmLabelEn: "Explore Thrill World Realm",
       realmLabelBn: "থ্রিল ওয়ার্ল্ড রিয়েলম দেখুন",
@@ -258,7 +258,7 @@ export default function AttractionsPage() {
             <button
               type="button"
               onClick={() => setActiveFloatingEffect(currentCategoryMeta.id)}
-              className="px-4 py-2.5 rounded-full bg-gradient-to-r from-[#FFC857] via-[#FF795C] to-[#087E8B] text-white font-heading font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-2 cursor-pointer border-2 border-white"
+              className="px-5 py-2.5 rounded-full bg-[#FF914D] hover:bg-[#FF914D]/90 text-white font-heading font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-2 cursor-pointer border-2 border-white"
               title="Watch floating 3D cartoon animation across page"
             >
               <Play className="w-4 h-4 fill-current text-white" />

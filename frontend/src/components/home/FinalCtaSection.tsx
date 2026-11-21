@@ -31,7 +31,7 @@ export function FinalCtaSection() {
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Floating Sparkle Crown */}
-        <div className="w-16 h-16 rounded-3xl bg-[#FF795C] text-white flex items-center justify-center text-3xl mb-6 shadow-xl border-2 border-[#FFC857] animate-float-slow">
+        <div className="w-16 h-16 rounded-3xl bg-[#FF914D] text-white flex items-center justify-center text-3xl mb-6 shadow-xl border-2 border-[#FFC75F] animate-float-slow">
           🎡
         </div>
 

@@ -68,20 +68,29 @@ export default function AttractionDetailPage() {
     "water-park": {
       nameEn: "Water Oasis",
       nameBn: "ওয়াটার পার্ক",
-      pillClass: "park-pill-sky",
+      pillClass: "park-pill-water",
       icon: Waves,
+      iconColor: "text-[#35C6C8]",
+      badgeText: "text-[#087E8B]",
+      btnClass: "btn-park-water",
     },
     "dino-zone": {
       nameEn: "Dino Kingdom",
       nameBn: "ডাইনো জোন",
-      pillClass: "park-pill-purple",
+      pillClass: "park-pill-dino",
       icon: Footprints,
+      iconColor: "text-[#00C9A7]",
+      badgeText: "text-[#00C9A7]",
+      btnClass: "btn-park-dino",
     },
     "amusement-park": {
       nameEn: "Thrill Galaxy",
       nameBn: "অ্যামিউজমেন্ট পার্ক",
-      pillClass: "park-pill-orange",
+      pillClass: "park-pill-thrill",
       icon: FerrisWheel,
+      iconColor: "text-[#FF6F91]",
+      badgeText: "text-[#845EC2]",
+      btnClass: "btn-park-thrill",
     },
   };
 
@@ -122,10 +131,10 @@ export default function AttractionDetailPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white flex flex-col items-center">
           {/* Zone Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border-2 border-[#FFC857] text-[#173B42] font-heading font-bold text-xs uppercase tracking-wider mb-4 shadow-md">
-            <ZoneIcon className="w-4 h-4 text-[#FF795C]" />
+            <ZoneIcon className={`w-4 h-4 ${zoneMeta.iconColor}`} />
             <span>{isBangla ? zoneMeta.nameBn : zoneMeta.nameEn}</span>
             <span className="text-slate-300">•</span>
-            <span className="text-[#087E8B]">{isBangla ? attraction.thrillLevelBn : attraction.thrillLevel}</span>
+            <span className={zoneMeta.badgeText}>{isBangla ? attraction.thrillLevelBn : attraction.thrillLevel}</span>
           </div>
 
           {/* Attraction Headline */}

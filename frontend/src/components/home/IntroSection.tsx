@@ -17,8 +17,8 @@ export function IntroSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header Badge & Title */}
         <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#087E8B]/20 text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
-            <Sparkles className="w-4 h-4 text-[#087E8B]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FF914D]/25 text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
+            <Sparkles className="w-4 h-4 text-[#FF914D]" />
             <span>
               {isBangla
                 ? "আনোয়ার সিটি • বাংলাদেশের শীর্ষস্থানীয় ওয়ান্ডারল্যান্ড"
@@ -28,7 +28,7 @@ export function IntroSection() {
 
           <h2 className="section-heading-main text-[#173B42] tracking-tight">
             {isBangla ? "একটি গন্তব্য," : "ONE DESTINATION,"}{" "}
-            <span className="text-[#FF795C]">
+            <span className="text-[#FF914D]">
               {isBangla ? "অফুরন্ত অ্যাডভেঞ্চার।" : "ENDLESS ADVENTURE."}
             </span>
           </h2>
@@ -37,10 +37,10 @@ export function IntroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column: Official Brand Statement & Stats */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="p-8 sm:p-10 rounded-3xl bg-white border-2 border-[#087E8B]/20 relative overflow-hidden shadow-md">
-              <div className="flex items-center gap-3 text-[#087E8B] mb-4">
-                <i className="fa-solid fa-quote-left text-3xl text-[#FFC857]"></i>
-                <span className="text-xs font-heading uppercase font-bold tracking-widest text-[#087E8B]">
+            <div className="p-8 sm:p-10 rounded-3xl bg-white border-2 border-[#FF914D]/20 relative overflow-hidden shadow-md">
+              <div className="flex items-center gap-3 text-[#FF914D] mb-4">
+                <i className="fa-solid fa-quote-left text-3xl text-[#FFC75F]"></i>
+                <span className="text-xs font-heading uppercase font-bold tracking-widest text-[#FF914D]">
                   {isBangla ? "অফিসিয়াল পার্ক চার্টার" : "Official Park Charter"}
                 </span>
               </div>
@@ -52,11 +52,11 @@ export function IntroSection() {
                       বাংলাদেশের বৃহত্তম ওয়েভ পুল
                     </strong>
                     । ডাইনো জোনে রয়েছে{" "}
-                    <strong className="text-[#26865D] font-bold">
+                    <strong className="text-[#00C9A7] font-bold">
                       সবচেয়ে বৈচিত্র্যময় ডাইনোসর সংগ্রহ
                     </strong>
                     । আর আমাদের অ্যামিউজমেন্ট পার্কে রয়েছে{" "}
-                    <strong className="text-[#FF795C] font-bold">
+                    <strong className="text-[#845EC2] font-bold">
                       উত্তেজনাপূর্ণ রোমাঞ্চকর সব রাইডস
                     </strong>
                     ।”
@@ -68,7 +68,7 @@ export function IntroSection() {
                       largest Wave pool in Bangladesh
                     </strong>{" "}
                     at our Water park. The{" "}
-                    <strong className="text-[#26865D] font-bold">
+                    <strong className="text-[#00C9A7] font-bold">
                       largest variety of dinosaurs
                     </strong>{" "}
                     is in the Dino Zone. Amazing and Thrilling Rides at our Amusement Park.”
@@ -76,16 +76,16 @@ export function IntroSection() {
                 )}
               </blockquote>
 
-              <div className="pt-6 border-t border-[#087E8B]/15 flex items-center justify-between">
+              <div className="pt-6 border-t border-[#FF914D]/15 flex items-center justify-between">
                 <div>
                   <div className="text-sm font-heading font-bold text-[#173B42]">
                     {isBangla ? "আনোয়ার সিটি ম্যাজিক আইল্যান্ড" : "Anowar City Magic Island"}
                   </div>
-                  <div className="text-xs text-[#087E8B] font-sans font-medium">
+                  <div className="text-xs text-[#FF914D] font-sans font-medium">
                     {isBangla ? "আপনার অ্যাডভেঞ্চার গন্তব্য" : "Your Adventure Destination"}
                   </div>
                 </div>
-                <div className="w-12 h-12 rounded-2xl bg-[#FFFDF5] border-2 border-[#FFC857] p-1 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-[#FFFDF5] border-2 border-[#FFC75F] p-1 flex items-center justify-center">
                   <img
                     src="/images/Magic%20Island%20Logo.jpg"
                     alt="Logo"

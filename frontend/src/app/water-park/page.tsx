@@ -56,7 +56,7 @@ export default function WaterParkPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="#rides"
-              className="btn-park-primary px-7 py-3.5 rounded-full text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"
+              className="btn-park-water px-7 py-3.5 rounded-full text-sm font-black uppercase tracking-wider flex items-center gap-2 shadow-xl hover:scale-105 transition-transform"
             >
               <Sparkles className="w-4 h-4" />
               <span>{isBangla ? "ওয়াটার রাইডস দেখুন" : "Explore Water Rides"}</span>
@@ -67,9 +67,9 @@ export default function WaterParkPage() {
                 href={waLink.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#26865D] hover:bg-[#26865D]/10 shadow-lg hover:scale-105 transition-all"
+                className="px-7 py-3.5 rounded-full bg-white text-[#173B42] font-black text-sm uppercase tracking-wider flex items-center gap-2 border-2 border-[#35C6C8] hover:bg-[#35C6C8]/10 shadow-lg hover:scale-105 transition-all"
               >
-                <MessageCircle className="w-4 h-4 text-[#26865D]" />
+                <MessageCircle className="w-4 h-4 text-[#087E8B]" />
                 <span>{isBangla ? "হোয়াটসঅ্যাপে যোগাযোগ" : "WhatsApp Inquiry"}</span>
               </a>
             )}
@@ -139,7 +139,7 @@ export default function WaterParkPage() {
                   </span>
                   <Link
                     href={`/attractions/${ride.id}`}
-                    className="btn-park-primary px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md hover:scale-105 transition-transform"
+                    className="btn-park-water px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md hover:scale-105 transition-transform"
                   >
                     <span>{isBangla ? "রাইড দেখুন" : "View Ride"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />

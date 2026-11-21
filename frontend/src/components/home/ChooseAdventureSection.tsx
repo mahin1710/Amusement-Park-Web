@@ -249,7 +249,6 @@ export function ChooseAdventureSection() {
             </div>
           </div>
         </div>
-        </div>
 
         {/* Supporting description positioned below the 3 realm options */}
         <div className="text-center max-w-3xl mx-auto mt-8 sm:mt-10">

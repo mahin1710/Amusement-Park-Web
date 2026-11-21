@@ -31,18 +31,18 @@ export default function AboutPage() {
             />
           </div>
 
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#087E8B]/10 text-[#087E8B] text-xs font-black uppercase tracking-widest border border-[#087E8B]/25">
-            <Sparkles className="w-4 h-4 text-[#087E8B]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FF914D]/10 text-[#FF914D] text-xs font-black uppercase tracking-widest border border-[#FF914D]/25">
+            <Sparkles className="w-4 h-4 text-[#FF914D]" />
             <span>{isBangla ? "আমাদের সম্পর্কে" : "About Magic Island"}</span>
           </div>
 
           <div className="space-y-1">
-            <span className="text-xs sm:text-sm font-black tracking-[0.28em] text-[#FF795C] uppercase block">
+            <span className="text-xs sm:text-sm font-black tracking-[0.28em] text-[#FF914D] uppercase block">
               {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
             </span>
             <h1 className="text-4xl sm:text-6xl font-black text-[#173B42] tracking-tight font-heading leading-tight">
               MAGIC ISLAND <br />
-              <span className="text-[#087E8B]">
+              <span className="text-[#FF914D]">
                 {isBangla ? "আপনার রোমাঞ্চের জাদুকরী গন্তব্য" : "YOUR ADVENTURE DESTINATION"}
               </span>
             </h1>
@@ -105,8 +105,8 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="p-8 rounded-3xl bg-white border-2 border-[#26865D]/30 shadow-md hover:-translate-y-2 hover:shadow-xl transition-all space-y-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#26865D]/15 text-[#26865D] flex items-center justify-center font-black shadow-inner">
+          <div className="p-8 rounded-3xl bg-white border-2 border-[#00C9A7]/30 shadow-md hover:-translate-y-2 hover:shadow-xl transition-all space-y-4">
+            <div className="w-14 h-14 rounded-2xl bg-[#C4FCEF] text-[#00C9A7] flex items-center justify-center font-black shadow-inner">
               <Footprints className="w-7 h-7" />
             </div>
             <h3 className="text-2xl font-black text-[#173B42] font-heading">
@@ -118,15 +118,15 @@ export default function AboutPage() {
                 : "The largest variety of dinosaurs in Bangladesh with 25+ roaring animatronics, 45ft T-Rex, and hands-on fossil discovery labs."}
             </p>
             <div className="pt-2">
-              <Link href="/dino-zone" className="text-xs font-black text-[#26865D] uppercase tracking-wider flex items-center gap-1 hover:underline">
+              <Link href="/dino-zone" className="text-xs font-black text-[#00C9A7] uppercase tracking-wider flex items-center gap-1 hover:underline">
                 <span>{isBangla ? "ডাইনো ওয়ার্ল্ড রিয়েলম" : "Explore Dino World"}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
 
-          <div className="p-8 rounded-3xl bg-white border-2 border-[#FF795C]/30 shadow-md hover:-translate-y-2 hover:shadow-xl transition-all space-y-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#FF795C]/15 text-[#FF795C] flex items-center justify-center font-black shadow-inner">
+          <div className="p-8 rounded-3xl bg-white border-2 border-[#845EC2]/30 shadow-md hover:-translate-y-2 hover:shadow-xl transition-all space-y-4">
+            <div className="w-14 h-14 rounded-2xl bg-[#D65DB1]/15 text-[#845EC2] flex items-center justify-center font-black shadow-inner">
               <FerrisWheel className="w-7 h-7" />
             </div>
             <h3 className="text-2xl font-black text-[#173B42] font-heading">
@@ -138,7 +138,7 @@ export default function AboutPage() {
                 : "Looping coasters, panoramic observation wheel, electric bumper arena, and nostalgic family carnival rides."}
             </p>
             <div className="pt-2">
-              <Link href="/amusement-park" className="text-xs font-black text-[#FF795C] uppercase tracking-wider flex items-center gap-1 hover:underline">
+              <Link href="/amusement-park" className="text-xs font-black text-[#845EC2] uppercase tracking-wider flex items-center gap-1 hover:underline">
                 <span>{isBangla ? "থ্রিল ওয়ার্ল্ড রিয়েলম" : "Explore Thrill World"}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -210,18 +210,18 @@ export default function AboutPage() {
 
           <a
             href={hotlineHref}
-            className="group p-5 rounded-2xl bg-white border-2 border-[#FF795C]/30 hover:border-[#FF795C] hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
+            className="group p-5 rounded-2xl bg-white border-2 border-[#FF914D]/30 hover:border-[#FF914D] hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#FF795C]/15 text-[#FF795C] flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-[#FF795C] group-hover:text-white transition-all shadow-xs">
+            <div className="w-12 h-12 rounded-2xl bg-[#FF914D]/15 text-[#FF914D] flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-[#FF914D] group-hover:text-white transition-all shadow-xs">
               <i className="fa-solid fa-phone"></i>
             </div>
-            <div className="text-[11px] font-heading font-black uppercase tracking-wider text-[#FF795C] mb-0.5">
+            <div className="text-[11px] font-heading font-black uppercase tracking-wider text-[#FF914D] mb-0.5">
               {isBangla ? "হটলাইন" : "Hotline"}
             </div>
             <div className="text-sm font-bold font-heading text-[#173B42] mb-3">
               {businessConfig.contact.hotline.display}
             </div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF795C]/10 text-[#FF795C] border border-[#FF795C]/20 text-xs font-heading font-semibold group-hover:bg-[#FF795C] group-hover:text-white transition-colors mt-auto">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF914D]/10 text-[#FF914D] border border-[#FF914D]/20 text-xs font-heading font-semibold group-hover:bg-[#FF914D] group-hover:text-white transition-colors mt-auto">
               <PhoneCall className="w-3 h-3" />
               <span>{isBangla ? "কল দিন" : "Call Now"}</span>
             </span>

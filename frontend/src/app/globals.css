@@ -108,8 +108,6 @@
   --accent-purple: #845EC2;
   --accent-green: #00C9A7;
 }
-  --accent-green: #26865D;
-}
 
 @layer base {
   body {

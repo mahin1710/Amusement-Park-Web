@@ -36,8 +36,8 @@ export default function LocationPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#087E8B]/10 text-[#087E8B] text-xs font-black uppercase tracking-widest mb-4 border border-[#087E8B]/25">
-            <Compass className="w-4 h-4 text-[#087E8B]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FF914D]/10 text-[#FF914D] text-xs font-black uppercase tracking-widest mb-4 border border-[#FF914D]/25">
+            <Compass className="w-4 h-4 text-[#FF914D]" />
             <span>{isBangla ? "লোকেশন ও যোগাযোগের ঠিকানা" : "Location & Contact Guide"}</span>
           </div>
           <h1 className="font-heading font-black text-3xl sm:text-5xl lg:text-6xl text-[#173B42] tracking-tight">
@@ -76,7 +76,7 @@ export default function LocationPage() {
                 allowFullScreen
               ></iframe>
               <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#087E8B]/20 text-xs font-black text-[#173B42] flex items-center gap-2 shadow-md">
-                <MapPin className="w-3.5 h-3.5 text-[#FF795C]" />
+                <MapPin className="w-3.5 h-3.5 text-[#FF914D]" />
                 <span>Magic Island, Keraniganj, Dhaka</span>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function LocationPage() {
             <div className="park-card rounded-3xl p-6 sm:p-7 space-y-4">
               <div className="flex items-center justify-between border-b border-[#087E8B]/15 pb-3">
                 <h3 className="text-base font-black text-[#173B42] font-heading flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-[#FF795C]" />
+                  <Clock className="w-4 h-4 text-[#FF914D]" />
                   <span>{isBangla ? "খোলা থাকার সময়সূচি" : "Operating Hours"}</span>
                 </h3>
               </div>
@@ -127,7 +127,7 @@ export default function LocationPage() {
 
                 <div className="flex justify-between py-2 border-b border-[#087E8B]/10">
                   <span className="text-[#173B42]/75">{isBangla ? "শুক্রবার - শনিবার (সাপ্তাহিক ছুটি):" : "Friday - Saturday (Weekends):"}</span>
-                  <span className="font-black text-[#FF795C]">
+                  <span className="font-black text-[#FF914D]">
                     {isBangla ? businessConfig.operatingHours.weekend.bn : businessConfig.operatingHours.weekend.en}
                   </span>
                 </div>
@@ -144,20 +144,20 @@ export default function LocationPage() {
             {/* Helpline Directory */}
             <div className="park-card rounded-3xl p-6 sm:p-7 space-y-4">
               <h3 className="text-base font-black text-[#173B42] font-heading flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#FF795C]" />
+                <Phone className="w-4 h-4 text-[#FF914D]" />
                 <span>{isBangla ? "যোগাযোগ ও হেল্পডেস্ক" : "Contact & Helpline"}</span>
               </h3>
 
               <div className="space-y-3 text-xs">
                 <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#FFFDF5] border border-[#087E8B]/20">
-                  <Phone className="w-4 h-4 text-[#FF795C] mt-0.5 shrink-0" />
+                  <Phone className="w-4 h-4 text-[#FF914D] mt-0.5 shrink-0" />
                   <div>
                     <span className="font-black text-[#173B42] block">
                       {isBangla ? "অফিশিয়াল হেল্পলাইন:" : "Official Hotline:"}
                     </span>
                     <a
                       href={hotlineHref}
-                      className="text-[#173B42] font-black hover:text-[#FF795C] transition-colors"
+                      className="text-[#173B42] font-black hover:text-[#FF914D] transition-colors"
                     >
                       {businessConfig.contact.hotline.display}
                     </a>
@@ -216,7 +216,7 @@ export default function LocationPage() {
             </div>
 
             <div className="p-6 rounded-2xl bg-[#FFFDF5] border border-[#087E8B]/20 space-y-2">
-              <div className="w-10 h-10 rounded-2xl bg-[#FF795C] text-white flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-[#FF914D] text-white flex items-center justify-center shadow-md">
                 <Car className="w-5 h-5" />
               </div>
               <h4 className="font-black text-[#173B42] text-sm font-heading">{t("location.tip2Title")}</h4>
@@ -237,7 +237,7 @@ export default function LocationPage() {
         <div className="park-card rounded-3xl p-8 sm:p-10 shadow-xl">
           <div className="text-center max-w-2xl mx-auto mb-8">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#087E8B]/25 text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-2.5 shadow-xs">
-              <Sparkles className="w-4 h-4 text-[#FF795C]" />
+              <Sparkles className="w-4 h-4 text-[#FF914D]" />
               <span>{isBangla ? "অফিসিয়াল যোগাযোগ ও সোশ্যাল হাব" : "Official Social & Contact Hub"}</span>
             </div>
             <h3 className="font-heading font-black text-2xl sm:text-4xl text-[#173B42]">
@@ -277,19 +277,19 @@ export default function LocationPage() {
             {/* Hotline Card */}
             <a
               href={hotlineHref}
-              className="group p-6 rounded-2xl bg-white border-2 border-[#FF795C]/30 hover:border-[#FF795C] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
+              className="group p-6 rounded-2xl bg-white border-2 border-[#FF914D]/30 hover:border-[#FF914D] hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#FF795C]/15 text-[#FF795C] flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-[#FF795C] group-hover:text-white transition-all shadow-xs">
+              <div className="w-14 h-14 rounded-2xl bg-[#FF914D]/15 text-[#FF914D] flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-[#FF914D] group-hover:text-white transition-all shadow-xs">
                 <i className="fa-solid fa-phone"></i>
               </div>
-              <div className="text-xs font-heading font-black uppercase tracking-wider text-[#FF795C] mb-1">
+              <div className="text-xs font-heading font-black uppercase tracking-wider text-[#FF914D] mb-1">
                 {isBangla ? "হটলাইন" : "Hotline"}
               </div>
               <div className="text-base font-black font-heading text-[#173B42] mb-4">
                 {businessConfig.contact.hotline.display}
               </div>
-              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FF795C]/10 text-[#FF795C] border border-[#FF795C]/20 text-xs font-heading font-bold group-hover:bg-[#FF795C] group-hover:text-white group-hover:border-[#FF795C] transition-colors mt-auto">
-                <PhoneCall className="w-3.5 h-3.5 text-[#FF795C] group-hover:text-white" />
+              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#FF914D]/10 text-[#FF914D] border border-[#FF914D]/20 text-xs font-heading font-bold group-hover:bg-[#FF914D] group-hover:text-white group-hover:border-[#FF914D] transition-colors mt-auto">
+                <PhoneCall className="w-3.5 h-3.5 text-[#FF914D] group-hover:text-white" />
                 <span>{isBangla ? "কল দিন" : "Call Hotline"}</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
               </span>

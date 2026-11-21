@@ -209,8 +209,8 @@ export default function GalleryPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#087E8B]/10 text-[#087E8B] text-xs font-black uppercase tracking-widest mb-4 border border-[#087E8B]/25">
-            <Camera className="w-4 h-4 text-[#087E8B]" />
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#FF914D]/10 text-[#FF914D] text-xs font-black uppercase tracking-widest mb-4 border border-[#FF914D]/25">
+            <Camera className="w-4 h-4 text-[#FF914D]" />
             <span>{isBangla ? "মেমোরিজ অ্যান্ড গ্যালারি" : "Photo Gallery"}</span>
           </div>
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#173B42] font-heading tracking-tight">
@@ -240,8 +240,8 @@ export default function GalleryPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-black uppercase tracking-wider transition-all cursor-pointer ${
                   isActive
-                    ? "bg-[#087E8B] text-white shadow-lg scale-105"
-                    : "bg-white border-2 border-[#087E8B]/20 text-[#173B42] hover:bg-[#087E8B]/10"
+                    ? "bg-[#FF914D] text-white shadow-lg scale-105"
+                    : "bg-white border-2 border-[#FF914D]/20 text-[#173B42] hover:bg-[#FF914D]/10"
                 }`}
               >
                 {Icon && <Icon className="w-4 h-4" />}
@@ -257,7 +257,7 @@ export default function GalleryPage() {
             <div
               key={item.id}
               onClick={() => setSelectedPhoto(item)}
-              className="group relative h-72 rounded-3xl overflow-hidden cursor-pointer bg-white border-2 border-[#087E8B]/20 shadow-md hover:border-[#087E8B] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+              className="group relative h-72 rounded-3xl overflow-hidden cursor-pointer bg-white border-2 border-[#FF914D]/20 shadow-md hover:border-[#FF914D] hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
             >
               <img
                 src={item.imageUrl}

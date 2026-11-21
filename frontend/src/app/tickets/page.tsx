@@ -16,8 +16,8 @@ export default function TicketsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#087E8B]/15 text-[#087E8B] text-xs font-bold uppercase tracking-widest mb-4 border border-[#087E8B]/25">
-            <Ticket className="w-3.5 h-3.5 text-[#087E8B]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF914D]/15 text-[#FF914D] text-xs font-bold uppercase tracking-widest mb-4 border border-[#FF914D]/25">
+            <Ticket className="w-3.5 h-3.5 text-[#FF914D]" />
             <span>{t("tickets.badge")}</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-[#173B42] tracking-tight font-heading uppercase">
@@ -28,8 +28,8 @@ export default function TicketsPage() {
           </p>
 
           {/* Pricing Notice */}
-          <div className="mt-6 p-4 rounded-xl bg-white border border-[#087E8B]/20 text-[#173B42]/80 text-xs flex items-center justify-center gap-2.5 max-w-2xl mx-auto text-left sm:text-center shadow-sm">
-            <ShieldAlert className="w-5 h-5 text-[#087E8B] shrink-0" />
+          <div className="mt-6 p-4 rounded-xl bg-white border border-[#FF914D]/20 text-[#173B42]/80 text-xs flex items-center justify-center gap-2.5 max-w-2xl mx-auto text-left sm:text-center shadow-sm">
+            <ShieldAlert className="w-5 h-5 text-[#FF914D] shrink-0" />
             <span>{t("tickets.placeholderBanner")}</span>
           </div>
         </div>
@@ -48,12 +48,12 @@ export default function TicketsPage() {
                 key={pkg.id}
                 className={`relative rounded-2xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 ${
                   isFeatured
-                    ? "bg-white border-2 border-[#087E8B] shadow-xl"
-                    : "bg-white border border-[#087E8B]/20 shadow-md"
+                    ? "bg-white border-2 border-[#FF914D] shadow-xl"
+                    : "bg-white border border-[#FF914D]/20 shadow-md"
                 }`}
               >
                 {isFeatured && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#FF795C] text-white font-bold text-[11px] uppercase tracking-wider shadow flex items-center gap-1.5 whitespace-nowrap">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#FF914D] text-white font-bold text-[11px] uppercase tracking-wider shadow flex items-center gap-1.5 whitespace-nowrap">
                     <Star className="w-3.5 h-3.5 fill-white" />
                     <span>{isBangla ? pkg.badge?.bn : pkg.badge?.en}</span>
                   </div>
@@ -69,7 +69,7 @@ export default function TicketsPage() {
                     </p>
                   </div>
 
-                  <div className="my-5 p-4 rounded-xl bg-[#FFFDF5] border border-[#087E8B]/20 space-y-2">
+                  <div className="my-5 p-4 rounded-xl bg-[#FFFDF5] border border-[#FF914D]/20 space-y-2">
                     <div className="flex items-baseline justify-between">
                       <span className="text-xs text-[#173B42]/75 font-medium">{t("tickets.adult")}:</span>
                       <div className="flex items-baseline gap-1">
@@ -80,10 +80,10 @@ export default function TicketsPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-baseline justify-between pt-1 border-t border-[#087E8B]/15">
+                    <div className="flex items-baseline justify-between pt-1 border-t border-[#FF914D]/15">
                       <span className="text-xs text-[#173B42]/75 font-medium">{t("tickets.child")}:</span>
                       <div className="flex items-baseline gap-1">
-                        <span className="text-base font-bold text-[#087E8B] font-heading">
+                        <span className="text-base font-bold text-[#FF914D] font-heading">
                           ৳{pkg.pricing.childPriceBDT.toLocaleString()}
                         </span>
                         <span className="text-[10px] text-[#173B42]/60">/{t("tickets.perPerson")}</span>
@@ -105,7 +105,7 @@ export default function TicketsPage() {
                     <ul className="space-y-2 text-[#173B42]/80">
                       {(isBangla ? pkg.perks.bn : pkg.perks.en).map((perk, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <Check className="w-3.5 h-3.5 text-[#087E8B] shrink-0 mt-0.5 font-bold" />
+                          <Check className="w-3.5 h-3.5 text-[#FF914D] shrink-0 mt-0.5 font-bold" />
                           <span className="leading-tight">{perk}</span>
                         </li>
                       ))}
@@ -127,7 +127,7 @@ export default function TicketsPage() {
                       href={waLink.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-2.5 rounded-xl border border-[#087E8B]/30 text-[#087E8B] bg-white hover:bg-[#087E8B]/10 text-xs font-bold flex items-center justify-center gap-2 transition-colors"
+                      className="w-full py-2.5 rounded-xl border border-[#FF914D]/30 text-[#FF914D] bg-white hover:bg-[#FF914D]/10 text-xs font-bold flex items-center justify-center gap-2 transition-colors"
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-[#26865D]" />
                       <span>{t("tickets.whatsappBtn")}</span>
@@ -163,10 +163,10 @@ export default function TicketsPage() {
               return (
                 <div
                   key={addon.id}
-                  className="rounded-2xl bg-white border border-[#087E8B]/20 p-5 flex flex-col justify-between space-y-4 shadow-sm hover:-translate-y-1 transition-all"
+                  className="rounded-2xl bg-white border border-[#FF914D]/20 p-5 flex flex-col justify-between space-y-4 shadow-sm hover:-translate-y-1 transition-all"
                 >
                   <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#087E8B]/15 text-[#087E8B] flex items-center justify-center font-bold">
+                    <div className="w-10 h-10 rounded-xl bg-[#FF914D]/15 text-[#FF914D] flex items-center justify-center font-bold">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -179,7 +179,7 @@ export default function TicketsPage() {
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-[#087E8B]/15 flex items-baseline justify-between">
+                  <div className="pt-3 border-t border-[#FF914D]/15 flex items-baseline justify-between">
                     <span className="text-base font-black text-[#173B42] font-heading">
                       ৳{addon.priceBDT}
                     </span>

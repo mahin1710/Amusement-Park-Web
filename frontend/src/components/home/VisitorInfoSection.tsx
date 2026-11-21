@@ -16,13 +16,13 @@ export function VisitorInfoSection() {
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FFC857] text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
-            <Sparkles className="w-4 h-4 text-[#087E8B]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-[#FF914D]/30 text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-3 shadow-xs">
+            <Sparkles className="w-4 h-4 text-[#FF914D]" />
             <span>{isBangla ? "আপনার সফরের প্রস্তুতি নিন" : "Plan Your Park Visit"}</span>
           </div>
           <h2 className="section-heading-main text-[#173B42] tracking-tight">
             {isBangla ? "দর্শনার্থী তথ্য ও" : "VISITOR GUIDELINES &"}{" "}
-            <span className="text-[#087E8B]">
+            <span className="text-[#FF914D]">
               {isBangla ? "পার্ক গাইডলাইন" : "PARK ESSENTIALS"}
             </span>
           </h2>

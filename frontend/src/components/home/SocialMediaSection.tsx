@@ -21,8 +21,8 @@ export function SocialMediaSection() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#087E8B]/20 text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-2.5 shadow-xs">
-            <Sparkles className="w-4 h-4 text-[#087E8B]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border-2 border-[#FF914D]/25 text-[#173B42] text-xs font-heading font-bold uppercase tracking-wider mb-2.5 shadow-xs">
+            <Sparkles className="w-4 h-4 text-[#FF914D]" />
             <span>
               {isBangla ? "অফিসিয়াল সোশ্যাল ও যোগাযোগ হাব" : "Official Social & Contact Hub"}
             </span>
@@ -30,7 +30,7 @@ export function SocialMediaSection() {
 
           <h2 className="section-heading-main text-[#173B42] tracking-tight">
             {isBangla ? "ম্যাজিক আইল্যান্ডের সাথে" : "CONNECT WITH"}{" "}
-            <span className="text-[#087E8B]">
+            <span className="text-[#FF914D]">
               {isBangla ? "যুক্ত থাকুন" : "MAGIC ISLAND"}
             </span>
           </h2>
@@ -70,19 +70,19 @@ export function SocialMediaSection() {
           {/* Card 2: Hotline */}
           <a
             href={hotlineHref}
-            className="group p-5 rounded-2xl bg-white border-2 border-[#FF795C]/30 hover:border-[#FF795C] hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
+            className="group p-5 rounded-2xl bg-white border-2 border-[#FF914D]/30 hover:border-[#FF914D] hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center cursor-pointer"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#FF795C]/15 text-[#FF795C] flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-[#FF795C] group-hover:text-white transition-all shadow-xs">
+            <div className="w-12 h-12 rounded-2xl bg-[#FF914D]/15 text-[#FF914D] flex items-center justify-center text-xl mb-3 group-hover:scale-110 group-hover:bg-[#FF795C] group-hover:text-white transition-all shadow-xs">
               <i className="fa-solid fa-phone"></i>
             </div>
-            <div className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#FF795C] mb-0.5">
+            <div className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#FF914D] mb-0.5">
               {isBangla ? "হটলাইন" : "Hotline"}
             </div>
             <div className="text-sm sm:text-base font-bold font-heading text-[#173B42] mb-3">
               {businessConfig.contact.hotline.display}
             </div>
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-50 text-[#C2410C] border border-orange-200 text-xs font-heading font-semibold group-hover:bg-[#FF795C] group-hover:text-white group-hover:border-[#FF795C] transition-colors mt-auto">
-              <PhoneCall className="w-3 h-3 text-[#FF795C] group-hover:text-white" />
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-orange-50 text-[#FF914D] border border-orange-200 text-xs font-heading font-semibold group-hover:bg-[#FF914D] group-hover:text-white group-hover:border-[#FF914D] transition-colors mt-auto">
+              <PhoneCall className="w-3 h-3 text-[#FF914D] group-hover:text-white" />
               <span>{isBangla ? "কল দিন" : "Call Hotline"}</span>
               <ArrowRight className="w-3 h-3 ml-0.5" />
             </span>
