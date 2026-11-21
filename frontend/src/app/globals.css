@@ -31,36 +31,41 @@
   /* ------------------------------------------------------------------------ */
   /* CENTRALIZED BRAND COLORS (MAGIC ISLAND BRAND IDENTITY)                    */
   /* ------------------------------------------------------------------------ */
-  /* 1. Primary Colors */
-  --color-primary: #087E8B;         /* Ocean Teal */
-  --color-primary-hover: #066772;
+  /* 1. Main Website: Orange Primary Theme */
+  --color-primary: #FF914D;         /* Primary Orange */
+  --color-primary-hover: #E87E3A;
   --color-background: #FFFDF5;      /* Warm Ivory */
-  --color-text: #173B42;            /* Deep Ocean */
+  --color-text: #173B42;            /* Deep Ocean Main Text */
 
-  /* 2. Secondary & Section Accent Colors */
-  --color-water: #35C6C8;           /* Aqua Blue */
-  --color-dino: #26865D;            /* Tropical Green */
-  --color-thrill: #FF795C;          /* Adventure Coral */
-  --color-highlight: #FFC857;       /* Sunshine Yellow */
-  --color-luxury: #12304A;          /* Midnight Navy */
-  --color-luxury-gold: #D9B66F;     /* Luxury Gold Supporting */
+  /* 2. Section-Specific Themes */
+  --color-resort: #FFC75F;          /* Golden Theme */
+  --color-resort-hover: #EBB34D;
+  --color-thrill: #845EC2;          /* Thrill Purple */
+  --color-thrill-pink: #D65DB1;     /* Thrill Pink */
+  --color-thrill-coral: #FF6F91;    /* Thrill Coral Pink */
+  --color-dino: #00C9A7;            /* Dino Mint Green */
+  --color-dino-soft: #C4FCEF;       /* Dino Soft Mint */
+  --color-water: #35C6C8;           /* Water Aqua Blue */
+  --color-water-teal: #087E8B;      /* Water Supporting Ocean Teal */
 
-  /* 3. Utility & Legacy Theme Token Mappings */
-  --color-park-teal: #087E8B;
-  --color-park-orange: #FF795C;     /* Adventure Coral */
-  --color-park-orange-hover: #E5654A;
-  --color-park-yellow: #FFC857;     /* Sunshine Yellow */
-  --color-park-yellow-light: #FFF0C8;
+  /* 3. Utility & Theme Token Mappings */
+  --color-park-orange: #FF914D;     /* Primary Orange */
+  --color-park-orange-hover: #E87E3A;
+  --color-park-yellow: #FFC75F;     /* Golden Theme */
+  --color-park-gold: #FFC75F;
   --color-park-sky: #35C6C8;        /* Aqua Blue */
   --color-park-sky-dark: #087E8B;   /* Ocean Teal */
-  --color-park-green: #26865D;      /* Tropical Green */
-  --color-park-green-light: #D4EFE3;
+  --color-park-teal: #087E8B;
+  --color-park-green: #00C9A7;      /* Mint Green */
+  --color-park-green-light: #C4FCEF;/* Soft Mint */
+  --color-park-purple: #845EC2;     /* Thrill Purple */
+  --color-park-pink: #D65DB1;       /* Thrill Pink */
+  --color-park-coral-pink: #FF6F91; /* Thrill Coral Pink */
   --color-park-cream: #FFFDF5;      /* Warm Ivory */
   --color-park-cream-card: #FFFFFF;
   --color-park-navy: #173B42;       /* Deep Ocean */
   --color-park-navy-muted: #3D6169;
   --color-park-midnight: #12304A;   /* Midnight Navy */
-  --color-park-gold: #D9B66F;       /* Luxury Gold */
 
   /* ------------------------------------------------------------------------ */
   /* CENTRALIZED TYPOGRAPHY CONFIGURATION (CSS VARIABLES)                     */
@@ -81,23 +86,28 @@
 }
 
 :root {
-  --color-primary: #087E8B;
+  --color-primary: #FF914D;
+  --color-primary-hover: #E87E3A;
   --color-background: #FFFDF5;
   --color-text: #173B42;
+  --color-resort: #FFC75F;
+  --color-thrill: #845EC2;
+  --color-thrill-pink: #D65DB1;
+  --color-thrill-coral: #FF6F91;
+  --color-dino: #00C9A7;
+  --color-dino-soft: #C4FCEF;
   --color-water: #35C6C8;
-  --color-dino: #26865D;
-  --color-thrill: #FF795C;
-  --color-highlight: #FFC857;
-  --color-luxury: #12304A;
-  --color-luxury-gold: #D9B66F;
+  --color-water-teal: #087E8B;
 
   --background: #FFFDF5;
   --surface: #FFFFFF;
-  --primary: #087E8B;
+  --primary: #FF914D;
   --text-main: #173B42;
-  --secondary: #FFC857;
+  --secondary: #FFC75F;
   --accent-sky: #35C6C8;
-  --accent-purple: #12304A;
+  --accent-purple: #845EC2;
+  --accent-green: #00C9A7;
+}
   --accent-green: #26865D;
 }
 
@@ -189,7 +199,7 @@
   background: rgba(255, 253, 245, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 2px solid rgba(8, 126, 139, 0.15);
+  border-bottom: 2px solid rgba(255, 145, 77, 0.15);
   box-shadow: 0 4px 20px -2px rgba(23, 59, 66, 0.06);
 }
 
@@ -197,16 +207,16 @@
 .park-card {
   background: #FFFFFF;
   border-radius: 28px;
-  border: 2px solid rgba(8, 126, 139, 0.14);
-  box-shadow: 0 10px 30px -5px rgba(18, 48, 74, 0.06);
+  border: 2px solid rgba(255, 145, 77, 0.14);
+  box-shadow: 0 10px 30px -5px rgba(23, 59, 66, 0.06);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   isolation: isolate;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 .park-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px -10px rgba(8, 126, 139, 0.18);
-  border-color: #087E8B;
+  box-shadow: 0 20px 40px -10px rgba(255, 145, 77, 0.18);
+  border-color: #FF914D;
 }
 
 /* Colorful Playful Pills */
@@ -217,24 +227,44 @@
   padding: 6px 16px;
   border-radius: 9999px;
   background: #FFFFFF;
-  border: 2px solid #FFC857;
+  border: 2px solid #FF914D;
   color: #173B42;
   font-family: var(--font-heading), "Poppins", sans-serif;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(255, 200, 87, 0.25);
+  box-shadow: 0 4px 12px rgba(255, 145, 77, 0.2);
 }
 
-.park-pill-teal {
-  background: #E8F7F8;
-  border-color: #A3E2E6;
-  color: #087E8B;
-}
-
-.park-pill-coral,
 .park-pill-orange {
-  background: #FFF1EE;
-  border-color: #FFC4B7;
-  color: #FF795C;
+  background: #FFF5EE;
+  border-color: #FFD4BC;
+  color: #FF914D;
+}
+
+.park-pill-golden,
+.park-pill-resort {
+  background: #FFF9ED;
+  border-color: #FFE6B5;
+  color: #173B42;
+}
+
+.park-pill-purple,
+.park-pill-thrill {
+  background: #F4EFFC;
+  border-color: #D3C3EE;
+  color: #845EC2;
+}
+
+.park-pill-pink {
+  background: #FCEDF7;
+  border-color: #F3C3E6;
+  color: #D65DB1;
+}
+
+.park-pill-mint,
+.park-pill-dino {
+  background: #C4FCEF;
+  border-color: #86EED8;
+  color: #00C9A7;
 }
 
 .park-pill-aqua,
@@ -244,41 +274,28 @@
   color: #087E8B;
 }
 
-.park-pill-purple,
-.park-pill-navy {
-  background: #E7EDF3;
-  border-color: #9AB4CD;
-  color: #12304A;
-}
-
-.park-pill-green {
-  background: #EDF7F2;
-  border-color: #A8DDC6;
-  color: #26865D;
-}
-
-/* Buttons */
+/* Primary Website Buttons: Orange Brand Identity */
 .btn-park-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, #087E8B 0%, #066772 100%);
+  background: linear-gradient(135deg, #FF914D 0%, #E87E3A 100%);
   color: #FFFFFF !important;
   font-family: var(--font-heading), "Poppins", sans-serif;
   font-weight: 600;
   letter-spacing: 0.01em;
   padding: 12px 28px;
   border-radius: 9999px;
-  box-shadow: 0 8px 24px rgba(8, 126, 139, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 145, 77, 0.35);
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   border: none;
 }
 .btn-park-primary:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(8, 126, 139, 0.45);
-  background: linear-gradient(135deg, #0A98A7 0%, #087E8B 100%);
+  box-shadow: 0 12px 30px rgba(255, 145, 77, 0.45);
+  background: linear-gradient(135deg, #FFA066 0%, #FF914D 100%);
 }
 
 .btn-park-secondary {
@@ -286,21 +303,21 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #FFC857;
+  background: #FFC75F;
   color: #173B42 !important;
   font-family: var(--font-heading), "Poppins", sans-serif;
   font-weight: 600;
   letter-spacing: 0.01em;
   padding: 12px 28px;
   border-radius: 9999px;
-  box-shadow: 0 6px 20px rgba(255, 200, 87, 0.35);
+  box-shadow: 0 6px 20px rgba(255, 199, 95, 0.35);
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   border: none;
 }
 .btn-park-secondary:hover {
   transform: translateY(-2px) scale(1.03);
-  background: #FFD270;
+  background: #EBB34D;
 }
 
 .btn-park-outline {
@@ -309,8 +326,8 @@
   justify-content: center;
   gap: 10px;
   background: #FFFFFF;
-  border: 2px solid #087E8B;
-  color: #087E8B !important;
+  border: 2px solid #FF914D;
+  color: #FF914D !important;
   font-family: var(--font-heading), "Poppins", sans-serif;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -320,62 +337,129 @@
   cursor: pointer;
 }
 .btn-park-outline:hover {
-  background: #E8F7F8;
-  border-color: #066772;
-  color: #066772 !important;
+  background: #FFF5EE;
+  border-color: #E87E3A;
+  color: #E87E3A !important;
   transform: translateY(-2px);
 }
 
-.btn-park-coral {
+/* Section Dedicated Action Buttons */
+.btn-park-resort {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, #FF795C 0%, #E5654A 100%);
-  color: #FFFFFF !important;
+  background: #FFC75F;
+  color: #173B42 !important;
   font-family: var(--font-heading), "Poppins", sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.01em;
   padding: 12px 28px;
   border-radius: 9999px;
-  box-shadow: 0 8px 24px rgba(255, 121, 92, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 199, 95, 0.35);
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   border: none;
 }
-.btn-park-coral:hover {
+.btn-park-resort:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(255, 121, 92, 0.45);
+  background: #EBB34D;
+}
+
+.btn-park-dino {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #00C9A7;
+  color: #173B42 !important;
+  font-family: var(--font-heading), "Poppins", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(0, 201, 167, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+}
+.btn-park-dino:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: #00B596;
+}
+
+.btn-park-thrill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #845EC2 0%, #D65DB1 100%);
+  color: #FFFFFF !important;
+  font-family: var(--font-heading), "Poppins", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(132, 94, 194, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+}
+.btn-park-thrill:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(135deg, #956FD3 0%, #FF6F91 100%);
+}
+
+.btn-park-water {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #35C6C8 0%, #087E8B 100%);
+  color: #FFFFFF !important;
+  font-family: var(--font-heading), "Poppins", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(53, 198, 200, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+}
+.btn-park-water:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(135deg, #42D8DA 0%, #066772 100%);
 }
 
 /* Gradient text */
 .text-gradient-park {
-  background: linear-gradient(135deg, #087E8B 0%, #35C6C8 50%, #FFC857 100%);
+  background: linear-gradient(135deg, #FF914D 0%, #FF6F91 50%, #FFC75F 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-water {
-  background: linear-gradient(135deg, #087E8B 0%, #35C6C8 60%, #26865D 100%);
+  background: linear-gradient(135deg, #087E8B 0%, #35C6C8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-purple,
 .text-gradient-dino {
-  background: linear-gradient(135deg, #26865D 0%, #087E8B 100%);
+  background: linear-gradient(135deg, #00C9A7 0%, #173B42 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-thrill {
-  background: linear-gradient(135deg, #FF795C 0%, #FFC857 100%);
+  background: linear-gradient(135deg, #845EC2 0%, #D65DB1 50%, #FF6F91 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-luxury {
-  background: linear-gradient(135deg, #12304A 0%, #D9B66F 100%);
+.text-gradient-luxury,
+.text-gradient-resort {
+  background: linear-gradient(135deg, #FFC75F 0%, #173B42 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

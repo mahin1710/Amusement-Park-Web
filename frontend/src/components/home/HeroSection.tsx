@@ -96,7 +96,7 @@ export function HeroSection() {
             className="flex items-center gap-3 group shrink-0 pointer-events-auto transition-transform hover:scale-102"
           >
             <div
-              className="shrink-0 flex items-center justify-center bg-white/95 backdrop-blur-md border-2 border-[#FFC857] overflow-hidden group-hover:scale-105 transition-transform"
+              className="shrink-0 flex items-center justify-center bg-white/95 backdrop-blur-md border-2 border-[#FF914D] overflow-hidden group-hover:scale-105 transition-transform"
               style={{
                 height: `calc(var(--logo-max) - (var(--logo-max) - var(--logo-min)) * var(--scroll-p, ${scrollProgress}))`,
                 padding: `calc(clamp(4px, 7px - 3px * var(--scroll-p, ${scrollProgress}), 7px))`,
@@ -112,7 +112,7 @@ export function HeroSection() {
             </div>
             <div className="flex flex-col justify-center">
               <span
-                className="font-bold uppercase font-heading leading-none text-[#FF795C]"
+                className="font-bold uppercase font-heading leading-none text-[#FF914D]"
                 style={{
                   fontSize: `calc(var(--sub-max) - (var(--sub-max) - var(--sub-min)) * var(--scroll-p, ${scrollProgress}))`,
                   letterSpacing: `calc(0.24em - 0.04em * var(--scroll-p, ${scrollProgress}))`,
@@ -143,7 +143,7 @@ export function HeroSection() {
               onClick={toggleLanguage}
               type="button"
               title="Switch Language"
-              className="nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#087E8B]/25 !shadow-lg cursor-pointer"
+              className="nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#FF914D]/25 !shadow-lg cursor-pointer"
               style={{
                 height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
                 paddingLeft: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
@@ -151,17 +151,17 @@ export function HeroSection() {
                 fontSize: `calc(clamp(11px, 12px - 1px * var(--scroll-p, ${scrollProgress}), 12px))`,
               }}
             >
-              <Globe className="w-3.5 h-3.5 text-[#35C6C8]" />
+              <Globe className="w-3.5 h-3.5 text-[#FF914D]" />
               <span>
                 {locale === "en" ? (
                   <>
-                    <strong className="text-[#087E8B]">EN</strong> |{" "}
+                    <strong className="text-[#FF914D]">EN</strong> |{" "}
                     <span className="font-bangla text-[#173B42]/70">বাংলা</span>
                   </>
                 ) : (
                   <>
                     <span className="text-[#173B42]/70">EN</span> |{" "}
-                    <strong className="font-bangla text-[#087E8B]">বাংলা</strong>
+                    <strong className="font-bangla text-[#FF914D]">বাংলা</strong>
                   </>
                 )}
               </span>
