@@ -1,5 +1,32 @@
 @import "tailwindcss";
 
+/* -------------------------------------------------------------------------- */
+/* CUSTOM WALTOGRAPH THEME PARK FONTS (Uploaded Disney-style Font Family)      */
+/* -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Waltograph';
+  src: url('/fonts/waltograph/waltograph.regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Waltograph';
+  src: url('/fonts/waltograph/waltograph.ui-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Waltograph UI';
+  src: url('/fonts/waltograph/waltograph.ui-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-park-orange: #FF6B35;
   --color-park-orange-hover: #E85924;
@@ -16,9 +43,13 @@
   --color-park-navy: #172554;
   --color-park-navy-muted: #3B4B75;
 
-  --font-heading: var(--font-heading), "Fredoka", "Poppins", sans-serif;
-  --font-sans: var(--font-sans), "Poppins", system-ui, sans-serif;
-  --font-body: var(--font-sans), "Poppins", system-ui, sans-serif;
+  /* Primary Header & Display Font: Waltograph with Bangla & Latin fallbacks */
+  --font-heading: var(--font-waltograph), "Waltograph", "Waltograph UI", var(--font-bangla), "Hind Siliguri", "Fredoka", sans-serif;
+  --font-display: var(--font-waltograph), "Waltograph", "Waltograph UI", var(--font-bangla), "Hind Siliguri", sans-serif;
+
+  /* Harmonized Body & Interface Fonts: Plus Jakarta Sans + Poppins */
+  --font-sans: var(--font-sans), var(--font-poppins), "Plus Jakarta Sans", "Poppins", system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-sans), var(--font-poppins), "Plus Jakarta Sans", "Poppins", system-ui, sans-serif;
   --font-bangla: var(--font-bangla), "Hind Siliguri", sans-serif;
 }
 
@@ -37,27 +68,27 @@
   body {
     background-color: #FFF9ED;
     color: #172554;
-    font-family: var(--font-sans), "Poppins", sans-serif;
+    font-family: var(--font-sans), var(--font-poppins), "Plus Jakarta Sans", "Poppins", sans-serif;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading), "Fredoka", sans-serif;
-    letter-spacing: -0.01em;
+    font-family: var(--font-heading), "Waltograph", "Waltograph UI", var(--font-bangla), "Hind Siliguri", sans-serif;
+    letter-spacing: 0.02em;
     font-weight: 700;
   }
 }
 
 .font-heading {
-  font-family: var(--font-heading), "Fredoka", "Poppins", sans-serif;
+  font-family: var(--font-heading), "Waltograph", "Waltograph UI", var(--font-bangla), "Hind Siliguri", "Fredoka", sans-serif;
 }
 
 .font-display {
-  font-family: var(--font-heading), "Fredoka", "Poppins", sans-serif;
+  font-family: var(--font-heading), "Waltograph", "Waltograph UI", var(--font-bangla), "Hind Siliguri", sans-serif;
 }
 
 .font-sans {
-  font-family: var(--font-sans), "Poppins", sans-serif;
+  font-family: var(--font-sans), var(--font-poppins), "Plus Jakarta Sans", "Poppins", sans-serif;
 }
 
 .font-bangla {
@@ -99,7 +130,7 @@
   background: #FFFFFF;
   border: 2px solid #FFD93D;
   color: #172554;
-  font-family: var(--font-heading), "Fredoka", sans-serif;
+  font-family: var(--font-sans), "Plus Jakarta Sans", "Poppins", sans-serif;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(255, 217, 61, 0.25);
 }
@@ -136,8 +167,9 @@
   gap: 10px;
   background: linear-gradient(135deg, #FF6B35 0%, #FF5100 100%);
   color: #FFFFFF !important;
-  font-family: var(--font-heading), "Fredoka", sans-serif;
-  font-weight: 600;
+  font-family: var(--font-sans), "Plus Jakarta Sans", "Poppins", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   padding: 12px 28px;
   border-radius: 9999px;
   box-shadow: 0 8px 24px rgba(255, 107, 53, 0.35);
@@ -157,8 +189,9 @@
   gap: 10px;
   background: #FFD93D;
   color: #172554 !important;
-  font-family: var(--font-heading), "Fredoka", sans-serif;
-  font-weight: 600;
+  font-family: var(--font-sans), "Plus Jakarta Sans", "Poppins", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   padding: 12px 28px;
   border-radius: 9999px;
   box-shadow: 0 6px 20px rgba(255, 217, 61, 0.35);
@@ -178,8 +211,9 @@
   background: #FFFFFF;
   border: 2px solid #FF6B35;
   color: #FF6B35 !important;
-  font-family: var(--font-heading), "Fredoka", sans-serif;
-  font-weight: 600;
+  font-family: var(--font-sans), "Plus Jakarta Sans", "Poppins", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   padding: 10px 24px;
   border-radius: 9999px;
   transition: all 0.25s ease;
@@ -230,11 +264,11 @@
 
 /* Centralized Main Section Heading Style with fluid typography clamp() */
 .section-heading-main {
-  font-family: var(--font-heading), "Fredoka", "Poppins", sans-serif;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  font-size: clamp(2rem, 1.25rem + 3.2vw, 3.75rem);
+  font-family: var(--font-heading), "Waltograph", "Waltograph UI", var(--font-bangla), "Hind Siliguri", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 1.15;
+  font-size: clamp(2.2rem, 1.35rem + 3.2vw, 4rem);
 }
 
 /* Premium Amusement Park Glowing & Interactive Category Effects */
@@ -273,7 +307,7 @@
   gap: 6px;
   padding: 8px 18px;
   border-radius: 9999px;
-  font-family: var(--font-heading), "Fredoka", "Poppins", sans-serif;
+  font-family: var(--font-sans), "Plus Jakarta Sans", "Poppins", sans-serif;
   font-weight: 600;
   font-size: 0.8125rem;
   background: rgba(255, 255, 255, 0.94);

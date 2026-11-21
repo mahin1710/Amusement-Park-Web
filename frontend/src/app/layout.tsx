@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Fredoka, Poppins, Hind_Siliguri } from "next/font/google";
+import localFont from "next/font/local";
+import { Plus_Jakarta_Sans, Poppins, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { AnimationProvider } from "@/context/AnimationContext";
@@ -10,20 +11,41 @@ import { FloatingBottomNav } from "@/components/layout/FloatingBottomNav";
 import { InteractiveCursorTrail } from "@/components/animations/InteractiveCursorTrail";
 import { siteConfig } from "@/config/site";
 
-const fredoka = Fredoka({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-heading",
+// Waltograph: Uploaded Disney-style Magical Theme Park Font
+const waltograph = localFont({
+  src: [
+    {
+      path: "./fonts/waltograph.regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/waltograph.ui-bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-waltograph",
   display: "swap",
 });
 
-const poppins = Poppins({
+// Plus Jakarta Sans: High-clarity geometric body & UI font that blends seamlessly with Waltograph
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-sans",
   display: "swap",
 });
 
+// Poppins: Rounded friendly geometric companion font
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
+// Hind Siliguri: Premium Bengali font with rounded terminals matching Waltograph/Poppins
 const hindSiliguri = Hind_Siliguri({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["bengali", "latin"],
@@ -79,7 +101,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fredoka.variable} ${poppins.variable} ${hindSiliguri.variable}`}>
+    <html
+      lang="en"
+      className={`${waltograph.variable} ${plusJakartaSans.variable} ${poppins.variable} ${hindSiliguri.variable}`}
+    >
       <head>
         <link
           rel="stylesheet"
@@ -88,7 +113,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
