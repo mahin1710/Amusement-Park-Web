@@ -45,7 +45,7 @@ export function Footer() {
                 ? "বাংলাদেশের শীর্ষস্থানীয় মেগা-বিনোদন পার্ক — দেশের বৃহত্তম ওয়েভ পুল, সুবিশাল প্রাগৈতিহাসিক ডাইনো জোন এবং রোমাঞ্চকর অ্যামিউজমেন্ট রাইডস এর অনন্য ঠিকানা।"
                 : "Bangladesh’s ultimate mega-entertainment park home to the nation’s largest wave pool, prehistoric Dino Zone, and high-adrenaline thrill amusement rides."}
             </p>
-            <div className="text-xs text-[#FFD93D] font-heading font-semibold">
+            <div className="text-sm text-[#FFD93D] font-magical tracking-wide">
               {isBangla ? "আনোয়ার সিটি ম্যাজিক আইল্যান্ড – আপনার পারিবারিক অ্যাডভেঞ্চার ঠিকানা।" : "Anowar City Magic Island – Where Every Moment Becomes a Magical Adventure."}
             </div>
 
