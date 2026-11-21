@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -11,14 +11,15 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
 import { businessConfig } from "@/config/business";
+import { heroSlides } from "@/config/heroSlides";
 
 export function HeroSection() {
   const { locale, setLocale, isBangla } = useTranslation();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Synchronize Header, Logo & Navigation transformation directly with scroll position
   // Direct 1:1 interpolation with requestAnimationFrame for 60/120fps hardware rendering
@@ -61,15 +62,6 @@ export function HeroSection() {
     };
   }, []);
 
-  // Ensure autoplay starts reliably across browsers
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Autoplay policy handled gracefully
-      });
-    }
-  }, []);
-
   const toggleLanguage = () => {
     setLocale(locale === "en" ? "bn" : "en");
   };
@@ -83,9 +75,37 @@ export function HeroSection() {
 
   const whatsappHref = `https://wa.me/${businessConfig.hotlines.whatsapp.replace(/[^0-9]/g, "")}`;
 
+  // Preload all slideshow images into browser memory to eliminate flashes/jumps
+  useEffect(() => {
+    heroSlides.forEach((slide) => {
+      const img = new window.Image();
+      img.src = slide.src;
+    });
+  }, []);
+
+  // Shuffle next slide continuously every 5 seconds, avoiding consecutive repeats
+  const advanceToNextSlide = useCallback(() => {
+    setCurrentIndex((prev) => {
+      if (heroSlides.length <= 1) return 0;
+      let next: number;
+      do {
+        next = Math.floor(Math.random() * heroSlides.length);
+      } while (next === prev);
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      advanceToNextSlide();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [advanceToNextSlide]);
+
   return (
     <>
-      {/* 4. INTEGRATED HERO NAVIGATION (Transparent at Top with Prominent Logo, Smoothly Shrinking on Scroll) */}
+      {/* 4. INTEGRATED HERO NAVIGATION (Scroll-Synchronized Direct Transformation) */}
       <header
         ref={headerRef}
         className="fixed top-0 inset-x-0 z-50 px-4 sm:px-6 lg:px-8 [--scroll-p:0] [--logo-max:56px] [--logo-min:40px] [--title-max:20px] [--title-min:16px] [--sub-max:10px] [--sub-min:9px] sm:[--logo-max:64px] sm:[--logo-min:44px] sm:[--title-max:24px] sm:[--title-min:18px] sm:[--sub-max:11px] sm:[--sub-min:9.5px] lg:[--logo-max:80px] lg:[--logo-min:48px] lg:[--title-max:30px] lg:[--title-min:20px] lg:[--sub-max:12px] lg:[--sub-min:10px]"
@@ -95,17 +115,15 @@ export function HeroSection() {
         }}
         data-purpose="hero-navigation-header"
       >
-        {/* Transparent Backdrop at Top (No solid bar initially), smoothly fades in blurred glass on scroll */}
+        {/* Localized Transparent Backdrop Blur (Smoothly fades in opacity and border in sync with scroll) */}
         <div
-          className="absolute inset-0 -z-10 pointer-events-none transition-all duration-200"
+          className="absolute inset-0 -z-10 pointer-events-none backdrop-blur-md"
           style={{
             backgroundColor: mobileMenuOpen
               ? "rgba(255, 249, 237, 0.95)"
-              : `rgba(255, 249, 237, calc(0.85 * var(--scroll-p, ${scrollProgress})))`,
+              : `rgba(255, 249, 237, calc(0.40 + 0.42 * var(--scroll-p, ${scrollProgress})))`,
             borderBottom: `2px solid rgba(254, 215, 170, calc(0.60 * var(--scroll-p, ${scrollProgress})))`,
             boxShadow: `0 2px 8px -1px rgba(67, 20, 7, calc(0.08 * var(--scroll-p, ${scrollProgress})))`,
-            backdropFilter: mobileMenuOpen || scrollProgress > 0.05 ? "blur(12px)" : "none",
-            WebkitBackdropFilter: mobileMenuOpen || scrollProgress > 0.05 ? "blur(12px)" : "none",
           }}
         />
 
@@ -127,7 +145,7 @@ export function HeroSection() {
                 height: `calc(var(--logo-max) - (var(--logo-max) - var(--logo-min)) * var(--scroll-p, ${scrollProgress}))`,
                 padding: `calc(clamp(4px, 6px - 2px * var(--scroll-p, ${scrollProgress}), 6px))`,
                 borderRadius: `calc(clamp(12px, 16px - 4px * var(--scroll-p, ${scrollProgress}), 16px))`,
-                boxShadow: `0 4px 12px -2px rgba(255, 107, 53, calc(0.20 - 0.12 * var(--scroll-p, ${scrollProgress})))`,
+                boxShadow: `0 4px 12px -2px rgba(255, 107, 53, calc(0.18 - 0.10 * var(--scroll-p, ${scrollProgress})))`,
               }}
             >
               <img
@@ -136,7 +154,7 @@ export function HeroSection() {
                 className="h-full w-auto object-contain"
               />
             </div>
-            <div className="flex flex-col justify-center drop-shadow-sm">
+            <div className="flex flex-col justify-center">
               <span
                 className="font-bold uppercase font-heading leading-none text-[#FF6B35]"
                 style={{
@@ -288,43 +306,77 @@ export function HeroSection() {
         )}
       </header>
 
-      {/* 1. HERO VIDEO & AMUSEMENT PARK ENTRANCE */}
+      {/* 1. HERO SLIDESHOW & AMUSEMENT PARK SECTION */}
       <section
-        className="relative h-[72vh] sm:h-[76vh] lg:h-[82vh] min-h-[520px] sm:min-h-[580px] max-h-[800px] flex flex-col justify-between overflow-hidden bg-[#FFF9ED]"
+        className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex flex-col justify-between overflow-hidden bg-[#FFF9ED]"
         data-purpose="amusement-park-entrance-hero"
         id="hero"
       >
-        {/* FULL-WIDTH CONTINUOUS LANDSCAPE HERO VIDEO */}
-        <div className="absolute inset-0 z-0 overflow-hidden w-full bg-[#172554]">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/images/Water%20World/Water%20Cover%20Pic.png"
-            className="w-full h-full object-cover object-center pointer-events-none"
-            aria-label="Anowar City Magic Island Official Theme Park Video"
-          >
-            <source src="/images/Home%20PG%20Video/Video-1.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+        {/* AUTOMATIC SHUFFLE FULL-WIDTH PHOTOGRAPHY SLIDESHOW (100% Edge-to-Edge) */}
+        <div className="absolute inset-0 z-0 overflow-hidden w-full">
+          {heroSlides.map((slide, idx) => {
+            const isActive = idx === currentIndex;
+            return (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                }`}
+                aria-hidden={!isActive}
+              >
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="w-full h-full object-cover object-center"
+                  loading={idx === 0 ? "eager" : "lazy"}
+                />
+              </div>
+            );
+          })}
 
-          {/* Subtle Top Protection Vignette for Navigation Visibility (Gently fades away as compact header blurred background takes over) */}
+          {/* 2. SUBTLE TOP BLUR & SEAMLESS GRADIENT BLEND (Soft transparent backdrop-blur behind navigation area) */}
           <div
-            className="absolute inset-x-0 top-0 h-32 sm:h-36 bg-gradient-to-b from-black/40 via-black/15 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+            className="absolute inset-x-0 top-0 h-28 sm:h-32 bg-gradient-to-b from-[#FFF9ED]/85 via-[#FFF9ED]/30 to-transparent backdrop-blur-[3px] pointer-events-none z-10"
             style={{
-              opacity: `calc(1 - var(--scroll-p, ${scrollProgress}))`,
+              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0) 100%)",
+              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0) 100%)",
             }}
-          />
+          ></div>
 
-          {/* Seamless Bottom-Edge Blend into #FFF9ED Page Background */}
-          <div className="absolute inset-x-0 -bottom-[2px] h-12 sm:h-16 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/60 to-transparent pointer-events-none z-20" />
+          {/* 3. SUBTLE, MINIMAL BOTTOM-EDGE BLEND (Short ~36px fade into #FFF9ED) */}
+          <div className="absolute inset-x-0 bottom-0 h-8 sm:h-10 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/30 to-transparent pointer-events-none z-20"></div>
         </div>
 
         {/* Top Breathing Space Spacer (Preserves layout balance when header is fixed) */}
         <div className="h-20 sm:h-24 lg:h-28 w-full pointer-events-none" aria-hidden="true" />
+
+        {/* 5. SUBTLE MINIMAL SLIDESHOW INDICATOR DOTS */}
+        <div className="relative z-30 pb-2.5 sm:pb-3 flex items-center justify-center mt-auto pointer-events-auto">
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 shadow-sm"
+            role="tablist"
+            aria-label="Slideshow Indicators"
+          >
+            {heroSlides.map((slide, idx) => {
+              const isActive = idx === currentIndex;
+              return (
+                <button
+                  key={slide.id}
+                  onClick={() => setCurrentIndex(idx)}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-label={`Show ${slide.alt}`}
+                  className={`transition-all duration-500 rounded-full cursor-pointer ${
+                    isActive
+                      ? "w-6 h-2 bg-[#FFD93D] shadow-sm"
+                      : "w-2 h-2 bg-white/60 hover:bg-white"
+                  }`}
+                />
+              );
+            })}
+          </div>
+        </div>
       </section>
     </>
   );
