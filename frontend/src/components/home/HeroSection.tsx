@@ -112,21 +112,24 @@ export function HeroSection() {
             </div>
             <div className="flex flex-col justify-center">
               <span
-                className="font-bold uppercase font-heading leading-none text-[#FFD93D] drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
+                className="font-bold uppercase font-heading leading-none text-[#FF6B35]"
                 style={{
                   fontSize: `calc(var(--sub-max) - (var(--sub-max) - var(--sub-min)) * var(--scroll-p, ${scrollProgress}))`,
                   letterSpacing: `calc(0.24em - 0.04em * var(--scroll-p, ${scrollProgress}))`,
                   marginBottom: `calc(clamp(2px, 4px - 2px * var(--scroll-p, ${scrollProgress}), 4px))`,
+                  filter: scrollProgress > 0.4 ? "none" : "drop-shadow(0 2px 6px rgba(0,0,0,0.95))",
+                  transition: "filter 0.25s ease",
                 }}
               >
                 {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
               </span>
               <span
-                className="font-black tracking-tight font-heading leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
+                className="font-black tracking-tight font-heading leading-none"
                 style={{
                   fontSize: `calc(var(--title-max) - (var(--title-max) - var(--title-min)) * var(--scroll-p, ${scrollProgress}))`,
-                  color: scrollProgress > 0.65 ? "#172554" : "#FFFFFF",
-                  transition: "color 0.25s ease",
+                  color: scrollProgress > 0.4 ? "#172554" : "#FFFFFF",
+                  filter: scrollProgress > 0.4 ? "none" : "drop-shadow(0 2px 10px rgba(0,0,0,0.95))",
+                  transition: "color 0.25s ease, filter 0.25s ease",
                 }}
               >
                 MAGIC ISLAND
