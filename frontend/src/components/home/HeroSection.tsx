@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -11,18 +11,17 @@ import {
 } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
 import { businessConfig } from "@/config/business";
-import { heroSlides } from "@/config/heroSlides";
 
 export function HeroSection() {
   const { locale, setLocale, isBangla } = useTranslation();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Synchronize Header, Logo & Navigation transformation directly with scroll position
-  // Direct 1:1 interpolation with requestAnimationFrame for 60/120fps hardware rendering
+  // Synchronize Logo & Navigation scaling directly with scroll position
+  // Direct 1:1 hardware-accelerated interpolation with requestAnimationFrame
   useEffect(() => {
     let ticking = false;
 
@@ -33,7 +32,7 @@ export function HeroSection() {
         document.body.scrollTop ||
         0;
 
-      // Range: from 0px (top) to 180px (full compact) on desktop, 140px on mobile
+      // Range: from 0px (top) to 180px (compact) on desktop, 140px on mobile
       const maxScroll = window.innerWidth < 768 ? 140 : 180;
       const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
 
@@ -62,6 +61,21 @@ export function HeroSection() {
     };
   }, []);
 
+  // Ensure video plays continuously across all browsers (including iOS low-power mode)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay policy fallback: re-ensure muted and play on interaction if needed
+        video.muted = true;
+        video.play().catch(() => {});
+      });
+    }
+  }, []);
+
   const toggleLanguage = () => {
     setLocale(locale === "en" ? "bn" : "en");
   };
@@ -75,77 +89,37 @@ export function HeroSection() {
 
   const whatsappHref = `https://wa.me/${businessConfig.hotlines.whatsapp.replace(/[^0-9]/g, "")}`;
 
-  // Preload all slideshow images into browser memory to eliminate flashes/jumps
-  useEffect(() => {
-    heroSlides.forEach((slide) => {
-      const img = new window.Image();
-      img.src = slide.src;
-    });
-  }, []);
-
-  // Shuffle next slide continuously every 5 seconds, avoiding consecutive repeats
-  const advanceToNextSlide = useCallback(() => {
-    setCurrentIndex((prev) => {
-      if (heroSlides.length <= 1) return 0;
-      let next: number;
-      do {
-        next = Math.floor(Math.random() * heroSlides.length);
-      } while (next === prev);
-      return next;
-    });
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      advanceToNextSlide();
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [advanceToNextSlide]);
-
   return (
     <>
-      {/* 4. INTEGRATED HERO NAVIGATION (Scroll-Synchronized Direct Transformation) */}
+      {/* 1. FLOATING HERO NAVIGATION (Transparent, Floating Over Video, No Header Bar) */}
       <header
         ref={headerRef}
-        className="fixed top-0 inset-x-0 z-50 px-4 sm:px-6 lg:px-8 [--scroll-p:0] [--logo-max:56px] [--logo-min:40px] [--title-max:20px] [--title-min:16px] [--sub-max:10px] [--sub-min:9px] sm:[--logo-max:64px] sm:[--logo-min:44px] sm:[--title-max:24px] sm:[--title-min:18px] sm:[--sub-max:11px] sm:[--sub-min:9.5px] lg:[--logo-max:80px] lg:[--logo-min:48px] lg:[--title-max:30px] lg:[--title-min:20px] lg:[--sub-max:12px] lg:[--sub-min:10px]"
+        className="fixed top-0 inset-x-0 z-50 px-4 sm:px-6 lg:px-8 pointer-events-none transition-colors duration-200 [--scroll-p:0] [--logo-max:64px] [--logo-min:42px] [--title-max:22px] [--title-min:16px] [--sub-max:11px] [--sub-min:9px] sm:[--logo-max:76px] sm:[--logo-min:46px] sm:[--title-max:26px] sm:[--title-min:18px] sm:[--sub-max:12px] sm:[--sub-min:9.5px] lg:[--logo-max:92px] lg:[--logo-min:50px] lg:[--title-max:32px] lg:[--title-min:20px] lg:[--sub-max:13px] lg:[--sub-min:10px]"
         style={{
-          paddingTop: `calc(clamp(8px, 1.25rem - 0.625rem * var(--scroll-p, ${scrollProgress}), 1.25rem))`,
-          paddingBottom: `calc(clamp(8px, 0.75rem - 0.125rem * var(--scroll-p, ${scrollProgress}), 0.75rem))`,
+          paddingTop: `calc(clamp(8px, 1.5rem - 0.75rem * var(--scroll-p, ${scrollProgress}), 1.5rem))`,
+          paddingBottom: `calc(clamp(8px, 0.75rem - 0.25rem * var(--scroll-p, ${scrollProgress}), 0.75rem))`,
         }}
         data-purpose="hero-navigation-header"
       >
-        {/* Localized Transparent Backdrop Blur (Smoothly fades in opacity and border in sync with scroll) */}
-        <div
-          className="absolute inset-0 -z-10 pointer-events-none backdrop-blur-md"
-          style={{
-            backgroundColor: mobileMenuOpen
-              ? "rgba(255, 249, 237, 0.95)"
-              : `rgba(255, 249, 237, calc(0.40 + 0.42 * var(--scroll-p, ${scrollProgress})))`,
-            borderBottom: `2px solid rgba(254, 215, 170, calc(0.60 * var(--scroll-p, ${scrollProgress})))`,
-            boxShadow: `0 2px 8px -1px rgba(67, 20, 7, calc(0.08 * var(--scroll-p, ${scrollProgress})))`,
-          }}
-        />
-
         <div
           className="max-w-[1400px] mx-auto flex items-center justify-between"
           style={{
             gap: `calc(clamp(0.625rem, 1.5rem - 0.5rem * var(--scroll-p, ${scrollProgress}), 1.5rem))`,
           }}
         >
-          {/* Brand Logo & Identity: Smoothly and Proportionally Scaling with Scroll Progress */}
+          {/* Brand Logo & Identity: Naturally Floating Over Video, Smoothly Scaling with Scroll Progress */}
           <Link
             href="/"
             aria-label="Anowar City Magic Island Home"
-            className="flex items-center gap-2.5 sm:gap-3 group shrink-0"
+            className="flex items-center gap-3 group shrink-0 pointer-events-auto transition-transform hover:scale-102"
           >
             <div
-              className="shrink-0 flex items-center justify-center bg-white border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105"
+              className="shrink-0 flex items-center justify-center bg-white/95 backdrop-blur-md border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105 transition-transform"
               style={{
                 height: `calc(var(--logo-max) - (var(--logo-max) - var(--logo-min)) * var(--scroll-p, ${scrollProgress}))`,
-                padding: `calc(clamp(4px, 6px - 2px * var(--scroll-p, ${scrollProgress}), 6px))`,
-                borderRadius: `calc(clamp(12px, 16px - 4px * var(--scroll-p, ${scrollProgress}), 16px))`,
-                boxShadow: `0 4px 12px -2px rgba(255, 107, 53, calc(0.18 - 0.10 * var(--scroll-p, ${scrollProgress})))`,
+                padding: `calc(clamp(4px, 7px - 3px * var(--scroll-p, ${scrollProgress}), 7px))`,
+                borderRadius: `calc(clamp(12px, 18px - 6px * var(--scroll-p, ${scrollProgress}), 18px))`,
+                boxShadow: "0 8px 24px -4px rgba(0, 0, 0, 0.35)",
               }}
             >
               <img
@@ -156,7 +130,7 @@ export function HeroSection() {
             </div>
             <div className="flex flex-col justify-center">
               <span
-                className="font-bold uppercase font-heading leading-none text-[#FF6B35]"
+                className="font-bold uppercase font-heading leading-none text-[#FFD93D] drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
                 style={{
                   fontSize: `calc(var(--sub-max) - (var(--sub-max) - var(--sub-min)) * var(--scroll-p, ${scrollProgress}))`,
                   letterSpacing: `calc(0.24em - 0.04em * var(--scroll-p, ${scrollProgress}))`,
@@ -166,9 +140,11 @@ export function HeroSection() {
                 {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
               </span>
               <span
-                className="font-black tracking-tight text-[#172554] font-heading leading-none"
+                className="font-black tracking-tight font-heading leading-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
                 style={{
                   fontSize: `calc(var(--title-max) - (var(--title-max) - var(--title-min)) * var(--scroll-p, ${scrollProgress}))`,
+                  color: scrollProgress > 0.65 ? "#172554" : "#FFFFFF",
+                  transition: "color 0.25s ease",
                 }}
               >
                 MAGIC ISLAND
@@ -176,10 +152,10 @@ export function HeroSection() {
             </div>
           </Link>
 
-          {/* Category Navigation Buttons: Proportionally Shrinking and Aligning with Scroll */}
+          {/* Floating Navigation Pill Buttons Directly Over Video (No Header Bar) */}
           <nav
             aria-label="Hero Navigation"
-            className="hidden lg:flex items-center gap-2 xl:gap-2.5 flex-wrap justify-center"
+            className="hidden lg:flex items-center gap-2 xl:gap-2.5 flex-wrap justify-center pointer-events-auto"
           >
             {navLinks.map((item) => {
               const isActive = pathname === item.href;
@@ -187,7 +163,7 @@ export function HeroSection() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`nav-pill-btn ${isActive ? "active" : ""}`}
+                  className={`nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#FED7AA]/90 !shadow-lg ${isActive ? "active" : ""}`}
                   style={{
                     paddingTop: `calc(clamp(6px, 8px - 2px * var(--scroll-p, ${scrollProgress}), 8px))`,
                     paddingBottom: `calc(clamp(6px, 8px - 2px * var(--scroll-p, ${scrollProgress}), 8px))`,
@@ -202,15 +178,15 @@ export function HeroSection() {
             })}
           </nav>
 
-          {/* Quick Actions (Bilingual Toggle & Helpline) */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* Floating Quick Action Pills */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 pointer-events-auto">
             {/* WhatsApp Quick Pill */}
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               title="WhatsApp Helpline"
-              className="hidden sm:inline-flex items-center gap-2 font-heading font-semibold rounded-full bg-[#55C98B] hover:bg-[#43B878] text-white shadow-md shadow-emerald-500/20 transition-transform hover:scale-105 duration-200 whitespace-nowrap cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-2 font-heading font-semibold rounded-full bg-[#55C98B] hover:bg-[#43B878] text-white shadow-xl shadow-emerald-950/20 transition-transform hover:scale-105 duration-200 whitespace-nowrap cursor-pointer border border-emerald-400/40"
               style={{
                 height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
                 paddingLeft: `calc(clamp(12px, 16px - 4px * var(--scroll-p, ${scrollProgress}), 16px))`,
@@ -228,7 +204,7 @@ export function HeroSection() {
               onClick={toggleLanguage}
               type="button"
               title="Switch Language"
-              className="nav-pill-btn cursor-pointer"
+              className="nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#FED7AA]/90 !shadow-lg cursor-pointer"
               style={{
                 height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
                 paddingLeft: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
@@ -255,7 +231,7 @@ export function HeroSection() {
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden rounded-full border-2 border-[#FED7AA] bg-white text-[#172554] hover:text-[#FF6B35] flex items-center justify-center transition-transform active:scale-95 shadow-sm cursor-pointer"
+              className="lg:hidden rounded-full border-2 border-[#FED7AA] bg-white/95 backdrop-blur-md text-[#172554] hover:text-[#FF6B35] flex items-center justify-center transition-transform active:scale-95 shadow-lg cursor-pointer"
               style={{
                 height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
                 width: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
@@ -267,9 +243,9 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer Overlay */}
+        {/* Mobile Navigation Drawer Overlay (When toggled open) */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-3 p-4 rounded-3xl bg-white/95 backdrop-blur-md border-2 border-[#FED7AA] shadow-2xl animate-in fade-in slide-in-from-top-3 max-h-[calc(100vh-90px)] overflow-y-auto">
+          <div className="lg:hidden mt-3 p-4 rounded-3xl bg-white/95 backdrop-blur-md border-2 border-[#FED7AA] shadow-2xl animate-in fade-in slide-in-from-top-3 max-h-[calc(100vh-90px)] overflow-y-auto pointer-events-auto">
             <nav className="flex flex-col gap-2">
               {navLinks.map((item) => {
                 const isActive = pathname === item.href;
@@ -306,77 +282,43 @@ export function HeroSection() {
         )}
       </header>
 
-      {/* 1. HERO SLIDESHOW & AMUSEMENT PARK SECTION */}
+      {/* 2. HERO SECTION WITH LANDSCAPE VIDEO BACKGROUND (Replaces Image Slideshow) */}
       <section
-        className="relative h-[72vh] sm:h-[76vh] lg:h-[80vh] min-h-[520px] sm:min-h-[580px] max-h-[760px] flex flex-col justify-between overflow-hidden bg-[#FFF9ED]"
+        className="relative h-[72vh] sm:h-[78vh] lg:h-[84vh] min-h-[540px] sm:min-h-[600px] max-h-[860px] flex flex-col justify-between overflow-hidden bg-[#172554]"
         data-purpose="amusement-park-entrance-hero"
         id="hero"
       >
-        {/* AUTOMATIC SHUFFLE FULL-WIDTH PHOTOGRAPHY SLIDESHOW (100% Edge-to-Edge) */}
-        <div className="absolute inset-0 z-0 overflow-hidden w-full">
-          {heroSlides.map((slide, idx) => {
-            const isActive = idx === currentIndex;
-            return (
-              <div
-                key={slide.id}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                  isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                }`}
-                aria-hidden={!isActive}
-              >
-                <img
-                  src={slide.src}
-                  alt={slide.alt}
-                  className="w-full h-full object-cover object-center"
-                  loading={idx === 0 ? "eager" : "lazy"}
-                />
-              </div>
-            );
-          })}
-
-          {/* 2. SUBTLE TOP BLUR & SEAMLESS GRADIENT BLEND (Soft transparent backdrop-blur behind navigation area) */}
-          <div
-            className="absolute inset-x-0 top-0 h-28 sm:h-32 bg-gradient-to-b from-[#FFF9ED]/85 via-[#FFF9ED]/30 to-transparent backdrop-blur-[3px] pointer-events-none z-10"
-            style={{
-              WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0) 100%)",
-              maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 55%, rgba(0,0,0,0) 100%)",
+        {/* LANDSCAPE VIDEO BACKGROUND (Exact Home PG video/video-1 file) */}
+        <div className="absolute inset-0 z-0 overflow-hidden w-full h-full">
+          <video
+            ref={videoRef}
+            src="/images/Home%20PG%20video/Video-1.mp4"
+            poster="/images/magic-island-waterpark-aerial.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls={false}
+            preload="auto"
+            className="w-full h-full object-cover object-center filter brightness-105 contrast-100"
+            onEnded={(e) => {
+              // Safety fallback ensuring loop playback never stalls
+              e.currentTarget.play().catch(() => {});
             }}
-          ></div>
+          />
 
-          {/* 3. SUBTLE, MINIMAL BOTTOM-EDGE BLEND (Short ~36px fade into #FFF9ED) */}
-          <div className="absolute inset-x-0 bottom-0 h-8 sm:h-10 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/30 to-transparent pointer-events-none z-20"></div>
+          {/* Cinematic Contrast Vignette for Text & Logo Readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#172554]/75 via-transparent to-black/30 pointer-events-none z-10" />
+
+          {/* Seamless Bottom-Edge Blend into Preceding Section (#FFF9ED) */}
+          <div className="absolute inset-x-0 -bottom-[1px] h-16 sm:h-24 bg-gradient-to-t from-[#FFF9ED] via-[#FFF9ED]/60 to-transparent pointer-events-none z-20" />
         </div>
 
-        {/* Top Breathing Space Spacer (Preserves layout balance when header is fixed) */}
-        <div className="h-20 sm:h-24 lg:h-28 w-full pointer-events-none" aria-hidden="true" />
+        {/* Top Breathing Space Spacer for Floating Header Balance */}
+        <div className="h-24 sm:h-28 lg:h-32 w-full pointer-events-none" aria-hidden="true" />
 
-        {/* 5. SUBTLE MINIMAL SLIDESHOW INDICATOR DOTS */}
-        <div className="relative z-30 pb-2.5 sm:pb-3 flex items-center justify-center mt-auto pointer-events-auto">
-          <div
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 shadow-sm"
-            role="tablist"
-            aria-label="Slideshow Indicators"
-          >
-            {heroSlides.map((slide, idx) => {
-              const isActive = idx === currentIndex;
-              return (
-                <button
-                  key={slide.id}
-                  onClick={() => setCurrentIndex(idx)}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  aria-label={`Show ${slide.alt}`}
-                  className={`transition-all duration-500 rounded-full cursor-pointer ${
-                    isActive
-                      ? "w-6 h-2 bg-[#FFD93D] shadow-sm"
-                      : "w-2 h-2 bg-white/60 hover:bg-white"
-                  }`}
-                />
-              );
-            })}
-          </div>
-        </div>
+        {/* Minimal Bottom Ambience Spacer */}
+        <div className="relative z-30 pb-4 sm:pb-6 pointer-events-none" aria-hidden="true" />
       </section>
     </>
   );

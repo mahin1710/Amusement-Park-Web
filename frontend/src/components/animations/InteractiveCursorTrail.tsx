@@ -33,7 +33,7 @@ export function InteractiveCursorTrail() {
     let cssWidth = window.innerWidth;
     let cssHeight = window.innerHeight;
 
-    // Retina & High-DPI Support for Ultra-Crisp Sparkles
+    // Retina & High-DPI Support for Pixel-Perfect Sparkle Coordinates
     const setupCanvasResolution = () => {
       if (!canvas || !ctx) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -41,8 +41,8 @@ export function InteractiveCursorTrail() {
       cssHeight = window.innerHeight;
       canvas.width = Math.floor(cssWidth * dpr);
       canvas.height = Math.floor(cssHeight * dpr);
-      ctx.setTransform(1, 0, 0, 1, 0, 0); // Reset transform
-      ctx.scale(dpr, dpr); // Scale for high-DPI
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
     };
 
     setupCanvasResolution();
@@ -52,56 +52,51 @@ export function InteractiveCursorTrail() {
     const sparkles: Sparkle[] = [];
     const colors = ["#FFD93D", "#FF6B35", "#38BDF8", "#55C98B", "#F472B6"];
 
-    let lastX = 0;
-    let lastY = 0;
-    let currentX = 0;
-    let currentY = 0;
+    let lastX = -100;
+    let lastY = -100;
+    let currentX = -100;
+    let currentY = -100;
     let isHolding = false;
     let activePointerId: number | null = null;
-    let lastMoveThrottle = 0;
     let lastHoldEmission = 0;
-    let lastDownTimestamp = 0;
 
-    // Helper: Spawn authentic 4-point star sparkle with physics
+    // Spawn 4-point diamond star sparkle originating EXACTLY at cursor position (0 jitter)
     const spawnSparkle = (
       x: number,
       y: number,
       speedMultiplier = 1.0,
-      jitter = 8,
       sizeBoost = 1.0
     ) => {
       if (sparkles.length > 70) sparkles.shift();
       const angle = Math.random() * Math.PI * 2;
-      const speed = (Math.random() * 1.9 + 0.5) * speedMultiplier;
+      const speed = (Math.random() * 0.9 + 0.3) * speedMultiplier;
       sparkles.push({
-        x: x + (Math.random() - 0.5) * jitter,
-        y: y + (Math.random() - 0.5) * jitter,
+        x, // Exact pointer coordinate, no offset
+        y, // Exact pointer coordinate, no offset
         vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed + 0.28,
-        size: (Math.random() * 4.2 + 2.8) * sizeBoost,
+        vy: Math.sin(angle) * speed + 0.15,
+        size: (Math.random() * 3.8 + 2.6) * sizeBoost,
         alpha: 1,
         color: colors[Math.floor(Math.random() * colors.length)],
         rotation: Math.random() * Math.PI,
-        vRot: (Math.random() - 0.5) * 0.16,
+        vRot: (Math.random() - 0.5) * 0.14,
       });
     };
 
-    // Trigger an immediate rich burst (used for single tap or click start)
+    // Immediate rich burst at exact click / tap down
     const triggerBurst = (x: number, y: number, count = 4) => {
       for (let i = 0; i < count; i++) {
-        spawnSparkle(x, y, 1.45, 14, 1.15);
+        spawnSparkle(x, y, 1.3, 1.15);
       }
     };
 
     // =============================================================
-    // 1. POINTER & MOUSE DOWN (CLICK & HOLD / TOUCH & HOLD)
+    // 1. POINTER DOWN (CLICK & HOLD / TOUCH & HOLD)
     // =============================================================
     const onPointerDown = (e: PointerEvent) => {
       // For mouse input, ensure it is the primary (left) button
       if (e.pointerType === "mouse" && e.button !== 0) return;
 
-      const now = performance.now();
-      lastDownTimestamp = now;
       isHolding = true;
       activePointerId = e.pointerId;
       currentX = e.clientX;
@@ -109,17 +104,18 @@ export function InteractiveCursorTrail() {
       lastX = e.clientX;
       lastY = e.clientY;
 
+      // Spawn burst originating directly at the cursor tip
       triggerBurst(currentX, currentY, 4);
     };
 
     // =============================================================
-    // 2. POINTER & MOUSE MOVE (TRAIL & DRAG FOLLOWING)
+    // 2. POINTER MOVE (IMMEDIATE 1:1 ZERO-DELAY TRACKING)
     // =============================================================
     const onPointerMove = (e: PointerEvent) => {
       currentX = e.clientX;
       currentY = e.clientY;
 
-      // Real-time mouse buttons validation (if mouse is down and moving)
+      // Real-time mouse buttons validation
       if (e.pointerType === "mouse") {
         if (e.buttons & 1) {
           isHolding = true;
@@ -128,24 +124,35 @@ export function InteractiveCursorTrail() {
         }
       }
 
-      const now = performance.now();
-      if (now - lastMoveThrottle < 16) return; // ~60fps throttle
-      lastMoveThrottle = now;
+      if (lastX < 0) {
+        lastX = currentX;
+        lastY = currentY;
+      }
 
-      const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
-      if (dist < 4) return;
-      lastX = e.clientX;
-      lastY = e.clientY;
+      const dist = Math.hypot(currentX - lastX, currentY - lastY);
+      if (dist >= 4) {
+        // Fast movement interpolation: connect gap along the exact vector
+        if (dist > 18) {
+          const steps = Math.min(3, Math.floor(dist / 14));
+          for (let i = 1; i <= steps; i++) {
+            const frac = i / (steps + 1);
+            spawnSparkle(
+              lastX + (currentX - lastX) * frac,
+              lastY + (currentY - lastY) * frac,
+              isHolding ? 1.1 : 0.85
+            );
+          }
+        }
 
-      // Spawn movement sparkles
-      const count = Math.min(isHolding ? 3 : 2, Math.floor(dist / 14) + 1);
-      for (let i = 0; i < count; i++) {
-        spawnSparkle(e.clientX, e.clientY, isHolding ? 1.3 : 1.0, 8);
+        // Direct spawn at current pointer coordinates
+        spawnSparkle(currentX, currentY, isHolding ? 1.2 : 1.0);
+        lastX = currentX;
+        lastY = currentY;
       }
     };
 
     // =============================================================
-    // 3. POINTER UP & CANCEL (RELEASE)
+    // 3. POINTER UP & CANCEL
     // =============================================================
     const onPointerUp = (e: PointerEvent) => {
       if (activePointerId === null || e.pointerId === activePointerId || e.pointerType === "mouse") {
@@ -155,82 +162,18 @@ export function InteractiveCursorTrail() {
     };
 
     const onPointerCancel = (e: PointerEvent) => {
-      // Don't kill touch hold if finger is still physically on screen
       if (e.pointerType === "mouse" || activePointerId === e.pointerId) {
         isHolding = false;
         activePointerId = null;
       }
     };
 
-    // =============================================================
-    // 4. DEDICATED TOUCHSCREEN EVENT LISTENERS (MOBILE / TABLET)
-    // =============================================================
-    // Ensures mobile browsers that intercept pointer events for scrolling
-    // continue to support touch tap, touch-and-hold, and dragging smoothly.
-    const onTouchStart = (e: TouchEvent) => {
-      if (!e.touches || e.touches.length === 0) return;
-      const touch = e.touches[0];
-      const now = performance.now();
-
-      // Avoid duplicate burst if pointerdown already fired in this instant
-      const isDuplicate = now - lastDownTimestamp < 35;
-      lastDownTimestamp = now;
-
-      isHolding = true;
-      currentX = touch.clientX;
-      currentY = touch.clientY;
-      lastX = touch.clientX;
-      lastY = touch.clientY;
-
-      if (!isDuplicate) {
-        triggerBurst(currentX, currentY, 4);
-      }
-    };
-
-    const onTouchMove = (e: TouchEvent) => {
-      if (!e.touches || e.touches.length === 0) return;
-      const touch = e.touches[0];
-      currentX = touch.clientX;
-      currentY = touch.clientY;
-      isHolding = true;
-
-      const now = performance.now();
-      if (now - lastMoveThrottle < 16) return;
-      lastMoveThrottle = now;
-
-      const dist = Math.hypot(touch.clientX - lastX, touch.clientY - lastY);
-      if (dist < 4) return;
-      lastX = touch.clientX;
-      lastY = touch.clientY;
-
-      const count = Math.min(3, Math.floor(dist / 14) + 1);
-      for (let i = 0; i < count; i++) {
-        spawnSparkle(touch.clientX, touch.clientY, 1.25, 8);
-      }
-    };
-
-    const onTouchEnd = (e: TouchEvent) => {
-      if (!e.touches || e.touches.length === 0) {
-        isHolding = false;
-        activePointerId = null;
-      }
-    };
-
-    const onTouchCancel = (e: TouchEvent) => {
-      if (!e.touches || e.touches.length === 0) {
-        isHolding = false;
-        activePointerId = null;
-      }
-    };
-
-    // Safety fallback when window loses focus or pointer exits document
+    // Safety fallback when window loses focus
     const onWindowBlur = () => {
       isHolding = false;
       activePointerId = null;
     };
 
-    // Use capturing phase ({ capture: true, passive: true }) so buttons & child
-    // elements never stop or swallow cursor events!
     const listenerOpts: AddEventListenerOptions = { capture: true, passive: true };
 
     window.addEventListener("pointerdown", onPointerDown, listenerOpts);
@@ -238,16 +181,10 @@ export function InteractiveCursorTrail() {
     window.addEventListener("pointerup", onPointerUp, listenerOpts);
     window.addEventListener("pointercancel", onPointerCancel, listenerOpts);
 
-    // Native Touch Events for guaranteed mobile/tablet support
-    window.addEventListener("touchstart", onTouchStart, listenerOpts);
-    window.addEventListener("touchmove", onTouchMove, listenerOpts);
-    window.addEventListener("touchend", onTouchEnd, listenerOpts);
-    window.addEventListener("touchcancel", onTouchCancel, listenerOpts);
-
     window.addEventListener("blur", onWindowBlur);
     document.addEventListener("mouseleave", onWindowBlur);
 
-    // 4-Point Star Drawing Logic (Authentic Theme Park Diamond Star)
+    // 4-Point Diamond Star Drawing
     const drawStar = (cx: number, cy: number, spikes: number, outerRadius: number, innerRadius: number) => {
       let rot = (Math.PI / 2) * 3;
       let x = cx;
@@ -271,17 +208,17 @@ export function InteractiveCursorTrail() {
       ctx.closePath();
     };
 
-    // Animation Render Loop
+    // 60 FPS Render Loop
     const render = () => {
       ctx.clearRect(0, 0, cssWidth, cssHeight);
       const now = performance.now();
 
-      // CONTINUOUS HOLD-TO-ACTIVATE GENERATION:
-      // While mouse button or finger is held down, stream continuous sparkles
-      if (isHolding) {
+      // CONTINUOUS HOLD-TO-ACTIVATE:
+      // While mouse button or touch is held down, stream sparkles from exact pointer position
+      if (isHolding && currentX >= 0 && currentY >= 0) {
         if (now - lastHoldEmission > 32) {
           lastHoldEmission = now;
-          spawnSparkle(currentX, currentY, 1.2, 12, 1.05);
+          spawnSparkle(currentX, currentY, 1.15, 1.05);
         }
       }
 
@@ -320,11 +257,6 @@ export function InteractiveCursorTrail() {
       window.removeEventListener("pointermove", onPointerMove, listenerOpts);
       window.removeEventListener("pointerup", onPointerUp, listenerOpts);
       window.removeEventListener("pointercancel", onPointerCancel, listenerOpts);
-
-      window.removeEventListener("touchstart", onTouchStart, listenerOpts);
-      window.removeEventListener("touchmove", onTouchMove, listenerOpts);
-      window.removeEventListener("touchend", onTouchEnd, listenerOpts);
-      window.removeEventListener("touchcancel", onTouchCancel, listenerOpts);
 
       window.removeEventListener("blur", onWindowBlur);
       document.removeEventListener("mouseleave", onWindowBlur);
