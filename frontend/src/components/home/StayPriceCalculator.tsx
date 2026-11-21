@@ -186,8 +186,8 @@ export function StayPriceCalculator() {
             <Clock className="w-3.5 h-3.5 text-[#FF6B35]" />
             <span>
               {isBangla
-                ? "১ স্টে আওয়ার্স: ১০:০০ AM - ০৯:০০ PM"
-                : "1 Stay Hours: 10:00 AM - 09:00 PM"}
+                ? "১ অ্যাকোমোডেশন আওয়ার্স: ১০:০০ AM - ০৯:৩০ AM"
+                : "1 Accommodation Hours: 10:00 AM - 09:30 AM"}
             </span>
           </div>
         </div>
