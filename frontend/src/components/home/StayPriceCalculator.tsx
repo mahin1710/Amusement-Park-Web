@@ -52,6 +52,14 @@ export function StayPriceCalculator() {
   const [checkOutDate, setCheckOutDate] = useState<string>("");
   const [checkOutTime, setCheckOutTime] = useState<string>("");
 
+  const handleCheckInDateChange = (val: string) => {
+    setCheckInDate(val);
+    // If checkout date is before the newly selected check-in date, reset checkout date
+    if (checkOutDate && val && checkOutDate < val) {
+      setCheckOutDate("");
+    }
+  };
+
   // Default: 1 Deluxe Room selected so user immediately sees live pricing
   const [quantities, setQuantities] = useState<Record<string, number>>({
     "deluxe-pool": 1,
@@ -229,8 +237,9 @@ export function StayPriceCalculator() {
               </label>
               <input
                 type="date"
+                min={initialDates.today}
                 value={checkInDate}
-                onChange={(e) => setCheckInDate(e.target.value)}
+                onChange={(e) => handleCheckInDateChange(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-[#FED7AA] bg-white text-xs sm:text-sm font-heading font-medium text-[#172554] focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent cursor-pointer shadow-xs"
               />
             </div>
@@ -273,7 +282,7 @@ export function StayPriceCalculator() {
               </label>
               <input
                 type="date"
-                min={checkInDate}
+                min={checkInDate || initialDates.today}
                 value={checkOutDate}
                 onChange={(e) => setCheckOutDate(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-[#FED7AA] bg-white text-xs sm:text-sm font-heading font-medium text-[#172554] focus:outline-none focus:ring-2 focus:ring-[#38BDF8] focus:border-transparent cursor-pointer shadow-xs"

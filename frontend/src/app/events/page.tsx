@@ -253,6 +253,7 @@ export default function EventsPage() {
                   </label>
                   <input
                     type="date"
+                    min={new Date().toISOString().split("T")[0]}
                     value={targetDate}
                     onChange={(e) => setTargetDate(e.target.value)}
                     className="w-full px-3 py-2.5 rounded-[10px] bg-[#F6F5FB] border border-[#B9B2F0]/50 text-[#1C1A4A] focus:outline-none focus:border-[#2E2A7A]"

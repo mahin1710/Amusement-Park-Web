@@ -265,6 +265,33 @@ export function calculateStayDuration(
   const [inH, inMin] = checkInTimeStr.split(":").map(Number);
   const checkInDate = new Date(inY, inM - 1, inD, inH, inMin, 0, 0);
 
+  // Validate check-in date is not in the past
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const checkInDateOnly = new Date(inY, inM - 1, inD).getTime();
+
+  if (checkInDateOnly < todayStart) {
+    return {
+      isValid: false,
+      isIncomplete: false,
+      isInvalidRange: true,
+      errorMessageEn: "Check-in date cannot be in the past. Please select today or a future date.",
+      errorMessageBn: "অতীতের কোনো তারিখ নির্বাচন করা যাবে না। অনুগ্রহ করে আজকের বা ভবিষ্যতের তারিখ নির্বাচন করুন।",
+      totalMinutes: 0,
+      durationHours: 0,
+      hours: 0,
+      minutes: 0,
+      chargeableDays: 0,
+      calendarNights: 0,
+      formattedDurationEn: "",
+      formattedDurationBn: "",
+      checkInFormattedEn: "",
+      checkInFormattedBn: "",
+      checkOutFormattedEn: "",
+      checkOutFormattedBn: "",
+    };
+  }
+
   const [outY, outM, outD] = checkOutDateStr.split("-").map(Number);
   const [outH, outMin] = checkOutTimeStr.split(":").map(Number);
   const checkOutDate = new Date(outY, outM - 1, outD, outH, outMin, 0, 0);
