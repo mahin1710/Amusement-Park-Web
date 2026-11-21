@@ -14,7 +14,7 @@ export function FloatingWhatsApp() {
   });
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end">
       {/* Popover Card */}
       {isOpen && (
         <div className="mb-3 w-80 rounded-2xl bg-white border border-slate-200 p-4 shadow-2xl text-slate-800 transition-all">

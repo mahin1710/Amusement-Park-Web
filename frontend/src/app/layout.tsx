@@ -6,6 +6,7 @@ import { AnimationProvider } from "@/context/AnimationContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
+import { FloatingBottomNav } from "@/components/layout/FloatingBottomNav";
 import { InteractiveCursorTrail } from "@/components/animations/InteractiveCursorTrail";
 import { siteConfig } from "@/config/site";
 
@@ -98,6 +99,7 @@ export default function RootLayout({
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
+            <FloatingBottomNav />
             <FloatingWhatsApp />
           </AnimationProvider>
         </LanguageProvider>
