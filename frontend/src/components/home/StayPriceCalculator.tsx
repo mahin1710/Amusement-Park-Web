@@ -46,11 +46,11 @@ export function StayPriceCalculator() {
   const { isBangla } = useTranslation();
   const initialDates = useMemo(() => getTodayAndTomorrow(), []);
 
-  // Form State (Default Check-in 10:00 AM, Check-out 09:30 AM tomorrow)
-  const [checkInDate, setCheckInDate] = useState<string>(initialDates.today);
-  const [checkInTime, setCheckInTime] = useState<string>(STAY_CONFIG.defaultCheckInTime);
-  const [checkOutDate, setCheckOutDate] = useState<string>(initialDates.tomorrow);
-  const [checkOutTime, setCheckOutTime] = useState<string>(STAY_CONFIG.defaultCheckOutTime);
+  // Form State: Starts empty so user can freely choose their preferred date & time
+  const [checkInDate, setCheckInDate] = useState<string>("");
+  const [checkInTime, setCheckInTime] = useState<string>("");
+  const [checkOutDate, setCheckOutDate] = useState<string>("");
+  const [checkOutTime, setCheckOutTime] = useState<string>("");
 
   // Default: 1 Deluxe Room selected so user immediately sees live pricing
   const [quantities, setQuantities] = useState<Record<string, number>>({
@@ -64,9 +64,9 @@ export function StayPriceCalculator() {
     return calculateStayDuration(checkInDate, checkInTime, checkOutDate, checkOutTime);
   }, [checkInDate, checkInTime, checkOutDate, checkOutTime]);
 
-  // Calculate Costs based on Chargeable Days
+  // Calculate Costs based on Chargeable Days (defaults to 1-day base rate when dates are pending)
   const costs = useMemo(() => {
-    const days = stay.isValid ? stay.chargeableDays : 0;
+    const days = stay.isValid ? stay.chargeableDays : 1;
     return calculateRoomCosts(quantities, days);
   }, [quantities, stay]);
 
@@ -79,13 +79,12 @@ export function StayPriceCalculator() {
     });
   };
 
-  // Reset to Defaults
+  // Reset to Defaults (inputs cleared)
   const handleReset = () => {
-    const { today, tomorrow } = getTodayAndTomorrow();
-    setCheckInDate(today);
-    setCheckInTime(STAY_CONFIG.defaultCheckInTime);
-    setCheckOutDate(tomorrow);
-    setCheckOutTime(STAY_CONFIG.defaultCheckOutTime);
+    setCheckInDate("");
+    setCheckInTime("");
+    setCheckOutDate("");
+    setCheckOutTime("");
     setQuantities({
       "deluxe-pool": 1,
       "executive-suite": 0,
@@ -95,7 +94,30 @@ export function StayPriceCalculator() {
 
   // Build WhatsApp Message with exact calculation details
   const whatsappBookingHref = useMemo(() => {
-    if (!stay.isValid) return "#";
+    if (!stay.isValid) {
+      const selectedRoomsSummary = costs.categoryTotals
+        .filter((c) => c.quantity > 0)
+        .map(
+          (c) =>
+            `• ${isBangla ? c.titleBn : c.titleEn}: ${
+              isBangla ? toBnDigits(c.quantity) : c.quantity
+            } ${isBangla ? "টি রুম" : "room(s)"} × ${formatCurrency(c.pricePerDayBDT, isBangla)}`
+        )
+        .join("\n");
+
+      const message = isBangla
+        ? `হ্যালো ম্যাজিক আইল্যান্ড, আমি রিসোর্ট রুম বুকিং অনুসন্ধান করতে চাই।\n\n` +
+          `নির্বাচিত রুম:\n${selectedRoomsSummary || "রুম তথ্য"}\n\n` +
+          `অনুগ্রহ করে রুমের প্রাপ্যতা ও বুকিং প্রক্রিয়া জানান।`
+        : `Hello Magic Island, I want to inquire about resort room booking.\n\n` +
+          `Selected Rooms:\n${selectedRoomsSummary || "No room selected"}\n\n` +
+          `Please share room availability and booking details.`;
+
+      return `https://wa.me/${businessConfig.hotlines.whatsapp.replace(
+        /[^0-9]/g,
+        ""
+      )}?text=${encodeURIComponent(message)}`;
+    }
 
     const selectedRoomsSummary = costs.categoryTotals
       .filter((c) => c.quantity > 0)
@@ -265,8 +287,20 @@ export function StayPriceCalculator() {
         </div>
       </div>
 
+      {/* Friendly Guide Note when inputs are empty */}
+      {stay.isIncomplete && (
+        <div className="p-4 rounded-2xl bg-[#FFF7ED] border-2 border-[#FED7AA] text-[#B45309] flex items-center gap-3 mb-8">
+          <Info className="w-5 h-5 text-[#FF6B35] shrink-0" />
+          <p className="text-xs sm:text-sm font-heading font-medium">
+            {isBangla
+              ? "আপনার সুবিধাজনক চেক-ইন ও চেক-আউট তারিখ এবং সময় নির্বাচন করুন।"
+              : "Select your preferred check-in and check-out dates and times above."}
+          </p>
+        </div>
+      )}
+
       {/* Validation Error Banner (When check-out <= check-in) */}
-      {!stay.isValid && (
+      {stay.isInvalidRange && (
         <div className="p-4 rounded-2xl bg-rose-50 border-2 border-rose-200 text-rose-800 flex items-center gap-3 mb-8 animate-in fade-in">
           <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
           <p className="text-xs sm:text-sm font-heading font-semibold">
@@ -489,9 +523,17 @@ export function StayPriceCalculator() {
                     <span className="font-semibold">{isBangla ? item.titleBn : item.titleEn}</span>
                     <span className="text-slate-500">
                       ({isBangla ? toBnDigits(item.quantity) : item.quantity}{" "}
-                      {isBangla ? "টি রুম" : "room"} × {formatCurrency(item.pricePerDayBDT, isBangla)} ×{" "}
-                      {isBangla ? toBnDigits(stay.chargeableDays) : stay.chargeableDays}{" "}
-                      {isBangla ? "দিন" : "days"})
+                      {isBangla ? "টি রুম" : "room"} × {formatCurrency(item.pricePerDayBDT, isBangla)}
+                      {stay.isValid ? (
+                        <>
+                          {" "}× {isBangla ? toBnDigits(stay.chargeableDays) : stay.chargeableDays}{" "}
+                          {isBangla ? "দিন" : "days"}
+                        </>
+                      ) : (
+                        <>
+                          {" "}× {isBangla ? "১ দিন" : "1 day"}
+                        </>
+                      )})
                     </span>
                   </div>
                   <strong className="font-heading font-bold text-[#172554] self-end sm:self-auto">
@@ -516,8 +558,14 @@ export function StayPriceCalculator() {
               {isBangla ? "চার্জেবল দিন:" : "Chargeable Days:"}
             </span>
             <strong className="font-heading text-sm text-[#FF6B35]">
-              {isBangla ? toBnDigits(stay.chargeableDays) : stay.chargeableDays}{" "}
-              {isBangla ? "দিন" : "Days"}
+              {stay.isValid ? (
+                <>
+                  {isBangla ? toBnDigits(stay.chargeableDays) : stay.chargeableDays}{" "}
+                  {isBangla ? "দিন" : "Days"}
+                </>
+              ) : (
+                <span className="text-slate-400 font-normal">--</span>
+              )}
             </strong>
           </div>
           <div>
@@ -525,14 +573,24 @@ export function StayPriceCalculator() {
               {isBangla ? "ক্যালেন্ডার রাত:" : "Calendar Nights:"}
             </span>
             <strong className="font-heading text-sm text-[#172554]">
-              {isBangla ? toBnDigits(stay.calendarNights) : stay.calendarNights}{" "}
-              {isBangla ? "রাত" : "Nights"}
+              {stay.isValid ? (
+                <>
+                  {isBangla ? toBnDigits(stay.calendarNights) : stay.calendarNights}{" "}
+                  {isBangla ? "রাত" : "Nights"}
+                </>
+              ) : (
+                <span className="text-slate-400 font-normal">--</span>
+              )}
             </strong>
           </div>
           <div>
             <span className="text-slate-500 block">{isBangla ? "মোট সময়:" : "Duration:"}</span>
             <strong className="font-heading text-sm text-[#172554]">
-              {isBangla ? stay.formattedDurationBn : stay.formattedDurationEn}
+              {stay.isValid ? (
+                isBangla ? stay.formattedDurationBn : stay.formattedDurationEn
+              ) : (
+                <span className="text-slate-400 font-normal">--</span>
+              )}
             </strong>
           </div>
         </div>
@@ -547,9 +605,13 @@ export function StayPriceCalculator() {
               {formatCurrency(costs.grandTotalBDT, isBangla)}
             </div>
             <span className="text-[11px] text-slate-500">
-              {isBangla
-                ? "ব্রেকফাস্ট ও ফ্রি পুলসাইড প্রিভিলেজ অন্তর্ভুক্ত"
-                : "Includes breakfast & complimentary park/pool privileges"}
+              {stay.isValid
+                ? (isBangla
+                    ? "ব্রেকফাস্ট ও ফ্রি পুলসাইড প্রিভিলেজ অন্তর্ভুক্ত"
+                    : "Includes breakfast & complimentary park/pool privileges")
+                : (isBangla
+                    ? "১ দিনের বেস প্রাক্কলন (নির্দিষ্ট ভাড়া জানতে উপরে তারিখ ও সময় দিন)"
+                    : "Base 1-day estimate (select dates & times above to calculate total stay)")}
             </span>
           </div>
 

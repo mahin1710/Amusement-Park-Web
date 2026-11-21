@@ -135,6 +135,8 @@ export const STAY_CONFIG = {
 
 export interface StayCalculationResult {
   isValid: boolean;
+  isIncomplete?: boolean;
+  isInvalidRange?: boolean;
   errorMessageEn?: string;
   errorMessageBn?: string;
   totalMinutes: number;
@@ -188,7 +190,7 @@ export function toBnDigits(num: number | string): string {
 
 /**
  * Currency Formatter:
- * - When English: "8,000/= TK"
+ * - When English: "8,000/="
  * - When Bangla: "৳৮,০০০"
  */
 export function formatCurrency(amount: number, isBangla: boolean): string {
@@ -196,7 +198,7 @@ export function formatCurrency(amount: number, isBangla: boolean): string {
   if (isBangla) {
     return `৳${toBnDigits(formattedNumber)}`;
   }
-  return `${formattedNumber}/= TK`;
+  return `${formattedNumber}/=`;
 }
 
 export function formatTime12h(time24: string): { en: string; bn: string } {
@@ -240,6 +242,8 @@ export function calculateStayDuration(
   if (!checkInDateStr || !checkInTimeStr || !checkOutDateStr || !checkOutTimeStr) {
     return {
       isValid: false,
+      isIncomplete: true,
+      isInvalidRange: false,
       errorMessageEn: "Please select both check-in and check-out dates and times.",
       errorMessageBn: "অনুগ্রহ করে চেক-ইন ও চেক-আউট তারিখ ও সময় নির্ধারণ করুন।",
       totalMinutes: 0,
@@ -270,6 +274,8 @@ export function calculateStayDuration(
   if (diffMs <= 0) {
     return {
       isValid: false,
+      isIncomplete: false,
+      isInvalidRange: true,
       errorMessageEn: "Check-out must be strictly later than check-in date and time.",
       errorMessageBn: "চেক-আউট সময় অবশ্যই চেক-ইন তারিখ ও সময়ের পরবর্তী হতে হবে।",
       totalMinutes: 0,
