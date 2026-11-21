@@ -60,9 +60,9 @@ export function StayPriceCalculator() {
     }
   };
 
-  // Default: 1 Deluxe Room selected so user immediately sees live pricing
+  // Default: Starts with 0 rooms selected (user must select their room)
   const [quantities, setQuantities] = useState<Record<string, number>>({
-    "deluxe-pool": 1,
+    "deluxe-pool": 0,
     "executive-suite": 0,
     "presidential-villa": 0,
   });
@@ -87,14 +87,14 @@ export function StayPriceCalculator() {
     });
   };
 
-  // Reset to Defaults (inputs cleared)
+  // Reset to Defaults (inputs cleared & 0 rooms selected)
   const handleReset = () => {
     setCheckInDate("");
     setCheckInTime("");
     setCheckOutDate("");
     setCheckOutTime("");
     setQuantities({
-      "deluxe-pool": 1,
+      "deluxe-pool": 0,
       "executive-suite": 0,
       "presidential-villa": 0,
     });
@@ -102,6 +102,17 @@ export function StayPriceCalculator() {
 
   // Build WhatsApp Message with exact calculation details
   const whatsappBookingHref = useMemo(() => {
+    if (costs.totalRoomsSelected === 0) {
+      const message = isBangla
+        ? `হ্যালো ম্যাজিক আইল্যান্ড, আমি রিসোর্ট রুম বুকিং অনুসন্ধান করতে চাই। অনুগ্রহ করে রুমের ধরন, প্রাপ্যতা ও ভাড়ার তালিকা জানান।`
+        : `Hello Magic Island, I want to inquire about resort room reservation. Please share room availability and rate details.`;
+
+      return `https://wa.me/${businessConfig.hotlines.whatsapp.replace(
+        /[^0-9]/g,
+        ""
+      )}?text=${encodeURIComponent(message)}`;
+    }
+
     if (!stay.isValid) {
       const selectedRoomsSummary = costs.categoryTotals
         .filter((c) => c.quantity > 0)
@@ -425,7 +436,7 @@ export function StayPriceCalculator() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {STAY_CONFIG.rooms.map((room) => {
             const qty = quantities[room.id] || 0;
-            const subtotal = room.pricePerDayBDT * qty * (stay.isValid ? stay.chargeableDays : 0);
+            const subtotal = room.pricePerDayBDT * qty * (stay.isValid ? stay.chargeableDays : 1);
             const isSelected = qty > 0;
 
             return (
@@ -437,21 +448,32 @@ export function StayPriceCalculator() {
                     : "bg-white border-slate-200 hover:border-[#FED7AA]"
                 }`}
               >
-                <div>
+                <div
+                  className={!isSelected ? "cursor-pointer group" : undefined}
+                  onClick={() => {
+                    if (!isSelected) handleQuantityChange(room.id, 1);
+                  }}
+                  title={!isSelected ? (isBangla ? "রুম নির্বাচন করতে ক্লিক করুন" : "Click to select room") : undefined}
+                >
                   {/* Room Thumbnail & Badge */}
                   <div className="relative h-36 rounded-xl overflow-hidden mb-3 bg-slate-100">
                     <img
                       src={room.image}
                       alt={room.alt}
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover object-center group-hover:scale-103 transition-transform"
                       loading="lazy"
                     />
                     <div className="absolute top-2 left-2 bg-[#FF6B35] text-white text-[10px] font-heading font-bold uppercase px-2.5 py-0.5 rounded-full shadow">
                       {isBangla ? room.badgeBn : room.badgeEn}
                     </div>
+
+                    {/* Green Right Check Sign on Selection */}
                     {isSelected && (
-                      <div className="absolute top-2 right-2 bg-emerald-500 text-white w-6 h-6 rounded-full flex items-center justify-center shadow">
-                        <Check className="w-3.5 h-3.5" />
+                      <div
+                        className="absolute top-2 right-2 bg-emerald-500 text-white w-7 h-7 rounded-full flex items-center justify-center shadow-md animate-in zoom-in-75"
+                        title={isBangla ? "নির্বাচিত রুম" : "Selected Room"}
+                      >
+                        <Check className="w-4 h-4 stroke-[3]" />
                       </div>
                     )}
                   </div>
@@ -467,44 +489,56 @@ export function StayPriceCalculator() {
                   </div>
                 </div>
 
-                {/* Quantity Stepper & Category Subtotal */}
+                {/* Quantity Stepper or Select Room Button */}
                 <div className="pt-3 border-t border-slate-200/60 mt-2">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-heading font-semibold text-slate-600">
-                      {isBangla ? "রুম সংখ্যা:" : "Rooms:"}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => handleQuantityChange(room.id, -1)}
-                        disabled={qty === 0}
-                        type="button"
-                        className="w-8 h-8 rounded-lg border border-slate-300 bg-white text-[#172554] hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center transition-all cursor-pointer"
-                        aria-label="Decrease quantity"
-                      >
-                        <Minus className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="w-8 text-center font-heading font-black text-sm text-[#172554]">
-                        {isBangla ? toBnDigits(qty) : qty}
-                      </span>
-                      <button
-                        onClick={() => handleQuantityChange(room.id, 1)}
-                        disabled={qty >= 10}
-                        type="button"
-                        className="w-8 h-8 rounded-lg bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] flex items-center justify-center transition-all cursor-pointer font-bold"
-                        aria-label="Increase quantity"
-                      >
-                        <Plus className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
+                  {!isSelected ? (
+                    <button
+                      onClick={() => handleQuantityChange(room.id, 1)}
+                      type="button"
+                      className="w-full py-2.5 px-3 rounded-xl bg-white border-2 border-[#FED7AA] hover:border-[#FF6B35] hover:bg-[#FFF7ED] text-[#172554] hover:text-[#FF6B35] font-heading font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs group"
+                    >
+                      <Plus className="w-4 h-4 text-[#FF6B35] group-hover:scale-110 transition-transform" />
+                      <span>{isBangla ? "রুম নির্বাচন করুন" : "Select Room"}</span>
+                    </button>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-heading font-semibold text-slate-600">
+                          {isBangla ? "রুম সংখ্যা:" : "Rooms:"}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleQuantityChange(room.id, -1)}
+                            type="button"
+                            className="w-8 h-8 rounded-lg border border-slate-300 bg-white text-[#172554] hover:bg-slate-100 flex items-center justify-center transition-all cursor-pointer"
+                            aria-label="Decrease quantity"
+                          >
+                            <Minus className="w-3.5 h-3.5" />
+                          </button>
+                          <span className="w-8 text-center font-heading font-black text-sm text-[#172554]">
+                            {isBangla ? toBnDigits(qty) : qty}
+                          </span>
+                          <button
+                            onClick={() => handleQuantityChange(room.id, 1)}
+                            disabled={qty >= 10}
+                            type="button"
+                            className="w-8 h-8 rounded-lg bg-[#FFD93D] hover:bg-[#FEE05E] text-[#172554] flex items-center justify-center transition-all cursor-pointer font-bold"
+                            aria-label="Increase quantity"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
 
-                  {/* Subtotal preview for this category */}
-                  <div className="flex items-baseline justify-between text-xs pt-2 border-t border-dashed border-slate-200">
-                    <span className="text-slate-500">{isBangla ? "সাবটোটাল:" : "Subtotal:"}</span>
-                    <strong className="font-heading font-bold text-[#172554]">
-                      {formatCurrency(subtotal, isBangla)}
-                    </strong>
-                  </div>
+                      {/* Subtotal preview for this category */}
+                      <div className="flex items-baseline justify-between text-xs pt-2 border-t border-dashed border-slate-200">
+                        <span className="text-slate-500">{isBangla ? "সাবটোটাল:" : "Subtotal:"}</span>
+                        <strong className="font-heading font-bold text-[#172554]">
+                          {formatCurrency(subtotal, isBangla)}
+                        </strong>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             );
@@ -622,7 +656,11 @@ export function StayPriceCalculator() {
               {formatCurrency(costs.grandTotalBDT, isBangla)}
             </div>
             <span className="text-[11px] text-slate-500">
-              {stay.isValid
+              {costs.totalRoomsSelected === 0
+                ? (isBangla
+                    ? "উপরে রুম নির্বাচন করে প্রাক্কলিত ভাড়া দেখুন"
+                    : "Select room(s) above to view estimated cost")
+                : stay.isValid
                 ? (isBangla
                     ? "ব্রেকফাস্ট ও ফ্রি পুলসাইড প্রিভিলেজ অন্তর্ভুক্ত"
                     : "Includes breakfast & complimentary park/pool privileges")
