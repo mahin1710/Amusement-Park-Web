@@ -190,7 +190,7 @@ export function toBnDigits(num: number | string): string {
 
 /**
  * Currency Formatter:
- * - When English: "8,000/="
+ * - When English: "8,000/= TK"
  * - When Bangla: "৳৮,০০০"
  */
 export function formatCurrency(amount: number, isBangla: boolean): string {
@@ -198,7 +198,7 @@ export function formatCurrency(amount: number, isBangla: boolean): string {
   if (isBangla) {
     return `৳${toBnDigits(formattedNumber)}`;
   }
-  return `${formattedNumber}/=`;
+  return `${formattedNumber}/= TK`;
 }
 
 export function formatTime12h(time24: string): { en: string; bn: string } {
