@@ -12,43 +12,48 @@ export function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
 
+  // Synchronize Logo & Navigation scaling directly with scroll position
+  // Direct 1:1 hardware-accelerated interpolation with requestAnimationFrame (matching Homepage)
   useEffect(() => {
     let ticking = false;
 
-    const updateScroll = () => {
+    const updateScrollProgress = () => {
       const scrollY =
         window.scrollY ||
         document.documentElement.scrollTop ||
         document.body.scrollTop ||
         0;
-      const maxScroll = window.innerWidth < 768 ? 90 : 120;
+
+      // Range: from 0px (top) to 180px (compact) on desktop, 140px on mobile
+      const maxScroll = window.innerWidth < 768 ? 140 : 180;
       const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
 
       if (headerRef.current) {
         headerRef.current.style.setProperty("--scroll-p", progress.toFixed(4));
       }
+
       setScrollProgress(progress);
       ticking = false;
     };
 
-    updateScroll();
+    updateScrollProgress();
 
-    const handleScroll = () => {
+    const onScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(updateScroll);
+        window.requestAnimationFrame(updateScrollProgress);
         ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
-  // On Homepage, the navigation pill buttons are integrated directly into the Hero Section (first viewport)
+  // On Homepage, the hero header is rendered directly in HeroSection
   if (pathname === "/") {
     return null;
   }
@@ -58,90 +63,101 @@ export function Navbar() {
   };
 
   return (
-    <header
-      ref={headerRef}
-      className="sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 bg-[#FFF9ED]/85 backdrop-blur-md border-b-2 border-[#FED7AA]/60 transition-shadow duration-200 [--scroll-p:0] [--nav-logo-max:48px] [--nav-logo-min:40px] sm:[--nav-logo-max:56px] sm:[--nav-logo-min:44px] lg:[--nav-logo-max:64px] lg:[--nav-logo-min:48px]"
-      style={{
-        paddingTop: `calc(clamp(8px, 1rem - 0.5rem * var(--scroll-p, ${scrollProgress}), 1rem))`,
-        paddingBottom: `calc(clamp(8px, 1rem - 0.5rem * var(--scroll-p, ${scrollProgress}), 1rem))`,
-        boxShadow: `0 4px 12px -2px rgba(67, 20, 7, calc(0.04 + 0.04 * var(--scroll-p, ${scrollProgress})))`,
-      }}
-      data-purpose="internal-page-navigation"
-    >
-      <div className="max-w-[1400px] mx-auto flex items-center justify-between gap-3 sm:gap-4">
-        {/* Brand Logo & Identity with Smooth Scaling Logo Element */}
-        <Link
-          href="/"
-          aria-label="Anowar City Magic Island Home"
-          className="flex items-center gap-2.5 sm:gap-3 group shrink-0"
+    <>
+      {/* FLOATING HEADER (Transparent, Floating, Exactly Matching Homepage) */}
+      <header
+        ref={headerRef}
+        className="fixed top-0 inset-x-0 z-50 px-4 sm:px-6 lg:px-8 pointer-events-none transition-colors duration-200 [--scroll-p:0] [--logo-max:64px] [--logo-min:42px] [--title-max:22px] [--title-min:16px] [--sub-max:11px] [--sub-min:9px] sm:[--logo-max:76px] sm:[--logo-min:46px] sm:[--title-max:26px] sm:[--title-min:18px] sm:[--sub-max:12px] sm:[--sub-min:9.5px] lg:[--logo-max:92px] lg:[--logo-min:50px] lg:[--title-max:32px] lg:[--title-min:20px] lg:[--sub-max:13px] lg:[--sub-min:10px]"
+        style={{
+          paddingTop: `calc(clamp(8px, 1.5rem - 0.75rem * var(--scroll-p, ${scrollProgress}), 1.5rem))`,
+          paddingBottom: `calc(clamp(8px, 0.75rem - 0.25rem * var(--scroll-p, ${scrollProgress}), 0.75rem))`,
+        }}
+        data-purpose="page-navigation-header"
+      >
+        <div
+          className="max-w-[1400px] mx-auto flex items-center justify-between"
+          style={{
+            gap: `calc(clamp(0.625rem, 1.5rem - 0.5rem * var(--scroll-p, ${scrollProgress}), 1.5rem))`,
+          }}
         >
-          <div
-            className="shrink-0 flex items-center justify-center bg-white border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105"
-            style={{
-              height: `calc(var(--nav-logo-max) - (var(--nav-logo-max) - var(--nav-logo-min)) * var(--scroll-p, ${scrollProgress}))`,
-              padding: `calc(clamp(4px, 6px - 2px * var(--scroll-p, ${scrollProgress}), 6px))`,
-              borderRadius: `calc(clamp(12px, 16px - 4px * var(--scroll-p, ${scrollProgress}), 16px))`,
-            }}
+          {/* Brand Logo & Identity: Smoothly Scaling with Scroll Progress (Matching Homepage) */}
+          <Link
+            href="/"
+            aria-label="Anowar City Magic Island Home"
+            className="flex items-center gap-3 group shrink-0 pointer-events-auto transition-transform hover:scale-102"
           >
-            <img
-              src="/images/Magic%20Island%20Logo.jpg"
-              alt="Anowar City Magic Island Official Logo"
-              className="h-full w-auto object-contain"
-            />
-          </div>
-          <div className="flex flex-col justify-center">
-            <span
-              className="font-bold uppercase font-heading leading-none text-[#FF6B35]"
+            <div
+              className="shrink-0 flex items-center justify-center bg-white/95 backdrop-blur-md border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105 transition-transform"
               style={{
-                fontSize: `calc(clamp(9px, 11px - 2px * var(--scroll-p, ${scrollProgress}), 11px))`,
-                letterSpacing: `calc(0.22em - 0.02em * var(--scroll-p, ${scrollProgress}))`,
-                marginBottom: `calc(clamp(2px, 4px - 2px * var(--scroll-p, ${scrollProgress}), 4px))`,
+                height: `calc(var(--logo-max) - (var(--logo-max) - var(--logo-min)) * var(--scroll-p, ${scrollProgress}))`,
+                padding: `calc(clamp(4px, 7px - 3px * var(--scroll-p, ${scrollProgress}), 7px))`,
+                borderRadius: `calc(clamp(12px, 18px - 6px * var(--scroll-p, ${scrollProgress}), 18px))`,
+                boxShadow: "0 8px 24px -4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
-            </span>
-            <span
-              className="font-black tracking-tight text-[#172554] font-heading leading-none"
-              style={{
-                fontSize: `calc(clamp(1rem, 1.5rem - 0.25rem * var(--scroll-p, ${scrollProgress}), 1.5rem))`,
-              }}
-            >
-              MAGIC ISLAND
-            </span>
-          </div>
-        </Link>
+              <img
+                src="/images/Magic%20Island%20Logo.jpg"
+                alt="Anowar City Magic Island Official Logo"
+                className="h-full w-auto object-contain"
+              />
+            </div>
+            <div className="flex flex-col justify-center">
+              <span
+                className="font-bold uppercase font-heading leading-none text-[#FF6B35]"
+                style={{
+                  fontSize: `calc(var(--sub-max) - (var(--sub-max) - var(--sub-min)) * var(--scroll-p, ${scrollProgress}))`,
+                  letterSpacing: `calc(0.24em - 0.04em * var(--scroll-p, ${scrollProgress}))`,
+                  marginBottom: `calc(clamp(2px, 4px - 2px * var(--scroll-p, ${scrollProgress}), 4px))`,
+                }}
+              >
+                {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
+              </span>
+              <span
+                className="font-black tracking-tight text-[#172554] font-heading leading-none"
+                style={{
+                  fontSize: `calc(var(--title-max) - (var(--title-max) - var(--title-min)) * var(--scroll-p, ${scrollProgress}))`,
+                }}
+              >
+                MAGIC ISLAND
+              </span>
+            </div>
+          </Link>
 
-        {/* Quick Actions (Bilingual Switcher EN / বাংলা - Untouched) */}
-        <div className="flex items-center shrink-0">
-          <button
-            onClick={toggleLanguage}
-            type="button"
-            title="Switch Language"
-            className="nav-pill-btn cursor-pointer"
-            style={{
-              height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
-              paddingLeft: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
-              paddingRight: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
-              fontSize: `calc(clamp(11px, 12px - 1px * var(--scroll-p, ${scrollProgress}), 12px))`,
-            }}
-          >
-            <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
-            <span>
-              {locale === "en" ? (
-                <>
-                  <strong className="text-[#FF6B35]">EN</strong> |{" "}
-                  <span className="font-bangla text-[#172554]/60">বাংলা</span>
-                </>
-              ) : (
-                <>
-                  <span className="text-[#172554]/60">EN</span> |{" "}
-                  <strong className="font-bangla text-[#FF6B35]">বাংলা</strong>
-                </>
-              )}
-            </span>
-          </button>
+          {/* Language Switcher Pill (Matching Homepage) */}
+          <div className="flex items-center shrink-0 pointer-events-auto">
+            <button
+              onClick={toggleLanguage}
+              type="button"
+              title="Switch Language"
+              className="nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#FED7AA]/90 !shadow-lg cursor-pointer"
+              style={{
+                height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
+                paddingLeft: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
+                paddingRight: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
+                fontSize: `calc(clamp(11px, 12px - 1px * var(--scroll-p, ${scrollProgress}), 12px))`,
+              }}
+            >
+              <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <span>
+                {locale === "en" ? (
+                  <>
+                    <strong className="text-[#FF6B35]">EN</strong> |{" "}
+                    <span className="font-bangla text-[#172554]/70">বাংলা</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-[#172554]/70">EN</span> |{" "}
+                    <strong className="font-bangla text-[#FF6B35]">বাংলা</strong>
+                  </>
+                )}
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Top Breathing Space Spacer so Page Titles & Badges Start Below the Large Initial Floating Header */}
+      <div className="h-24 sm:h-28 lg:h-32 w-full pointer-events-none shrink-0" aria-hidden="true" />
+    </>
   );
 }
