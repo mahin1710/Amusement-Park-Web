@@ -87,7 +87,7 @@ export function Navbar() {
             className="flex items-center gap-3 group shrink-0 pointer-events-auto transition-transform hover:scale-102"
           >
             <div
-              className="shrink-0 flex items-center justify-center bg-white/95 backdrop-blur-md border-2 border-[#FFD93D] overflow-hidden group-hover:scale-105 transition-transform"
+              className="shrink-0 flex items-center justify-center bg-white/95 backdrop-blur-md border-2 border-[#FFC857] overflow-hidden group-hover:scale-105 transition-transform"
               style={{
                 height: `calc(var(--logo-max) - (var(--logo-max) - var(--logo-min)) * var(--scroll-p, ${scrollProgress}))`,
                 padding: `calc(clamp(4px, 7px - 3px * var(--scroll-p, ${scrollProgress}), 7px))`,
@@ -103,7 +103,7 @@ export function Navbar() {
             </div>
             <div className="flex flex-col justify-center">
               <span
-                className="font-bold uppercase font-heading leading-none text-[#FF6B35]"
+                className="font-bold uppercase font-heading leading-none text-[#FF795C]"
                 style={{
                   fontSize: `calc(var(--sub-max) - (var(--sub-max) - var(--sub-min)) * var(--scroll-p, ${scrollProgress}))`,
                   letterSpacing: `calc(0.24em - 0.04em * var(--scroll-p, ${scrollProgress}))`,
@@ -113,7 +113,7 @@ export function Navbar() {
                 {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
               </span>
               <span
-                className="font-bold tracking-wide text-[#172554] font-magical leading-none"
+                className="font-bold tracking-wide text-[#173B42] font-magical leading-none"
                 style={{
                   fontSize: `calc(var(--title-max) - (var(--title-max) - var(--title-min)) * var(--scroll-p, ${scrollProgress}))`,
                 }}
@@ -129,7 +129,7 @@ export function Navbar() {
               onClick={toggleLanguage}
               type="button"
               title="Switch Language"
-              className="nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#FED7AA]/90 !shadow-lg cursor-pointer"
+              className="nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#087E8B]/20 !shadow-lg cursor-pointer"
               style={{
                 height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
                 paddingLeft: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
@@ -137,17 +137,17 @@ export function Navbar() {
                 fontSize: `calc(clamp(11px, 12px - 1px * var(--scroll-p, ${scrollProgress}), 12px))`,
               }}
             >
-              <Globe className="w-3.5 h-3.5 text-[#38BDF8]" />
+              <Globe className="w-3.5 h-3.5 text-[#087E8B]" />
               <span>
                 {locale === "en" ? (
                   <>
-                    <strong className="text-[#FF6B35]">EN</strong> |{" "}
-                    <span className="font-bangla text-[#172554]/70">বাংলা</span>
+                    <strong className="text-[#087E8B]">EN</strong> |{" "}
+                    <span className="font-bangla text-[#173B42]/70">বাংলা</span>
                   </>
                 ) : (
                   <>
-                    <span className="text-[#172554]/70">EN</span> |{" "}
-                    <strong className="font-bangla text-[#FF6B35]">বাংলা</strong>
+                    <span className="text-[#173B42]/70">EN</span> |{" "}
+                    <strong className="font-bangla text-[#087E8B]">বাংলা</strong>
                   </>
                 )}
               </span>
