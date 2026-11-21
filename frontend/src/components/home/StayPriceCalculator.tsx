@@ -22,6 +22,7 @@ import {
   calculateStayDuration,
   calculateRoomCosts,
   toBnDigits,
+  formatCurrency,
 } from "@/config/roomPricing";
 import { businessConfig } from "@/config/business";
 
@@ -100,9 +101,11 @@ export function StayPriceCalculator() {
       .filter((c) => c.quantity > 0)
       .map(
         (c) =>
-          `• ${isBangla ? c.titleBn : c.titleEn}: ${c.quantity} ${
+          `• ${isBangla ? c.titleBn : c.titleEn}: ${
+            isBangla ? toBnDigits(c.quantity) : c.quantity
+          } ${
             isBangla ? "টি রুম" : "room(s)"
-          } × ৳${c.pricePerDayBDT.toLocaleString()} = ৳${c.subtotalBDT.toLocaleString()}`
+          } × ${formatCurrency(c.pricePerDayBDT, isBangla)} = ${formatCurrency(c.subtotalBDT, isBangla)}`
       )
       .join("\n");
 
@@ -114,7 +117,7 @@ export function StayPriceCalculator() {
         `🏨 বিলিং দিন (Chargeable): ${toBnDigits(stay.chargeableDays)} দিন\n` +
         `🌙 ক্যালেন্ডার রাত: ${toBnDigits(stay.calendarNights)} রাত\n\n` +
         `নির্বাচিত রুম:\n${selectedRoomsSummary || "কনো রুম নির্বাচন করা হয়নি"}\n\n` +
-        `💰 সর্বমোট প্রাক্কলিত ভাড়া: ৳${costs.grandTotalBDT.toLocaleString()}\n\n` +
+        `💰 সর্বমোট প্রাক্কলিত ভাড়া: ${formatCurrency(costs.grandTotalBDT, isBangla)}\n\n` +
         `অনুগ্রহ করে প্রাপ্যতা ও নিশ্চিতকরণ প্রক্রিয়া জানান।`
       : `Hello Magic Island, I want to inquire about resort room booking with this estimate:\n\n` +
         `📅 Check-in: ${stay.checkInFormattedEn}\n` +
@@ -123,7 +126,7 @@ export function StayPriceCalculator() {
         `🏨 Chargeable Days: ${stay.chargeableDays} Day(s)\n` +
         `🌙 Calendar Nights: ${stay.calendarNights} Night(s)\n\n` +
         `Selected Rooms:\n${selectedRoomsSummary || "No room selected"}\n\n` +
-        `💰 Grand Total: ৳${costs.grandTotalBDT.toLocaleString()}\n\n` +
+        `💰 Grand Total: ${formatCurrency(costs.grandTotalBDT, isBangla)}\n\n` +
         `Please confirm availability and booking procedure.`;
 
     return `https://wa.me/${businessConfig.hotlines.whatsapp.replace(
@@ -176,14 +179,14 @@ export function StayPriceCalculator() {
         <div className="p-5 sm:p-6 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA]/80 shadow-xs">
           <div className="flex items-center gap-2 mb-4 text-[#172554]">
             <div className="w-8 h-8 rounded-full bg-[#FFD93D] flex items-center justify-center text-[#172554] font-bold text-sm">
-              ১
+              {isBangla ? "১" : "1"}
             </div>
             <div>
               <h4 className="font-heading font-bold text-base text-[#172554] leading-tight">
                 {isBangla ? "চেক-ইন তারিখ ও সময়" : "Check-in Date & Time"}
               </h4>
               <span className="text-[11px] text-[#3B4B75]">
-                {isBangla ? "স্ট্যান্ডার্ড চেক-ইন: সকাল ১০:০০ টা" : "Standard Check-in: 10:00 AM"}
+                {isBangla ? "আপনার পছন্দমতো চেক-ইন সময়" : "Select your preferred arrival time"}
               </span>
             </div>
           </div>
@@ -220,14 +223,14 @@ export function StayPriceCalculator() {
         <div className="p-5 sm:p-6 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA]/80 shadow-xs">
           <div className="flex items-center gap-2 mb-4 text-[#172554]">
             <div className="w-8 h-8 rounded-full bg-[#FFD93D] flex items-center justify-center text-[#172554] font-bold text-sm">
-              ২
+              {isBangla ? "২" : "2"}
             </div>
             <div>
               <h4 className="font-heading font-bold text-base text-[#172554] leading-tight">
                 {isBangla ? "চেক-আউট তারিখ ও সময়" : "Check-out Date & Time"}
               </h4>
               <span className="text-[11px] text-[#3B4B75]">
-                {isBangla ? "স্ট্যান্ডার্ড চেক-আউট: সকাল ০৯:৩০ টা" : "Standard Check-out: 09:30 AM"}
+                {isBangla ? "আপনার সুবিধাজনক চেক-আউট সময়" : "Select your preferred departure time"}
               </span>
             </div>
           </div>
@@ -291,8 +294,8 @@ export function StayPriceCalculator() {
               </div>
               <span className="text-[11px] text-white/70 mt-1">
                 {isBangla
-                  ? `স্ট্যান্ডার্ড ২৩.৫ ঘণ্টা = ১ দিন হিসাব`
-                  : `Ceiling(Hours / 23.5) billing rule`}
+                  ? `মোট অবস্থানের সময় অনুযায়ী হিসাব`
+                  : `Calculated from total stay duration`}
               </span>
             </div>
 
@@ -406,7 +409,7 @@ export function StayPriceCalculator() {
                     {isBangla ? room.titleBn : room.titleEn}
                   </h5>
                   <div className="text-xs text-[#FF6B35] font-heading font-bold mb-3">
-                    ৳{room.pricePerDayBDT.toLocaleString()}{" "}
+                    {formatCurrency(room.pricePerDayBDT, isBangla)}{" "}
                     <span className="text-[11px] font-normal text-slate-500">
                       / {isBangla ? "দিন (প্রতি রুম)" : "day (per room)"}
                     </span>
@@ -448,7 +451,7 @@ export function StayPriceCalculator() {
                   <div className="flex items-baseline justify-between text-xs pt-2 border-t border-dashed border-slate-200">
                     <span className="text-slate-500">{isBangla ? "সাবটোটাল:" : "Subtotal:"}</span>
                     <strong className="font-heading font-bold text-[#172554]">
-                      ৳{subtotal.toLocaleString()}
+                      {formatCurrency(subtotal, isBangla)}
                     </strong>
                   </div>
                 </div>
@@ -486,13 +489,13 @@ export function StayPriceCalculator() {
                     <span className="font-semibold">{isBangla ? item.titleBn : item.titleEn}</span>
                     <span className="text-slate-500">
                       ({isBangla ? toBnDigits(item.quantity) : item.quantity}{" "}
-                      {isBangla ? "টি রুম" : "room"} × ৳{item.pricePerDayBDT.toLocaleString()} ×{" "}
+                      {isBangla ? "টি রুম" : "room"} × {formatCurrency(item.pricePerDayBDT, isBangla)} ×{" "}
                       {isBangla ? toBnDigits(stay.chargeableDays) : stay.chargeableDays}{" "}
                       {isBangla ? "দিন" : "days"})
                     </span>
                   </div>
                   <strong className="font-heading font-bold text-[#172554] self-end sm:self-auto">
-                    ৳{item.subtotalBDT.toLocaleString()}
+                    {formatCurrency(item.subtotalBDT, isBangla)}
                   </strong>
                 </div>
               ))
@@ -541,7 +544,7 @@ export function StayPriceCalculator() {
               {isBangla ? "সর্বমোট প্রাক্কলিত ভাড়া" : "Grand Total Estimated Cost"}
             </span>
             <div className="text-3xl sm:text-4xl font-black font-heading text-[#FF6B35] leading-tight">
-              ৳{costs.grandTotalBDT.toLocaleString()}
+              {formatCurrency(costs.grandTotalBDT, isBangla)}
             </div>
             <span className="text-[11px] text-slate-500">
               {isBangla

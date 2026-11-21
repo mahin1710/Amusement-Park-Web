@@ -186,6 +186,19 @@ export function toBnDigits(num: number | string): string {
   return String(num).replace(/[0-9]/g, (d) => bn[parseInt(d, 10)]);
 }
 
+/**
+ * Currency Formatter:
+ * - When English: "8,000/= TK"
+ * - When Bangla: "৳৮,০০০"
+ */
+export function formatCurrency(amount: number, isBangla: boolean): string {
+  const formattedNumber = amount.toLocaleString("en-US");
+  if (isBangla) {
+    return `৳${toBnDigits(formattedNumber)}`;
+  }
+  return `${formattedNumber}/= TK`;
+}
+
 export function formatTime12h(time24: string): { en: string; bn: string } {
   const [hStr, mStr] = time24.split(":");
   let h = parseInt(hStr, 10);
