@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Plus_Jakarta_Sans, Poppins, Hind_Siliguri } from "next/font/google";
+import { Poppins, Nunito_Sans, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { AnimationProvider } from "@/context/AnimationContext";
@@ -11,7 +11,7 @@ import { FloatingBottomNav } from "@/components/layout/FloatingBottomNav";
 import { InteractiveCursorTrail } from "@/components/animations/InteractiveCursorTrail";
 import { siteConfig } from "@/config/site";
 
-// Waltograph: Uploaded Disney-style Magical Theme Park Font
+// A. Waltograph: Decorative Branding & Selected Magical Accents
 const waltograph = localFont({
   src: [
     {
@@ -29,25 +29,25 @@ const waltograph = localFont({
   display: "swap",
 });
 
-// Plus Jakarta Sans: High-clarity geometric body & UI font that blends seamlessly with Waltograph
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-// Poppins: Rounded friendly geometric companion font
+// B. Poppins: Primary Heading, Navigation, Button & Label Font
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
   display: "swap",
 });
 
-// Hind Siliguri: Premium Bengali font with rounded terminals matching Waltograph/Poppins
+// C. Nunito Sans: Readable Body & Supporting Content Font
+const nunitoSans = Nunito_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-nunito",
+  display: "swap",
+});
+
+// Bengali Typography Fallback: Hind Siliguri
 const hindSiliguri = Hind_Siliguri({
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   subsets: ["bengali", "latin"],
   variable: "--font-bangla",
   display: "swap",
@@ -103,7 +103,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${waltograph.variable} ${plusJakartaSans.variable} ${poppins.variable} ${hindSiliguri.variable}`}
+      className={`${waltograph.variable} ${poppins.variable} ${nunitoSans.variable} ${hindSiliguri.variable}`}
     >
       <head>
         <link
@@ -113,7 +113,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@400;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&family=Hind+Siliguri:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
       </head>

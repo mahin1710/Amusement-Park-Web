@@ -113,7 +113,7 @@ export function Navbar() {
                 {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
               </span>
               <span
-                className="font-black tracking-tight text-[#172554] font-heading leading-none"
+                className="font-bold tracking-wide text-[#172554] font-magical leading-none"
                 style={{
                   fontSize: `calc(var(--title-max) - (var(--title-max) - var(--title-min)) * var(--scroll-p, ${scrollProgress}))`,
                 }}

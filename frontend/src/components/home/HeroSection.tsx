@@ -124,7 +124,7 @@ export function HeroSection() {
                 {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
               </span>
               <span
-                className="font-black tracking-tight font-heading leading-none"
+                className="font-bold tracking-wide font-magical leading-none"
                 style={{
                   fontSize: `calc(var(--title-max) - (var(--title-max) - var(--title-min)) * var(--scroll-p, ${scrollProgress}))`,
                   color: scrollProgress > 0.4 ? "#172554" : "#FFFFFF",

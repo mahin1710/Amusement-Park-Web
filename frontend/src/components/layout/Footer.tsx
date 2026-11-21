@@ -30,7 +30,7 @@ export function Footer() {
                 <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] text-[#FFD93D] uppercase font-heading leading-tight">
                   {isBangla ? "আনোয়ার সিটি" : "ANOWAR CITY"}
                 </span>
-                <span className="text-xl font-bold tracking-tight text-white font-heading leading-tight flex items-center gap-1.5">
+                <span className="text-xl sm:text-2xl font-bold tracking-wide text-white font-magical leading-tight flex items-center gap-1.5">
                   MAGIC ISLAND
                   <span className="inline-block w-2 h-2 rounded-full bg-[#FF6B35] animate-ping"></span>
                 </span>
