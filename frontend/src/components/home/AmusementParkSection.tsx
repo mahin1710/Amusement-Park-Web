@@ -109,7 +109,7 @@ export function AmusementParkSection() {
             <Link
               key={idx}
               href={`/attractions/${ride.id}`}
-              className="park-card p-6 flex flex-col justify-between group cursor-pointer h-full"
+              className={`park-card p-6 flex flex-col justify-between group cursor-pointer h-full hover:${ride.accent} shadow-md hover:shadow-2xl transition-all duration-300`}
             >
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-[#FFF9ED] border-2 border-[#FED7AA] flex items-center justify-center text-3xl mb-4 group-hover:scale-110 group-hover:rotate-6 transition-transform shadow-xs">

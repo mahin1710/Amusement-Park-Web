@@ -95,29 +95,29 @@ export function IntroSection() {
               </div>
             </div>
 
-            {/* Stat Counters Grid (Fully Bilingual Numbers & Text) */}
+            {/* Stat Counters Grid (Colorful, Eye-Catchy Theme Gradients) */}
             <div className="grid grid-cols-3 gap-3.5 sm:gap-4">
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border-2 border-[#BAE6FD] text-center shadow-xs">
-                <div className="text-2xl sm:text-3xl font-black font-heading text-[#0284C7]">
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-white via-sky-50 to-[#E0F2FE] border-2 border-[#38BDF8] text-center shadow-md shadow-sky-500/15 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-sky-500/25 transition-all">
+                <div className="text-2xl sm:text-3xl font-black font-heading text-[#0284C7] drop-shadow-2xs">
                   {isBangla ? "১০,০০০+" : "10,000+"}
                 </div>
-                <div className="text-[11px] font-heading font-semibold text-[#172554] mt-0.5">
+                <div className="text-[11px] font-heading font-bold text-[#0369A1] mt-0.5">
                   {isBangla ? "বর্গফুট ওয়েভ বেসিন" : "Sq Ft Wave Basin"}
                 </div>
               </div>
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border-2 border-[#DDD6FE] text-center shadow-xs">
-                <div className="text-2xl sm:text-3xl font-black font-heading text-[#8B5CF6]">
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-white via-purple-50 to-[#EDE9FE] border-2 border-[#A855F7] text-center shadow-md shadow-purple-500/15 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-purple-500/25 transition-all">
+                <div className="text-2xl sm:text-3xl font-black font-heading text-[#8B5CF6] drop-shadow-2xs">
                   {isBangla ? "৫০+" : "50+"}
                 </div>
-                <div className="text-[11px] font-heading font-semibold text-[#172554] mt-0.5">
+                <div className="text-[11px] font-heading font-bold text-[#6D28D9] mt-0.5">
                   {isBangla ? "অ্যানিমেট্রনিক ডাইনো" : "Robotic Dinosaurs"}
                 </div>
               </div>
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border-2 border-[#FED7AA] text-center shadow-xs">
-                <div className="text-2xl sm:text-3xl font-black font-heading text-[#FF6B35]">
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-white via-orange-50 to-[#FFEDD5] border-2 border-[#FF6B35] text-center shadow-md shadow-orange-500/15 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-orange-500/25 transition-all">
+                <div className="text-2xl sm:text-3xl font-black font-heading text-[#FF6B35] drop-shadow-2xs">
                   {isBangla ? "২৫+" : "25+"}
                 </div>
-                <div className="text-[11px] font-heading font-semibold text-[#172554] mt-0.5">
+                <div className="text-[11px] font-heading font-bold text-[#C2410C] mt-0.5">
                   {isBangla ? "থ্রিল ও ফ্যামিলি রাইড" : "Thrill & Family Rides"}
                 </div>
               </div>

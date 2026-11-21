@@ -226,38 +226,38 @@ export function ResortStaySection() {
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
-            <div className="p-4 rounded-2xl bg-[#FFF9ED] border border-[#FED7AA]">
-              <i className="fa-solid fa-wifi text-[#38BDF8] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-white to-sky-50 border-2 border-[#38BDF8]/50 shadow-xs hover:shadow-lg hover:shadow-sky-500/20 hover:-translate-y-1.5 transition-all group">
+              <i className="fa-solid fa-wifi text-[#38BDF8] text-xl mb-1.5 group-hover:scale-115 transition-transform inline-block"></i>
               <div className="text-xs font-heading font-bold text-[#172554]">
                 {isBangla ? "ফ্রি হাই-স্পিড ওয়াইফাই" : "Free Fast Wi-Fi"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFF9ED] border border-[#FED7AA]">
-              <i className="fa-solid fa-person-swimming text-[#38BDF8] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-white to-cyan-50 border-2 border-[#06B6D4]/50 shadow-xs hover:shadow-lg hover:shadow-cyan-500/20 hover:-translate-y-1.5 transition-all group">
+              <i className="fa-solid fa-person-swimming text-[#06B6D4] text-xl mb-1.5 group-hover:scale-115 transition-transform inline-block"></i>
               <div className="text-xs font-heading font-bold text-[#172554]">
                 {isBangla ? "পুলসাইড অ্যাক্সেস" : "Poolside Access"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFF9ED] border border-[#FED7AA]">
-              <i className="fa-solid fa-utensils text-[#FF6B35] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-white to-orange-50 border-2 border-[#FF6B35]/50 shadow-xs hover:shadow-lg hover:shadow-orange-500/20 hover:-translate-y-1.5 transition-all group">
+              <i className="fa-solid fa-utensils text-[#FF6B35] text-xl mb-1.5 group-hover:scale-115 transition-transform inline-block"></i>
               <div className="text-xs font-heading font-bold text-[#172554]">
                 {isBangla ? "কমপ্লিমেন্টারি ব্রেকফাস্ট" : "Free Breakfast"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFF9ED] border border-[#FED7AA]">
-              <i className="fa-solid fa-shield-halved text-[#55C98B] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-white to-emerald-50 border-2 border-[#55C98B]/50 shadow-xs hover:shadow-lg hover:shadow-emerald-500/20 hover:-translate-y-1.5 transition-all group">
+              <i className="fa-solid fa-shield-halved text-[#55C98B] text-xl mb-1.5 group-hover:scale-115 transition-transform inline-block"></i>
               <div className="text-xs font-heading font-bold text-[#172554]">
                 {isBangla ? "২৪/৭ নিরাপত্তা পাহারা" : "24/7 Security"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFF9ED] border border-[#FED7AA]">
-              <i className="fa-solid fa-square-parking text-[#8B5CF6] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-white to-purple-50 border-2 border-[#8B5CF6]/50 shadow-xs hover:shadow-lg hover:shadow-purple-500/20 hover:-translate-y-1.5 transition-all group">
+              <i className="fa-solid fa-square-parking text-[#8B5CF6] text-xl mb-1.5 group-hover:scale-115 transition-transform inline-block"></i>
               <div className="text-xs font-heading font-bold text-[#172554]">
                 {isBangla ? "সুরক্ষিত ফ্রি পার্কিং" : "Free VIP Parking"}
               </div>
             </div>
-            <div className="p-4 rounded-2xl bg-[#FFF9ED] border border-[#FED7AA]">
-              <i className="fa-solid fa-bell-concierge text-[#FFD93D] text-xl mb-1.5"></i>
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-white to-amber-50 border-2 border-[#FFD93D]/70 shadow-xs hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-1.5 transition-all group">
+              <i className="fa-solid fa-bell-concierge text-[#EAB308] text-xl mb-1.5 group-hover:scale-115 transition-transform inline-block"></i>
               <div className="text-xs font-heading font-bold text-[#172554]">
                 {isBangla ? "রুম সার্ভিস ও হেল্পলাইন" : "Room Service"}
               </div>

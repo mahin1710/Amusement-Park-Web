@@ -35,8 +35,8 @@ export function VisitorInfoSection() {
 
         {/* 4 Key Essentials Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="p-6 rounded-3xl bg-white border-2 border-[#BAE6FD] shadow-xs hover:scale-102 transition-transform">
-            <div className="w-12 h-12 rounded-2xl bg-[#E0F2FE] text-[#0284C7] flex items-center justify-center text-xl mb-4">
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-white via-sky-50/50 to-[#E0F2FE]/70 border-2 border-[#38BDF8]/60 shadow-md shadow-sky-500/10 hover:shadow-xl hover:shadow-sky-500/25 hover:-translate-y-2 transition-all duration-300 group">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#E0F2FE] to-[#BAE6FD] text-[#0284C7] flex items-center justify-center text-xl mb-4 shadow-sm group-hover:scale-110 group-hover:rotate-6 transition-transform">
               <Clock className="w-6 h-6" />
             </div>
             <h3 className="text-base font-heading font-bold text-[#172554] mb-1">
@@ -52,8 +52,8 @@ export function VisitorInfoSection() {
             </p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border-2 border-[#BBF7D0] shadow-xs hover:scale-102 transition-transform">
-            <div className="w-12 h-12 rounded-2xl bg-[#DCFCE7] text-[#15803D] flex items-center justify-center text-xl mb-4">
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-white via-emerald-50/50 to-[#DCFCE7]/70 border-2 border-[#10B981]/60 shadow-md shadow-emerald-500/10 hover:shadow-xl hover:shadow-emerald-500/25 hover:-translate-y-2 transition-all duration-300 group">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#DCFCE7] to-[#BBF7D0] text-[#15803D] flex items-center justify-center text-xl mb-4 shadow-sm group-hover:scale-110 group-hover:rotate-6 transition-transform">
               <MapPin className="w-6 h-6" />
             </div>
             <h3 className="text-base font-heading font-bold text-[#172554] mb-1">
@@ -69,8 +69,8 @@ export function VisitorInfoSection() {
             </p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-xs hover:scale-102 transition-transform">
-            <div className="w-12 h-12 rounded-2xl bg-[#FFEDD5] text-[#C2410C] flex items-center justify-center text-xl mb-4">
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-white via-orange-50/50 to-[#FFEDD5]/70 border-2 border-[#FF6B35]/60 shadow-md shadow-orange-500/10 hover:shadow-xl hover:shadow-orange-500/25 hover:-translate-y-2 transition-all duration-300 group">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#FFEDD5] to-[#FED7AA] text-[#C2410C] flex items-center justify-center text-xl mb-4 shadow-sm group-hover:scale-110 group-hover:rotate-6 transition-transform">
               <Shirt className="w-6 h-6" />
             </div>
             <h3 className="text-base font-heading font-bold text-[#172554] mb-1">
@@ -86,8 +86,8 @@ export function VisitorInfoSection() {
             </p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border-2 border-[#DDD6FE] shadow-xs hover:scale-102 transition-transform">
-            <div className="w-12 h-12 rounded-2xl bg-[#F3E8FF] text-[#7C3AED] flex items-center justify-center text-xl mb-4">
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-white via-purple-50/50 to-[#F3E8FF]/70 border-2 border-[#8B5CF6]/60 shadow-md shadow-purple-500/10 hover:shadow-xl hover:shadow-purple-500/25 hover:-translate-y-2 transition-all duration-300 group">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#F3E8FF] to-[#DDD6FE] text-[#7C3AED] flex items-center justify-center text-xl mb-4 shadow-sm group-hover:scale-110 group-hover:rotate-6 transition-transform">
               <PhoneCall className="w-6 h-6" />
             </div>
             <h3 className="text-base font-heading font-bold text-[#172554] mb-1">
