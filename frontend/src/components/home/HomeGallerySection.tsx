@@ -142,7 +142,7 @@ export function HomeGallerySection() {
 
           {/* Gallery Filter Tabs */}
           <div
-            className="flex flex-wrap gap-2 mt-6 p-2 rounded-full bg-white/95 backdrop-blur-md border-2 border-[#FED7AA] shadow-md shadow-orange-500/5"
+            className="flex flex-wrap gap-2 mt-6 p-1.5 rounded-full bg-white border-2 border-[#FED7AA] shadow-sm"
             data-purpose="gallery-filters"
           >
             {filters.map((f) => (
@@ -151,8 +151,8 @@ export function HomeGallerySection() {
                 onClick={() => setSelectedFilter(f.id)}
                 className={`px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   selectedFilter === f.id
-                    ? "bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] text-white shadow-lg shadow-orange-500/30 scale-105"
-                    : "text-[#172554] hover:bg-[#FFF2B2]/60 hover:text-[#FF6B35]"
+                    ? "bg-[#FF6B35] text-white shadow-md shadow-orange-500/20"
+                    : "text-[#172554] hover:bg-[#FFF2B2]"
                 }`}
               >
                 {isBangla ? f.labelBn : f.labelEn}
@@ -167,7 +167,7 @@ export function HomeGallerySection() {
             <div
               key={item.id}
               onClick={() => setLightboxImage(item.src)}
-              className={`${item.span} relative rounded-3xl overflow-hidden border-2 border-[#FED7AA] hover:border-[#FF6B35] shadow-md hover:shadow-2xl hover:shadow-orange-500/20 group cursor-pointer transition-all duration-500 ${item.height}`}
+              className={`${item.span} relative rounded-3xl overflow-hidden border-2 border-[#FED7AA] shadow-md group cursor-pointer ${item.height}`}
             >
               <img
                 alt={item.titleEn}

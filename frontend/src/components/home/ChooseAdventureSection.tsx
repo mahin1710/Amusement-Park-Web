@@ -33,7 +33,7 @@ export function ChooseAdventureSection() {
         {/* 3 Signature Experience Realms */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Realm 1: WATER OASIS (Using Real Park Aerial Photo) */}
-          <div className="park-card overflow-hidden flex flex-col justify-between group border-2 border-[#BAE6FD] hover:border-[#0284C7] shadow-xl shadow-sky-500/10 hover:shadow-2xl hover:shadow-sky-500/25 bg-gradient-to-b from-sky-50/25 via-white to-white transition-all">
+          <div className="park-card overflow-hidden flex flex-col justify-between group">
             <Link
               href="/water-park"
               className="relative h-68 overflow-hidden bg-slate-100 cursor-pointer block"
@@ -108,7 +108,7 @@ export function ChooseAdventureSection() {
           </div>
 
           {/* Realm 2: DINO KINGDOM */}
-          <div className="park-card overflow-hidden flex flex-col justify-between group border-2 border-[#DDD6FE] hover:border-[#8B5CF6] shadow-xl shadow-purple-500/10 hover:shadow-2xl hover:shadow-purple-500/25 bg-gradient-to-b from-purple-50/25 via-white to-white transition-all">
+          <div className="park-card overflow-hidden flex flex-col justify-between group">
             <Link
               href="/dino-zone"
               className="relative h-68 overflow-hidden bg-slate-100 cursor-pointer block"
@@ -179,7 +179,7 @@ export function ChooseAdventureSection() {
           </div>
 
           {/* Realm 3: THRILL GALAXY */}
-          <div className="park-card overflow-hidden flex flex-col justify-between group border-2 border-[#FED7AA] hover:border-[#FF6B35] shadow-xl shadow-orange-500/10 hover:shadow-2xl hover:shadow-orange-500/25 bg-gradient-to-b from-orange-50/25 via-white to-white transition-all">
+          <div className="park-card overflow-hidden flex flex-col justify-between group">
             <Link
               href="/amusement-park"
               className="relative h-68 overflow-hidden bg-slate-100 cursor-pointer block"

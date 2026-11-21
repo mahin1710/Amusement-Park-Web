@@ -35,7 +35,7 @@ export function TicketsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
           {/* Package 1: Water Park Wave Pass */}
-          <div className="rounded-3xl p-8 bg-gradient-to-b from-sky-50/50 via-white to-white border-2 border-[#38BDF8]/60 shadow-lg shadow-sky-500/10 flex flex-col justify-between hover:border-[#0284C7] hover:shadow-2xl hover:shadow-sky-500/25 transition-all duration-300">
+          <div className="rounded-3xl p-8 bg-white border border-slate-200 shadow-md flex flex-col justify-between hover:border-sky-400 hover:shadow-xl transition-all duration-300">
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-sky-700 mb-2">
                 {isBangla ? "শুধুমাত্র ওয়াটার পার্ক" : "Water Realm Only"}
@@ -83,7 +83,7 @@ export function TicketsSection() {
           </div>
 
           {/* Package 2: All-Inclusive Adventure Mega Pass (MOST POPULAR) */}
-          <div className="rounded-3xl p-8 bg-gradient-to-b from-orange-50 via-white to-white border-2 border-[#FF6B35] flex flex-col justify-between relative shadow-2xl shadow-orange-500/25 ring-4 ring-[#FF6B35]/20 md:-translate-y-4 hover:scale-102 transition-all duration-300">
+          <div className="rounded-3xl p-8 bg-gradient-to-b from-orange-50/50 via-white to-white border-2 border-[#FF7A24] flex flex-col justify-between relative shadow-xl shadow-orange-500/10 md:-translate-y-4">
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 gradient-orange-cta px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-wider text-white shadow">
               ★ {isBangla ? "সর্বাধিক জনপ্রিয় পছন্দ" : "MOST POPULAR CHOICE"}
             </div>
@@ -140,7 +140,7 @@ export function TicketsSection() {
           </div>
 
           {/* Package 3: Family Adventure Combo */}
-          <div className="rounded-3xl p-8 bg-gradient-to-b from-purple-50/50 via-white to-white border-2 border-[#A855F7]/60 shadow-lg shadow-purple-500/10 flex flex-col justify-between hover:border-[#8B5CF6] hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300">
+          <div className="rounded-3xl p-8 bg-white border border-slate-200 shadow-md flex flex-col justify-between hover:border-purple-400 hover:shadow-xl transition-all duration-300">
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-purple-700 mb-2">
                 {isBangla ? "ফ্যামিলি গ্রুপ সেভার" : "Family Group Saver"}

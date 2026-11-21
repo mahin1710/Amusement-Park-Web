@@ -28,20 +28,39 @@
 }
 
 @theme {
-  --color-park-orange: #FF6B35;
-  --color-park-orange-hover: #E85924;
-  --color-park-yellow: #FFD93D;
-  --color-park-yellow-light: #FFF2B2;
-  --color-park-sky: #38BDF8;
-  --color-park-sky-dark: #0284C7;
-  --color-park-purple: #8B5CF6;
-  --color-park-purple-light: #DDD6FE;
-  --color-park-green: #55C98B;
-  --color-park-green-light: #D1FAE5;
-  --color-park-cream: #FFF9ED;
+  /* ------------------------------------------------------------------------ */
+  /* CENTRALIZED BRAND COLORS (MAGIC ISLAND BRAND IDENTITY)                    */
+  /* ------------------------------------------------------------------------ */
+  /* 1. Primary Colors */
+  --color-primary: #087E8B;         /* Ocean Teal */
+  --color-primary-hover: #066772;
+  --color-background: #FFFDF5;      /* Warm Ivory */
+  --color-text: #173B42;            /* Deep Ocean */
+
+  /* 2. Secondary & Section Accent Colors */
+  --color-water: #35C6C8;           /* Aqua Blue */
+  --color-dino: #26865D;            /* Tropical Green */
+  --color-thrill: #FF795C;          /* Adventure Coral */
+  --color-highlight: #FFC857;       /* Sunshine Yellow */
+  --color-luxury: #12304A;          /* Midnight Navy */
+  --color-luxury-gold: #D9B66F;     /* Luxury Gold Supporting */
+
+  /* 3. Utility & Legacy Theme Token Mappings */
+  --color-park-teal: #087E8B;
+  --color-park-orange: #FF795C;     /* Adventure Coral */
+  --color-park-orange-hover: #E5654A;
+  --color-park-yellow: #FFC857;     /* Sunshine Yellow */
+  --color-park-yellow-light: #FFF0C8;
+  --color-park-sky: #35C6C8;        /* Aqua Blue */
+  --color-park-sky-dark: #087E8B;   /* Ocean Teal */
+  --color-park-green: #26865D;      /* Tropical Green */
+  --color-park-green-light: #D4EFE3;
+  --color-park-cream: #FFFDF5;      /* Warm Ivory */
   --color-park-cream-card: #FFFFFF;
-  --color-park-navy: #172554;
-  --color-park-navy-muted: #3B4B75;
+  --color-park-navy: #173B42;       /* Deep Ocean */
+  --color-park-navy-muted: #3D6169;
+  --color-park-midnight: #12304A;   /* Midnight Navy */
+  --color-park-gold: #D9B66F;       /* Luxury Gold */
 
   /* ------------------------------------------------------------------------ */
   /* CENTRALIZED TYPOGRAPHY CONFIGURATION (CSS VARIABLES)                     */
@@ -62,27 +81,30 @@
 }
 
 :root {
-  --background: #FFF9ED;
+  --color-primary: #087E8B;
+  --color-background: #FFFDF5;
+  --color-text: #173B42;
+  --color-water: #35C6C8;
+  --color-dino: #26865D;
+  --color-thrill: #FF795C;
+  --color-highlight: #FFC857;
+  --color-luxury: #12304A;
+  --color-luxury-gold: #D9B66F;
+
+  --background: #FFFDF5;
   --surface: #FFFFFF;
-  --primary: #FF6B35;
-  --secondary: #FFD93D;
-  --accent-sky: #38BDF8;
-  --accent-purple: #8B5CF6;
-  --accent-green: #55C98B;
-  --text-main: #172554;
+  --primary: #087E8B;
+  --text-main: #173B42;
+  --secondary: #FFC857;
+  --accent-sky: #35C6C8;
+  --accent-purple: #12304A;
+  --accent-green: #26865D;
 }
 
 @layer base {
   body {
-    background-color: #FFF9ED;
-    background-image:
-      radial-gradient(at 10% 12%, rgba(255, 107, 53, 0.08) 0px, transparent 40%),
-      radial-gradient(at 90% 18%, rgba(56, 189, 248, 0.12) 0px, transparent 45%),
-      radial-gradient(at 15% 55%, rgba(139, 92, 246, 0.09) 0px, transparent 40%),
-      radial-gradient(at 85% 72%, rgba(255, 217, 61, 0.14) 0px, transparent 42%),
-      radial-gradient(at 50% 95%, rgba(85, 201, 139, 0.09) 0px, transparent 40%);
-    background-attachment: fixed;
-    color: #172554;
+    background-color: #FFFDF5;
+    color: #173B42;
     font-family: var(--font-sans), "Nunito Sans", sans-serif;
     font-weight: 400;
     overflow-x: hidden;
@@ -102,10 +124,7 @@
   }
 
   /* Card titles, subheadings, labels: Always Poppins (Zero Waltograph on picture cards) */
-  h3,
-  h4,
-  h5,
-  h6 {
+  h3, h4, h5, h6 {
     font-family: var(--font-heading), "Poppins", var(--font-bangla), "Hind Siliguri", sans-serif;
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -129,26 +148,11 @@
   --font-magical: var(--font-heading), "Poppins", var(--font-bangla), "Hind Siliguri", sans-serif;
 }
 
-.park-card h1,
-.park-card h2,
-.park-card h3,
-.park-card h4,
-.park-card h5,
-.park-card h6,
+.park-card h1, .park-card h2, .park-card h3, .park-card h4, .park-card h5, .park-card h6,
 .park-card .font-heading,
-.picture-card h1,
-.picture-card h2,
-.picture-card h3,
-.picture-card h4,
-.picture-card h5,
-.picture-card h6,
+.picture-card h1, .picture-card h2, .picture-card h3, .picture-card h4, .picture-card h5, .picture-card h6,
 .picture-card .font-heading,
-[data-card] h1,
-[data-card] h2,
-[data-card] h3,
-[data-card] h4,
-[data-card] h5,
-[data-card] h6,
+[data-card] h1, [data-card] h2, [data-card] h3, [data-card] h4, [data-card] h5, [data-card] h6,
 [data-card] .font-heading {
   font-family: var(--font-heading), "Poppins", var(--font-bangla), "Hind Siliguri", sans-serif !important;
   letter-spacing: -0.01em;
@@ -172,8 +176,7 @@
   font-family: var(--font-heading), "Poppins", var(--font-bangla), "Hind Siliguri", sans-serif;
 }
 
-.font-sans,
-.font-body {
+.font-sans, .font-body {
   font-family: var(--font-sans), "Nunito Sans", var(--font-bangla), "Hind Siliguri", sans-serif;
 }
 
@@ -183,29 +186,27 @@
 
 /* Amusement Park Glass Navigation */
 .glass-nav {
-  background: rgba(255, 249, 237, 0.94);
+  background: rgba(255, 253, 245, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 2px solid rgba(254, 215, 170, 0.6);
-  box-shadow: 0 4px 20px -2px rgba(255, 107, 53, 0.08);
+  border-bottom: 2px solid rgba(8, 126, 139, 0.15);
+  box-shadow: 0 4px 20px -2px rgba(23, 59, 66, 0.06);
 }
 
-/* Amusement Park Card: soft rounded corners, warm colorful borders, elevated playful hover */
+/* Amusement Park Card: soft rounded corners, warm borders, playful hover */
 .park-card {
   background: #FFFFFF;
   border-radius: 28px;
-  border: 2px solid rgba(254, 215, 170, 0.85);
-  box-shadow: 0 10px 30px -5px rgba(255, 107, 53, 0.08), 0 4px 12px -2px rgba(23, 37, 84, 0.04);
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid rgba(8, 126, 139, 0.14);
+  box-shadow: 0 10px 30px -5px rgba(18, 48, 74, 0.06);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   isolation: isolate;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
-  position: relative;
 }
-
 .park-card:hover {
-  transform: translateY(-8px) scale(1.01);
-  box-shadow: 0 24px 48px -12px rgba(255, 107, 53, 0.22), 0 10px 24px -6px rgba(56, 189, 248, 0.16);
-  border-color: #FF6B35;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -10px rgba(8, 126, 139, 0.18);
+  border-color: #087E8B;
 }
 
 /* Colorful Playful Pills */
@@ -216,72 +217,68 @@
   padding: 6px 16px;
   border-radius: 9999px;
   background: #FFFFFF;
-  border: 2px solid #FFD93D;
-  color: #172554;
+  border: 2px solid #FFC857;
+  color: #173B42;
   font-family: var(--font-heading), "Poppins", sans-serif;
   font-weight: 600;
-  box-shadow: 0 4px 14px rgba(255, 217, 61, 0.35);
-  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(255, 200, 87, 0.25);
 }
 
+.park-pill-teal {
+  background: #E8F7F8;
+  border-color: #A3E2E6;
+  color: #087E8B;
+}
+
+.park-pill-coral,
 .park-pill-orange {
-  background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
-  border-color: #FED7AA;
-  color: #C2410C;
-  box-shadow: 0 4px 14px rgba(255, 107, 53, 0.18);
+  background: #FFF1EE;
+  border-color: #FFC4B7;
+  color: #FF795C;
 }
 
+.park-pill-aqua,
 .park-pill-sky {
-  background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
-  border-color: #BAE6FD;
-  color: #0369A1;
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.18);
+  background: #ECFDFD;
+  border-color: #A5F0F1;
+  color: #087E8B;
 }
 
-.park-pill-purple {
-  background: linear-gradient(135deg, #FAF5FF 0%, #F3E8FF 100%);
-  border-color: #DDD6FE;
-  color: #6D28D9;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.18);
+.park-pill-purple,
+.park-pill-navy {
+  background: #E7EDF3;
+  border-color: #9AB4CD;
+  color: #12304A;
 }
 
 .park-pill-green {
-  background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
-  border-color: #BBF7D0;
-  color: #15803D;
-  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.18);
+  background: #EDF7F2;
+  border-color: #A8DDC6;
+  color: #26865D;
 }
 
-.park-pill-yellow {
-  background: linear-gradient(135deg, #FEFCE8 0%, #FEF08A 100%);
-  border-color: #FDE047;
-  color: #854D0E;
-  box-shadow: 0 4px 14px rgba(234, 179, 8, 0.22);
-}
-
-/* Buttons: Ultra-Vibrant Amusement Theme Gradients & Glows */
+/* Buttons */
 .btn-park-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 45%, #FF5100 100%);
+  background: linear-gradient(135deg, #087E8B 0%, #066772 100%);
   color: #FFFFFF !important;
   font-family: var(--font-heading), "Poppins", sans-serif;
   font-weight: 600;
   letter-spacing: 0.01em;
   padding: 12px 28px;
   border-radius: 9999px;
-  box-shadow: 0 10px 28px rgba(255, 107, 53, 0.42), 0 0 16px rgba(255, 217, 61, 0.25);
-  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 24px rgba(8, 126, 139, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   border: none;
-  position: relative;
 }
-
 .btn-park-primary:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 16px 36px rgba(255, 107, 53, 0.52), 0 0 24px rgba(255, 217, 61, 0.4);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(8, 126, 139, 0.45);
+  background: linear-gradient(135deg, #0A98A7 0%, #087E8B 100%);
 }
 
 .btn-park-secondary {
@@ -289,22 +286,21 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, #FFD93D 0%, #FEE05E 45%, #F59E0B 100%);
-  color: #172554 !important;
+  background: #FFC857;
+  color: #173B42 !important;
   font-family: var(--font-heading), "Poppins", sans-serif;
   font-weight: 600;
   letter-spacing: 0.01em;
   padding: 12px 28px;
   border-radius: 9999px;
-  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.35);
-  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 6px 20px rgba(255, 200, 87, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
+  border: none;
 }
-
 .btn-park-secondary:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.45);
-  background: linear-gradient(135deg, #FEE05E 0%, #FFD93D 45%, #F59E0B 100%);
+  transform: translateY(-2px) scale(1.03);
+  background: #FFD270;
 }
 
 .btn-park-outline {
@@ -313,51 +309,73 @@
   justify-content: center;
   gap: 10px;
   background: #FFFFFF;
-  border: 2px solid #FF6B35;
-  color: #FF6B35 !important;
+  border: 2px solid #087E8B;
+  color: #087E8B !important;
   font-family: var(--font-heading), "Poppins", sans-serif;
   font-weight: 600;
   letter-spacing: 0.01em;
   padding: 10px 24px;
   border-radius: 9999px;
-  box-shadow: 0 4px 14px rgba(255, 107, 53, 0.15);
   transition: all 0.25s ease;
   cursor: pointer;
 }
-
 .btn-park-outline:hover {
-  background: #FFF7ED;
+  background: #E8F7F8;
+  border-color: #066772;
+  color: #066772 !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.25);
 }
 
-/* Eye-Catchy Multi-Color Text Gradients */
+.btn-park-coral {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #FF795C 0%, #E5654A 100%);
+  color: #FFFFFF !important;
+  font-family: var(--font-heading), "Poppins", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(255, 121, 92, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+}
+.btn-park-coral:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(255, 121, 92, 0.45);
+}
+
+/* Gradient text */
 .text-gradient-park {
-  background: linear-gradient(135deg, #FF6B35 0%, #FF9F1C 40%, #FFD93D 100%);
+  background: linear-gradient(135deg, #087E8B 0%, #35C6C8 50%, #FFC857 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-water {
-  background: linear-gradient(135deg, #0284C7 0%, #38BDF8 50%, #06B6D4 100%);
+  background: linear-gradient(135deg, #087E8B 0%, #35C6C8 60%, #26865D 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.text-gradient-purple,
 .text-gradient-dino {
-  background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 50%, #10B981 100%);
+  background: linear-gradient(135deg, #26865D 0%, #087E8B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-purple {
-  background: linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #EC4899 100%);
+.text-gradient-thrill {
+  background: linear-gradient(135deg, #FF795C 0%, #FFC857 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-rainbow {
-  background: linear-gradient(135deg, #FF6B35 0%, #FFD93D 25%, #10B981 50%, #38BDF8 75%, #8B5CF6 100%);
+.text-gradient-luxury {
+  background: linear-gradient(135deg, #12304A 0%, #D9B66F 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -372,7 +390,6 @@
   0% {
     opacity: 0;
   }
-
   100% {
     opacity: 1;
   }
@@ -393,14 +410,11 @@
 
 /* Premium Amusement Park Glowing & Interactive Category Effects */
 @keyframes magicalGlow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 15px rgba(255, 217, 61, 0.35), 0 10px 25px -5px rgba(255, 107, 53, 0.2);
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 200, 87, 0.35), 0 10px 25px -5px rgba(8, 126, 139, 0.2);
   }
-
   50% {
-    box-shadow: 0 0 25px rgba(255, 107, 53, 0.45), 0 15px 35px -5px rgba(255, 217, 61, 0.3);
+    box-shadow: 0 0 25px rgba(8, 126, 139, 0.45), 0 15px 35px -5px rgba(255, 200, 87, 0.3);
   }
 }
 
@@ -410,12 +424,9 @@
 }
 
 @keyframes gentleFloat {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0px);
   }
-
   50% {
     transform: translateY(-6px);
   }
@@ -425,7 +436,7 @@
   animation: gentleFloat 3s ease-in-out infinite;
 }
 
-/* Modern Compact Rounded Pill Navigation Buttons with Orange Hover */
+/* Modern Compact Rounded Pill Navigation Buttons with Ocean Teal Hover */
 .nav-pill-btn {
   display: inline-flex;
   align-items: center;
@@ -437,9 +448,9 @@
   font-weight: 500;
   font-size: 0.8125rem;
   background: rgba(255, 255, 255, 0.94);
-  border: 1.5px solid rgba(254, 215, 170, 0.85);
-  color: #172554;
-  box-shadow: 0 2px 8px rgba(23, 37, 84, 0.05);
+  border: 1.5px solid rgba(8, 126, 139, 0.22);
+  color: #173B42;
+  box-shadow: 0 2px 8px rgba(23, 59, 66, 0.05);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -449,25 +460,25 @@
 }
 
 .nav-pill-btn:hover {
-  background: #FF6B35 !important;
-  border-color: #FF6B35 !important;
+  background: #087E8B !important;
+  border-color: #087E8B !important;
   color: #FFFFFF !important;
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 6px 18px rgba(255, 107, 53, 0.35);
+  box-shadow: 0 6px 18px rgba(8, 126, 139, 0.35);
 }
 
 .nav-pill-btn:active {
-  background: #E85924 !important;
-  border-color: #E85924 !important;
+  background: #066772 !important;
+  border-color: #066772 !important;
   color: #FFFFFF !important;
   transform: translateY(0px) scale(0.97);
 }
 
 .nav-pill-btn.active {
-  background: #FF6B35 !important;
-  border-color: #FF6B35 !important;
+  background: #087E8B !important;
+  border-color: #087E8B !important;
   color: #FFFFFF !important;
-  box-shadow: 0 4px 14px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 14px rgba(8, 126, 139, 0.3);
 }
 
 .nav-pill-btn:hover *,
@@ -477,37 +488,28 @@
 
 /* Playful Floating Animations */
 @keyframes floatSlow {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
-
   50% {
     transform: translateY(-10px) rotate(2deg);
   }
 }
 
 @keyframes floatReverse {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0px) rotate(0deg);
   }
-
   50% {
     transform: translateY(8px) rotate(-2deg);
   }
 }
 
 @keyframes pulseGlow {
-
-  0%,
-  100% {
+  0%, 100% {
     opacity: 0.8;
     transform: scale(1);
   }
-
   50% {
     opacity: 1;
     transform: scale(1.05);
@@ -530,17 +532,14 @@
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 ::-webkit-scrollbar-track {
   background: #FFF9ED;
 }
-
 ::-webkit-scrollbar-thumb {
   background: #FED7AA;
   border-radius: 9999px;
   border: 2px solid #FFF9ED;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: #FF6B35;
 }

@@ -117,7 +117,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-[#FFF9ED] text-[#172554] antialiased flex flex-col font-sans selection:bg-[#FFD93D] selection:text-[#172554]">
+      <body className="min-h-screen bg-[#FFFDF5] text-[#173B42] antialiased flex flex-col font-sans selection:bg-[#FFC857] selection:text-[#173B42]">
         <LanguageProvider>
           <AnimationProvider>
             <InteractiveCursorTrail />
