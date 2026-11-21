@@ -3,6 +3,8 @@
 import React from "react";
 import { useTranslation } from "@/context/LanguageContext";
 import { businessConfig } from "@/config/business";
+import { StayPriceCalculator } from "./StayPriceCalculator";
+import { STAY_CONFIG } from "@/config/roomPricing";
 
 export function ResortStaySection() {
   const { isBangla } = useTranslation();
@@ -41,8 +43,8 @@ export function ResortStaySection() {
         "শীতাতপ নিয়ন্ত্রিত ও ২৪/৭ জেনারেটর ব্যাকআপ",
         "হাই-স্পিড ওয়াই-ফাই ও স্মার্ট টিভি",
       ],
-      rateEn: "৳ [Rate Placeholder] / Night",
-      rateBn: "৳ [ভাড়ার প্লেসহোল্ডার] / রাত",
+      rateEn: "৳6,500 / Day",
+      rateBn: "৳৬,৫০০ / দিন",
     },
     {
       id: "executive-suite",
@@ -72,8 +74,8 @@ export function ResortStaySection() {
         "ওয়াটার পার্কে ভিআইপি অগ্রাধিকার প্রবেশ",
         "২৪/৭ রুম সার্ভিস ও সার্বক্ষণিক নিরাপত্তা",
       ],
-      rateEn: "৳ [Rate Placeholder] / Night",
-      rateBn: "৳ [ভাড়ার প্লেসহোল্ডার] / রাত",
+      rateEn: "৳8,000 / Day",
+      rateBn: "৳৮,০০০ / দিন",
     },
     {
       id: "presidential-villa",
@@ -103,8 +105,8 @@ export function ResortStaySection() {
         "সব জোনের জন্য আনলিমিটেড ফ্রি পার্ক পাস",
         "ডেডিকেটেড অ্যাটেনডেন্ট ও ফাস্ট চেক-ইন",
       ],
-      rateEn: "৳ [Rate Placeholder] / Night",
-      rateBn: "৳ [ভাড়ার প্লেসহোল্ডার] / রাত",
+      rateEn: "৳9,500 / Day",
+      rateBn: "৳৯,৫০০ / দিন",
     },
   ];
 
@@ -207,6 +209,9 @@ export function ResortStaySection() {
             </div>
           ))}
         </div>
+
+        {/* Interactive Stay & Room Price Calculator (Frontend-Only) */}
+        <StayPriceCalculator />
 
         {/* Resort Stay Guest Amenities Banner */}
         <div className="mt-8 sm:mt-10 p-6 sm:p-8 rounded-3xl bg-white border-2 border-[#FED7AA] shadow-md">
