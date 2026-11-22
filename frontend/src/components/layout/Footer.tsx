@@ -127,6 +127,11 @@ export function Footer() {
                   {isBangla ? "পার্কের অবস্থান ও সময়সূচি" : "Directions & Hours"}
                 </Link>
               </li>
+              <li>
+                <Link className="hover:text-[#FFC857] transition-colors" href="/shop">
+                  {isBangla ? "স্যুভেনির ও গিফট শপ" : "Souvenir & Gift Shop"}
+                </Link>
+              </li>
             </ul>
           </div>
 
