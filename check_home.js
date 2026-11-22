@@ -5,10 +5,10 @@ const chrome = spawn('C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe
   '--remote-debugging-port=9222',
   '--headless=new',
   '--window-size=1280,800',
-  'http://localhost:3000/shop'
+  'http://localhost:3000'
 ]);
 
-async function run() {
+async function checkHome() {
   await new Promise(r => setTimeout(r, 2000));
   
   const tabs = await new Promise((resolve, reject) => {
@@ -19,16 +19,13 @@ async function run() {
     }).on('error', reject);
   });
   
-  const pageTab = tabs.find(t => t.type === 'page' && t.url.includes('localhost:3000/shop'));
+  const pageTab = tabs.find(t => t.type === 'page' && t.url === 'http://localhost:3000/');
   const ws = new WebSocket(pageTab.webSocketDebuggerUrl);
   let id = 1;
   const callbacks = new Map();
   
   ws.onmessage = (event) => {
     const msg = JSON.parse(event.data);
-    if (msg.method === 'Runtime.consoleAPICalled') {
-      console.log('BROWSER LOG:', msg.params.args.map(a => a.value || a.description).join(' '));
-    }
     if (msg.id && callbacks.has(msg.id)) {
       callbacks.get(msg.id)(msg);
       callbacks.delete(msg.id);
@@ -45,32 +42,33 @@ async function run() {
   
   ws.onopen = async () => {
     await send('Runtime.enable');
-    
     const evalScript = async (expression) => {
       const res = await send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });
       return res.result?.result?.value;
     };
     
-    await new Promise(r => setTimeout(r, 1000));
+    await new Promise(r => setTimeout(r, 1500));
     
-    // Inject test listener
-    await evalScript(`
-      console.log('PATHNAME:', window.location.pathname);
-      console.log('HEADER FOUND:', !!document.querySelector('[data-purpose="shop-page-header"]'));
-      window.addEventListener('scroll', () => {
-        console.log('WINDOW SCROLL EVENT FIRED! scrollY:', window.scrollY);
-      });
-      window.scrollTo(0, 120);
+    const calcStatus = await evalScript(`
+      (() => {
+        const sec = document.getElementById('ride-calculator');
+        if (!sec) return { found: false };
+        const cards = sec.querySelectorAll('.ride-experience-card');
+        return {
+          found: true,
+          cardsCount: cards.length,
+          sectionText: sec.querySelector('h2')?.innerText
+        };
+      })()
     `);
-    
-    await new Promise(r => setTimeout(r, 500));
-    
+    console.log('HOME CALCULATOR STATUS:', calcStatus);
+
     ws.close();
     chrome.kill();
   };
 }
 
-run().catch(e => {
+checkHome().catch(e => {
   console.error(e);
   chrome.kill();
 });
