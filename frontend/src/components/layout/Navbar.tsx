@@ -11,6 +11,8 @@ export function Navbar() {
   const pathname = usePathname();
   const isShop = pathname === "/shop" || pathname === "/shop/";
 
+  console.log('[Navbar Component] pathname:', pathname, 'isShop:', isShop);
+
   // Regular Navbar scroll progress (for non-shop pages)
   const [scrollProgress, setScrollProgress] = useState(0);
   const headerRef = useRef<HTMLElement>(null);
@@ -75,6 +77,8 @@ export function Navbar() {
         document.documentElement.scrollTop ||
         document.body.scrollTop ||
         0;
+
+      console.log('[updateShopScroll] scrollY:', scrollY, 'shopHeaderRef.current:', !!shopHeaderRef.current);
 
       // 1. Initial Scroll Phase (0px to 100px):
       // Logo smoothly shrinks from large to compact size
