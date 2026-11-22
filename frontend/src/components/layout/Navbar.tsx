@@ -3,11 +3,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Globe, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/context/LanguageContext";
 
 export function Navbar() {
-  const { locale, setLocale, isBangla } = useTranslation();
+  const { isBangla } = useTranslation();
   const pathname = usePathname();
   const isShop = pathname === "/shop" || pathname === "/shop/";
 
@@ -129,10 +129,6 @@ export function Navbar() {
     return null;
   }
 
-  const toggleLanguage = () => {
-    setLocale(locale === "en" ? "bn" : "en");
-  };
-
   // Dedicated Shop Page Layout: Logo in extreme top-left with shrink + exit-upward animation
   if (isShop) {
     return (
@@ -179,7 +175,7 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* Extreme Top-Right Language & Park Home Action Controls */}
+          {/* Extreme Top-Right Action Controls (Language toggle removed - only on Home screen) */}
           <div className="absolute top-4 right-4 sm:top-5 sm:right-6 lg:right-8 flex items-center gap-2 pointer-events-auto">
             <Link
               href="/"
@@ -189,28 +185,6 @@ export function Navbar() {
               <ArrowLeft className="w-3.5 h-3.5 text-[#FF914D]" />
               <span>{isBangla ? "পার্ক হোম" : "Park Home"}</span>
             </Link>
-
-            <button
-              onClick={toggleLanguage}
-              type="button"
-              title="Switch Language"
-              className="nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#FF914D]/30 !shadow-lg cursor-pointer h-10 px-3.5 text-xs font-heading"
-            >
-              <Globe className="w-3.5 h-3.5 text-[#FF914D]" />
-              <span>
-                {locale === "en" ? (
-                  <>
-                    <strong className="text-[#FF914D]">EN</strong> |{" "}
-                    <span className="font-bangla text-[#173B42]/70">বাংলা</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-[#173B42]/70">EN</span> |{" "}
-                    <strong className="font-bangla text-[#FF914D]">বাংলা</strong>
-                  </>
-                )}
-              </span>
-            </button>
           </div>
         </header>
 
@@ -233,7 +207,7 @@ export function Navbar() {
         data-purpose="page-navigation-header"
       >
         <div
-          className="max-w-[1400px] mx-auto flex items-center justify-between"
+          className="w-full flex items-center justify-between"
           style={{
             gap: `calc(clamp(0.625rem, 1.5rem - 0.5rem * var(--scroll-p, ${scrollProgress}), 1.5rem))`,
           }}
@@ -280,37 +254,6 @@ export function Navbar() {
               </span>
             </div>
           </Link>
-
-          {/* Language Switcher Pill (Matching Homepage) */}
-          <div className="flex items-center shrink-0 pointer-events-auto">
-            <button
-              onClick={toggleLanguage}
-              type="button"
-              title="Switch Language"
-              className="nav-pill-btn !bg-white/95 !backdrop-blur-md !border-2 !border-[#FF914D]/25 !shadow-lg cursor-pointer"
-              style={{
-                height: `calc(clamp(36px, 40px - 4px * var(--scroll-p, ${scrollProgress}), 40px))`,
-                paddingLeft: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
-                paddingRight: `calc(clamp(12px, 14px - 2px * var(--scroll-p, ${scrollProgress}), 14px))`,
-                fontSize: `calc(clamp(11px, 12px - 1px * var(--scroll-p, ${scrollProgress}), 12px))`,
-              }}
-            >
-              <Globe className="w-3.5 h-3.5 text-[#FF914D]" />
-              <span>
-                {locale === "en" ? (
-                  <>
-                    <strong className="text-[#FF914D]">EN</strong> |{" "}
-                    <span className="font-bangla text-[#173B42]/70">বাংলা</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-[#173B42]/70">EN</span> |{" "}
-                    <strong className="font-bangla text-[#FF914D]">বাংলা</strong>
-                  </>
-                )}
-              </span>
-            </button>
-          </div>
         </div>
       </header>
 

@@ -84,7 +84,7 @@ export function HeroSection() {
         data-purpose="hero-navigation-header"
       >
         <div
-          className="max-w-[1400px] mx-auto flex items-center justify-between"
+          className="w-full flex items-center justify-between"
           style={{
             gap: `calc(clamp(0.625rem, 1.5rem - 0.5rem * var(--scroll-p, ${scrollProgress}), 1.5rem))`,
           }}
