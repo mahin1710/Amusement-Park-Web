@@ -5,6 +5,7 @@ import { DinoZoneSection } from "@/components/home/DinoZoneSection";
 import { AmusementParkSection } from "@/components/home/AmusementParkSection";
 import { ResortStaySection } from "@/components/home/ResortStaySection";
 import { HomeGallerySection } from "@/components/home/HomeGallerySection";
+import { RideExperienceCalculatorSection } from "@/components/home/RideExperienceCalculatorSection";
 import { VisitorInfoSection } from "@/components/home/VisitorInfoSection";
 import { SocialMediaSection } from "@/components/home/SocialMediaSection";
 import { IntroSection } from "@/components/home/IntroSection";
@@ -34,7 +35,10 @@ export default function HomePage() {
       {/* 7. Experience Magic Island Gallery (with filter tabs & lightbox) */}
       <HomeGallerySection />
 
-      {/* 8. Visitor Information & Park Essentials */}
+      {/* 8. Choose Your Magic Island Experience (Ride Experience & Ticket Price Calculator) */}
+      <RideExperienceCalculatorSection />
+
+      {/* 9. Visitor Information & Park Essentials */}
       <VisitorInfoSection />
 
       {/* 9. One Destination, Endless Adventure (IntroSection) */}
