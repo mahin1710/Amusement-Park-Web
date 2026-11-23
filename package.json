@@ -4,10 +4,14 @@
   "private": true,
   "description": "Magic Island Theme & Water Park Decoupled Architecture",
   "scripts": {
-    "dev": "npm --prefix frontend run dev",
+    "dev": "node scripts/start.js",
     "dev:frontend": "npm --prefix frontend run dev",
+    "dev:all": "node scripts/start-all.js",
+    "setup": "node scripts/setup.js",
+    "install:all": "npm --prefix frontend install",
+    "postinstall": "npm --prefix frontend install",
     "build": "npm --prefix frontend run build",
-    "start": "npm --prefix frontend run start"
+    "start": "node scripts/start.js"
   }
 }
 

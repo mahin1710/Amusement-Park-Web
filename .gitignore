@@ -34,7 +34,10 @@ desktop.ini
 
 # IDE files
 .idea/
-.vscode/
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/settings.json
 *.suo
 *.ntvs*
 *.njsproj

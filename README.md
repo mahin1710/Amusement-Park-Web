@@ -63,27 +63,42 @@ magic-island/
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Quick Start Guide (Run on Any Local Device)
 
-### 1. Start the Backend API (Laravel)
-```bash
-cd backend
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate:fresh --seed
-php artisan serve --port=8000
-```
-API runs at `http://localhost:8000/api`.
+You can run this project on any local machine (Windows, macOS, or Linux) using any of the following methods:
 
-### 2. Start the Frontend (Next.js)
+### Method 1: One-Click Instant Run (Windows — Easiest)
+Simply double-click the **`run.bat`** (or **`start.bat`**) file in the project root folder.
+- It automatically verifies Node.js.
+- It automatically sets up `.env.local` if missing.
+- It automatically installs all dependencies if missing.
+- It launches the website and opens `http://localhost:3000` in your browser!
+
+---
+
+### Method 2: In VS Code (1-Click Run)
+1. Open this project folder in **VS Code** (`File > Open Folder...`).
+2. Press **`Ctrl + Shift + B`** (or go to `Terminal > Run Build Task...` and select **Start Magic Island Website**).
+   - Alternatively, press **`F5`** to launch directly in your browser with debugging!
+
+---
+
+### Method 3: From Terminal / Command Prompt
+Open your terminal in the project root folder and run:
 ```bash
-cd frontend
-npm install
-cp .env.example .env.local
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+> **Note:** Even on a fresh clone or ZIP download, `npm run dev` automatically verifies your environment files and installs missing packages on its first run!
+
+---
+
+### 🌐 Full Stack Mode (Frontend + Laravel Backend)
+If you have **PHP** and **Composer** installed and want to run both the Laravel API and Next.js frontend together:
+```bash
+npm run dev:all
+```
+- **Frontend URL:** [http://localhost:3000](http://localhost:3000)
+- **Backend API URL:** [http://localhost:8000/api](http://localhost:8000/api) (SQLite default, zero DB setup required)
 
 ---
 
