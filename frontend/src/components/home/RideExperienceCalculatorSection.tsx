@@ -32,14 +32,6 @@ export function RideExperienceCalculatorSection() {
   const [selectedRideIds, setSelectedRideIds] = useState<string[]>([]);
   const [isMobileSummaryOpen, setIsMobileSummaryOpen] = useState(false);
 
-  // Only display categories that currently have attractions available
-  const availableCategories = useMemo(() => {
-    return RIDE_CATEGORIES.filter((cat) => {
-      if (cat.id === "all") return true;
-      return RIDE_EXPERIENCE_ITEMS.some((r) => r.category === cat.id);
-    });
-  }, []);
-
   // Filter rides based on category
   const filteredRides = useMemo(() => {
     if (selectedCategory === "all") return RIDE_EXPERIENCE_ITEMS;
@@ -162,7 +154,7 @@ export function RideExperienceCalculatorSection() {
 
         {/* Category Navigation Filter Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-10 sm:mb-12">
-          {availableCategories.map((cat) => {
+          {RIDE_CATEGORIES.map((cat) => {
             const isActive = selectedCategory === cat.id;
             const count =
               cat.id === "all"
