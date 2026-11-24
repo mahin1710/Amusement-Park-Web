@@ -111,7 +111,7 @@ export function RideExperienceCalculatorSection() {
   return (
     <section
       id="ride-calculator"
-      className="py-14 sm:py-20 bg-[#FFFDF5] relative border-t border-[#FF914D]/15 overflow-hidden"
+      className="py-14 sm:py-20 bg-[#FFFDF5] relative overflow-hidden"
       data-purpose="ride-experience-calculator"
     >
       {/* Subtle Background Glows */}

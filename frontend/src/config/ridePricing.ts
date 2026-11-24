@@ -46,34 +46,7 @@ export const RIDE_CATEGORIES: { id: RideCategory; labelEn: string; labelBn: stri
 ];
 
 export const RIDE_EXPERIENCE_ITEMS: RideExperienceItem[] = [
-  // WATER WORLD (2 Selected Attractions)
-  {
-    id: "tsunami-wave-pool",
-    name: {
-      en: "Tsunami Bay Giant Wave Pool",
-      bn: "সুনামি বে বিশাল ওয়েভ পুল",
-    },
-    category: "water-park",
-    categoryLabel: {
-      en: "Water World",
-      bn: "ওয়াটার ওয়ার্ল্ড",
-    },
-    tagline: {
-      en: "Bangladesh's Largest 6ft Ocean Waves",
-      bn: "বাংলাদেশের বৃহত্তম ৬ ফুট সামুদ্রিক ঢেউ",
-    },
-    shortDescription: {
-      en: "Experience ocean-scale rolling surf with computerized pneumatic wave generator creating 6 distinct waves.",
-      bn: "অত্যাধুনিক নিউমেটিক প্রযুক্তিতে প্রতি ৪৫ মিনিট পরপর তৈরি হওয়া ৬ ফুট উচ্চতার জীবন্ত সামুদ্রিক ঢেউয়ের পুল।",
-    },
-    estimatedPriceBDT: 200,
-    imageUrl: "/images/Water%20World/Water%20Cover%20Pic.png",
-    thrillLevel: {
-      en: "Moderate",
-      bn: "মাঝারি",
-    },
-    isSignature: true,
-  },
+  // WATER WORLD (1 Selected Attraction)
   {
     id: "aqua-speed-racing-flumes",
     name: {
